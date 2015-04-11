@@ -41,6 +41,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AcademyPlatform.Data\AcademyPlatform.Data.csproj">
+      <Project>{8ad83099-290d-4b21-b517-6df1099f14b1}</Project>
+      <Name>AcademyPlatform.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">
+      <Project>{a9f65f1e-f7fa-4c33-8092-cba90776843b}</Project>
+      <Name>AcademyPlatform.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
