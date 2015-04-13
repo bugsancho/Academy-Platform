@@ -5,8 +5,10 @@ namespace AcademyPlatform.Data
 
     public interface IAcademyPlatformDbContext
     {
-        IDbSet<T> Set<T>() where T : class;
+        DbSet<T> Set<T>() where T : class;
 
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+
+        int SaveChanges();
     }
 }

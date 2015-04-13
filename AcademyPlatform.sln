@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Web.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Services", "AcademyPlatform.Services\AcademyPlatform.Services.csproj", "{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Common", "AcademyPlatform.Common\AcademyPlatform.Common.csproj", "{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

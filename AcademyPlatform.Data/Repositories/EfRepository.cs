@@ -42,7 +42,7 @@
 
         public int SaveChanges()
         {
-            return this.SaveChanges();
+            return context.SaveChanges();
         }
 
         private void ChangeState(T entity, EntityState state)

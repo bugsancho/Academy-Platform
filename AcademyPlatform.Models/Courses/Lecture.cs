@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace AcademyPlatform.Models.Courses
+﻿namespace AcademyPlatform.Models.Courses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Lecture
     {
         public int Id { get; set; }

@@ -11,6 +11,12 @@
 
     public class AcademyPlatformDbContext : IdentityDbContext<User>, IAcademyPlatformDbContext
     {
+        public AcademyPlatformDbContext()
+            : base("DefaultConnection")
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AcademyPlatformDbContext, Configuration>());
+        }
+
         public IDbSet<Course> Courses { get; set; }
 
         public IDbSet<Lecture> Lectures { get; set; }
@@ -21,27 +27,9 @@
 
         public IDbSet<LectureResource> LectureResources { get; set; }
 
-        public AcademyPlatformDbContext()
-            : base("DefaultConnection")
-        {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AcademyPlatformDbContext, Configuration>());
-        }
-
-        public IDbSet<T> Set<T>() where T : class
-        {
-            return base.Set<T>();
-        }
-
         public static AcademyPlatformDbContext Create()
         {
             return new AcademyPlatformDbContext();
-        }
-
-        public override int SaveChanges()
-        {
-            this.ApplyAuditInfoRules();
-            this.ApplyDeletableEntityRules();
-            return base.SaveChanges();
         }
 
         private void ApplyAuditInfoRules()
