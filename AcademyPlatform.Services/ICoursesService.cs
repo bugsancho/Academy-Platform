@@ -4,9 +4,6 @@ namespace AcademyPlatform.Services
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using AcademyPlatform.Common.Validators;
-    using AcademyPlatform.Data.Repositories;
-    using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
 
     public interface ICoursesService

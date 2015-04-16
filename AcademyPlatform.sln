@@ -3,17 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Web", "AcademyPlatform.Web\AcademyPlatform.Web.csproj", "{13913680-924A-46EC-9221-AA37386A8D0A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Data", "AcademyPlatform.Data\AcademyPlatform.Data.csproj", "{8AD83099-290D-4B21-B517-6DF1099F14B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Models", "AcademyPlatform.Models\AcademyPlatform.Models.csproj", "{A9F65F1E-F7FA-4C33-8092-CBA90776843B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Web.Infrastructure", "AcademyPlatform.Web.Infrastructure\AcademyPlatform.Web.Infrastructure.csproj", "{8AE5320D-2EE3-4891-8363-59D3E1CA3059}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Services", "AcademyPlatform.Services\AcademyPlatform.Services.csproj", "{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Common", "AcademyPlatform.Common\AcademyPlatform.Common.csproj", "{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Web", "AcademyPlatform.Web\AcademyPlatform.Web.csproj", "{13913680-924A-46EC-9221-AA37386A8D0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Web.Infrastructure", "AcademyPlatform.Web.Infrastructure\AcademyPlatform.Web.Infrastructure.csproj", "{8AE5320D-2EE3-4891-8363-59D3E1CA3059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Validators", "AcademyPlatform.Validators\AcademyPlatform.Validators.csproj", "{009DC350-C0EF-4A29-8643-5D92570BE9F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademyPlatform.Web.Validators", "AcademyPlatform.Web.Validators\AcademyPlatform.Web.Validators.csproj", "{FF873EED-A590-4D65-9797-DE5084889AC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{13913680-924A-46EC-9221-AA37386A8D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13913680-924A-46EC-9221-AA37386A8D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13913680-924A-46EC-9221-AA37386A8D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13913680-924A-46EC-9221-AA37386A8D0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AD83099-290D-4B21-B517-6DF1099F14B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AD83099-290D-4B21-B517-6DF1099F14B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AD83099-290D-4B21-B517-6DF1099F14B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,10 +33,6 @@ Global
 		{A9F65F1E-F7FA-4C33-8092-CBA90776843B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F65F1E-F7FA-4C33-8092-CBA90776843B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9F65F1E-F7FA-4C33-8092-CBA90776843B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3901EFC5-27FE-4590-BB9A-9FFD3A0B6617}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,22 @@ Global
 		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13913680-924A-46EC-9221-AA37386A8D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13913680-924A-46EC-9221-AA37386A8D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13913680-924A-46EC-9221-AA37386A8D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13913680-924A-46EC-9221-AA37386A8D0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE5320D-2EE3-4891-8363-59D3E1CA3059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009DC350-C0EF-4A29-8643-5D92570BE9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009DC350-C0EF-4A29-8643-5D92570BE9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009DC350-C0EF-4A29-8643-5D92570BE9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009DC350-C0EF-4A29-8643-5D92570BE9F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF873EED-A590-4D65-9797-DE5084889AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF873EED-A590-4D65-9797-DE5084889AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF873EED-A590-4D65-9797-DE5084889AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF873EED-A590-4D65-9797-DE5084889AC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

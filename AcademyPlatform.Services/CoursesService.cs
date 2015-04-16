@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using AcademyPlatform.Common.Validators;
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
@@ -15,11 +14,11 @@
 
         private readonly IRepository<User> users;
 
-        private readonly IValidator validator;
+        //private readonly IValidator validator;
 
-        public CoursesService(IRepository<Course> courses, IRepository<User> users, IValidator validator)
+        public CoursesService(IRepository<Course> courses, IRepository<User> users)
         {
-            this.validator = validator;
+            //this.validator = validator;
             this.courses = courses;
             this.users = users;
         }
@@ -36,6 +35,8 @@
 
         public bool CreateCourse(Course course)
         {
+            ICollection<ValidationResult> results = new List<ValidationResult>();
+            Validator.TryValidateObject(course, new ValidationContext(course), results);
             //if (!validator.Validate(course))
             //{
             //    return false;
@@ -56,7 +57,8 @@
 
         public ICollection<ValidationResult> GetErrors(Course course)
         {
-            return validator.GetValidationResults(course);
+            return null;
+            //return validator.GetValidationResults(course);
         }
     }
 }

@@ -1,16 +1,15 @@
-﻿using AcademyPlatform.Models.Courses;
-using AcademyPlatform.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace AcademyPlatform.Web.Areas.Courses.Controllers
+﻿namespace AcademyPlatform.Web.Areas.Courses.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Services;
+
     public class CoursesController : Controller
     {
         private ICoursesService coursesService;
+
         public CoursesController(ICoursesService coursesService)
         {
             this.coursesService = coursesService;
@@ -71,7 +70,6 @@ namespace AcademyPlatform.Web.Areas.Courses.Controllers
             try
             {
                 // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -93,7 +91,6 @@ namespace AcademyPlatform.Web.Areas.Courses.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
             catch

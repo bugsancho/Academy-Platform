@@ -57,6 +57,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc">
+      <HintPath>..\packages\FluentValidation.MVC5.5.5.0.0\lib\Net45\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Glimpse.Ado">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
     </Reference>
@@ -222,6 +228,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="NinjectValidationFactory.cs" />
+    <Compile Include="ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -344,9 +352,17 @@
       <Project>{3901efc5-27fe-4590-bb9a-9ffd3a0b6617}</Project>
       <Name>AcademyPlatform.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Validators\AcademyPlatform.Validators.csproj">
+      <Project>{009dc350-c0ef-4a29-8643-5d92570be9f0}</Project>
+      <Name>AcademyPlatform.Validators</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Web.Infrastructure\AcademyPlatform.Web.Infrastructure.csproj">
       <Project>{8ae5320d-2ee3-4891-8363-59d3e1ca3059}</Project>
       <Name>AcademyPlatform.Web.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Web.Validators\AcademyPlatform.Web.Validators.csproj">
+      <Project>{ff873eed-a590-4d65-9797-de5084889ac4}</Project>
+      <Name>AcademyPlatform.Web.Validators</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
