@@ -226,12 +226,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="NinjectValidationFactory.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -262,6 +262,7 @@
     <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Courses\Views\Courses\Create.cshtml" />
+    <Content Include="Areas\Courses\Views\Shared\EditorTemplates\GenericEditorTemplate.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -328,9 +329,7 @@
       <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Courses\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
@@ -359,6 +358,10 @@
     <ProjectReference Include="..\AcademyPlatform.Web.Infrastructure\AcademyPlatform.Web.Infrastructure.csproj">
       <Project>{8ae5320d-2ee3-4891-8363-59d3e1ca3059}</Project>
       <Name>AcademyPlatform.Web.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Web.Models\AcademyPlatform.Web.Models.csproj">
+      <Project>{3f351c2d-799a-48fe-84f8-6c5412b6d060}</Project>
+      <Name>AcademyPlatform.Web.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Web.Validators\AcademyPlatform.Web.Validators.csproj">
       <Project>{ff873eed-a590-4d65-9797-de5084889ac4}</Project>

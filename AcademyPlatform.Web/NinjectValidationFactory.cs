@@ -8,7 +8,7 @@
     {
         public override IValidator CreateInstance(Type validatorType)
         {
-            return ObjectFactory.GetInstance(validatorType) as IValidator;
+            return ObjectFactory.TryGetInstance(validatorType) as IValidator;
         }
     }
 }

@@ -68,6 +68,8 @@ namespace AcademyPlatform.Web.App_Start
         {
             AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Validators.Courses.CourseValidator)))
                 .ForEach(match => kernel.Bind(match.InterfaceType).To(match.ValidatorType));
+            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Validators.Courses.CreateCourseViewModelValidator)))
+                .ForEach(match => kernel.Bind(match.InterfaceType).To(match.ValidatorType));
             kernel.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<IAcademyPlatformDbContext>().To<AcademyPlatformDbContext>();
             kernel.Bind<ICoursesService>().To<CoursesService>();

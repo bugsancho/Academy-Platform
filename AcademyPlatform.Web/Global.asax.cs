@@ -5,7 +5,6 @@
     using System.Web.Optimization;
     using System.Web.Routing;
     using AcademyPlatform.Web.Infrastructure.Mappings;
-    using FluentValidation;
     using FluentValidation.Mvc;
 
     public class MvcApplication : System.Web.HttpApplication
@@ -20,19 +19,10 @@
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            ModelValidatorProviders.Providers.Clear();
             DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             ModelValidatorProviders.Providers.Add(new FluentValidationModelValidatorProvider(new NinjectValidationFactory()));
-            
-            //FluentValidationModelValidatorProvider.Configure(provider => provider.ValidatorFactory = new NinjectValidationFactory());
 
-            //AssemblyScanner.FindValidatorsInAssemblyContaining<IValidator>()
-            //               .ForEach(result =>
-            //               {
-            //                   For(result.InterfaceType).Singleton().Use(result.ValidatorType);
-            //               });
-
-            var autoMapperConfig = new AutoMapperConfig(Assembly.GetExecutingAssembly());
+            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CreateCourseViewModel)));
             autoMapperConfig.Execute();
         }
     }

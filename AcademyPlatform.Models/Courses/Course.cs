@@ -6,6 +6,7 @@
 
     public class Course
     {
+        //[ScaffoldColumn(false)]
         public int Id { get; set; }
 
         //[StringLength(100, MinimumLength = 10)]

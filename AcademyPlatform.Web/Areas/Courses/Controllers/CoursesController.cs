@@ -5,6 +5,8 @@
     using System.Web.Mvc;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services;
+    using AcademyPlatform.Web.Models.Courses;
+    using AutoMapper;
 
     public class CoursesController : Controller
     {
@@ -35,26 +37,17 @@
 
         // POST: Courses/Courses/Create
         [HttpPost]
-        public ActionResult Create(Course course)
+        public ActionResult Create(CreateCourseViewModel courseViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (!coursesService.CreateCourse(course))
-                {
-                    foreach (var error in coursesService.GetErrors(course))
-                    {
-                        ModelState.AddModelError(error.MemberNames.First(), error.ErrorMessage);
-                    }
-
-                    return View();
-                }
+                var course = Mapper.Map<Course>(courseViewModel);
+                coursesService.CreateCourse(course);
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(courseViewModel);
         }
 
         // GET: Courses/Courses/Edit/5

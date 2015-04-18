@@ -35,8 +35,6 @@
 
         public bool CreateCourse(Course course)
         {
-            ICollection<ValidationResult> results = new List<ValidationResult>();
-            Validator.TryValidateObject(course, new ValidationContext(course), results);
             //if (!validator.Validate(course))
             //{
             //    return false;
