@@ -1,8 +1,8 @@
 ﻿@model AcademyPlatform.Web.Models.ExternalLoginConfirmationViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.PageTitle = "Register";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.PageTitle.</h2>
 <h3>Associate your @ViewBag.LoginProvider account.</h3>
 
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

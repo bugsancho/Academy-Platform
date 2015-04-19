@@ -33,6 +33,11 @@
             return this.users.GetById(userId).Courses.AsQueryable();
         }
 
+        public Course GetCourseById(int id)
+        {
+            return this.courses.GetById(id);
+        }
+
         public bool CreateCourse(Course course)
         {
             //if (!validator.Validate(course))
@@ -43,6 +48,24 @@
             try
             {
                 this.courses.Add(course);
+                this.courses.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool UpdateCourse(Course course)
+        {
+            //if (!validator.Validate(course))
+            //{
+            //    return false;
+            //}
+            try
+            {
+                this.courses.Update(course);
                 this.courses.SaveChanges();
 
                 return true;

@@ -6,6 +6,8 @@
     using System.Web.Routing;
     using AcademyPlatform.Web.Infrastructure.Mappings;
     using FluentValidation.Mvc;
+    using FluentValidation;
+    using AcademyPlatform.Web.Resources;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -21,7 +23,7 @@
 
             DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             ModelValidatorProviders.Providers.Add(new FluentValidationModelValidatorProvider(new NinjectValidationFactory()));
-
+            ValidatorOptions.ResourceProviderType = typeof(ErrorMessages);
             var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CreateCourseViewModel)));
             autoMapperConfig.Execute();
         }

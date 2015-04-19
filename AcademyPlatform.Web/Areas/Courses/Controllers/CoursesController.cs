@@ -58,17 +58,18 @@
 
         // POST: Courses/Courses/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, CreateCourseViewModel courseViewModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var courseInDb = coursesService.GetCourseById(id);
+                var course = Mapper.Map(courseViewModel, courseInDb);
+                coursesService.UpdateCourse(course);
+
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(courseViewModel);
         }
 
         // GET: Courses/Courses/Delete/5
