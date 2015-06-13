@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>
+
+@foreach (var item in Model)
+{
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-8 text-center">
+                    @item.Title
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    @Html.EditorFor(x => item.Description)
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        @Html.LabelFor(x => item.Difficulty)
+                        @item.Difficulty
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(x => item.StartDate)
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(x => item.EndDate)
+                        @item.EndDate
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(x => item.Price)
+                        @item.Price
+                    </div>
+                </div>
+            </div>
+        </div>
+}

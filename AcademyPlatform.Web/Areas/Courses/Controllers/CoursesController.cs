@@ -7,10 +7,11 @@
     using AcademyPlatform.Services;
     using AcademyPlatform.Web.Models.Courses;
     using AutoMapper;
+    using System.Collections.Generic;
 
     public class CoursesController : Controller
     {
-        private ICoursesService coursesService;
+        private readonly ICoursesService coursesService;
 
         public CoursesController(ICoursesService coursesService)
         {
@@ -20,7 +21,16 @@
         // GET: Courses/Courses
         public ActionResult Index()
         {
-            return View();
+            var models = new List<CoursesListViewModel>() { 
+            new CoursesListViewModel() { Title = "C#", Description = "Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
+            new CoursesListViewModel() { Title = "C#", Description = "2Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
+            new CoursesListViewModel() { Title = "C#", Description = "3Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
+            new CoursesListViewModel() { Title = "C#", Description = "4Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
+            new CoursesListViewModel() { Title = "C#", Description = "5Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
+            new CoursesListViewModel() { Title = "C#", Description = "6Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner }
+            
+            };
+            return View(models);
         }
 
         // GET: Courses/Courses/Details/5
@@ -53,7 +63,14 @@
         // GET: Courses/Courses/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var courseInDb = coursesService.GetCourseById(id);
+            if (courseInDb == null)
+            {
+                return HttpNotFound();
+            }
+
+            var course = Mapper.Map<CreateCourseViewModel>(courseInDb);
+            return View(course);
         }
 
         // POST: Courses/Courses/Edit/5
@@ -72,25 +89,19 @@
             return View(courseViewModel);
         }
 
-        // GET: Courses/Courses/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: Courses/Courses/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
+            var course = coursesService.GetCourseById(id);
+            if (course == null)
             {
-                // TODO: Add delete logic here
-                return RedirectToAction("Index");
+                return HttpNotFound("Invalid course id");
             }
-            catch
-            {
-                return View();
-            }
+
+            coursesService.DeleteCourse(course);
+            return RedirectToAction("Index");
         }
     }
 }

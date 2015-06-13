@@ -67,6 +67,7 @@
     <Compile Include="Base\LoggedEntity.cs" />
     <Compile Include="Base\SoftDeletableEntity.cs" />
     <Compile Include="Courses\Course.cs" />
+    <Compile Include="Courses\CourseDifficultyType.cs" />
     <Compile Include="Courses\HomeworkAssignment.cs" />
     <Compile Include="Courses\HomeworkAssignmentType.cs" />
     <Compile Include="Courses\HomeworkSubmission.cs" />

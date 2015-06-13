@@ -1,8 +1,6 @@
 ﻿namespace AcademyPlatform.Services
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
@@ -76,10 +74,19 @@
             }
         }
 
-        public ICollection<ValidationResult> GetErrors(Course course)
+        public bool DeleteCourse(Course course)
         {
-            return null;
-            //return validator.GetValidationResults(course);
+            try
+            {
+                this.courses.Delete(course);
+                this.courses.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

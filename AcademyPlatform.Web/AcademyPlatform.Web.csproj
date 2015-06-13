@@ -278,6 +278,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\Courses\Views\Courses\Edit.cshtml" />
+    <Content Include="Areas\Courses\Views\Courses\Index.cshtml" />
+    <Content Include="Areas\Courses\Views\Shared\DisplayTemplates\String.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -297,7 +300,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
