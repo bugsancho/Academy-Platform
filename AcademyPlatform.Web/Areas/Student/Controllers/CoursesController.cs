@@ -28,6 +28,11 @@
         public ActionResult Details(int id)
         {
             var course = coursesService.GetCourseById(id);
+            if (course == null)
+            {
+                return HttpNotFound("Invalid course id");
+            }
+
             var vm = Mapper.Map<CourseViewModel>(course);
             return View(vm);
         }
@@ -95,6 +100,17 @@
 
             coursesService.DeleteCourse(course);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Apply()
+        {
+            return View();
+        }
+
+        public ActionResult ApplicationCompleted()
+        {
+            return View();
         }
     }
 }

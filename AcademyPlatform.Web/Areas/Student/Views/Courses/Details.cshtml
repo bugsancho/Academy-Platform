@@ -62,13 +62,13 @@
                         <h3 class="title">Project Info</h3>
                         <div class="separator-2"></div>
                         <ul class="list margin-clear">
-                            <li><strong>Начало: </strong> <span class="text-left">@Model.StartDate.ToString("MMMM yyy")</span></li>
-                            <li><strong>Край: </strong> <span class="text-left">@Model.EndDate.ToString("MMMM yyy")</span></li>
+                            <li><strong>Начало: </strong> <span class="text-left">@Model.StartDate.ToString("dd MMMM yyy")</span></li>
+                            <li><strong>Край: </strong> <span class="text-left">@Model.EndDate.ToString("dd MMMM yyy")</span></li>
                             <li><strong>Продължителност: </strong> <span class="text-left"> 50 учебни часа</span></li>
                             <li><strong>Зала: </strong> <span class="text-left"> зала едно на НДК</span></li>
                             <li><strong>Лектор: </strong> <span class="text-left"> Лектор Х </span></li>
                         </ul>
-                        <a href="#" class="btn btn-danger btn-lg"> Кандидатствай </a>
+                        <a href="@Url.Action("Apply","Courses",new {Area = "Student"})" class="btn btn-danger btn-lg"> Кандидатствай </a>
                     </div>
                 </div>
             </aside>

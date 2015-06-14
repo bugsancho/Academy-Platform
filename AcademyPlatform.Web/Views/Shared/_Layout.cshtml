@@ -26,7 +26,7 @@
         <!-- "full-width": mandatory class for the full-width menu layout -->
         <!-- "centered": mandatory class for the centered logo layout -->
         <!-- ================ -->
-        <header class="header clearfix">
+        <header class="header fixed clearfix">
 
             <div class="container">
                 <div class="row">
@@ -75,21 +75,55 @@
                                         <!-- Collect the nav links, forms, and other content for toggling -->
                                         <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                             <!-- main-menu -->
-                                            <ul class="nav navbar-nav ">
-                                                <li>
-                                                    @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                                </li>
-                                                <li>
-                                                    @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Student" }, null)
-                                                </li>
-                                                <li>
-                                                    @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                                </li>
-                                                <li>
-                                                    @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                                </li>
+                                                @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <ul class="nav navbar-nav ">
+                                                    <li>
+                                                        @Html.ActionLink("Моите Курсове", "ComingSoon", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Изпити", "ComingSoon", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                    </li>
+                                                    <li>
+                                                        @Html.ActionLink("Форум", "ComingSoon", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                    </li>
+                                                    <li class="dropdown ">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="index.html">Информация</a>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Student" }, null)
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                            </li>
+                                                            <li>
+                                                                @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            }
+                                            else
+                                                {
+                                                   <ul class="nav navbar-nav ">
+                                                       <li>
+                                                           @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                       </li>
+                                                       <li>
+                                                           @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Student" }, null)
+                                                       </li>
+                                                       <li>
+                                                           @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                       </li>
+                                                       <li>
+                                                           @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                       </li>
 
-                                            </ul>
+                                                   </ul>
+                                                }
                                             @Html.Partial("_LoginPartial")
                                         </div>
                                         <!-- header dropdown buttons end-->

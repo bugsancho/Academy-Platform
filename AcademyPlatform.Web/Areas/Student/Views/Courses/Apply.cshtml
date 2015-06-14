@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Кандидатствай";
+}
+@section PreContent{
+<div class="pv-40 dark-translucent-bg">
+    <div class="container">
+        <div class="object-non-visible text-center" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+            <!-- logo -->
+            <div id="logo" class="logo">
+                <h3 class="margin-clear"><a href="index.html" class="logo-font link-light">A<span class="text-default">cademy</span></a></h3>
+            </div>
+            <!-- name-and-slogan -->
+            <p class="small">Мултифункционална Академия</p>
+            <div class="form-block center-block p-30 light-gray-bg border-clear text-left">
+                <h2 class="title">Кандидатствай</h2>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group has-feedback">
+                        <label for="inputName" class="col-sm-3 control-label">Име <span class="text-danger small">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputName" placeholder="Fisrt Name" required>
+                            <i class="fa fa-pencil form-control-feedback"></i>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label for="inputLastName" class="col-sm-3 control-label">Фамилия <span class="text-danger small">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="inputLastName" placeholder="Last Name" required>
+                            <i class="fa fa-pencil form-control-feedback"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label for="inputEmail" class="col-sm-3 control-label">Email <span class="text-danger small">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                            <i class="fa fa-envelope form-control-feedback"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input" class="col-sm-3 control-label">Курс <span class="text-danger small">*</span></label>
+                        <div class="col-sm-8">
+                            <select class="form-control">
+                                <option>Въведение в Програмирането с C#</option>
+                                <option>Уеб Дизайн</option>
+                                <option>HTML & CSS</option>
+                                <option>Реклама</option>
+                            </select>
+                            <i class=""></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input" class="col-sm-3 control-label">Имате ли предишен опит?</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input" class="col-sm-3 control-label">Какво очаквате от Академията?</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-8">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" required> Приемам <a href="#">условията</a> на Академията.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-8">
+                            <a href="@Url.Action("ApplicationCompleted","Courses",new {Area = "Student"})" style="color:white" class="btn btn-group btn-danger btn-animated">Кандидатствай <i class="fa fa-check"></i></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

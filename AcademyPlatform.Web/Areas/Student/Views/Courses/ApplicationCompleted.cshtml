@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.PageTitle = "Успешна кандидатура";
+}
+
+@section PreContent {
+
+    <section class="section default-bg clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h1 class="title">Благодарим ви за кандидатурата!</h1>
+                            <div class="separator object-non-visible" data-animation-effect="zoomIn" data-effect-delay="100"></div>
+                            <p>Ще ви отговорим възможно най-бързо и ще ви викнем мутри!</p>
+                            <p>и още биячи!</p>
+                            <p>е така да ви е гадно!</p>
+                        </div>
+                        <div class="col-sm-12">
+                            <br>
+                            <p>
+                                <a href="@Url.Action( "Index", "Home", routeValues: new { Area = string.Empty })" class="btn btn-lg btn-gray-transparent btn-animated">Начало<i class="fa fa-home pl-20"></i></a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+}

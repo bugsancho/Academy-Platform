@@ -326,6 +326,8 @@
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Content\jasny-bootstrap.css.map" />
     <Content Include="Areas\Student\Views\Courses\Details.cshtml" />
+    <Content Include="Areas\Student\Views\Courses\Apply.cshtml" />
+    <Content Include="Areas\Student\Views\Courses\ApplicationCompleted.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -400,6 +402,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js.map">
       <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
     </Content>
+    <Content Include="Views\Home\ComingSoon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Student\Views\Lectures\" />
