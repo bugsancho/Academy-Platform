@@ -13,7 +13,6 @@ namespace AcademyPlatform.Web.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
-    using AcademyPlatform.Validators.Courses;
 
     public static class NinjectWebCommon
     {
@@ -66,9 +65,9 @@ namespace AcademyPlatform.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Validators.Courses.CourseValidator)))
+            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Models.Courses.Validators.CourseValidator)))
                 .ForEach(match => kernel.Bind(match.InterfaceType).To(match.ValidatorType));
-            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Validators.Courses.CreateCourseViewModelValidator)))
+            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.Validators.CreateCourseViewModelValidator)))
                 .ForEach(match => kernel.Bind(match.InterfaceType).To(match.ValidatorType));
             kernel.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<IAcademyPlatformDbContext>().To<AcademyPlatformDbContext>();
