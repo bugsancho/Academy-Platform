@@ -27,10 +27,19 @@
                         "~/Content/animate.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new ScriptBundle("~/project-theme-scripts").Include(
+                //"~/Scripts/Plugins/jasny-bootstrap.js",
+                "~/Scripts/Plugins/SmoothScroll.js",
+                "~/Scripts/Plugins/jquery.waypoints.js",
+                "~/Scripts/template.js",
+                "~/Scripts/Plugins/jquery.vide.js"));
+
             bundles.Add(new StyleBundle("~/project-theme").Include(
                        "~/Content/project-theme.css",
                        "~/Content/ProjectThemeSkins/cool_green.css",
                        "~/Content/Fonts/font-awesome.css",
+                       "~/Content/hover.css",
+                       "~/Content/jasny-bootstrap.css",
                        "~/Content/animate.css"));
         }
     }

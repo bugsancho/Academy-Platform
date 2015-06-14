@@ -1,35 +1,144 @@
-﻿@model IEnumerable<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>
-
-@foreach (var item in Model)
+﻿@section PreContent
 {
-
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-8 text-center">
-                    @item.Title
-                </div>
+    <div class="banner video-background-banner pv-40 dark-translucent-bg hovered">
+        <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; -webkit-background-size: cover; background-image: none; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;">
+            <video autoplay="" loop="" muted="" style="visibility: visible; margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 1905px; height: auto;">
+                <source src="@Url.Content("~/Content/videos/background-video-banner.mp4")" type="video/mp4" />
+                <source src="@Url.Content("~/Content/videos/background-video-banner.webm")" type="video/webm" />
+            </video>
+        </div>
+        <!-- breadcrumb start -->
+        <!-- ================ -->
+        <div class="breadcrumb-container">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a class="link-dark" href="index.html">Академия (Home)</a></li>
+                    <li class="active">Курсове</li>
+                </ol>
             </div>
+        </div>
+        <!-- breadcrumb end -->
+        <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    @Html.EditorFor(x => item.Description)
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        @Html.LabelFor(x => item.Difficulty)
-                        @item.Difficulty
-                    </div>
-                    <div class="row">
-                        @Html.LabelFor(x => item.StartDate)
-                    </div>
-                    <div class="row">
-                        @Html.LabelFor(x => item.EndDate)
-                        @item.EndDate
-                    </div>
-                    <div class="row">
-                        @Html.LabelFor(x => item.Price)
-                        @item.Price
-                    </div>
+                <div class="col-md-8 text-center col-md-offset-2 pv-20">
+                    <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Име на Академията</h2>
+                    <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                    <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Някакво много надъхващото мото.</p>
                 </div>
             </div>
         </div>
+    </div>
 }
+<section class="main-container border-clear light-gray-bg padding-bottom-clear">
+    <div class="container">
+        <div class="row">
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-12">
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title text-center"></h1>
+                <!-- page-title end -->
+
+                <div class="image-box space-top style-4">
+                    <div class="row grid-space-0">
+                        <div class="col-md-6">
+                            <div class="overlay-container">
+                                <img src="@Url.Content("~/Content/Images/csharp.png")" alt="">
+                                <div class="overlay-to-top">
+                                    <p class="small margin-clear"><em> C# <br> Обектно ореантиран език за програмиране.</em></p><em>
+                                    </em>
+                                </div><em>
+                                </em>
+                            </div><em>
+                            </em>
+                        </div><em>
+                            <div class="col-md-6">
+                                <div class="body">
+                                    <div class="pv-30 visible-lg"></div>
+                                    <h3>Курс: "Въведение в Програмирането с C#"</h3>
+                                    <div class="separator-2"></div>
+                                    <p class="margin-clear">C# е обектно-ориентиран език за програмиране, разработен от Microsoft, като част от софтуерната платформа .NET. Стремежът още при създаването на C# езика е бил да се създаде един прост, модерен, обектно-ориентиран език с общо предназначение. Основа за C# са C++, Java и донякъде езици като Delphi, VB.NET и C. </p>
+                                    <br>
+                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                </div>
+                            </div>
+                        </em>
+                    </div><em>
+                    </em>
+                </div><em>
+                    <div class="image-box style-4">
+                        <div class="row grid-space-0">
+                            <div class="col-md-6 col-md-push-6">
+                                <div class="overlay-container">
+                                    <img src="@Url.Content("~/Content/Images/html_css.png")" alt="">
+                                    <div class="overlay-to-top">
+                                        <p class="small margin-clear"><em>HTML &amp; CSS <br> Изграждане на уеб страници и стилизиране.</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-md-pull-6">
+                                <div class="body text-right">
+                                    <div class="pv-30 visible-lg"></div>
+                                    <h3>Уеб Дизайн</h3>
+                                    <div class="separator-3"></div>
+                                    <p class="margin-clear">HTML (Hyper Text Markup Language) е основният маркиращ език за описание и дизайн на уеб страници. CSS (Cascading Style Sheets) е език за описание на стилове (език за стилови листове, style sheet language) — използва се основно за описване на представянето на документ, написан на език за маркиране. Най-често се използва заедно с HTML, но може да се приложи върху произволен XML документ.</p>
+                                    <br>
+                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-box style-4">
+                        <div class="row grid-space-0">
+                            <div class="col-md-6">
+                                <div class="overlay-container">
+                                    <img src="@Url.Content("~/Content/Images/java.png")" alt="">
+                                    <div class="overlay-to-top">
+                                        <p class="small margin-clear"><em>Java <br> Обектно ореантиран език за програмиране.</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="body">
+                                    <div class="pv-30 visible-lg"></div>
+                                    <h3>Java</h3>
+                                    <div class="separator-2"></div>
+                                    <p class="margin-clear">Java е обектно-ориентиран език за програмиране. Кодът, написан на Java не се компилира до машинен код за определен процесор, а до специфичен за езика код, наречен байт код. Поради това за изпълнението на програма, написана на Java е необходима т. нар. Java Virtual Machine.</p>
+                                    <br>
+                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-box style-4">
+                        <div class="row grid-space-0">
+                            <div class="col-md-6 col-md-push-6">
+                                <div class="overlay-container">
+                                    <img src="@Url.Content("~/Content/Images/advert.jpg")" alt="">
+                                    <div class="overlay-to-top">
+                                        <p class="small margin-clear"><em>Реклама <br> Графичен дизайн на реклами.</em></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-md-pull-6">
+                                <div class="body text-right">
+                                    <div class="pv-30 visible-lg"></div>
+                                    <h3>Реклама</h3>
+                                    <div class="separator-3"></div>
+                                    <p class="margin-clear">Реклама в бизнеса е форма на маркетингова комуникация, която има за цел да окуражи, убеди или в някои случаи тя дори манипулира (това обикновено бива възприемано в негативен аспект) аудиторията (зрители, читатели или слушатели, и т.н.) да предприеме или да продължи да предприема определено действие.</p>
+                                    <br>
+                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </em>
+            </div><em>
+                <!-- main end -->
+            </em>
+        </div><em>
+        </em>
+    </div><em>
+    </em>
+</section>

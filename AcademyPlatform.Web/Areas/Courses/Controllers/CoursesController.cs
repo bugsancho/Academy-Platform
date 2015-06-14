@@ -21,16 +21,7 @@
         // GET: Courses/Courses
         public ActionResult Index()
         {
-            var models = new List<CoursesListViewModel>() { 
-            new CoursesListViewModel() { Title = "C#", Description = "Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
-            new CoursesListViewModel() { Title = "C#", Description = "2Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
-            new CoursesListViewModel() { Title = "C#", Description = "3Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
-            new CoursesListViewModel() { Title = "C#", Description = "4Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
-            new CoursesListViewModel() { Title = "C#", Description = "5Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner },
-            new CoursesListViewModel() { Title = "C#", Description = "6Супер якият курс по С Шарп", StartDate = DateTime.Now.AddDays(50), EndDate = DateTime.Now.AddDays(60), Price = 653.11m, Difficulty = CourseDifficultyType.Beginner }
-            
-            };
-            return View(models);
+            return View();
         }
 
         // GET: Courses/Courses/Details/5
