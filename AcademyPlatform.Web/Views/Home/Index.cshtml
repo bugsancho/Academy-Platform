@@ -1,31 +1,192 @@
 ﻿@{
-    ViewBag.PageTitle = "Home Page";
+    ViewBag.PageTitle = "Начало";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+@section PreContent{
+<div class="banner clearfix">
+    <!-- slideshow start -->
+    <!-- ================ -->
+    <div class="slideshow">
+
+        <!-- slider revolution start -->
+        <!-- ================ -->
+        <div class="slider-banner-container">
+            <div class="slider-banner-fullwidth">
+                <ul class="slides">
+                    <!-- slide 1 start -->
+                    <!-- ================ -->
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on" data-title="Нашите Курсове">
+
+                        <!-- main image -->
+                        <img src="@Url.Content("~/Content/Images/EvoX-GRD.jpg")" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="600"
+                             data-start="0">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption sfb fadeout large_white"
+                             data-x="left"
+                             data-y="110"
+                             data-speed="500"
+                             data-start="1000"
+                             data-easing="easeOutQuad">
+                            Прекрасни възможности за придобиване на Софтуерни знания.
+                        </div>
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption sfb fadeout large_white tp-resizeme hidden-xs"
+                             data-x="left"
+                             data-y="170"
+                             data-speed="500"
+                             data-start="1300"
+                             data-easing="easeOutQuad">
+                            <div class="separator-2 light"></div>
+                        </div>
+                        <!-- LAYER NR. 3 -->
+                        <div class="tp-caption sfb fadeout medium_white hidden-xs"
+                             data-x="left"
+                             data-y="180"
+                             data-speed="500"
+                             data-start="1300"
+                             data-easing="easeOutQuad"
+                             data-endspeed="600">
+                            Предлагаме голямо разнообразие от курсове. <br> C#, Java, HTML & CSS, Реклама.
+                        </div>
+                        <!-- LAYER NR. 4 -->
+                        <div class="tp-caption sfb fadeout small_white"
+                             data-x="left"
+                             data-y="260"
+                             data-speed="500"
+                             data-start="1600"
+                             data-easing="easeOutQuad"
+                             data-endspeed="600">
+                            <a href="@Url.Action("Index", "Courses", new { area = "Courses" })" class=" btn radius-50 btn-default btn-animated">Нашите Курсове <i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </li>
+                    <!-- slide 1 end -->
+                    <!-- slide 2 start -->
+                    <!-- ================ -->
+                    <li data-transition="fade" data-slotamount="1" data-masterspeed="500" data-saveperformance="on" data-title="Откриване на Академията">
+
+                        <!-- main image -->
+                        <img src="@Url.Content("~/Content/Images/baloons.jpg")" alt="slidebg2" data-bgposition="center top" data-bgrepeat="no-repeat" data-bgfit="cover">
+                        <!-- Transparent Background -->
+                        <div class="tp-caption dark-translucent-bg"
+                             data-x="center"
+                             data-y="bottom"
+                             data-speed="600"
+                             data-start="500">
+                        </div>
+                        <!-- LAYER NR. 1 -->
+                        <div class="tp-caption sfb fadeout text-center large_white"
+                             data-x="center"
+                             data-y="110"
+                             data-speed="500"
+                             data-start="1000"
+                             data-easing="easeOutQuad">
+                            Откриване на Академията
+                        </div>
+                        <!-- LAYER NR. 2 -->
+                        <div class="tp-caption sfb fadeout text-center large_white tp-resizeme hidden-xs"
+                             data-x="center"
+                             data-y="150"
+                             data-speed="500"
+                             data-start="1300"
+                             data-easing="easeOutQuad">
+                            <div class="separator light"></div>
+                        </div>
+                        <!-- LAYER NR. 3 -->
+                        <div class="tp-caption sfb fadeout medium_white text-center hidden-xs"
+                             data-x="center"
+                             data-y="180"
+                             data-speed="500"
+                             data-start="1300"
+                             data-easing="easeOutQuad"
+                             data-endspeed="600">
+                            Заповядайте на откриването на Академията! <br> Ще се състой на 23 март 2013г.
+                        </div>
+                        <!-- LAYER NR. 4 -->
+                        <div class="tp-caption sfb fadeout small_white text-center"
+                             data-x="center"
+                             data-y="260"
+                             data-speed="500"
+                             data-start="1600"
+                             data-easing="easeOutQuad"
+                             data-endspeed="600">
+                            <span class="pl-5 pr-5">За повече информация се </span> <a href="@Url.Action("Contact", "Home", new { area = string.Empty })" class="btn radius-50 btn-default btn-animated">Свържете с нас<i class="fa fa-envelope"></i></a>
+                        </div>
+                    </li>
+                    <!-- slide 2 end -->
+                </ul>
+                <div class="tp-bannertimer"></div>
+            </div>
+        </div>
+        <!-- slider revolution end -->
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <!-- slideshow end -->
+</div>
+}
+
+<div class="pv-40">
+    <div class="container">
+        <h2 class="text-center">Какво предлагаме</h2>
+        <div class="separator"></div>
+        <div class="row mt-20">
+            <div class="col-md-6">
+                <div class="feature-box-2 right">
+                    <span class="icon without-bg"><i class="text-default fa fa-pencil"></i></span>
+                    <div class="body">
+                        <h4 class="title">Удобна студентска система</h4>
+                        <p>Нашия екип се е постарал максимално да удовлетвори нуждите на модерния потребител.</p>
+                        <div class="separator-3"></div>
+                    </div>
+                </div>
+                <div class="feature-box-2 right">
+                    <span class="icon without-bg"><i class="text-default fa fa-book"></i></span>
+                    <div class="body">
+                        <h4 class="title">Предложение две</h4>
+                        <p>Нашия екип се е постарал максимално да удовлетвори нуждите на модерния потребител.</p>
+                        <div class="separator-3"></div>
+                    </div>
+                </div>
+                <div class="feature-box-2 right">
+                    <span class="icon without-bg"><i class="text-default fa fa-star"></i></span>
+                    <div class="body">
+                        <h4 class="title">Предложение три</h4>
+                        <p>Нашия екип се е постарал максимално да удовлетвори нуждите на модерния потребител.</p>
+                        <div class="separator-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="feature-box-2">
+                    <span class="icon without-bg"><i class="text-default fa fa-coffee"></i></span>
+                    <div class="body">
+                        <h4 class="title">Предложение четири</h4>
+                        <p>Нашия екип се е постарал максимално да удовлетвори нуждите на модерния потребител.</p>
+                        <div class="separator-2"></div>
+                    </div>
+                </div>
+                <div class="feature-box-2">
+                    <span class="icon without-bg"><i class="text-default fa fa-female"></i></span>
+                    <div class="body">
+                        <h4 class="title">Предложение пет</h4>
+                        <p>Нашия екип се е постарал максимално да удовлетвори нуждите на модерния потребител.</p>
+                        <div class="separator-2"></div>
+                    </div>
+                </div>
+                <div class="feature-box-2">
+                    <span class="icon without-bg"><i class="text-default fa fa-support"></i></span>
+                    <div class="body">
+                        <h4 class="title">Предложение шест</h4>
+                        <p>Нашия екип се е постарал максимално да удовлетвори нуждите на модерния потребител.</p>
+                        <div class="separator-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

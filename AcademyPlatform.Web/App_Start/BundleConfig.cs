@@ -30,15 +30,18 @@
             bundles.Add(new ScriptBundle("~/project-theme-scripts").Include(
                 //"~/Scripts/Plugins/jasny-bootstrap.js",
                 "~/Scripts/Plugins/SmoothScroll.js",
+                "~/Scripts/Plugins/jquery.themepunch.revolution.js",
+                "~/Scripts/Plugins/jquery.themepunch.tools.min.js",
                 "~/Scripts/Plugins/jquery.waypoints.js",
                 "~/Scripts/template.js",
                 "~/Scripts/Plugins/jquery.vide.js"));
 
             bundles.Add(new StyleBundle("~/project-theme").Include(
                        "~/Content/project-theme.css",
-                       "~/Content/ProjectThemeSkins/cool_green.css",
+                       "~/Content/ProjectThemeSkins/light_blue.css",
                        "~/Content/Fonts/font-awesome.css",
                        "~/Content/hover.css",
+                       "~/Content/rs-slider.css",
                        "~/Content/jasny-bootstrap.css",
                        "~/Content/animate.css"));
         }

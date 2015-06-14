@@ -256,7 +256,12 @@
     <Content Include="Content\Fonts\font-awesome.min.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
+    <Content Include="Content\Images\arrow_large_left.png" />
+    <Content Include="Content\Images\arrow_large_right.png" />
+    <Content Include="Content\Images\baloons.jpg" />
+    <Content Include="Content\Images\EvoX-GRD.jpg" />
     <Content Include="Content\Images\page-contact-banner.jpg" />
+    <Content Include="Content\Images\timer.png" />
     <Content Include="Content\Images\аdvertising.png" />
     <Content Include="Content\Images\csharp.png" />
     <Content Include="Content\Images\html_css.png" />
@@ -280,6 +285,7 @@
     <Content Include="Content\ProjectThemeSkins\purple.css" />
     <Content Include="Content\ProjectThemeSkins\red.css" />
     <Content Include="Content\ProjectThemeSkins\vivid_red.css" />
+    <Content Include="Content\rs-slider.css" />
     <Content Include="Content\Videos\background-video-banner.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -333,6 +339,9 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\Plugins\jasny-bootstrap.js" />
     <Content Include="Scripts\Plugins\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.revolution.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.revolution.min.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.tools.min.js" />
     <Content Include="Scripts\Plugins\jquery.vide.js" />
     <Content Include="Scripts\Plugins\jquery.vide.min.js" />
     <Content Include="Scripts\Plugins\jquery.waypoints.js" />
