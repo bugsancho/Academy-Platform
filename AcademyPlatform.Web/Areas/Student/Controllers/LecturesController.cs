@@ -1,4 +1,4 @@
-﻿namespace AcademyPlatform.Web.Areas.Courses.Controllers
+﻿namespace AcademyPlatform.Web.Areas.Student.Controllers
 {
     using System;
     using System.Linq;

@@ -224,9 +224,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Courses\Controllers\CoursesController.cs" />
-    <Compile Include="Areas\Courses\Controllers\LecturesController.cs" />
-    <Compile Include="Areas\Courses\CoursesAreaRegistration.cs" />
+    <Compile Include="Areas\Student\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Student\Controllers\LecturesController.cs" />
+    <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -256,8 +256,6 @@
     <Content Include="Content\Fonts\font-awesome.min.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
-    <Content Include="Content\Images\arrow_large_left.png" />
-    <Content Include="Content\Images\arrow_large_right.png" />
     <Content Include="Content\Images\baloons.jpg" />
     <Content Include="Content\Images\EvoX-GRD.jpg" />
     <Content Include="Content\Images\page-contact-banner.jpg" />
@@ -308,15 +306,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Areas\Courses\Views\web.config" />
-    <Content Include="Areas\Courses\Views\Courses\Create.cshtml" />
-    <Content Include="Areas\Courses\Views\Shared\EditorTemplates\GenericEditorTemplate.cshtml" />
+    <Content Include="Areas\Student\Views\web.config" />
+    <Content Include="Areas\Student\Views\Courses\Create.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\EditorTemplates\GenericEditorTemplate.cshtml" />
     <Content Include="App_GlobalResources\ErrorMessages.bg">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Courses\Views\Courses\Edit.cshtml" />
-    <Content Include="Areas\Courses\Views\Courses\Index.cshtml" />
+    <Content Include="Areas\Student\Views\Courses\Edit.cshtml" />
+    <Content Include="Areas\Student\Views\Courses\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Content\project-theme.css.map" />
     <Content Include="fonts\fontawesome-webfont.eot" />
@@ -325,8 +323,9 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\Videos\background-video-banner.webm" />
-    <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
     <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Areas\Student\Views\Courses\Details.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -403,8 +402,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Courses\Views\Lectures\" />
-    <Folder Include="Areas\Courses\Views\Shared\DisplayTemplates\" />
+    <Folder Include="Areas\Student\Views\Lectures\" />
+    <Folder Include="Areas\Student\Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

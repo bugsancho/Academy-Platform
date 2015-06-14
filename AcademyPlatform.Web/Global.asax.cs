@@ -24,7 +24,7 @@
             DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             ModelValidatorProviders.Providers.Add(new FluentValidationModelValidatorProvider(new NinjectValidationFactory()));
             ValidatorOptions.ResourceProviderType = typeof(ErrorMessages);
-            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CreateCourseViewModel)));
+            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CourseViewModel)));
             autoMapperConfig.Execute();
         }
     }

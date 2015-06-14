@@ -6,20 +6,27 @@
 
     public class Course
     {
-        //[ScaffoldColumn(false)]
         public int Id { get; set; }
 
-        //[StringLength(100, MinimumLength = 10)]
         public string Title { get; set; }
 
-        //[StringLength(500, MinimumLength = 50)]
-        public string Description { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string ShortDescription { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string DetailedDescription { get; set; }
+
+        public string ImageUrl { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+
+        public decimal Price { get; set; }
+
+        public CourseDifficultyType Difficulty { get; set; }
 
         public virtual ICollection<Lecture> Lectures { get; set; }
 

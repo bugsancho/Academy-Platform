@@ -1,4 +1,4 @@
-﻿namespace AcademyPlatform.Web.Areas.Courses.Controllers
+﻿namespace AcademyPlatform.Web.Areas.Student.Controllers
 {
     using System;
     using System.Linq;
@@ -27,7 +27,9 @@
         // GET: Courses/Courses/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var course = coursesService.GetCourseById(id);
+            var vm = Mapper.Map<CourseViewModel>(course);
+            return View(vm);
         }
 
         // GET: Courses/Courses/Create
@@ -38,7 +40,7 @@
 
         // POST: Courses/Courses/Create
         [HttpPost]
-        public ActionResult Create(CreateCourseViewModel courseViewModel)
+        public ActionResult Create(CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -60,13 +62,13 @@
                 return HttpNotFound();
             }
 
-            var course = Mapper.Map<CreateCourseViewModel>(courseInDb);
+            var course = Mapper.Map<CourseViewModel>(courseInDb);
             return View(course);
         }
 
         // POST: Courses/Courses/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, CreateCourseViewModel courseViewModel)
+        public ActionResult Edit(int id, CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
             {

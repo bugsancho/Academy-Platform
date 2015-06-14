@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Courses\CoursesListViewModel.cs" />
-    <Compile Include="Courses\CreateCourseViewModel.cs" />
+    <Compile Include="Courses\CourseViewModel.cs" />
     <Compile Include="Courses\Validators\CreateCourseViewModelValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.PageTitle = "Курсове";   
+    ViewBag.PageTitle = "Курсове";
 }
 
 @section PreContent
@@ -12,16 +12,16 @@
             </video>
         </div>
         @*<!-- breadcrumb start -->
-        <!-- ================ -->
-        <div class="breadcrumb-container">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home pr-10"></i><a class="link-dark" href="@Url.Action("Index", "Home",  new { Area = string.Empty }) ">Академия (Home)</a></li>
-                    <li class="active">Курсове</li>
-                </ol>
+            <!-- ================ -->
+            <div class="breadcrumb-container">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home pr-10"></i><a class="link-dark" href="@Url.Action("Index", "Home",  new { Area = string.Empty }) ">Академия (Home)</a></li>
+                        <li class="active">Курсове</li>
+                    </ol>
+                </div>
             </div>
-        </div>
-        <!-- breadcrumb end -->*@
+            <!-- breadcrumb end -->*@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 text-center col-md-offset-2 pv-20">
@@ -64,7 +64,7 @@
                                     <div class="separator-2"></div>
                                     <p class="margin-clear">C# е обектно-ориентиран език за програмиране, разработен от Microsoft, като част от софтуерната платформа .NET. Стремежът още при създаването на C# езика е бил да се създаде един прост, модерен, обектно-ориентиран език с общо предназначение. Основа за C# са C++, Java и донякъде езици като Delphi, VB.NET и C. </p>
                                     <br>
-                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                    <a href="@Url.Action("Details", "Courses", new { id = 5 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
                                 </div>
                             </div>
                         </em>
@@ -88,7 +88,7 @@
                                     <div class="separator-3"></div>
                                     <p class="margin-clear">HTML (Hyper Text Markup Language) е основният маркиращ език за описание и дизайн на уеб страници. CSS (Cascading Style Sheets) е език за описание на стилове (език за стилови листове, style sheet language) — използва се основно за описване на представянето на документ, написан на език за маркиране. Най-често се използва заедно с HTML, но може да се приложи върху произволен XML документ.</p>
                                     <br>
-                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                    <a href="@Url.Action("Details", "Courses", new { id = 11 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +110,7 @@
                                     <div class="separator-2"></div>
                                     <p class="margin-clear">Java е обектно-ориентиран език за програмиране. Кодът, написан на Java не се компилира до машинен код за определен процесор, а до специфичен за езика код, наречен байт код. Поради това за изпълнението на програма, написана на Java е необходима т. нар. Java Virtual Machine.</p>
                                     <br>
-                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                    <a href="@Url.Action("Details", "Courses", new { id = 13 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                                     <div class="separator-3"></div>
                                     <p class="margin-clear">Реклама в бизнеса е форма на маркетингова комуникация, която има за цел да окуражи, убеди или в някои случаи тя дори манипулира (това обикновено бива възприемано в негативен аспект) аудиторията (зрители, читатели или слушатели, и т.н.) да предприеме или да продължи да предприема определено действие.</p>
                                     <br>
-                                    <a href="AcademyCourseInfoPage.html" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                    <a href="@Url.Action("Details", "Courses", new { id = 14 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
                                 </div>
                             </div>
                         </div>

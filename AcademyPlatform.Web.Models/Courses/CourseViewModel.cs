@@ -6,14 +6,18 @@
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Web.Infrastructure.Mappings;
 
-    public class CreateCourseViewModel : IMapFrom<Course>
+    public class CourseViewModel : IMapFrom<Course>
     {
         [Display(Name = "Заглавие")]
         public string Title { get; set; }
 
+        [Display(Name = "Кратко Описание")]
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Описание")]
-        public string Description { get; set; }
+        public string ShortDescription { get; set; }
+
+        [Display(Name = "Подробно Описание")]
+        [DataType(DataType.MultilineText)]
+        public string DetailedDescription { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Начална дата")]
