@@ -1,8 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
-
-namespace AcademyPlatform.Web
+﻿namespace AcademyPlatform.Web
 {
+    using System.Web.Optimization;
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
@@ -25,7 +23,15 @@ namespace AcademyPlatform.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                        "~/Content/project-theme.css",
+                        "~/Content/animate.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/project-theme").Include(
+                       "~/Content/project-theme.css",
+                       "~/Content/ProjectThemeSkins/cool_green.css",
+                       "~/Content/Fonts/font-awesome.css",
+                       "~/Content/animate.css"));
         }
     }
 }

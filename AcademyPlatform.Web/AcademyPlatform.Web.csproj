@@ -247,11 +247,32 @@
     <Compile Include="ViewModels\ManageViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Fonts\font-awesome.css" />
+    <Content Include="Content\Fonts\font-awesome.min.css" />
+    <Content Include="Content\Images\logo_light_blue.png" />
+    <Content Include="Content\project-theme.css" />
+    <Content Include="Content\ProjectThemeSkins\blue.css" />
+    <Content Include="Content\ProjectThemeSkins\brown.css" />
+    <Content Include="Content\ProjectThemeSkins\cool_green.css" />
+    <Content Include="Content\ProjectThemeSkins\dark_cyan.css" />
+    <Content Include="Content\ProjectThemeSkins\dark_red.css" />
+    <Content Include="Content\ProjectThemeSkins\gold.css" />
+    <Content Include="Content\ProjectThemeSkins\gray.css" />
+    <Content Include="Content\ProjectThemeSkins\green.css" />
+    <Content Include="Content\ProjectThemeSkins\light_blue.css" />
+    <Content Include="Content\ProjectThemeSkins\orange.css" />
+    <Content Include="Content\ProjectThemeSkins\pink.css" />
+    <Content Include="Content\ProjectThemeSkins\purple.css" />
+    <Content Include="Content\ProjectThemeSkins\red.css" />
+    <Content Include="Content\ProjectThemeSkins\vivid_red.css" />
+    <Content Include="Content\Videos\background-video-banner.mp4" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\FontAwesome\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -272,8 +293,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Courses\Views\web.config" />
-    <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Courses\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Courses\Views\Courses\Create.cshtml" />
     <Content Include="Areas\Courses\Views\Shared\EditorTemplates\GenericEditorTemplate.cshtml" />
     <Content Include="App_GlobalResources\ErrorMessages.bg">
@@ -283,6 +302,14 @@
     <Content Include="Areas\Courses\Views\Courses\Edit.cshtml" />
     <Content Include="Areas\Courses\Views\Courses\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Content\project-theme.css.map" />
+    <Content Include="fonts\FontAwesome\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome\fontawesome-webfont.ttf" />
+    <Content Include="fonts\FontAwesome\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome\FontAwesome.otf" />
+    <Content Include="Content\Videos\background-video-banner.webm" />
+    <Content Include="Areas\Courses\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />

@@ -3,40 +3,115 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.PageTitle - My ASP.NET Application</title>
+    <title>@ViewBag.PageTitle - Academy Platform</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/project-theme")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="header-container">
+
+        <!-- header-top start -->
+        <!-- classes:  -->
+        <!-- "dark": dark version of header top e.g. class="header-top dark" -->
+        <!-- "colored": colored version of header top e.g. class="header-top colored" -->
+        <!-- ================ -->
+        <!-- header-top end -->
+        <!-- header start -->
+        <!-- classes:  -->
+        <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
+        <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
+        <!-- "full-width": mandatory class for the full-width menu layout -->
+        <!-- "centered": mandatory class for the centered logo layout -->
+        <!-- ================ -->
+        <header class="header clearfix">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- header-left start -->
+                        <!-- ================ -->
+                        <div class="header-left clearfix">
+                            <!-- logo -->
+                            <div id="logo" class="logo">
+                                <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img id="logo_img" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt="Академията"></a>
+                            </div>
+                            <!-- name-and-slogan -->
+                            <div class="site-slogan">
+                                Мултифункционална Академия
+                            </div>
+
+                        </div>
+                        <!-- header-left end -->
+                    </div>
+                    <div class="col-md-9">
+
+                        <!-- header-right start -->
+                        <!-- ================ -->
+                        <div class="header-right clearfix">
+
+                            <!-- main-navigation start -->
+                            <!-- classes: -->
+                            <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
+                            <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
+                            <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
+                            <!-- ================ -->
+                            <div class="main-navigation  animated">
+                                <!-- navbar start -->
+                                <!-- ================ -->
+                                <nav class="navbar navbar-default" role="navigation">
+                                    <div class="container-fluid">
+                                        <!-- Toggle get grouped for better mobile display -->
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+
+                                        </div>
+                                        <!-- Collect the nav links, forms, and other content for toggling -->
+                                        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                            <!-- main-menu -->
+                                            <ul class="nav navbar-nav ">
+                                                <li>
+                                                    @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Courses" }, null)
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                                </li>
+
+                                            </ul>
+                                            @Html.Partial("_LoginPartial")
+                                        </div>
+                                        <!-- header dropdown buttons end-->
+                                    </div>
+                                </nav>
+                            </div>
+                            <!-- navbar end -->
+                        </div>
+                        <!-- main-navigation end -->
+                    </div>
+                    <!-- header-right end -->
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+        </header>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Academy Platform</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
