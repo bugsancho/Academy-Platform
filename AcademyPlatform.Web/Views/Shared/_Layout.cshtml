@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/project-theme")
-
+    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
@@ -109,10 +109,42 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Academy Platform</p>
-        </footer>
     </div>
+    <footer id="footer" class="clearfix dark">
+
+        <!-- .footer start -->
+        <!-- ================ -->
+        <div class="footer">
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="footer-content text-center padding-ver-clear">
+                                <div class="logo-footer"><img id="logo-footer" class="center-block" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt=""></div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus illo vel dolorum soluta consectetur doloribus sit. Delectus non tenetur odit dicta vitae debitis suscipit doloribus. Lorem ipsum dolor sit amet, illo vel dolorum soluta consectetur.</p>
+                                <ul class="list-inline mb-20">
+                                    <li><i class="text-default fa fa-map-marker pr-5"></i>One infinity loop, 54100</li>
+                                    <li><a href="tel:+00 1234567890" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-5"></i>+00 1234567890</a></li>
+                                    <li><a href="mailto:info@theproject.com" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-5"></i>info@theproject.com</a></li>
+                                </ul>
+                                <ul class="social-links circle animated-effect-1 margin-clear">
+                                    <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="xing"><a target="_blank" href="http://www.xing.com"><i class="fa fa-xing"></i></a></li>
+                                </ul>
+                                <div class="separator"></div>
+                                <p class="text-center margin-clear">Copyright © 2015 Academy Platform by <a target="_blank" href="https://github.com/bugsancho">Alexander Todorov</a>. All Rights Reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .footer end -->
+
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/project-theme-scripts")
