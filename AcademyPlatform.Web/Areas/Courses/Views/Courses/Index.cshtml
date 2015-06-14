@@ -7,17 +7,17 @@
                 <source src="@Url.Content("~/Content/videos/background-video-banner.webm")" type="video/webm" />
             </video>
         </div>
-        <!-- breadcrumb start -->
+        @*<!-- breadcrumb start -->
         <!-- ================ -->
         <div class="breadcrumb-container">
             <div class="container">
                 <ol class="breadcrumb">
-                    <li><i class="fa fa-home pr-10"></i><a class="link-dark" href="index.html">Академия (Home)</a></li>
+                    <li><i class="fa fa-home pr-10"></i><a class="link-dark" href="@Url.Action("Index", "Home",  new { Area = string.Empty }) ">Академия (Home)</a></li>
                     <li class="active">Курсове</li>
                 </ol>
             </div>
         </div>
-        <!-- breadcrumb end -->
+        <!-- breadcrumb end -->*@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 text-center col-md-offset-2 pv-20">
@@ -115,7 +115,7 @@
                         <div class="row grid-space-0">
                             <div class="col-md-6 col-md-push-6">
                                 <div class="overlay-container">
-                                    <img src="@Url.Content("~/Content/Images/advert.jpg")" alt="">
+                                    <img src="@Url.Content("~/Content/Images/аdvertising.png")" alt="">
                                     <div class="overlay-to-top">
                                         <p class="small margin-clear"><em>Реклама <br> Графичен дизайн на реклами.</em></p>
                                     </div>

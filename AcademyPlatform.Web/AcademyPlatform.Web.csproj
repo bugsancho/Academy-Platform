@@ -256,11 +256,13 @@
     <Content Include="Content\Fonts\font-awesome.min.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
-    <Content Include="Content\Images\advert.jpg" />
+    <Content Include="Content\Images\page-contact-banner.jpg" />
+    <Content Include="Content\Images\аdvertising.png" />
     <Content Include="Content\Images\csharp.png" />
     <Content Include="Content\Images\html_css.png" />
     <Content Include="Content\Images\java.png" />
     <Content Include="Content\Images\logo_light_blue.png" />
+    <Content Include="Content\Images\team-member.jpg" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\project-theme.css" />
