@@ -1,7 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Validators.Courses
 {
-    using System;
-    using AcademyPlatform.Web.Models.Courses;
+    using Models.Courses;
     using FluentValidation;
 
     public class CreateCourseViewModelValidator : AbstractValidator<CreateCourseViewModel>
