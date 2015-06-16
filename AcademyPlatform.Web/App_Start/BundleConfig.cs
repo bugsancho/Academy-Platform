@@ -33,6 +33,7 @@
                 "~/Scripts/Plugins/jquery.themepunch.revolution.js",
                 "~/Scripts/Plugins/jquery.themepunch.tools.min.js",
                 "~/Scripts/Plugins/jquery.waypoints.js",
+                "~/Scripts/Plugins/jquery.browser.js",
                 "~/Scripts/template.js",
                 "~/Scripts/Plugins/jquery.vide.js"));
 

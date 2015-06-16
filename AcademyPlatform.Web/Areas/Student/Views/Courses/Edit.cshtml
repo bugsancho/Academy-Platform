@@ -7,14 +7,12 @@
 
 <h2>@ViewBag.PageTitle</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         @Html.EditorForModel("GenericEditorTemplate")
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Обнови" class="btn btn-default" />
@@ -29,4 +27,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
 }
