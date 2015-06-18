@@ -572,6 +572,7 @@
   <ItemGroup>
     <Folder Include="Areas\Student\Views\Lectures\" />
     <Folder Include="Areas\Student\Views\Shared\DisplayTemplates\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

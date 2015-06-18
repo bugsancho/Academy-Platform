@@ -15,6 +15,9 @@
         [Display(Name = "Заглавие")]
         public string Title { get; set; }
 
+        [Display(Name = "Заглавие")]
+        public string Tagline { get; set; }
+
         [Display(Name = "Кратко Описание")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]

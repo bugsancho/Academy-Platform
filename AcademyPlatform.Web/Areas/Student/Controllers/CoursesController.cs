@@ -59,6 +59,8 @@
         }
 
         // GET: Courses/Courses/Edit/5
+        [Authorize(Roles = "admin")]
+
         public ActionResult Edit(int id)
         {
             var courseInDb = coursesService.GetCourseById(id);
@@ -73,6 +75,7 @@
 
         // POST: Courses/Courses/Edit/5
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id, CourseViewModel courseViewModel)
         {
             if (ModelState.IsValid)
