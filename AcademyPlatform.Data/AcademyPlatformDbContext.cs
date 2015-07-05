@@ -8,6 +8,8 @@
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class AcademyPlatformDbContext : IdentityDbContext<User>, IAcademyPlatformDbContext
     {
@@ -15,6 +17,17 @@
             : base("DefaultConnection")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AcademyPlatformDbContext, Configuration>());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Course>()
+                        .Property(t => t.PrettyUrl)
+                        .HasMaxLength(50)
+            .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_Name") { IsUnique = true }));
+
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public IDbSet<Course> Courses { get; set; }

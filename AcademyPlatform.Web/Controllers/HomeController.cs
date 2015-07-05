@@ -1,5 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Controllers
 {
+    using DevTrends.MvcDonutCaching;
     using System;
     using System.Linq;
     using System.Web.Mvc;
@@ -24,6 +25,11 @@
         public ActionResult ComingSoon()
         {
             return View();
+        }
+
+        public ActionResult RenderNavigation()
+        {
+            return View("_MainNavigation");
         }
     }
 }

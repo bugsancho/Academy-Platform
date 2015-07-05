@@ -13,6 +13,7 @@ namespace AcademyPlatform.Web.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
+    using AcademyPlatform.Web.Infrastructure.Sanitizers;
 
     public static class NinjectWebCommon
     {
@@ -72,6 +73,7 @@ namespace AcademyPlatform.Web.App_Start
             kernel.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<IAcademyPlatformDbContext>().To<AcademyPlatformDbContext>();
             kernel.Bind<ICoursesService>().To<CoursesService>();
+            kernel.Bind<IHtmlSanitizer>().To<HtmlSanitizer>();
         }
     }
 }

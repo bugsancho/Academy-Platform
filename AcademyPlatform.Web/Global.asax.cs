@@ -8,6 +8,8 @@
     using FluentValidation.Mvc;
     using FluentValidation;
     using AcademyPlatform.Web.Resources;
+    using System.Web;
+    using System;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -26,6 +28,13 @@
             ValidatorOptions.ResourceProviderType = typeof(ErrorMessages);
             var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CourseViewModel)));
             autoMapperConfig.Execute();
+        }
+
+        protected void Application_RequestEnd()
+        {
+            System.Diagnostics.Trace.WriteLine(string.Format("{0}:{1}",
+         (DateTime.Now - HttpContext.Current.Timestamp).TotalMilliseconds,
+         HttpContext.Current.Request.RawUrl));
         }
     }
 }

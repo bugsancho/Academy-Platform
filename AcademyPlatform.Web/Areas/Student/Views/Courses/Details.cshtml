@@ -66,11 +66,7 @@
                             <li><strong>Зала: </strong> <span class="text-left"> зала едно на НДК</span></li>
                             <li><strong>Лектор: </strong> <span class="text-left"> Лектор Х </span></li>
                         </ul>
-                        <a href="@Url.Action("Apply","Courses",new {Area = "Student"})" class="btn btn-danger btn-lg"> Кандидатствай </a>
-                        @if (User.IsInRole("admin"))
-                        {
-                            <a href="@Url.Action("Edit", "Courses", new { Area = "Student", id = Model.Id })" class="btn btn-warning btn-lg"> Редактирай </a>
-                        }
+                        <a href="@Url.Action("Apply","Courses",new {Area = "Student"})" class="btn btn-danger btn-lg"> Кандидатствай </a>                  
                     </div>
                 </div>
             </aside>

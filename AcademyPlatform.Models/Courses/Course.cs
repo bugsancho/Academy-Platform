@@ -8,6 +8,8 @@
     {
         public int Id { get; set; }
 
+        public string PrettyUrl { get; set; }
+
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]

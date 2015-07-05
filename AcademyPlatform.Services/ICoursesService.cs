@@ -1,3 +1,5 @@
+using AcademyPlatform.Data.Repositories;
+
 namespace AcademyPlatform.Services
 {
     using System;
@@ -11,6 +13,8 @@ namespace AcademyPlatform.Services
         bool UpdateCourse(Course course);
 
         Course GetCourseById(int id);
+
+        Course GetCourseByPrettyUrl(string url);
 
         IQueryable<Course> GetActiveCourses();
 

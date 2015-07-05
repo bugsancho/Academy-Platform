@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Web.Infrastructure.Mappings;
@@ -12,10 +13,14 @@
         [HiddenInput]
         public int Id { get; set; }
 
+        [Display(Name = "Линк")]
+        [ScaffoldColumn(false)]
+        public string PrettyUrl { get; set; }
+
         [Display(Name = "Заглавие")]
         public string Title { get; set; }
 
-        [Display(Name = "Заглавие")]
+        [Display(Name = "Tag Line")]
         public string Tagline { get; set; }
 
         [Display(Name = "Кратко Описание")]
@@ -36,6 +41,10 @@
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; }
 
+
+        [Display(Name = "Kartinka Описание")]
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase CourseImage { get; set; }
 
         [Display(Name = "Крайна дата")]
         [DataType(DataType.Date)]

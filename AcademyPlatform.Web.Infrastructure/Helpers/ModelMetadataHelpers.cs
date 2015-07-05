@@ -9,12 +9,12 @@
     {
         public static IEnumerable<ModelMetadata> GetPropertiesForDisplay(ViewDataDictionary viewData)
         {
-            return viewData.ModelMetadata.Properties.Where(prop => ShouldShowForDisplay(prop, viewData));
+            return viewData.ModelMetadata.Properties;
         }
 
         public static IEnumerable<ModelMetadata> GetPropertiesForEdit(ViewDataDictionary viewData)
         {
-            return viewData.ModelMetadata.Properties.Where(prop => ShouldShowForEdit(prop, viewData));
+            return viewData.ModelMetadata.Properties;
         }
 
         private static bool ShouldShowForEdit(ModelMetadata metadata, ViewDataDictionary viewData)

@@ -1,5 +1,7 @@
-﻿@{
+﻿@model IList<AcademyPlatform.Models.Courses.Course>
+@{
     ViewBag.PageTitle = "Курсове";
+    bool isEven = true;
 }
 
 @section PreContent
@@ -43,106 +45,127 @@
                 <!-- ================ -->
                 <h1 class="page-title text-center"></h1>
                 <!-- page-title end -->
+                @foreach (var course in Model)
+                {
+                    isEven = !isEven;
+                    <div class="image-box space-top style-4">
+                        <div class="row grid-space-0">
+                            <div class="col-md-6 @(isEven ? "col-md-push-6" : string.Empty) ">
+                                <div class="overlay-container">
+                                    <img src="@Url.Content(course.ImageUrl)" style=" height:325px" alt="">
+                                    <div class="overlay-to-top">
+                                        <p class="small margin-clear">
+                                            <em>@course.Title</em>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 @(isEven ? "col-md-pull-6" : string.Empty)">
+                                <div class="body">
+                                    <div class="pv-30 visible-lg"></div>
+                                    <h3>@course.Title</h3>
+                                    <div class="separator-2"></div>
+                                    <p class="margin-clear">@Html.Raw(course.ShortDescription)</p><br>
+                                    <a href="@Url.RouteUrl("CoursesPrettyUrl", new {id = course.PrettyUrl})" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                </div>
+                            </div>
 
-                <div class="image-box space-top style-4">
+                        </div>
+                    </div>
+                }
+                @*<div class="image-box space-top style-4">
                     <div class="row grid-space-0">
                         <div class="col-md-6">
                             <div class="overlay-container">
-                                <img src="@Url.Content("~/Content/Images/csharp.png")" alt="">
+                                <img src="@Url.Content("~/Content/Images/csharp.png")" height="375" alt="">
                                 <div class="overlay-to-top">
-                                    <p class="small margin-clear"><em> C# <br> Обектно ореантиран език за програмиране.</em></p><em>
-                                    </em>
-                                </div><em>
-                                </em>
-                            </div><em>
-                            </em>
-                        </div><em>
-                            <div class="col-md-6">
-                                <div class="body">
-                                    <div class="pv-30 visible-lg"></div>
-                                    <h3>Курс: "Въведение в Програмирането с C#"</h3>
-                                    <div class="separator-2"></div>
-                                    <p class="margin-clear">C# е обектно-ориентиран език за програмиране, разработен от Microsoft, като част от софтуерната платформа .NET. Стремежът още при създаването на C# езика е бил да се създаде един прост, модерен, обектно-ориентиран език с общо предназначение. Основа за C# са C++, Java и донякъде езици като Delphi, VB.NET и C. </p>
-                                    <br>
-                                    <a href="@Url.Action("Details", "Courses", new { id = 5 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
-                                </div>
-                            </div>
-                        </em>
-                    </div><em>
-                    </em>
-                </div><em>
-                    <div class="image-box style-4">
-                        <div class="row grid-space-0">
-                            <div class="col-md-6 col-md-push-6">
-                                <div class="overlay-container">
-                                    <img src="@Url.Content("~/Content/Images/html_css.png")" alt="">
-                                    <div class="overlay-to-top">
-                                        <p class="small margin-clear"><em>HTML &amp; CSS <br> Изграждане на уеб страници и стилизиране.</em></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-md-pull-6">
-                                <div class="body text-right">
-                                    <div class="pv-30 visible-lg"></div>
-                                    <h3>Уеб Дизайн</h3>
-                                    <div class="separator-3"></div>
-                                    <p class="margin-clear">HTML (Hyper Text Markup Language) е основният маркиращ език за описание и дизайн на уеб страници. CSS (Cascading Style Sheets) е език за описание на стилове (език за стилови листове, style sheet language) — използва се основно за описване на представянето на документ, написан на език за маркиране. Най-често се използва заедно с HTML, но може да се приложи върху произволен XML документ.</p>
-                                    <br>
-                                    <a href="@Url.Action("Details", "Courses", new { id = 11 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                                    <p class="small margin-clear"><em> C# <br> Обектно ореантиран език за програмиране.</em></p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="image-box style-4">
-                        <div class="row grid-space-0">
-                            <div class="col-md-6">
-                                <div class="overlay-container">
-                                    <img src="@Url.Content("~/Content/Images/java.png")" alt="">
-                                    <div class="overlay-to-top">
-                                        <p class="small margin-clear"><em>Java <br> Обектно ореантиран език за програмиране.</em></p>
-                                    </div>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="body">
+                                <div class="pv-30 visible-lg"></div>
+                                <h3>Курс: "Въведение в Програмирането с C#"</h3>
+                                <div class="separator-2"></div>
+                                <p class="margin-clear">C# е обектно-ориентиран език за програмиране, разработен от Microsoft, като част от софтуерната платформа .NET. Стремежът още при създаването на C# езика е бил да се създаде един прост, модерен, обектно-ориентиран език с общо предназначение. Основа за C# са C++, Java и донякъде езици като Delphi, VB.NET и C. </p>
+                                <br>
+                                <a href="@Url.RouteUrl("CoursesPrettyUrl", new { id = Model[0].PrettyUrl })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
                             </div>
-                            <div class="col-md-6">
-                                <div class="body">
-                                    <div class="pv-30 visible-lg"></div>
-                                    <h3>Java</h3>
-                                    <div class="separator-2"></div>
-                                    <p class="margin-clear">Java е обектно-ориентиран език за програмиране. Кодът, написан на Java не се компилира до машинен код за определен процесор, а до специфичен за езика код, наречен байт код. Поради това за изпълнението на програма, написана на Java е необходима т. нар. Java Virtual Machine.</p>
-                                    <br>
-                                    <a href="@Url.Action("Details", "Courses", new { id = 13 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="image-box style-4">
+                    <div class="row grid-space-0">
+                        <div class="col-md-6 col-md-push-6">
+                            <div class="overlay-container">
+                                <img src="@Url.Content("~/Content/Images/csharp.png")" height="375" alt="">
+                                <div class="overlay-to-top">
+                                    <p class="small margin-clear"><em>HTML &amp; CSS <br> Изграждане на уеб страници и стилизиране.</em></p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="image-box style-4">
-                        <div class="row grid-space-0">
-                            <div class="col-md-6 col-md-push-6">
-                                <div class="overlay-container">
-                                    <img src="@Url.Content("~/Content/Images/аdvertising.png")" alt="">
-                                    <div class="overlay-to-top">
-                                        <p class="small margin-clear"><em>Реклама <br> Графичен дизайн на реклами.</em></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-md-pull-6">
-                                <div class="body text-right">
-                                    <div class="pv-30 visible-lg"></div>
-                                    <h3>Реклама</h3>
-                                    <div class="separator-3"></div>
-                                    <p class="margin-clear">Реклама в бизнеса е форма на маркетингова комуникация, която има за цел да окуражи, убеди или в някои случаи тя дори манипулира (това обикновено бива възприемано в негативен аспект) аудиторията (зрители, читатели или слушатели, и т.н.) да предприеме или да продължи да предприема определено действие.</p>
-                                    <br>
-                                    <a href="@Url.Action("Details", "Courses", new { id = 14 })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
-                                </div>
+                        <div class="col-md-6 col-md-pull-6">
+                            <div class="body text-right">
+                                <div class="pv-30 visible-lg"></div>
+                                <h3>Уеб Дизайн</h3>
+                                <div class="separator-3"></div>
+                                <p class="margin-clear">HTML (Hyper Text Markup Language) е основният маркиращ език за описание и дизайн на уеб страници. CSS (Cascading Style Sheets) е език за описание на стилове (език за стилови листове, style sheet language) — използва се основно за описване на представянето на документ, написан на език за маркиране. Най-често се използва заедно с HTML, но може да се приложи върху произволен XML документ.</p>
+                                <br>
+                                <a href="@Url.RouteUrl("CoursesPrettyUrl", new { id = Model[1].PrettyUrl })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
                             </div>
                         </div>
                     </div>
-                </em>
-            </div><em>
-                <!-- main end -->
-            </em>
-        </div><em>
-        </em>
-    </div><em>
-    </em>
+                </div>
+                <div class="image-box style-4">
+                    <div class="row grid-space-0">
+                        <div class="col-md-6">
+                            <div class="overlay-container">
+                                <img src="@Url.Content("~/Content/Images/java.png")" height="375" alt="">
+                                <div class="overlay-to-top">
+                                    <p class="small margin-clear"><em>Java <br> Обектно ореантиран език за програмиране.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="body">
+                                <div class="pv-30 visible-lg"></div>
+                                <h3>Java</h3>
+                                <div class="separator-2"></div>
+                                <p class="margin-clear">Java е обектно-ориентиран език за програмиране. Кодът, написан на Java не се компилира до машинен код за определен процесор, а до специфичен за езика код, наречен байт код. Поради това за изпълнението на програма, написана на Java е необходима т. нар. Java Virtual Machine.</p>
+                                <br>
+                                <a href="@Url.RouteUrl("CoursesPrettyUrl", new { id = Model[2].PrettyUrl })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-box style-4">
+                    <div class="row grid-space-0">
+                        <div class="col-md-6 col-md-push-6">
+                            <div class="overlay-container">
+                                <img src="@Url.Content("~/Content/Images/аdvertising.png")" height="375" alt="">
+                                <div class="overlay-to-top">
+                                    <p class="small margin-clear"><em>Реклама <br> Графичен дизайн на реклами.</em></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-pull-6">
+                            <div class="body text-right">
+                                <div class="pv-30 visible-lg"></div>
+                                <h3>Реклама</h3>
+                                <div class="separator-3"></div>
+                                <p class="margin-clear">Реклама в бизнеса е форма на маркетингова комуникация, която има за цел да окуражи, убеди или в някои случаи тя дори манипулира (това обикновено бива възприемано в негативен аспект) аудиторията (зрители, читатели или слушатели, и т.н.) да предприеме или да продължи да предприема определено действие.</p>
+                                <br>
+                                <a href="@Url.RouteUrl("CoursesPrettyUrl", new { id = Model[3].PrettyUrl })" class="btn btn-gray-transparent btn-sm btn-animated margin-clear">Повече за курса<i class="fa fa-arrow-right pl-10"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+            </div>
+            <!-- main end -->
+
+        </div>
+    </div>
 </section>

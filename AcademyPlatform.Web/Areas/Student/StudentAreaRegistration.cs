@@ -14,6 +14,11 @@ namespace AcademyPlatform.Web.Areas.Student
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            //context.MapRoute(
+            //    "Student_cyr",
+            //    "Студент/Курсове/Детайли/{id}",
+            //    new { controller = "Courses", action = "Details", id = UrlParameter.Optional }
+            //);
             context.MapRoute(
                 "Student_default",
                 "Student/{controller}/{action}/{id}",

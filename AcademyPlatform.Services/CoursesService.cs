@@ -16,14 +16,14 @@
 
         public CoursesService(IRepository<Course> courses, IRepository<User> users)
         {
-            //this.validator = validator;
+            //this.validator = validator;   
             this.courses = courses;
             this.users = users;
         }
 
         public IQueryable<Course> GetActiveCourses()
         {
-            return this.courses.All().Where(c => c.StartDate < DateTime.Now && c.EndDate < DateTime.Now);
+            return this.courses.All();
         }
 
         public IQueryable<Course> GetCoursesByUserId(string userId)
@@ -31,9 +31,16 @@
             return this.users.GetById(userId).Courses.AsQueryable();
         }
 
+
+
         public Course GetCourseById(int id)
         {
             return this.courses.GetById(id);
+        }
+
+        public Course GetCourseByPrettyUrl(string url)
+        {
+            return this.courses.All().Where(x => x.PrettyUrl == url).FirstOrDefault();
         }
 
         public bool CreateCourse(Course course)

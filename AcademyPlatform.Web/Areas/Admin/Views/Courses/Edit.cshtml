@@ -1,5 +1,4 @@
-﻿
-@model AcademyPlatform.Web.Models.Courses.CourseViewModel
+﻿@model AcademyPlatform.Web.Models.Courses.CourseViewModel
 
 @{
     ViewBag.PageTitle = "Обнови курс";
@@ -7,12 +6,13 @@
 
 <h2>@ViewBag.PageTitle</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Courses", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         @Html.EditorForModel("GenericEditorTemplate")
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Обнови" class="btn btn-default" />

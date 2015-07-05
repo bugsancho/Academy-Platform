@@ -14,6 +14,13 @@ namespace AcademyPlatform.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "CoursesPrettyUrl",
+                url: "Courses/{id}",
+                defaults: new { controller = "Courses", action = "Details", area = "Student" },
+                namespaces: new string[] { "AcademyPlatform.Web.Areas.Student.Controllers" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
