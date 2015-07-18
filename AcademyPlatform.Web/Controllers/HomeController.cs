@@ -1,8 +1,5 @@
 ﻿namespace AcademyPlatform.Web.Controllers
 {
-    using DevTrends.MvcDonutCaching;
-    using System;
-    using System.Linq;
     using System.Web.Mvc;
 
     public class HomeController : Controller

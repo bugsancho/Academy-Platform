@@ -3,42 +3,110 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.PageTitle - Academy Platform</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/project-theme")
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
+    <div class="header-container">
+        <header class="header fixed clearfix">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- header-left start -->
+                        <!-- ================ -->
+                        <div class="header-left clearfix">
+                            <!-- logo -->
+                            <div id="logo" class="logo">
+                                <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img id="logo_img" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt="Академията"></a>
+                            </div>
+                            <!-- name-and-slogan -->
+                            <div class="site-slogan">
+                                Администрация
+                            </div>
 
-    <div class="container body-content">
+                        </div>
+                        <!-- header-left end -->
+                    </div>
+                    <div class="col-md-9">
+
+                        <!-- header-right start -->
+                        <!-- ================ -->
+                        <div class="header-right clearfix">
+
+                            <!-- main-navigation start -->
+                            <!-- classes: -->
+                            <!-- "onclick": Makes the dropdowns open on click, this the default bootstrap behavior e.g. class="main-navigation onclick" -->
+                            <!-- "animated": Enables animations on dropdowns opening e.g. class="main-navigation animated" -->
+                            <!-- "with-dropdown-buttons": Mandatory class that adds extra space, to the main navigation, for the search and cart dropdowns -->
+                            <!-- ================ -->
+                            <div class="main-navigation  animated">
+                                <!-- navbar start -->
+                                <!-- ================ -->
+                                <nav class="navbar navbar-default" role="navigation">
+                                    <div class="container-fluid">
+                                        <!-- Toggle get grouped for better mobile display -->
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                        </div>
+                                        <!-- Collect the nav links, forms, and other content for toggling -->
+                                        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                                            <!-- main-menu -->
+                                            <ul class="nav navbar-nav ">
+
+                                                <li>
+                                                    @Html.ActionLink("Курсове", "Index", "Courses", new {area = "Admin"}, null)
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- header dropdown buttons end-->
+                                    </div>
+                                </nav>
+                            </div>
+                            <!-- navbar end -->
+                        </div>
+                        <!-- main-navigation end -->
+                    </div>
+                    <!-- header-right end -->
+                </div>
+            </div>
+        </header>
+
+    </div>
+    @RenderSection("PreContent", required: false)
+    <div class="container-fluid body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
+    <footer id="footer" class="clearfix dark">
+        <div class="footer">
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="footer-content text-center padding-ver-clear">
+                                <p class="text-center margin-clear">Copyright © 2015 Academy Platform by <a target="_blank" href="https://github.com/bugsancho">Alexander Todorov</a>. All Rights Reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+
     <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"> </script>
-
-
+    @Scripts.Render("~/project-theme-scripts")
     @RenderSection("scripts", required: false)
 </body>
 </html>

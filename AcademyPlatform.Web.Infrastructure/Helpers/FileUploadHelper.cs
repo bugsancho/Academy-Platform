@@ -23,9 +23,11 @@
                 throw new ArgumentNullException("uploadedImage");
             }
 
-            if (!AllowedImageExtensions.Contains(Path.GetExtension(uploadedImage.FileName)))
+            // ReSharper disable once PossibleNullReferenceException
+            string fileExtension = Path.GetExtension(uploadedImage.FileName).ToLowerInvariant();
+            if (!AllowedImageExtensions.Contains(fileExtension))
             {
-                throw new ArgumentException("The file is not an allowed image type");
+                throw new ArgumentException(string.Format("The file is not an allowed image type: {0}", Path.GetExtension(uploadedImage.FileName)));
             }
 
             string serverPath = HttpContext.Current.Server.MapPath(path);

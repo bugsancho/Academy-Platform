@@ -12,6 +12,8 @@
 
         public string Title { get; set; }
 
+        public string TagLine { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string ShortDescription { get; set; }
 
@@ -36,8 +38,8 @@
 
         public Course()
         {
-            this.Lectures = new HashSet<Lecture>();
-            this.Participants = new HashSet<User>();
+            Lectures = new HashSet<Lecture>();
+            Participants = new HashSet<User>();
         }
     }
 }

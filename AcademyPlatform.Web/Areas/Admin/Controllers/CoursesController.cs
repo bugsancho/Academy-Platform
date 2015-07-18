@@ -9,16 +9,21 @@
     using AcademyPlatform.Web.Models.Courses;
     using AutoMapper;
     using AcademyPlatform.Web.Infrastructure.Filters;
-    using System.Web;
-    using System.IO;
     using AcademyPlatform.Web.Infrastructure.Helpers;
 
     [CustomAuthorize(Roles = "admin")]
     public class CoursesController : Controller
     {
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            _logger.Error(filterContext.Exception);
+            base.OnException(filterContext);
+        }
+
         private const string ImagesFolderFormat = "~\\Images\\Courses\\{0}";
         private readonly ICoursesService _coursesService;
         private readonly IHtmlSanitizer _sanitizer;
+        private readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public CoursesController(ICoursesService coursesService, IHtmlSanitizer sanitizer)
         {
@@ -75,18 +80,23 @@
             {
                 return View(courseViewModel);
             }
+
             var courseInDb = _coursesService.GetCourseById(id);
 
-            try
+            if (courseViewModel.CourseImage != null && courseViewModel.CourseImage.ContentLength != 0)
             {
-                courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.Id));
+                try
+                {
+                    courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.Id));
+                }
+                catch (Exception exception)//TODO catch more specific exceptions and add more detailed messages
+                {
+                    _logger.Error("There was a problem uploading course picture", exception);
+                    ModelState.AddModelError(string.Empty, @"Файлът не може да бъде качен!");
+                    return View(courseViewModel);
+                }
             }
-            catch (Exception)
-            {
-                //TODO catch more specific exceptions and add more detailed messages
-                ModelState.AddModelError(string.Empty, @"Файлът не може да бъде качен!");
-                return View(courseViewModel);
-            }
+
             courseViewModel.ShortDescription = _sanitizer.Sanitize(courseViewModel.ShortDescription);
             courseViewModel.DetailedDescription = _sanitizer.Sanitize(courseViewModel.DetailedDescription);
 

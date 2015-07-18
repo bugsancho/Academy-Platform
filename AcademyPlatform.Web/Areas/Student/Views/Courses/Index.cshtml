@@ -45,6 +45,9 @@
                 <!-- ================ -->
                 <h1 class="page-title text-center"></h1>
                 <!-- page-title end -->
+                <iframe src="https://onedrive.live.com/embed?cid=D6FD0E341350E565&resid=D6FD0E341350E565%211243&authkey=APp1H7Qj965WzL0&em=2" width="1280" height="749" frameborder="0" scrolling="no"></iframe>
+                @*<iframe src="http://docs.google.com/gview?url=https://docs.google.com/presentation/d/13F0jJXBS5TvGZNtLGy3CPHkDnfwiyipHuwN0EMGQwts/edit?usp=sharing&embedded=true" style="width:600px; height:500px;" frameborder="0"></iframe>*@
+                <iframe src="https://docs.google.com/presentation/d/1vhFHDUuhz74Y0SF4c58VSEdgKG_xiXE82zSZPBfB6io/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                 @foreach (var course in Model)
                 {
                     isEven = !isEven;
@@ -55,7 +58,7 @@
                                     <img src="@Url.Content(course.ImageUrl)" style=" height:325px" alt="">
                                     <div class="overlay-to-top">
                                         <p class="small margin-clear">
-                                            <em>@course.Title</em>
+                                            <em>@course.TagLine</em>
                                         </p>
                                     </div>
                                 </div>

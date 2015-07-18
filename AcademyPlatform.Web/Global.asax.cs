@@ -10,6 +10,7 @@
     using AcademyPlatform.Web.Resources;
     using System.Web;
     using System;
+    using System.IO;
 
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -28,6 +29,8 @@
             ValidatorOptions.ResourceProviderType = typeof(ErrorMessages);
             var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CourseViewModel)));
             autoMapperConfig.Execute();
+
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
         }
 
         protected void Application_RequestEnd()
