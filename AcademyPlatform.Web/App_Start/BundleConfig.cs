@@ -35,6 +35,8 @@
                 "~/Scripts/Plugins/jquery.waypoints.js",
                 "~/Scripts/Plugins/jquery.browser.js",
                 "~/Scripts/template.js",
+                "~/Scripts/Plugins/isotope.pkgd.js",
+                "~/Scripts/Plugins/isotope.pkgd.min.js",
                 "~/Scripts/Plugins/jquery.vide.js"));
 
             bundles.Add(new StyleBundle("~/project-theme").Include(
