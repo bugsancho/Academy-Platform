@@ -1,36 +1,35 @@
-﻿
-@*<!-- header-top start -->
-<!-- classes:  -->
-<!-- "dark": dark version of header top e.g. class="header-top dark" -->
-<!-- "colored": colored version of header top e.g. class="header-top colored" -->
-<!-- ================ -->
-<!-- header-top end -->
-<!-- header start -->
-<!-- classes:  -->
-<!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
-<!-- "dark": dark version of header e.g. class="header dark clearfix" -->
-<!-- "full-width": mandatory class for the full-width menu layout -->
-<!-- "centered": mandatory class for the centered logo layout -->
-<!-- ================ -->*@
+﻿@*<!-- header-top start -->
+    <!-- classes:  -->
+    <!-- "dark": dark version of header top e.g. class="header-top dark" -->
+    <!-- "colored": colored version of header top e.g. class="header-top colored" -->
+    <!-- ================ -->
+    <!-- header-top end -->
+    <!-- header start -->
+    <!-- classes:  -->
+    <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
+    <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
+    <!-- "full-width": mandatory class for the full-width menu layout -->
+    <!-- "centered": mandatory class for the centered logo layout -->
+    <!-- ================ -->*@
 @{
-    Layout = null;   
+    Layout = null;
 }
 <header class="header fixed clearfix">
 
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <!-- header-left start -->                
+                <!-- header-left start -->
                 <!-- ================ -->
                 <div class="header-left clearfix">
                     <!-- logo -->
                     <div id="logo" class="logo">
-                        <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img id="logo_img"  src="@Url.Content("https://lh6.googleusercontent.com/MdVF_AIkqG1u9S8Q_XI1AOGRuW8QycS8yJ_yIxzojf7Qbj_0RNx4k3jlSdEZfudSUTm_rtfXEmAAvX8=w1896-h835")" alt="Академията"></a>
+                        <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img id="logo_img" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt="Академията"></a>
                     </div>
                     <!-- name-and-slogan -->
-                    <div class="site-slogan"> 
+                   <!-- <div class="site-slogan">
                         Мултифункционална Академия
-                    </div>
+                    </div> -->
 
                 </div>
                 <!-- header-left end -->
@@ -65,39 +64,7 @@
                                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                     <!-- main-menu -->
                                     <ul class="nav navbar-nav ">
-                                        @if (User.Identity.IsAuthenticated)
-                                        {
-
-                                            <li>
-                                                @Html.ActionLink("Моите Курсове", "ComingSoon", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                            </li>
-                                            <li>
-                                                @Html.ActionLink("Изпити", "ComingSoon", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                            </li>
-                                            <li>
-                                                @Html.ActionLink("Форум", "ComingSoon", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                            </li>
-                                            <li class="dropdown ">
-                                                <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index","Home",new { Area = string.Empty})">Информация</a>
-                                                <ul class="dropdown-menu">
-                                                    <li>
-                                                        @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                                    </li>
-                                                    <li>
-                                                        @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Student" }, null)
-                                                    </li>
-                                                    <li>
-                                                        @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                                    </li>
-                                                    <li>
-                                                        @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li>
+                                        <li>
                                                 @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
                                             </li>
                                             <li>
@@ -109,13 +76,9 @@
                                             <li>
                                                 @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
                                             </li>
-
-
-                                        }
-
+                                     
                                         @if (User.IsInRole("admin"))
                                         {
-                                            
                                             <li class="dropdown ">
                                                 <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index","Courses",new { Area = "Admin"})">Админ</a>
                                                 <ul class="dropdown-menu">
