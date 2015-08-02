@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -267,11 +267,17 @@
   <ItemGroup>
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-theme.min.css">
+      <DependentUpon>bootstrap-theme.css</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Content\Fonts\font-awesome.css" />
-    <Content Include="Content\Fonts\font-awesome.min.css" />
+    <Content Include="Content\Fonts\font-awesome.min.css">
+      <DependentUpon>font-awesome.css</DependentUpon>
+    </Content>
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
@@ -286,14 +292,19 @@
     <Content Include="Content\Images\logo_light_blue.png" />
     <Content Include="Content\Images\team-member.jpg" />
     <Content Include="Content\jasny-bootstrap.css" />
-    <Content Include="Content\jasny-bootstrap.min.css" />
-    <Content Include="Content\Less\style.css">
-      <DependentUpon>style.less</DependentUpon>
+    <Content Include="Content\jasny-bootstrap.min.css">
+      <DependentUpon>jasny-bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Content\Less\style.min.css">
-      <DependentUpon>style.css</DependentUpon>
+    <Content Include="Content\Less\project-theme.css">
+      <DependentUpon>project-theme.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\project-theme.min.css">
+      <DependentUpon>project-theme.css</DependentUpon>
     </Content>
     <Content Include="Content\project-theme.css" />
+    <Content Include="Content\project-theme.min.css">
+      <DependentUpon>project-theme.css</DependentUpon>
+    </Content>
     <Content Include="Content\ProjectThemeSkins\blue.css" />
     <Content Include="Content\ProjectThemeSkins\brown.css" />
     <Content Include="Content\ProjectThemeSkins\cool_green.css" />
@@ -309,6 +320,9 @@
     <Content Include="Content\ProjectThemeSkins\red.css" />
     <Content Include="Content\ProjectThemeSkins\vivid_red.css" />
     <Content Include="Content\rs-slider.css" />
+    <Content Include="Content\Site.min.css">
+                                                           <DependentUpon>Site.css</DependentUpon>
+                                                          </Content>
     <Content Include="Content\Videos\background-video-banner.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -317,13 +331,19 @@
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js">
+      <DependentUpon>bootstrap.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
     </Content>
     <Content Include="Scripts\gridmvc.js" />
-    <Content Include="Scripts\gridmvc.lang.ru.js" />
-    <Content Include="Scripts\gridmvc.min.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js">
+      <DependentUpon>gridmvc.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\gridmvc.min.js">
+      <DependentUpon>gridmvc.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js.map">
       <DependentUpon>jquery-1.10.2.min.js</DependentUpon>
@@ -332,8 +352,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map">
+      <DependentUpon>bootstrap-theme.css</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap.css.map">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Student\Views\web.config" />
     <Content Include="Areas\Admin\Views\Courses\Create.cshtml" />
     <Content Include="Areas\Student\Views\Shared\EditorTemplates\GenericEditorTemplate.cshtml" />
@@ -343,8 +367,12 @@
     </Content>
     <Content Include="Areas\Admin\Views\Courses\Edit.cshtml" />
     <Content Include="Areas\Student\Views\Courses\Index.cshtml" />
-    <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Content\project-theme.css.map" />
+    <Content Include="Scripts\jquery-2.1.4.min.map">
+      <DependentUpon>jquery-2.1.4.js</DependentUpon>
+    </Content>
+    <Content Include="Content\project-theme.css.map">
+      <DependentUpon>project-theme.css</DependentUpon>
+    </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -352,7 +380,9 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\Videos\background-video-banner.webm" />
     <Content Include="Areas\Student\Views\_ViewStart.cshtml" />
-    <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Content\jasny-bootstrap.css.map">
+      <DependentUpon>jasny-bootstrap.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Student\Views\Courses\Details.cshtml" />
     <Content Include="Areas\Student\Views\Courses\Apply.cshtml" />
     <Content Include="Areas\Student\Views\Courses\ApplicationCompleted.cshtml" />
@@ -395,53 +425,92 @@
     <Content Include="Content\Less\skins\purple.less" />
     <Content Include="Content\Less\skins\red.less" />
     <Content Include="Content\Less\skins\vivid_red.less" />
-    <Content Include="Content\Less\style.less" />
+    <Content Include="Content\Less\project-theme.less" />
     <Content Include="Content\Less\variables.less" />
-    <Content Include="Content\Less\style.css.map">
-      <DependentUpon>style.css</DependentUpon>
+    <Content Include="Content\Less\project-theme.css.map">
+      <DependentUpon>project-theme.css</DependentUpon>
     </Content>
+    <Content Include="Content\Site.css.map" />
     <None Include="Properties\PublishProfiles\AcdamyProductionDeploy.pubxml" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js">
+      <DependentUpon>jquery.validate.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
-    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js">
+      <DependentUpon>jquery-2.1.4.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js">
+      <DependentUpon>jquery.validate.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
+      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\Plugins\isotope.pkgd.js" />
+    <Content Include="Scripts\Plugins\isotope.pkgd.min.js">
+      <DependentUpon>isotope.pkgd.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Plugins\jasny-bootstrap.js" />
-    <Content Include="Scripts\Plugins\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\Plugins\jasny-bootstrap.min.js">
+      <DependentUpon>jasny-bootstrap.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Plugins\jquery.browser.js" />
     <Content Include="Scripts\Plugins\jquery.themepunch.revolution.js" />
-    <Content Include="Scripts\Plugins\jquery.themepunch.revolution.min.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.revolution.min.js">
+      <DependentUpon>jquery.themepunch.revolution.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Plugins\jquery.themepunch.tools.min.js" />
     <Content Include="Scripts\Plugins\jquery.vide.js" />
-    <Content Include="Scripts\Plugins\jquery.vide.min.js" />
+    <Content Include="Scripts\Plugins\jquery.vide.min.js">
+      <DependentUpon>jquery.vide.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Plugins\jquery.waypoints.js" />
-    <Content Include="Scripts\Plugins\jquery.waypoints.min.js" />
+    <Content Include="Scripts\Plugins\jquery.waypoints.min.js">
+      <DependentUpon>jquery.waypoints.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Plugins\SmoothScroll.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js">
+      <DependentUpon>respond.matchmedia.addListener.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\respond.min.js">
+      <DependentUpon>respond.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\template.js" />
     <Content Include="Scripts\tinymce\license.txt" />
     <Content Include="Scripts\tinymce\plugins\advlist\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\anchor\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\anchor\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\autolink\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\autoresize\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\autosave\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\bbcode\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\charmap\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\charmap\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\codemirror\codemirror\.gitattributes" />
     <Content Include="Scripts\tinymce\plugins\codemirror\codemirror\.gitignore" />
     <Content Include="Scripts\tinymce\plugins\codemirror\codemirror\addon\comment\comment.js" />
@@ -875,13 +944,19 @@
     <Content Include="Scripts\tinymce\plugins\codemirror\langs\nl.js" />
     <Content Include="Scripts\tinymce\plugins\codemirror\LICENSE.txt" />
     <Content Include="Scripts\tinymce\plugins\codemirror\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\codemirror\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\codemirror\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\codemirror\README.txt" />
     <Content Include="Scripts\tinymce\plugins\codemirror\source.html" />
     <Content Include="Scripts\tinymce\plugins\code\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\code\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\colorpicker\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\compat3x\css\dialog.css" />
     <Content Include="Scripts\tinymce\plugins\compat3x\img\buttons.png" />
     <Content Include="Scripts\tinymce\plugins\compat3x\img\icons.gif" />
@@ -891,16 +966,22 @@
     <Content Include="Scripts\tinymce\plugins\compat3x\img\progress.gif" />
     <Content Include="Scripts\tinymce\plugins\compat3x\img\tabs.gif" />
     <Content Include="Scripts\tinymce\plugins\compat3x\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\compat3x\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\compat3x\tiny_mce_popup.js" />
     <Content Include="Scripts\tinymce\plugins\compat3x\utils\editable_selects.js" />
     <Content Include="Scripts\tinymce\plugins\compat3x\utils\form_utils.js" />
     <Content Include="Scripts\tinymce\plugins\compat3x\utils\mctabs.js" />
     <Content Include="Scripts\tinymce\plugins\compat3x\utils\validate.js" />
     <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\directionality\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cool.gif" />
     <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-cry.gif" />
     <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-embarassed.gif" />
@@ -918,63 +999,119 @@
     <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-wink.gif" />
     <Content Include="Scripts\tinymce\plugins\emoticons\img\smiley-yell.gif" />
     <Content Include="Scripts\tinymce\plugins\emoticons\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\emoticons\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\example\dialog.html" />
     <Content Include="Scripts\tinymce\plugins\example\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\example\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\fullpage\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\hr\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\hr\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\image\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\image\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\importcss\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\importcss\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\layer\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\layer\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\link\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\link\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\lists\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
     <Content Include="Scripts\tinymce\plugins\media\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\media\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\noneditable\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\paste\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\preview\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\print\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\print\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\save\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\save\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\table\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\table\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\template\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\template\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\textcolor\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textcolor\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\textpattern\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\textpattern\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\visualblocks\css\visualblocks.css" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\address.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\article.gif" />
@@ -996,11 +1133,17 @@
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\section.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\img\ul.gif" />
     <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualblocks\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\visualchars\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\plugins\wordcount\plugin.js" />
-    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\plugin.min.js">
+      <DependentUpon>plugin.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\skins\lightgray\content.inline.min.css" />
     <Content Include="Scripts\tinymce\skins\lightgray\content.min.css" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
@@ -1012,9 +1155,13 @@
     <Content Include="Scripts\tinymce\skins\lightgray\skin.ie7.min.css" />
     <Content Include="Scripts\tinymce\skins\lightgray\skin.min.css" />
     <Content Include="Scripts\tinymce\themes\modern\theme.js" />
-    <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Scripts\tinymce\themes\modern\theme.min.js">
+      <DependentUpon>theme.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\tinymce\tinymce.js" />
-    <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\tinymce\tinymce.min.js">
+      <DependentUpon>tinymce.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1094,6 +1241,9 @@
     <Content Include="Scripts\tinymce\plugins\codemirror\codemirror\LICENSE" />
     <Content Include="Scripts\tinymce\plugins\codemirror\codemirror\package.json" />
     <Content Include="Scripts\tinymce\plugins\codemirror\codemirror\README.md" />
+    <Content Include="Scripts\Plugins\isotope.pkgd.min.js.map">
+      <DependentUpon>isotope.pkgd.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
