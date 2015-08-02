@@ -6,6 +6,8 @@
 
     public class HomeworkAssignment
     {
+        private ICollection<HomeworkSubmission> _submissions;
+
         [ForeignKey("Lecture")]
         public int Id { get; set; }
 
@@ -17,11 +19,15 @@
 
         public HomeworkAssignmentType Type { get; set; }
 
-        public virtual ICollection<HomeworkSubmission> Submissions { get; set; }
+        public virtual ICollection<HomeworkSubmission> Submissions
+        {
+            get { return _submissions; }
+            set { _submissions = value; }
+        }
 
         public HomeworkAssignment()
         {
-            this.Submissions = new HashSet<HomeworkSubmission>();
+            _submissions = new HashSet<HomeworkSubmission>();
         }
     }
 }

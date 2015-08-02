@@ -6,6 +6,8 @@
 
     public class Lecture
     {
+        private ICollection<LectureResource> _resources;
+
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -27,11 +29,15 @@
 
         public int HomeworkId { get; set; }
 
-        public virtual ICollection<LectureResource> Resources { get; set; }
+        public virtual ICollection<LectureResource> Resources
+        {
+            get { return _resources; }
+            set { _resources = value; }
+        }
 
         public Lecture()
         {
-            this.Resources = new HashSet<LectureResource>();
+            _resources = new HashSet<LectureResource>();
         }
     }
 }

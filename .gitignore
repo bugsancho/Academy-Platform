@@ -172,3 +172,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 EventSystem.Web/Event/CreateEvent.aspx.designer.cs
 EventSystem.Web/Event/CreateEvent.aspx.designer.cs
+logs
+Images

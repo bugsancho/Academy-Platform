@@ -6,6 +6,9 @@
 
     public class Course
     {
+        private ICollection<Lecture> _lectures;
+        private ICollection<User> _participants;
+
         public int Id { get; set; }
 
         public string PrettyUrl { get; set; }
@@ -32,14 +35,22 @@
 
         public CourseDifficultyType Difficulty { get; set; }
 
-        public virtual ICollection<Lecture> Lectures { get; set; }
+        public virtual ICollection<Lecture> Lectures
+        {
+            get { return _lectures; }
+            set { _lectures = value; }
+        }
 
-        public virtual ICollection<User> Participants { get; set; }
+        public virtual ICollection<User> Participants
+        {
+            get { return _participants; }
+            set { _participants = value; }
+        }
 
         public Course()
         {
-            Lectures = new HashSet<Lecture>();
-            Participants = new HashSet<User>();
+            _lectures = new HashSet<Lecture>();
+            _participants = new HashSet<User>();
         }
     }
 }

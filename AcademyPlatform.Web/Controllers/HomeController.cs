@@ -19,6 +19,7 @@
             return View();
         }
 
+        [Route("ComingSoon")]
         [AllowAnonymous]
         public ActionResult ComingSoon()
         {

@@ -51,8 +51,9 @@
         }
 
         //
-        // GET: /Account/Login
+        // GET: /Login
         [AllowAnonymous]
+        [Route("Login")]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -60,10 +61,11 @@
         }
 
         //
-        // POST: /Account/Login
+        // POST: /Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("Login")]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -140,18 +142,20 @@
         }
 
         //
-        // GET: /Account/Register
+        // GET: /Register
         //[AllowAnonymous]
+        [Route("Register")]
         public ActionResult Register()
         {
             return View();
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Register
         [HttpPost]
         // [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("Register")]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -191,18 +195,20 @@
         }
 
         //
-        // GET: /Account/ForgotPassword
+        // GET: /ForgotPassword
         [AllowAnonymous]
+        [Route("ForgotPassword")]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
         //
-        // POST: /Account/ForgotPassword
+        // POST: /ForgotPassword
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("ForgotPassword")]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -393,6 +399,7 @@
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("LogOff")]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();

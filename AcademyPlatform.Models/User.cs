@@ -9,6 +9,8 @@
 
     public class User : IdentityUser
     {
+        private ICollection<Course> _courses;
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -17,11 +19,15 @@
             return userIdentity;
         }
 
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Course> Courses
+        {
+            get { return _courses; }
+            set { _courses = value; }
+        }
 
         public User()
         {
-            this.Courses = new HashSet<Course>();
+            _courses = new HashSet<Course>();
         }
     }
 }
