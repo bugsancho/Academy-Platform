@@ -3,8 +3,10 @@
     ViewBag.PageTitle = "Курсове";
     bool isEven = true;
 }
+
 @section PreContent
 {
+    <script src="/Scripts/Plugins/isotope.pkgd.js"></script>
     <div class="banner video-background-banner pv-40 dark-translucent-bg hovered">
         <div style="position: absolute; z-index: -1; top: 0px; left: 0px; bottom: 0px; right: 0px; overflow: hidden; -webkit-background-size: cover; background-image: none; background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;">
             <video autoplay="" loop="" muted="" style="visibility: visible; margin: auto; position: absolute; z-index: -1; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); width: 1905px; height: auto;">
@@ -12,19 +14,29 @@
                 <source src="@Url.Content("~/Content/videos/background-video-banner.webm")" type="video/webm" />
             </video>
         </div>
-
+        @*<!-- breadcrumb start -->
+            <!-- ================ -->
+            <div class="breadcrumb-container">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li><i class="fa fa-home pr-10"></i><a class="link-dark" href="@Url.Action("Index", "Home",  new { Area = string.Empty }) ">Академия (Home)</a></li>
+                        <li class="active">Курсове</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- breadcrumb end -->*@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 text-center col-md-offset-2 pv-20">
-                    <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Focus Academy</h2>
+                    <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Име на Академията</h2>
                     <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
-                    <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Insight, Inspire, Improve.</p>
+                    <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Някакво много надъхващото мото.</p>
                 </div>
             </div>
         </div>
     </div>
 }
-<section class="main-container">
+<section class="main-container border-clear light-gray-bg padding-bottom-clear">
     <div class="container">
         <div class="row">
             <!-- main start -->
@@ -32,8 +44,7 @@
             <div class="main col-md-12">
                 <!-- page-title start -->
                 <!-- ================ -->
-                <h1 class="page-title">Нашите Курсове</h1>
-                <div class="separator-2"></div>
+                <h1 class="page-title text-center">Нашите Курсове</h1>
                 <!-- page-title end -->
                 <!--Isotope filters-->
                 <div class="filters">
@@ -45,35 +56,36 @@
                     </ul>
                 </div>
                 <!--Isotope filters END-->
-                            
-                @foreach (var course in Model)
-                {
-                    isEven = !isEven;
-                     <!-- Boxes -->
-                    <div class="isotope-container-fitrows row grid-space-10">
-                        <div data-category="programming" class="col-sm-6 col-md-4 isotope-item @(isEven ? "col-md-pull-6" : string.Empty)">
-                            <!-- here is the isotope "programming"-->
+                <div class="isotope-container-fitrows grid-space-10">
+                    @foreach (var course in Model)
+                    {
+                        isEven = !isEven;
+
+                        <div data-category="@(isEven? "programming" : "isocert")" class="isotope-item col-md-4">
                             <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
                                 <div class="overlay-container">
-                                    <img src="@Url.Content(course.ImageUrl)"> <!---->
+                                    <img src="@Url.Content(course.ImageUrl)" style=" height:325px" alt="">
                                     <div class="overlay-to-top">
-                                        <p class="small margin-clear"><em>@course.TagLine</em></p>
+                                        <p class="small margin-clear">
+                                            <em>@course.TagLine</em>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="body">
-                                    <h3>@course.Title</h3>
-                                    <div class="separator"></div>
-                                    <p>@Html.Raw(course.ShortDescription).</p>
-                                    <a href="@Url.RouteUrl("coursesprettyurl", new {id=course.PrettyUrl})" class="btn btn-default btn-sm btn-animated margin-clear">Повече за Курса<i class="fa fa-arrow-right pl-10"></i></a>
-                                </div>
+                            </div>
+                            <div class="body">
+                                <h3>@course.Title</h3>
+                                <div class="separator"></div>
+                                <p>@Html.Raw(course.ShortDescription).</p>
+                                <a href="@Url.RouteUrl("coursesprettyurl", new {id=course.PrettyUrl})" class="btn btn-default btn-sm btn-animated margin-clear">Повече за Курса<i class="fa fa-arrow-right pl-10"></i></a>
                             </div>
                         </div>
-                    </div>
-                <!-- Boxes End-->
 
-                }
+                    }
+                </div>
+
             </div>
             <!-- main end -->
+
         </div>
     </div>
 </section>

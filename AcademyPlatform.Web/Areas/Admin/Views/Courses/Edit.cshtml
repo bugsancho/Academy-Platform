@@ -6,7 +6,7 @@
 
 <h2>@ViewBag.PageTitle</h2>
 
-@using (Html.BeginForm("Edit", "Courses", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Courses", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

@@ -20,7 +20,7 @@
             base.OnException(filterContext);
         }
 
-        private const string ImagesFolderFormat = "~\\Images\\Courses\\{0}";
+        private const string ImagesFolderFormat = "~\\Images\\CourseImages\\{0}";
         private readonly ICoursesService _coursesService;
         private readonly IHtmlSanitizer _sanitizer;
         private readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -49,7 +49,7 @@
         {
             if (ModelState.IsValid)
             {
-                var imagePath = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.Id));
+                var imagePath = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
                 var course = Mapper.Map<Course>(courseViewModel);
                 course.ImageUrl = imagePath;
                 _coursesService.CreateCourse(course);
@@ -87,7 +87,7 @@
             {
                 try
                 {
-                    courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.Id));
+                    courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
                 }
                 catch (Exception exception)//TODO catch more specific exceptions and add more detailed messages
                 {

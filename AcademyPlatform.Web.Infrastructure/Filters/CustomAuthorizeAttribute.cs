@@ -2,6 +2,7 @@
 {
     using System;
     using System.Web.Mvc;
+    using System.Web.Routing;
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class CustomAuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
@@ -14,7 +15,9 @@
             }
             else
             {
-                base.HandleUnauthorizedRequest(filterContext);
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                     new { action = "ComingSoon", Controller = "Home", Area = string.Empty }));
+                // base.HandleUnauthorizedRequest(filterContext);
             }
         }
     }

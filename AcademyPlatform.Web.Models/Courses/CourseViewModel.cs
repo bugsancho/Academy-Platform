@@ -10,9 +10,6 @@
 
     public class CourseViewModel : IMapFrom<Course>
     {
-        [HiddenInput]
-        public int Id { get; set; }
-
         [Display(Name = "Линк")]
         [ScaffoldColumn(false)]
         public string PrettyUrl { get; set; }

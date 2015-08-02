@@ -19,11 +19,13 @@
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult ComingSoon()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult RenderNavigation()
         {
             return View("_MainNavigation");

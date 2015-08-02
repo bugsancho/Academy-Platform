@@ -34,7 +34,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -356,6 +356,7 @@
     <Content Include="Areas\Admin\Views\Courses\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\GenericEditorTemplate.cshtml" />
+    <None Include="Properties\PublishProfiles\AcdamyProductionDeploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -543,6 +544,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

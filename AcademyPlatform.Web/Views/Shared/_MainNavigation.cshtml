@@ -79,7 +79,7 @@
                                      
                                         @if (User.IsInRole("admin"))
                                         {
-                                            <li class="dropdown ">
+                                            <li class="dropdown">
                                                 <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index","Courses",new { Area = "Admin"})">Админ</a>
                                                 <ul class="dropdown-menu">
                                                     <li>
@@ -88,8 +88,12 @@
                                                 </ul>
                                             </li>
                                         }
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            @Html.Action(actionName: "LoginPartial", controllerName: "Account", routeValues: new {Area = string.Empty}, excludeFromParentCache: true)
+                                        }
                                     </ul>
-                                    @Html.Action(actionName: "LoginPartial", controllerName: "Account", routeValues: new { Area = string.Empty }, excludeFromParentCache: true)
+                                   
                                 </div>
                                 <!-- header dropdown buttons end-->
                             </div>
