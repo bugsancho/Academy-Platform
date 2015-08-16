@@ -20,6 +20,9 @@
         [Display(Name = "Tag Line")]
         public string Tagline { get; set; }
 
+        [UIHint("EntityDropdown")]
+        public int CategoryId { get; set; }
+
         [Display(Name = "Кратко Описание")]
         [DataType(DataType.MultilineText)]
         [AllowHtml]

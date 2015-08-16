@@ -24,13 +24,8 @@
                 <div class="header-left clearfix">
                     <!-- logo -->
                     <div id="logo" class="logo">
-                        <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img id="logo_img" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt="Академията"></a>
+                        <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img src="@Url.Content("~/Images/logo-focus.png")" alt="Академията"></a>
                     </div>
-                    <!-- name-and-slogan -->
-                   <!-- <div class="site-slogan">
-                        Мултифункционална Академия
-                    </div> -->
-
                 </div>
                 <!-- header-left end -->
             </div>
@@ -65,18 +60,18 @@
                                     <!-- main-menu -->
                                     <ul class="nav navbar-nav ">
                                         <li>
-                                                @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                            </li>
-                                            <li>
-                                                @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Student" }, null)
-                                            </li>
-                                            <li>
-                                                @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                            </li>
-                                            <li>
-                                                @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
-                                            </li>
-                                     
+                                            @Html.ActionLink("Начало", "Index", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Курсове", "Index", "Courses", new { area = string.Empty }, null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("За нас", "About", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink("Контакти", "Contact", "Home", routeValues: new { Area = string.Empty }, htmlAttributes: null)
+                                        </li>
+
                                         @if (User.IsInRole("admin"))
                                         {
                                             <li class="dropdown">
@@ -85,15 +80,18 @@
                                                     <li>
                                                         @Html.ActionLink("Курсове", "Index", "Courses", new { area = "Admin" }, null)
                                                     </li>
+                                                    <li>
+                                                        @Html.ActionLink("Категории", "Index", "Categories", new { area = "Admin" }, null)
+                                                    </li>
                                                 </ul>
                                             </li>
                                         }
                                         @if (User.Identity.IsAuthenticated)
                                         {
-                                            @Html.Action(actionName: "LoginPartial", controllerName: "Account", routeValues: new {Area = string.Empty}, excludeFromParentCache: true)
+                                            @Html.Action(actionName: "LoginPartial", controllerName: "Account", routeValues: new { Area = string.Empty }, excludeFromParentCache: true)
                                         }
                                     </ul>
-                                   
+
                                 </div>
                                 <!-- header dropdown buttons end-->
                             </div>

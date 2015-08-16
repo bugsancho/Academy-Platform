@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace AcademyPlatform.Web.Areas.Student
+﻿namespace AcademyPlatform.Web.Areas.Student
 {
+    using System.Web.Mvc;
+
     public class StudentAreaRegistration : AreaRegistration
     {
         public override string AreaName
@@ -14,11 +14,6 @@ namespace AcademyPlatform.Web.Areas.Student
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            //context.MapRoute(
-            //    "Student_cyr",
-            //    "Студент/Курсове/Детайли/{id}",
-            //    new { controller = "Courses", action = "Details", id = UrlParameter.Optional }
-            //);
             context.MapRoute(
                 "Student_default",
                 "Student/{controller}/{action}/{id}",

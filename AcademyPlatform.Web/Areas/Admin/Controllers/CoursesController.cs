@@ -3,11 +3,14 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
-    using AcademyPlatform.Models.Courses;
-    using AcademyPlatform.Services;
-    using AcademyPlatform.Web.Infrastructure.Sanitizers;
-    using AcademyPlatform.Web.Models.Courses;
+
     using AutoMapper;
+
+    using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Services.Contracts;
+    using AcademyPlatform.Web.Models.Courses;
+
+    using AcademyPlatform.Web.Infrastructure.Sanitizers;
     using AcademyPlatform.Web.Infrastructure.Filters;
     using AcademyPlatform.Web.Infrastructure.Helpers;
 
@@ -22,12 +25,14 @@
 
         private const string ImagesFolderFormat = "~\\Images\\CourseImages\\{0}";
         private readonly ICoursesService _coursesService;
+        private readonly ICategoryService _categories;
         private readonly IHtmlSanitizer _sanitizer;
         private readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CoursesController(ICoursesService coursesService, IHtmlSanitizer sanitizer)
+        public CoursesController(ICoursesService coursesService, IHtmlSanitizer sanitizer, ICategoryService categories)
         {
             _sanitizer = sanitizer;
+            _categories = categories;
             _coursesService = coursesService;
         }
 
@@ -41,6 +46,7 @@
         [HttpGet]
         public ActionResult Create()
         {
+            SetRelatedItemsInViewBag(null);
             return View();
         }
 
@@ -52,24 +58,26 @@
                 var imagePath = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
                 var course = Mapper.Map<Course>(courseViewModel);
                 course.ImageUrl = imagePath;
-                _coursesService.CreateCourse(course);
+                _coursesService.Create(course);
 
                 return RedirectToAction("Index");
             }
 
+            SetRelatedItemsInViewBag(null);
             return View(courseViewModel);
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var courseInDb = _coursesService.GetCourseById(id);
+            var courseInDb = _coursesService.GetById(id);
             if (courseInDb == null)
             {
                 return HttpNotFound();
             }
 
             var course = Mapper.Map<CourseViewModel>(courseInDb);
+            SetRelatedItemsInViewBag(courseInDb);
             return View(course);
         }
 
@@ -81,7 +89,7 @@
                 return View(courseViewModel);
             }
 
-            var courseInDb = _coursesService.GetCourseById(id);
+            var courseInDb = _coursesService.GetById(id);
 
             if (courseViewModel.CourseImage != null && courseViewModel.CourseImage.ContentLength != 0)
             {
@@ -93,6 +101,7 @@
                 {
                     _logger.Error("There was a problem uploading course picture", exception);
                     ModelState.AddModelError(string.Empty, @"Файлът не може да бъде качен!");
+                    SetRelatedItemsInViewBag(courseInDb);
                     return View(courseViewModel);
                 }
             }
@@ -101,7 +110,7 @@
             courseViewModel.DetailedDescription = _sanitizer.Sanitize(courseViewModel.DetailedDescription);
 
             var course = Mapper.Map(courseViewModel, courseInDb);
-            _coursesService.UpdateCourse(course);
+            _coursesService.Update(course);
 
             return RedirectToAction("Index");
         }
@@ -109,14 +118,20 @@
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var course = _coursesService.GetCourseById(id);
+            var course = _coursesService.GetById(id);
             if (course == null)
             {
                 return HttpNotFound("Invalid course id");
             }
 
-            _coursesService.DeleteCourse(course);
+            _coursesService.Delete(course);
             return RedirectToAction("Index");
+        }
+
+        private void SetRelatedItemsInViewBag(Course course)
+        {
+            ViewBag.PossibleCategories =
+                _categories.GetAll().Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Title, Selected = (course != null && course.CategoryId == x.Id) });
         }
     }
 }

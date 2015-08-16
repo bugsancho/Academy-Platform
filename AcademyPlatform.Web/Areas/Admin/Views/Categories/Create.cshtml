@@ -1,0 +1,33 @@
+﻿@model AcademyPlatform.Web.Models.Courses.CategoryEditViewModel
+
+@{
+    ViewBag.PageTitle = "Създай";
+}
+
+<h2>@ViewBag.PageTitle</h2>
+
+@*@using (Html.BeginForm("Create", "Categories", new { area = "Admin"}, FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.EditorForModel("GenericEditorTemplate")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

@@ -35,14 +35,19 @@
             this.ChangeState(entity, EntityState.Modified);
         }
 
-        public void Delete(T entity)
+        public void Delete(object id)
         {
-            this.ChangeState(entity, EntityState.Deleted);
+            this.ChangeState(this.GetById(id), EntityState.Deleted);
         }
 
         public int SaveChanges()
         {
             return context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
         }
 
         private void ChangeState(T entity, EntityState state)

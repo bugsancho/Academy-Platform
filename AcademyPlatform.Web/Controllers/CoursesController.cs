@@ -1,46 +1,52 @@
-﻿namespace AcademyPlatform.Web.Areas.Student.Controllers
+﻿namespace AcademyPlatform.Web.Controllers
 {
-    using System;
     using System.Linq;
     using System.Web.Mvc;
-    using AcademyPlatform.Services;
+
+    using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Courses;
+
     using AutoMapper;
 
     public class CoursesController : Controller
     {
-        private readonly ICoursesService coursesService;
+        private readonly ICoursesService _courses;
+
+        private readonly ICategoryService _categories;
 
 
-        public CoursesController(ICoursesService coursesService)
+        public CoursesController(ICoursesService courses, ICategoryService categories)
         {
-            this.coursesService = coursesService;
+            _courses = courses;
+            _categories = categories;
         }
 
-        // GET: Courses/Courses
+        // GET: Courses/Courses 
         public ActionResult Index()
         {
-            var courses = coursesService.GetActiveCourses();
+            ViewBag.Categories = _categories.GetAll();
+            var courses = _courses.GetActiveCourses();
             return View(courses.ToList());
         }
 
         // GET: Courses/Courses/Details/5
         //[DonutOutputCache(VaryByParam = "id", Duration = 30, Location = OutputCacheLocation.Server)]
-        public ActionResult Details(string id)
+        [Route("Courses/{prettyUrl}")]
+        public ActionResult Details(string prettyUrl)
         {
             //Thread.Sleep(3000);
-            var course = coursesService.GetCourseByPrettyUrl(id);
+            var course = _courses.GetCourseByPrettyUrl(prettyUrl);
             if (course == null)
             {
-                return HttpNotFound("Invalid course id");
+                return HttpNotFound("Invalid course url");
             }
 
             var vm = Mapper.Map<CourseViewModel>(course);
-            return View("~/Areas/Student/Views/Courses/Details.cshtml", vm);
+            return View(vm);
         }
 
-
         [HttpGet]
+        [Route("Courses/{prettyUrl}/Apply")]
         public ActionResult Apply()
         {
             return View();

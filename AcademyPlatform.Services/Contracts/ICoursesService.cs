@@ -1,18 +1,16 @@
-using AcademyPlatform.Data.Repositories;
-
-namespace AcademyPlatform.Services
+namespace AcademyPlatform.Services.Contracts
 {
-    using System;
     using System.Linq;
+
     using AcademyPlatform.Models.Courses;
 
     public interface ICoursesService
     {
-        bool DeleteCourse(Course course);
+        void Delete(Course course);
 
-        bool UpdateCourse(Course course);
+        void Update(Course course);
 
-        Course GetCourseById(int id);
+        Course GetById(int id);
 
         Course GetCourseByPrettyUrl(string url);
 
@@ -20,7 +18,7 @@ namespace AcademyPlatform.Services
 
         IQueryable<Course> GetCoursesByUserId(string userId);
 
-        bool CreateCourse(Course course);
+        void Create(Course course);
 
     }
 }

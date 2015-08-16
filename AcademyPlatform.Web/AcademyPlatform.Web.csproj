@@ -151,13 +151,18 @@
     </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.2.0.0\lib\net45-full\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject.Web.Mvc">
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -240,10 +245,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LecturesController.cs" />
-    <Compile Include="Areas\Student\Controllers\CoursesController.cs" />
-    <Compile Include="Areas\Student\Controllers\LecturesController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -324,12 +328,14 @@
       <DependentUpon>Site.css</DependentUpon>
     </Content>
     <Content Include="Content\Videos\background-video-banner.mp4" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Icon.png" />
+    <Content Include="Images\favicon.png" />
+    <Content Include="Images\logo-focus-white.png" />
+    <Content Include="Images\logo-focus.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
@@ -366,7 +372,7 @@
       <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\Admin\Views\Courses\Edit.cshtml" />
-    <Content Include="Areas\Student\Views\Courses\Index.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map">
       <DependentUpon>jquery-2.1.4.js</DependentUpon>
     </Content>
@@ -383,9 +389,9 @@
     <Content Include="Content\jasny-bootstrap.css.map">
       <DependentUpon>jasny-bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Areas\Student\Views\Courses\Details.cshtml" />
-    <Content Include="Areas\Student\Views\Courses\Apply.cshtml" />
-    <Content Include="Areas\Student\Views\Courses\ApplicationCompleted.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Apply.cshtml" />
+    <Content Include="Views\Courses\ApplicationCompleted.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -430,7 +436,14 @@
     <Content Include="Content\Less\project-theme.css.map">
       <DependentUpon>project-theme.css</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css.map" />    
+    <Content Include="Content\Site.css.map" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EntityDropdown.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
     <None Include="Properties\PublishProfiles\AcdamyProductionDeploy.pubxml" />
     <Content Include="Scripts\jquery.validate-vsdoc.js">
       <DependentUpon>jquery.validate.js</DependentUpon>
@@ -1247,8 +1260,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Lectures\" />
-    <Folder Include="Areas\Student\Views\Lectures\" />
+    <Folder Include="Areas\Student\Controllers\" />
     <Folder Include="Areas\Student\Views\Shared\DisplayTemplates\" />
     <Folder Include="Images\Courses\" />
     <Folder Include="Scripts\tinymce\plugins\codemirror\codemirror\CodeMirror\" />

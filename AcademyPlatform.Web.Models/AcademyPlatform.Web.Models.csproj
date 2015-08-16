@@ -72,6 +72,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Courses\CategoryEditViewModel.cs" />
+    <Compile Include="Courses\CategoryListViewModel.cs" />
     <Compile Include="Courses\CoursesListViewModel.cs" />
     <Compile Include="Courses\CourseViewModel.cs" />
     <Compile Include="Courses\Validators\CreateCourseViewModelValidator.cs" />

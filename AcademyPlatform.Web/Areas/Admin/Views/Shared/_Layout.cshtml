@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.PageTitle - Academy Platform</title>
+    <title>@ViewBag.PageTitle - Фокус Академия</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/project-theme")
@@ -22,7 +22,7 @@
                         <div class="header-left clearfix">
                             <!-- logo -->
                             <div id="logo" class="logo">
-                                <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img id="logo_img" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt="Академията"></a>
+                                <a href="@Url.Action("Index", "Home", new { Area = string.Empty })"><img src="@Url.Content("~/Images/logo-focus.png")" alt="Академията"></a>
                             </div>
                             <!-- name-and-slogan -->
                             <div class="site-slogan">
@@ -64,7 +64,10 @@
                                             <ul class="nav navbar-nav ">
 
                                                 <li>
-                                                    @Html.ActionLink("Курсове", "Index", "Courses", new {area = "Admin"}, null)
+                                                    @Html.ActionLink("Курсове", "Index", "Courses")
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Категории", "Index", "Categories")
                                                 </li>
                                             </ul>
                                         </div>

@@ -91,6 +91,7 @@
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Helpers\FileUploadHelper.cs" />
     <Compile Include="Helpers\ModelMetadataHelpers.cs" />
+    <Compile Include="Helpers\PluralizationHelper.cs" />
     <Compile Include="Sanitizers\HtmlSanitizer.cs" />
     <Compile Include="Sanitizers\IHtmlSanitizer.cs" />
     <Compile Include="Mappings\AutoMapperConfig.cs" />

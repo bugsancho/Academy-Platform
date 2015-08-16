@@ -10,5 +10,7 @@ namespace AcademyPlatform.Data
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 
         int SaveChanges();
+
+        void Dispose();
     }
 }

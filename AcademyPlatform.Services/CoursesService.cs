@@ -1,10 +1,10 @@
 ﻿namespace AcademyPlatform.Services
 {
-    using System;
     using System.Linq;
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Services.Contracts;
 
     public class CoursesService : ICoursesService
     {
@@ -12,10 +12,8 @@
 
         private readonly IRepository<User> users;
 
-        // private readonly IValidator validator;
         public CoursesService(IRepository<Course> courses, IRepository<User> users)
         {
-            // this.validator = validator;   
             this.courses = courses;
             this.users = users;
         }
@@ -30,9 +28,7 @@
             return this.users.GetById(userId).Courses.AsQueryable();
         }
 
-
-
-        public Course GetCourseById(int id)
+        public Course GetById(int id)
         {
             return this.courses.GetById(id);
         }
@@ -42,56 +38,23 @@
             return this.courses.All().FirstOrDefault(x => x.PrettyUrl == url);
         }
 
-        public bool CreateCourse(Course course)
+        public void Create(Course course)
         {
-            // if (!validator.Validate(course))
-            // {
-            //    return false;
-            // }
-            try
-            {
-                this.courses.Add(course);
-                this.courses.SaveChanges();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            this.courses.Add(course);
+            this.courses.SaveChanges();
         }
-        public bool UpdateCourse(Course course)
+        public void Update(Course course)
         {
-            //if (!validator.Validate(course))
-            //{
-            //    return false;
-            //}
-            try
-            {
-                this.courses.Update(course);
-                this.courses.SaveChanges();
+            this.courses.Update(course);
+            this.courses.SaveChanges();
 
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
 
-        public bool DeleteCourse(Course course)
+        public void Delete(Course course)
         {
-            try
-            {
-                this.courses.Delete(course);
-                this.courses.SaveChanges();
+            this.courses.Delete(course);
+            this.courses.SaveChanges();
 
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
     }
 }
