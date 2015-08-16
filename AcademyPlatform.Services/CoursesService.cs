@@ -12,11 +12,10 @@
 
         private readonly IRepository<User> users;
 
-        //private readonly IValidator validator;
-
+        // private readonly IValidator validator;
         public CoursesService(IRepository<Course> courses, IRepository<User> users)
         {
-            //this.validator = validator;   
+            // this.validator = validator;   
             this.courses = courses;
             this.users = users;
         }
@@ -40,16 +39,15 @@
 
         public Course GetCourseByPrettyUrl(string url)
         {
-            return this.courses.All().Where(x => x.PrettyUrl == url).FirstOrDefault();
+            return this.courses.All().FirstOrDefault(x => x.PrettyUrl == url);
         }
 
         public bool CreateCourse(Course course)
         {
-            //if (!validator.Validate(course))
-            //{
+            // if (!validator.Validate(course))
+            // {
             //    return false;
-            //}
-
+            // }
             try
             {
                 this.courses.Add(course);

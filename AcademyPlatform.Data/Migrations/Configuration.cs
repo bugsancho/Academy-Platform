@@ -3,6 +3,7 @@ namespace AcademyPlatform.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using AcademyPlatform.Models.Courses;
 
     internal sealed class Configuration : DbMigrationsConfiguration<AcademyPlatform.Data.AcademyPlatformDbContext>
     {
@@ -15,7 +16,10 @@ namespace AcademyPlatform.Data.Migrations
 
         protected override void Seed(AcademyPlatform.Data.AcademyPlatformDbContext context)
         {
-
+            //foreach (var course in context.Courses)
+            //{
+            //    course.CategoryId = 1;
+            //}
 
             //  This method will be called after migrating to the latest version.
 

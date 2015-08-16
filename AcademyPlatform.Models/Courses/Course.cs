@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public class Course
@@ -13,6 +14,7 @@
 
         public string PrettyUrl { get; set; }
 
+        [DisplayName("Zagkavie")]
         public string Title { get; set; }
 
         public string TagLine { get; set; }
@@ -30,6 +32,10 @@
 
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
 
         public decimal Price { get; set; }
 

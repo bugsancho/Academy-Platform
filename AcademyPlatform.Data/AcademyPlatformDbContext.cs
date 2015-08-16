@@ -32,6 +32,8 @@
 
         public IDbSet<Course> Courses { get; set; }
 
+        public IDbSet<Category> Categories { get; set; }
+
         public IDbSet<Lecture> Lectures { get; set; }
 
         public IDbSet<HomeworkAssignment> HomeworkAssignments { get; set; }

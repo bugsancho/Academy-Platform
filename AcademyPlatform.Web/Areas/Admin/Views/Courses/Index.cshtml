@@ -7,8 +7,8 @@
 
 @Html.Grid(Model).Columns(columns =>
 {
-    columns.Add(x => x.Id).Titled("Id");
-    columns.Add(x => x.Title).Titled("Име");
+    columns.Add(x => x.Id);
+    columns.Add(x => x.Title);
     columns.Add(x => x.StartDate).Titled("Начална дата").Format("{0:dd/MM/yyyy}");
     columns.Add(x => x.EndDate).Titled("Крайна дата").Format("{0:dd/MM/yyyy}");
     columns.Add().RenderValueAs(x => Html.ActionLink("Редактирай", "Edit", "Courses", new { Area = "Admin", id = x.Id },  new { @class = "btn btn-info"})).Encoded(false).Sanitized(false);
