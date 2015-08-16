@@ -21,7 +21,6 @@ namespace AcademyPlatform.Web.Areas.Student.Controllers
         }
 
         // GET: Student/Home
-        [Route("Account")]
         public ActionResult Index()
         {
             return View("~/Areas/Student/Views/Account/Index.cshtml", _courses.GetActiveCourses().Project().To<CoursesListViewModel>());
