@@ -247,6 +247,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesController.cs" />
+    <Compile Include="Areas\Student\Controllers\AccountController.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Areas\Student\StudentAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -270,6 +271,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
+    <Content Include="Content\animations.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css">
       <DependentUpon>bootstrap-theme.css</DependentUpon>
@@ -336,6 +338,7 @@
     <Content Include="Images\favicon.png" />
     <Content Include="Images\logo-focus-white.png" />
     <Content Include="Images\logo-focus.png" />
+    <Content Include="Images\Valq.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
@@ -343,6 +346,7 @@
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\gridmvc.js" />
     <Content Include="Scripts\gridmvc.lang.ru.js">
       <DependentUpon>gridmvc.js</DependentUpon>
@@ -444,6 +448,8 @@
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EntityDropdown.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
+    <Content Include="Areas\Student\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Student\Views\Account\Index.cshtml" />
     <None Include="Properties\PublishProfiles\AcdamyProductionDeploy.pubxml" />
     <Content Include="Scripts\jquery.validate-vsdoc.js">
       <DependentUpon>jquery.validate.js</DependentUpon>
@@ -1260,7 +1266,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Student\Controllers\" />
     <Folder Include="Areas\Student\Views\Shared\DisplayTemplates\" />
     <Folder Include="Images\Courses\" />
     <Folder Include="Scripts\tinymce\plugins\codemirror\codemirror\CodeMirror\" />

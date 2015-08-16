@@ -4,10 +4,17 @@
     using AcademyPlatform.Models.Courses;
     using System.ComponentModel.DataAnnotations;
 
-    public class CoursesListViewModel
+    using AcademyPlatform.Web.Infrastructure.Mappings;
+
+    public class CoursesListViewModel : IMapFrom<Course>
     {
         [Display(Name = "Заглавие")]
         public string Title { get; set; }
+
+        public string PrettyUrl { get; set; }
+
+        [Display(Name = "Категория")]
+        public string CategoryTitle { get; set; }
 
         [Display(Name = "Кратко Описание")]
         public string ShortDescription { get; set; }

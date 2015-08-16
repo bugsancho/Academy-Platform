@@ -1,0 +1,209 @@
+﻿@model IEnumerable<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>
+@{
+    ViewBag.PageTitle = "Акаунт";
+}
+<div class="account-page-title container-fulid">
+    <h1 class="page-title">Моите курсове</h1>
+    <h4 class="page-notice">Тук може да менажирате всички курсове, който посещавате.</h4>
+    <i class="fa fa-book pull-right"></i>
+</div>
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-container">
+    <ol class="breadcrumb">
+        <li><i class="fa fa-home pr-10"></i><a href="#">Начало</a></li>
+        <li><a href="#">Моят профил</a></li>
+        <li class="active">Моите курсове</li>
+    </ol>
+</div>
+<!-- breadcrumb end -->
+<div class="account-container clearfix">
+    <div class="container-fulid">
+        <div class="account-content col-md-8">
+
+            @foreach (var course in Model)
+            {
+                <div class="courses col-md-6">
+                    <div class="feature-box text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                        <div class="courses-top pv-30 ph-20 ">
+                            <button class="btn btn-xs" data-toggle="tooltip" title="" data-original-title="Харесва ми!">
+                                <i class="fa fa-heart text-danger"></i>
+                            </button>
+                            <h3 class="courses-content-light">
+                                <a href="@Url.RouteUrl(new {controller= "Courses", action = "Details", area = string.Empty, prettyUrl =course.PrettyUrl})" class="themed-color-default">@course.Title</a><br>
+                                <small>@course.CategoryTitle</small>
+                            </h3>
+                        </div>
+                        <div class="courses-bottom pv-30 ph-20 clearfix">
+                            <a href="#" class="courses-image-container animated fadeInUpSmall" data-animation-effect="fadeInUpSmall">
+                                <span class="icon default-bg circle"><i class="fa fa-globe"></i></span>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-default pull-right">
+                                8 урока,
+                                <i class="fa fa-clock-o"></i> 8 часа
+                            </a>
+                            <a href="#" class="btn btn-sm btn-success pull-left">25лв.</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="account-sidebar col-md-4">
+            <div class="account-sidebar-block col-md-12">
+                <div class="sidebar-block-title">
+                    <h3>Категории курсове</h3>
+                </div>
+                <div class="sidebar-block-section">
+                    <ul class="nav courses-categories">
+                        <li class="active">
+                            <a href="javascript:void(0)"><span class="badge pull-right">100</span>Всички курсове</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">12</span>
+                                <i class="fa fa-desktop"></i>
+                                Уев дизайн
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">12</span>
+                                <i class="fa fa-code"></i>
+                                Програмиране
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">16</span>
+                                <i class="fa fa-pie-chart"></i>
+                                Интернет маркетинг
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">16</span>
+                                <i class="fa fa-rss"></i>
+                                Телекомуникации
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">8</span>
+                                <i class="fa fa-trophy"></i>
+                                Гранчарство
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">22</span>
+                                <i class="fa fa-puzzle-piece"></i>
+                                Редене на пъзел
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">12</span>
+                                <i class="fa fa-bar-chart"></i>
+                                Финанси
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <span class="badge pull-right">2</span>
+                                <i class="fa fa-bicycle"></i>
+                                Колоездене
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="account-sidebar-block col-md-12">
+                <div class="sidebar-block-title">
+                    <h3>Акаунт статус</h3>
+                </div>
+                <div class="sidebar-block-section">
+                    <table class="account-activities table table-borderless table-striped table-vcenter">
+                        <tbody>
+                            <tr>
+                                <td class="text-right" style="width: 30%;">
+                                    <img src="@Url.Content("~/images/Valq.png")" alt="avatar" class="img-circle">
+                                </td>
+                                <td>
+                                    <a href="#"><strong>Валя Йорданова</strong></a>
+                                    <br>
+                                    <em>интернет учащ</em>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Профил</td>
+                                <td>
+                                    <a class="activities" href="#"><i class="fa fa-phone"></i> 0888 888 888 </a>
+                                    <a class="activities" href="#"><i class="fa fa-envelope"></i> v.yordanova@focus.bg</a>
+                                    <a class="activities" href="#"><i class="fa fa-coffee"></i> Маркетинг мениджър</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Курсове</td>
+                                <td>
+                                    <a class="activities" href="#"><i class="fa fa-plus"></i> <strong>3</strong> Нови </a>
+                                    <a class="activities" href="#"><i class="fa fa-heart"></i> <strong>5</strong> Любими</a>
+                                    <a class="activities" href="#"><i class="fa fa-check"></i> <strong>10</strong> Завършени</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="account-sidebar-block col-md-12">
+                <div class="sidebar-block-title">
+                    <h3>Най-посещавани курсове</h3>
+                </div>
+                <div class="sidebar-block-section">
+                    <table class="courses-popular table table-borderless table-striped table-vcenter">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="#">HTML5 за начинаещи</a><br>
+                                    <small>Уеб дизайн</small>
+                                </td>
+                                <td class="text-center" style="width: 80px;">
+                                    <div class="btn-group btn-group-xs">
+                                        <a href="javascript:void(0)" class="btn"><i class="fa fa-shopping-cart"></i></a>
+                                        <a href="javascript:void(0)" class="btn"><i class="fa fa-heart text-danger"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#">C# - обектно ориентирано програмиране</a><br>
+                                    <small>Програмиране</small>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-xs">
+                                        <a href="javascript:void(0)" class="btn"><i class="fa fa-shopping-cart"></i></a>
+                                        <a href="javascript:void(0)" class="btn"><i class="fa fa-heart text-danger"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#">Реклама с Google Adwords</a><br>
+                                    <small>Интернет маркетинг</small>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group btn-group-xs">
+                                        <a href="javascript:void(0)" class="btn"><i class="fa fa-shopping-cart"></i></a>
+                                        <a href="javascript:void(0)" class="btn"><i class="fa fa-heart text-danger"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

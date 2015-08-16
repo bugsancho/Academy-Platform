@@ -25,6 +25,7 @@
                       "~/Content/bootstrap.css",
                         "~/Content/project-theme.css",
                         "~/Content/animate.css",
+                        "~/Content/animations.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/project-theme-scripts").Include(
@@ -35,6 +36,7 @@
                 "~/Scripts/Plugins/jquery.waypoints.js",
                 "~/Scripts/Plugins/jquery.browser.js",
                 "~/Scripts/template.js",
+                "~/Scripts/custom.js",
                 "~/Scripts/Plugins/isotope.pkgd.js",
                 "~/Scripts/Plugins/isotope.pkgd.min.js",
                 "~/Scripts/Plugins/jquery.vide.js"));

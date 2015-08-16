@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.PageTitle - Фокус Академия</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/project-theme")
+    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.png")">
+</head>
+<body class="my-account">
+    <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
+    <div class="header-container">
+    </div>
+    @RenderSection("PreContent", required: false)
+    <div class="page-wrapper">
+        <div class="container-fulid">
+            <!-- left navigation start -->
+            <div class="left-navigation">
+                <div class="block clearfix">
+                    <div id="account-logo" class="logo">
+                        <a href="@Url.Action("Index", "Home", new { Area = string.Empty })">
+                            <img id="logo_img" src="@Url.Content("~/images/logo-focus-white.png")" alt="Академия Фокус">
+                        </a>
+                    </div>
+                    <div class="account-sidebar-user clearfix">
+                        <div class="account-sidebar-user-avatar">
+                            <a href="#">
+                                <img src="@Url.Content("~/images/Valq.png")" alt="avatar">
+                            </a>
+                        </div>
+                        <div class="account-sidebar-user-name">Валя Йорданова</div>
+                        <div class="account-sidebar-user-links">
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Профил"><i class="fa fa-user"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Моите курсове"><i class="fa fa-graduation-cap"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Съобщения"><i class="icon-mail"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Logout"><i class="icon-logout"></i></a>
+                        </div>
+                    </div>
+                    <nav>
+                        <ul class="account-nav">
+                            <li><a href="#"><i class="fa fa-home"></i>Към сайта</a></li>
+                            <li><a href="#"><i class="fa fa-certificate"></i>Сертификати</a></li>
+                            <li><a href="#"><i class="fa fa-folder-open"></i>Материали</a></li>
+                            <li class="active"><a href="#"><i class="fa fa-graduation-cap"></i>Курсове</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- left navigation end -->
+            <div class="account-main">
+                <header class="account-header clearfix">
+                    <a class="account-nav-button" href="javascript:void(0)" onclick="">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <form action="#" method="post" class="account-form-search" role="search">
+                        <input type="text" id="top-search" name="top-search" class="form-search" placeholder="Търсене..">
+                        <a href="#"><i class="fa fa-search"></i></a>
+                    </form>
+                    <div class="account-dropdown dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>
+                                <img src="@Url.Content("~/images/Valq.png")" alt="avatar">
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                            <li class="dropdown-header text-center">Акаунт</li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-user"></i>
+                                    Моят акаунт
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-graduation-cap"></i>
+                                    Моите курсове
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-mail"></i>
+                                    Съобщения
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-logout"></i>
+                                    Изход
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+          
+                @RenderBody()
+            </div>
+            <footer id="footer" class="clearfix ">
+                <div class="subfooter">
+                    <div class="container">
+                        <div class="subfooter-inner">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-center">Copyright © 2015 The Project by <a target="_blank" href="http://htmlcoder.me">HtmlCoder</a>. All Rights Reserved</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    @*<footer id="footer" class="clearfix dark">
+            <div class="footer">
+                <div class="container">
+                    <div class="footer-inner">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3">
+                                <div class="footer-content text-center padding-ver-clear">
+                                    <div class="logo-footer"><img id="logo-footer" class="center-block" src="@Url.Content("~/Content/Images/logo_light_blue.png")" alt=""></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus illo vel dolorum soluta consectetur doloribus sit. Delectus non tenetur odit dicta vitae debitis suscipit doloribus. Lorem ipsum dolor sit amet, illo vel dolorum soluta consectetur.</p>
+                                    <ul class="list-inline mb-20">
+                                        <li><i class="text-default fa fa-map-marker pr-5"></i>One infinity loop, 54100</li>
+                                        <li><a href="tel:+00 1234567890" class="link-dark"><i class="text-default fa fa-phone pl-10 pr-5"></i>+00 1234567890</a></li>
+                                        <li><a href="mailto:info@theproject.com" class="link-dark"><i class="text-default fa fa-envelope-o pl-10 pr-5"></i>info@theproject.com</a></li>
+                                    </ul>
+                                    <ul class="social-links circle animated-effect-1 margin-clear">
+                                        <li class="facebook"><a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+                                        <li class="twitter"><a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+                                        <li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+                                        <li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
+                                        <li class="xing"><a target="_blank" href="http://www.xing.com"><i class="fa fa-xing"></i></a></li>
+                                    </ul>
+                                    <div class="separator"></div>
+                                    <p class="text-center margin-clear">Copyright © 2015 Academy Platform by <a target="_blank" href="https://github.com/bugsancho">Alexander Todorov</a>. All Rights Reserved</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/project-theme-scripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
