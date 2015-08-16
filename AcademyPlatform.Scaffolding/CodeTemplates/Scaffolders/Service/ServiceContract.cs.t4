@@ -1,0 +1,39 @@
+<#@ template language="C#" HostSpecific="True"  inherits="DynamicTransform" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="EnvDTE" #>
+<#@ Output Extension="cs" #>
+namespace <#= Model.ServiceNamespace #>
+{ 
+	using System;
+	using System.Collections.Generic;
+	using System.Linq.Expressions;
+	<# foreach(var ns in new[] { Model.ModelTypeNamespace}.Where(x => !string.IsNullOrEmpty(x) && (x != Model.ServiceNamespace)).Distinct()) { #>
+using <#= ns #>;
+	<# } #>
+
+<# 
+    var modelType = (CodeType)Model.ModelType; 
+    var modelName = modelType.Name;
+    var primaryKeyProperty = modelType.VisibleMembers().OfType<CodeProperty>().Single(x => x.Name == Model.PrimaryKey);
+    var isObjectContext = false;
+#>
+    public interface I<#= modelName #>Service
+    {
+        IEnumerable<<#= modelName #>> GetAll();
+
+		IEnumerable<T> GetAll<T>() where T : class;
+
+        <#= modelName #> GetById(<#= primaryKeyProperty.Type.AsString #> id);
+
+        T GetById<T>(<#= primaryKeyProperty.Type.AsString #> id);
+
+        void Create(<#= modelName #> <#= modelName.ToLower() #>);
+
+		void Update(<#= modelName #> <#= modelName.ToLower() #>);
+
+        void Delete(<#= primaryKeyProperty.Type.AsString #> id);
+		
+        void Dispose();
+    }
+}

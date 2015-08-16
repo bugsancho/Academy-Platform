@@ -1,0 +1,52 @@
+﻿<#@ Template Language="C#" HostSpecific="True" Inherits="DynamicTransform" #>
+<#@ Output extension="cshtml" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ assembly name="System.Data.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="System.Data.Linq.Mapping" #>
+<#@ import namespace="System.Data.Objects.DataClasses" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Reflection" #>
+<#  var viewModelDataType = (EnvDTE.CodeType) Model.EditViewModelDataType;
+    var routeValues = string.IsNullOrEmpty(Model.Area) ? "null" : string.Format("new {{ area = \"{0}\"}}", Model.Area);
+ #>
+ @model <#= viewModelDataType.FullName #>
+
+@{
+    ViewBag.PageTitle = "<#= Model.ViewName #>";
+	<# if (!String.IsNullOrEmpty(Model.Layout)) { #>
+    Layout = "<#= Model.Layout #>";
+			<#} #>
+}
+
+<h2>@ViewBag.PageTitle</h2>
+
+@*@using (Html.BeginForm("Edit", "<#=Model.PluralName #>", <#=routeValues #>, FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.EditorForModel("GenericEditorTemplate")
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

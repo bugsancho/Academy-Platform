@@ -1,0 +1,176 @@
+<#@ template language="C#" HostSpecific="True"  inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="EnvDTE" #>
+namespace <#= Model.ControllerNamespace #>
+{
+	using System.Linq;
+	using System.Web.Mvc;
+	
+	using AutoMapper;
+	
+	<# if(!string.IsNullOrEmpty(Model.ModelTypeNamespace)) { #>
+using <#= Model.ModelTypeNamespace #>;
+	<# } #>
+	<# if((!string.IsNullOrEmpty(Model.ServicesNamespace)) && (Model.ServicesNamespace != Model.ModelTypeNamespace)) { #>
+using <#= Model.ServicesNamespace #>;
+	<# } #>
+using <#= Model.ViewModelNamespace #>;
+   
+<#  
+	var modelType = (CodeType)Model.ModelType; 
+	var viewModelType = (CodeType)Model.ViewModelType; 
+	var modelName = modelType.Name; 
+	var viewModelName = viewModelType.Name; 
+	var modelNamePlural = Model.ModelTypePluralized; 
+	var modelVariable = modelName.ToLower(); 
+	var relatedEntities = ((IEnumerable)Model.RelatedEntities).OfType<RelatedEntityInfo>();
+	var primaryKeyProperty = modelType.VisibleMembers().OfType<CodeProperty>().Single(x => x.Name == Model.PrimaryKey);
+	var routingName = Regex.Replace(Model.ControllerName, "Controller$", "", RegexOptions.IgnoreCase);
+    var serviceVariableName = Services[modelType.FullName].VariableName;
+
+
+	string[] displayPropertyNames = new[] { "Name", "Title", "LastName", "Surname", "Subject", "Count" };
+
+	//var chosenSubproperty = propertyType.DisplayColumnProperty() ?? RelatedEntityType.FindProperty(displayPropertyNames);
+#>
+	public class <#= Model.ControllerName #> : Controller
+	{
+<# foreach(var service in Services.Values) { #>
+		private readonly I<#= service.ServiceTypeName #> <#= service.VariableName #>;
+<# } #>
+
+		
+		public <#= Model.ControllerName #>(<#= String.Join(", ", Services.Values.Select(x => "I" + x.ServiceTypeName + " " + x.VariableName.Substring(1))) #>)
+		{
+<# foreach(var service in Services.Values) { #>
+			<#= service.VariableName #> = <#= service.VariableName.Substring(1) #>;
+<# } #>
+		}
+				
+		// GET: /<#= routingName #>/
+		[HttpGet]
+		public ViewResult Index()
+		{
+		return View(<#= serviceVariableName #>.GetAll<<#= viewModelName.Replace("EditViewModel","ListViewModel") #>>());
+		}
+				
+		// GET: /<#= routingName #>/Details/5
+		[HttpGet]
+		public ViewResult Details(<#= primaryKeyProperty.Type.AsString #> id)
+		{
+			return View(<#= serviceVariableName #>.GetById<<#= viewModelName #>>(id));
+		}
+				
+		// GET: /<#= routingName #>/Create
+		[HttpGet]
+		public ActionResult Create()
+		{
+			SetRelatedItemsInViewBag();
+			return View();
+		}
+		
+		// POST: /<#= routingName #>/Create
+		[HttpPost]
+		public ActionResult Create(<#= viewModelName #> <#= modelVariable #>)
+		{
+			if (ModelState.IsValid) 
+			{
+				var domainModel = Mapper.Map<<#= modelName #>>(<#=modelVariable#>);
+				<#= serviceVariableName #>.Create(domainModel);
+				return RedirectToAction("Index");
+			} 
+			else 
+			{
+				SetRelatedItemsInViewBag();
+				return View(<#= modelVariable #>);
+			}
+		}		
+		
+		// GET: /<#= routingName #>/Edit/5
+		[HttpGet]
+		public ActionResult Edit(<#= primaryKeyProperty.Type.AsString #> id)
+		{
+			 SetRelatedItemsInViewBag();
+			 return View(<#= serviceVariableName #>.GetById<<#= viewModelName #>>(id));
+		}
+		
+		// POST: /<#= routingName #>/Edit/5
+		[HttpPost]
+		public ActionResult Edit(<#= primaryKeyProperty.Type.AsString #> id, <#= viewModelName #> <#= modelVariable #>)
+		{
+			if (ModelState.IsValid) 
+			{
+				var <#= modelVariable #>InDb = <#=serviceVariableName#>.GetById(id);
+				var updatedModel = Mapper.Map(<#=modelVariable#>, <#=modelVariable#>InDb);
+				<#= serviceVariableName #>.Update(updatedModel);
+				return RedirectToAction("Index");
+			} 
+			else 
+			{
+				SetRelatedItemsInViewBag();
+				return View(<#= modelVariable #>);
+			}
+		}
+		
+		// GET: /<#= routingName #>/Delete/5
+		[HttpGet]
+		public ActionResult Delete(<#= primaryKeyProperty.Type.AsString #> id)
+		{
+			return View(<#= serviceVariableName #>.GetById<<#= viewModelName #>>(id));
+		}
+		
+		// POST: /<#= routingName #>/Delete/5
+
+		[HttpPost]
+		[ActionName("Delete")]
+		public ActionResult DeleteConfirmed(<#= primaryKeyProperty.Type.AsString #> id)
+		{
+			<#= serviceVariableName #>.Delete(id);
+
+			return RedirectToAction("Index");
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing) {
+<# foreach(var service in Services.Values) { #>
+				<#= service.VariableName #>.Dispose();
+<# } #>
+			}
+			base.Dispose(disposing);
+		}
+
+		private void SetRelatedItemsInViewBag()
+        {
+		<# foreach(var relatedEntity in relatedEntities.Where(x => x.RelationType == RelationType.Parent)) { #>
+	ViewBag.Possible<#= relatedEntity.RelationNamePlural #> = <#= Services[relatedEntity.RelatedEntityType.FullName].VariableName #>.GetAll().Select(x => new SelectListItem { Value = x.<#=relatedEntity.RelatedEntityPrimaryKeyName #>.ToString(), Text = x.<#= relatedEntity.RelatedEntityType.FindProperty(displayPropertyNames).Name  #> });
+<# } #>
+        }
+	}
+}
+<#+
+class ServiceInfo {
+	public string ServiceTypeName { get; set; }
+	public string VariableName { get; set; }
+}
+
+IDictionary<string, ServiceInfo> _services;
+IDictionary<string, ServiceInfo> Services {
+	get {
+		if (_services == null) {
+			var relatedEntities = ((IEnumerable)Model.RelatedEntities).OfType<RelatedEntityInfo>();
+			var relatedTypes = relatedEntities.Where(x => x.RelationType == RelationType.Parent).Select(x => x.RelatedEntityType).Distinct();
+			_services = relatedTypes.ToDictionary(
+				relatedType => relatedType.FullName,
+				relatedType => new ServiceInfo { ServiceTypeName = relatedType.Name + "Service", VariableName = "_" + relatedType.Name.ToLower() + "Service" }
+			); 
+			_services[((CodeType)Model.ModelType).FullName] = new ServiceInfo { ServiceTypeName = Model.Service, VariableName = "_" + ((CodeType)Model.ModelType).Name.ToLower() + "Service" };
+		}
+		return _services;
+	}
+}
+#>

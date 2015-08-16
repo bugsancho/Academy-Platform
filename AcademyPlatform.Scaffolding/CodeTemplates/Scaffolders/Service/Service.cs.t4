@@ -1,0 +1,84 @@
+<#@ template language="C#" HostSpecific="True"  inherits="DynamicTransform" #>
+<#@ assembly name="System.Data.Entity" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="EnvDTE" #>
+<#@ Output Extension="cs" #>
+namespace <#= Model.ServiceNamespace #>
+{ 
+	using System.Collections.Generic;
+	using System.Linq;
+
+	using AutoMapper;
+	using AutoMapper.QueryableExtensions;
+
+	<# foreach(var ns in new[] { Model.ModelTypeNamespace}.Where(x => !string.IsNullOrEmpty(x) && (x != Model.ServiceNamespace)).Distinct()) { #>
+using <#= ns #>;
+	<# } #>
+using <#=Model.ServiceContractNamespace#>;
+	using <#=Model.RepositoryNamespace#>;	
+<# 
+    var modelType = (CodeType)Model.ModelType; 
+    var modelName = modelType.Name; 
+    var modelNamePlural = Model.ModelTypePluralized; 
+    var primaryKeyProperty = modelType.VisibleMembers().OfType<CodeProperty>().Single(x => x.Name == Model.PrimaryKey);
+    var repositoryName = "_" + modelNamePlural.ToLower();
+    var repositoryNameLower = modelNamePlural.ToLower();
+#>
+
+    public class <#= modelName #>Service : I<#= modelName #>Service
+    {
+		private readonly IRepository<<#=modelName#>> <#=repositoryName#>;
+
+		public  <#= modelName #>Service (IRepository<<#=modelName#>> <#=repositoryNameLower#>)
+		{
+			<#= repositoryName #> = <#= repositoryNameLower #>;
+		}
+
+        public IEnumerable<<#= modelName #>> GetAll()
+        {
+             return <#= repositoryName #>.All().ToList(); 
+        }
+
+		public IEnumerable<T> GetAll<T>() where T : class
+        {
+            var <#=repositoryNameLower#> = <#= repositoryName #>.All();
+
+            return <#=repositoryNameLower#>.Project().To<T>().ToList();
+        }
+		
+        public <#= modelName #> GetById(<#= primaryKeyProperty.Type.AsString #> id)
+        {
+            return <#= repositoryName #>.GetById(id);
+
+        }
+		
+		public T GetById<T>(<#= primaryKeyProperty.Type.AsString #> id)
+        {
+            return Mapper.Map<T>(<#= repositoryName #>.GetById(id));
+
+        }
+
+        public void Create(<#= modelName #> <#= modelName.ToLower() #>)
+        { 	
+		    <#= repositoryName #>.Add(<#= modelName.ToLower() #>);
+		    <#= repositoryName #>.SaveChanges();
+        }
+
+		public void Update(<#= modelName #> <#= modelName.ToLower() #>)
+        { 	
+		    <#= repositoryName #>.Update(<#= modelName.ToLower() #>);
+			<#= repositoryName #>.SaveChanges();
+        }
+
+        public void Delete(<#= primaryKeyProperty.Type.AsString #> id)
+        {
+             <#= repositoryName #>.Delete(id);
+			 <#= repositoryName #>.SaveChanges();
+        }
+
+        public void Dispose() 
+        {
+            <#= repositoryName #>.Dispose();
+        }
+    }
+}
