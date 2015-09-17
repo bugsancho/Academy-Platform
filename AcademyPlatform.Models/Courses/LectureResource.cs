@@ -10,7 +10,7 @@
 
         public int Version { get; set; }
 
-        public virtual Lecture Lecture { get; set; }
+        public virtual Module Module { get; set; }
 
         public int LectureId { get; set; }
 

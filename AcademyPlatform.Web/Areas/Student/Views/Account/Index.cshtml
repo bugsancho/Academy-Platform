@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>
 @{
     ViewBag.PageTitle = "Акаунт";
+    bool isEvenRow = false;
 }
 <div class="account-page-title container-fulid">
     <h1 class="page-title">Моите курсове</h1>
@@ -23,6 +24,11 @@
 
             @foreach (var course in Model)
             {
+                
+                if (isEvenRow)
+                {
+                    @:<div class="row">
+                }
                 <div class="courses col-md-6">
                     <div class="feature-box text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                         <div class="courses-top pv-30 ph-20 ">
@@ -30,7 +36,7 @@
                                 <i class="fa fa-heart text-danger"></i>
                             </button>
                             <h3 class="courses-content-light">
-                                <a href="@Url.RouteUrl(new {controller= "Courses", action = "Details", area = string.Empty, prettyUrl =course.PrettyUrl})" class="themed-color-default">@course.Title</a><br>
+                                <a href="@Url.RouteUrl(new { controller = "Courses", action = "Details", area = string.Empty, prettyUrl = course.PrettyUrl })" class="themed-color-default">@course.Title</a><br>
                                 <small>@course.CategoryTitle</small>
                             </h3>
                         </div>
@@ -46,6 +52,12 @@
                         </div>
                     </div>
                 </div>
+                if (isEvenRow)
+                {
+                    @:</div>
+                }
+
+                isEvenRow = !isEvenRow;
             }
         </div>
 

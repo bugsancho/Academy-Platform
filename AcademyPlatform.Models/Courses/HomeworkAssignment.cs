@@ -8,10 +8,10 @@
     {
         private ICollection<HomeworkSubmission> _submissions;
 
-        [ForeignKey("Lecture")]
+        [ForeignKey("Module")]
         public int Id { get; set; }
 
-        public virtual Lecture Lecture { get; set; }
+        public virtual Module Module { get; set; }
 
         public int LectureId { get; set; }
 

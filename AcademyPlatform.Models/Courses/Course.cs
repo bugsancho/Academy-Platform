@@ -7,7 +7,7 @@
 
     public class Course
     {
-        private ICollection<Lecture> _lectures;
+        private ICollection<Module> _lectures;
         private ICollection<User> _participants;
 
         public int Id { get; set; }
@@ -41,7 +41,7 @@
 
         public CourseDifficultyType Difficulty { get; set; }
 
-        public virtual ICollection<Lecture> Lectures
+        public virtual ICollection<Module> Lectures
         {
             get { return _lectures; }
             set { _lectures = value; }
@@ -55,7 +55,7 @@
 
         public Course()
         {
-            _lectures = new HashSet<Lecture>();
+            _lectures = new HashSet<Module>();
             _participants = new HashSet<User>();
         }
     }
