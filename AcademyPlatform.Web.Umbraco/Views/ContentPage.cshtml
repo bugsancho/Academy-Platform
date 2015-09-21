@@ -1,0 +1,10 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = "~/Views/Site.cshtml";
+}
+@section PreContent
+{
+    @Umbraco.Field("subHeader")
+}
+
+@Umbraco.Field("Content")

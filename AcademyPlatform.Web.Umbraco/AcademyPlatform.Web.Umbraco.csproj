@@ -131,6 +131,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -238,6 +247,9 @@
     <Reference Include="UrlRewritingNet.UrlRewriter">
       <HintPath>..\packages\UmbracoCms.Core.7.3.0-RC\lib\UrlRewritingNet.UrlRewriter.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
@@ -248,7 +260,142 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animations.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Fonts\font-awesome.css" />
+    <Content Include="Content\Fonts\font-awesome.min.css" />
+    <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\hover-min.css" />
+    <Content Include="Content\hover.css" />
+    <Content Include="Content\Images\baloons.jpg" />
+    <Content Include="Content\Images\csharp.png" />
+    <Content Include="Content\Images\EvoX-GRD.jpg" />
+    <Content Include="Content\Images\html_css.png" />
+    <Content Include="Content\Images\java.png" />
+    <Content Include="Content\Images\logo_light_blue.png" />
+    <Content Include="Content\Images\page-contact-banner.jpg" />
+    <Content Include="Content\Images\team-member.jpg" />
+    <Content Include="Content\Images\timer.png" />
+    <Content Include="Content\Images\аdvertising.png" />
+    <Content Include="Content\jasny-bootstrap.css" />
+    <Content Include="Content\jasny-bootstrap.min.css" />
+    <Content Include="Content\Less\project-theme.css" />
+    <Content Include="Content\Less\project-theme.min.css" />
+    <Content Include="Content\project-theme.css" />
+    <Content Include="Content\project-theme.min.css" />
+    <Content Include="Content\ProjectThemeSkins\blue.css" />
+    <Content Include="Content\ProjectThemeSkins\brown.css" />
+    <Content Include="Content\ProjectThemeSkins\cool_green.css" />
+    <Content Include="Content\ProjectThemeSkins\dark_cyan.css" />
+    <Content Include="Content\ProjectThemeSkins\dark_red.css" />
+    <Content Include="Content\ProjectThemeSkins\gold.css" />
+    <Content Include="Content\ProjectThemeSkins\gray.css" />
+    <Content Include="Content\ProjectThemeSkins\green.css" />
+    <Content Include="Content\ProjectThemeSkins\light_blue.css" />
+    <Content Include="Content\ProjectThemeSkins\orange.css" />
+    <Content Include="Content\ProjectThemeSkins\pink.css" />
+    <Content Include="Content\ProjectThemeSkins\purple.css" />
+    <Content Include="Content\ProjectThemeSkins\red.css" />
+    <Content Include="Content\ProjectThemeSkins\vivid_red.css" />
+    <Content Include="Content\rs-slider.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Site.min.css" />
+    <Content Include="Content\Videos\background-video-banner.mp4" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\jasny-bootstrap.css.map" />
+    <Content Include="Content\Less\mixins.less" />
+    <Content Include="Content\Less\mixins\buttons.less" />
+    <Content Include="Content\Less\mixins\center-block.less" />
+    <Content Include="Content\Less\mixins\clearfix.less" />
+    <Content Include="Content\Less\mixins\functions.less" />
+    <Content Include="Content\Less\mixins\gradients.less" />
+    <Content Include="Content\Less\mixins\hide-text.less" />
+    <Content Include="Content\Less\mixins\opacity.less" />
+    <Content Include="Content\Less\mixins\size.less" />
+    <Content Include="Content\Less\mixins\vendor-prefixes.less" />
+    <Content Include="Content\Less\project-theme.css.map" />
+    <Content Include="Content\Less\project-theme.less" />
+    <Content Include="Content\Less\Site.less" />
+    <Content Include="Content\Less\skins\blue.less" />
+    <Content Include="Content\Less\skins\brown.less" />
+    <Content Include="Content\Less\skins\cool_green.less" />
+    <Content Include="Content\Less\skins\dark_cyan.less" />
+    <Content Include="Content\Less\skins\dark_red.less" />
+    <Content Include="Content\Less\skins\gold.less" />
+    <Content Include="Content\Less\skins\gray.less" />
+    <Content Include="Content\Less\skins\green.less" />
+    <Content Include="Content\Less\skins\light_blue.less" />
+    <Content Include="Content\Less\skins\orange.less" />
+    <Content Include="Content\Less\skins\pink.less" />
+    <Content Include="Content\Less\skins\purple.less" />
+    <Content Include="Content\Less\skins\red.less" />
+    <Content Include="Content\Less\skins\vivid_red.less" />
+    <Content Include="Content\Less\variables.less" />
+    <Content Include="Content\Less\_blocks-widgets.less" />
+    <Content Include="Content\Less\_components.less" />
+    <Content Include="Content\Less\_layout.less" />
+    <Content Include="Content\Less\_main-slideshow.less" />
+    <Content Include="Content\Less\_navigations.less" />
+    <Content Include="Content\Less\_owl-carousel.less" />
+    <Content Include="Content\Less\_pages.less" />
+    <Content Include="Content\Less\_sections.less" />
+    <Content Include="Content\Less\_typography.less" />
+    <Content Include="Content\project-theme.css.map" />
+    <Content Include="Content\Site.css.map" />
+    <Content Include="Content\Videos\background-video-banner.webm" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\Plugins\isotope.pkgd.js" />
+    <Content Include="Scripts\Plugins\isotope.pkgd.min.js" />
+    <Content Include="Scripts\Plugins\jasny-bootstrap.js" />
+    <Content Include="Scripts\Plugins\jasny-bootstrap.min.js" />
+    <Content Include="Scripts\Plugins\jquery.browser.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.revolution.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.revolution.min.js" />
+    <Content Include="Scripts\Plugins\jquery.themepunch.tools.min.js" />
+    <Content Include="Scripts\Plugins\jquery.vide.js" />
+    <Content Include="Scripts\Plugins\jquery.vide.min.js" />
+    <Content Include="Scripts\Plugins\jquery.waypoints.js" />
+    <Content Include="Scripts\Plugins\jquery.waypoints.min.js" />
+    <Content Include="Scripts\Plugins\SmoothScroll.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\template.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
@@ -275,6 +422,20 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
+    <Content Include="Views\ContentPage.cshtml" />
+    <Content Include="Views\Site.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Partials\Seo.cshtml" />
+    <Content Include="Scripts\jquery.validate.min.js.map" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map" />
+    <Content Include="Scripts\Plugins\isotope.pkgd.min.js.map" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js.map" />
+    <Content Include="Scripts\respond.min.js.map" />
+    <Content Include="Views\Course.cshtml" />
+    <Content Include="Views\Courses.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -307,7 +468,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Common\DocumentTypes.cs" />
+    <Compile Include="Controllers\DocumentTypeControllers\CoursesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CoursesViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Startup\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
