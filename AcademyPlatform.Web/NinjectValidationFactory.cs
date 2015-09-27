@@ -1,7 +1,7 @@
 ﻿namespace AcademyPlatform.Web
 {
     using System;
-    using System.Linq;
+
     using FluentValidation;
 
     public class NinjectValidationFactory : ValidatorFactoryBase

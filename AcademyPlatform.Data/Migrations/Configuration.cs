@@ -1,11 +1,8 @@
 namespace AcademyPlatform.Data.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-    using AcademyPlatform.Models.Courses;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AcademyPlatform.Data.AcademyPlatformDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AcademyPlatformDbContext>
     {
         public Configuration()
         {
@@ -14,7 +11,7 @@ namespace AcademyPlatform.Data.Migrations
             ContextKey = "AcademyPlatform.Data.AcademyPlatformDbContext";
         }
 
-        protected override void Seed(AcademyPlatform.Data.AcademyPlatformDbContext context)
+        protected override void Seed(AcademyPlatformDbContext context)
         {
             //foreach (var course in context.Courses)
             //{

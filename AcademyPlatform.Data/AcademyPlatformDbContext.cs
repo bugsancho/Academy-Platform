@@ -1,17 +1,17 @@
 ﻿namespace AcademyPlatform.Data
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Linq;
+
     using AcademyPlatform.Data.Migrations;
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using System.Data.Entity.Infrastructure.Annotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
-    public class AcademyPlatformDbContext : IdentityDbContext<User>, IAcademyPlatformDbContext
+    public class AcademyPlatformDbContext : DbContext, IAcademyPlatformDbContext
     {
         public AcademyPlatformDbContext()
             : base("DefaultConnection")
@@ -31,6 +31,7 @@
         }
 
         public IDbSet<Course> Courses { get; set; }
+        public IDbSet<User> Users { get; set; }
 
         public IDbSet<Category> Categories { get; set; }
 

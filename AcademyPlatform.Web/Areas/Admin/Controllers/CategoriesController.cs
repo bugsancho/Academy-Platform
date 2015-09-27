@@ -1,13 +1,12 @@
 namespace AcademyPlatform.Web.Areas.Admin.Controllers
 {
-    using System.Linq;
     using System.Web.Mvc;
-
-    using AutoMapper;
 
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Courses;
+
+    using AutoMapper;
 
     public class CategoriesController : Controller
     {

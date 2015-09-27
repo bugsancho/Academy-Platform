@@ -1,9 +1,5 @@
 ﻿namespace AcademyPlatform.Models.Courses
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
     public class Module
     {
         //private ICollection<LectureResource> _resources;

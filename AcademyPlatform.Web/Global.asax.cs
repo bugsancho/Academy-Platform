@@ -1,18 +1,24 @@
 ﻿namespace AcademyPlatform.Web
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
     using System.Reflection;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using AcademyPlatform.Web.Infrastructure.Mappings;
-    using FluentValidation.Mvc;
-    using FluentValidation;
-    using AcademyPlatform.Web.Resources;
-    using System.Web;
-    using System;
-    using System.IO;
 
-    public class MvcApplication : System.Web.HttpApplication
+    using AcademyPlatform.Web.Infrastructure.Mappings;
+    using AcademyPlatform.Web.Models.Courses;
+    using AcademyPlatform.Web.Resources;
+
+    using FluentValidation;
+    using FluentValidation.Mvc;
+
+    using log4net.Config;
+
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -27,15 +33,15 @@
             DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             ModelValidatorProviders.Providers.Add(new FluentValidationModelValidatorProvider(new NinjectValidationFactory()));
             ValidatorOptions.ResourceProviderType = typeof(ErrorMessages);
-            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.CourseViewModel)));
+            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseViewModel)));
             autoMapperConfig.Execute();
 
-            log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
+            XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));
         }
 
         protected void Application_RequestEnd()
         {
-            System.Diagnostics.Trace.WriteLine(string.Format("{0}:{1}",
+            Trace.WriteLine(string.Format("{0}:{1}",
          (DateTime.Now - HttpContext.Current.Timestamp).TotalMilliseconds,
          HttpContext.Current.Request.RawUrl));
         }

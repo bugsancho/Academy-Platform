@@ -1,15 +1,14 @@
 namespace AcademyPlatform.Services.Contracts
-{ 
-	using System;
-	using System.Collections.Generic;
-	using System.Linq.Expressions;
-	using AcademyPlatform.Models.Courses;
-	
+{
+    using System.Collections.Generic;
+
+    using AcademyPlatform.Models.Courses;
+
     public interface ICategoryService
     {
         IEnumerable<Category> GetAll();
 
-		IEnumerable<T> GetAll<T>() where T : class;
+        IEnumerable<T> GetAll<T>() where T : class;
 
         Category GetById(int id);
 
@@ -17,10 +16,10 @@ namespace AcademyPlatform.Services.Contracts
 
         void Create(Category category);
 
-		void Update(Category category);
+        void Update(Category category);
 
         void Delete(int id);
-		
+
         void Dispose();
     }
 }

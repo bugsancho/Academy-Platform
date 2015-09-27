@@ -2,9 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Web.Infrastructure.Mappings;
 

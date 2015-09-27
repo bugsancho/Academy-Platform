@@ -2,6 +2,8 @@
 {
     using System.Data.Entity.Infrastructure.Pluralization;
 
+    //TODO Consider replacing Entity Framework reference with another service. Possibly https://github.com/MehdiK/Humanize
+
     public static class PluralizationHelper
     {
         private static readonly IPluralizationService PluralizationService = new EnglishPluralizationService();

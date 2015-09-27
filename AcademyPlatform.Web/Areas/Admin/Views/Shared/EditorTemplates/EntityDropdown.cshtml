@@ -1,10 +1,9 @@
 ﻿@using AcademyPlatform.Web.Infrastructure.Helpers
-
 @model Object
 
 @{
     var propertyName = ViewData.ModelMetadata.PropertyName;
-    var idIndex = propertyName.IndexOf("Id", System.StringComparison.Ordinal);
+    var idIndex = propertyName.IndexOf("Id", StringComparison.Ordinal);
     
     if (idIndex == -1)
     {

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace AcademyPlatform.Models.Courses
+﻿namespace AcademyPlatform.Models.Courses
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum CourseDifficultyType
     {
         [Display(Name = "Трудност")]

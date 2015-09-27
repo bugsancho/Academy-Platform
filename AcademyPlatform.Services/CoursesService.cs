@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Services
 {
     using System.Linq;
+
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;

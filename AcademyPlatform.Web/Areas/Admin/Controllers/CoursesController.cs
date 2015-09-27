@@ -2,17 +2,19 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using System.Web.Mvc;
-
-    using AutoMapper;
 
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
-    using AcademyPlatform.Web.Models.Courses;
-
-    using AcademyPlatform.Web.Infrastructure.Sanitizers;
     using AcademyPlatform.Web.Infrastructure.Filters;
     using AcademyPlatform.Web.Infrastructure.Helpers;
+    using AcademyPlatform.Web.Infrastructure.Sanitizers;
+    using AcademyPlatform.Web.Models.Courses;
+
+    using AutoMapper;
+
+    using log4net;
 
     [CustomAuthorize(Roles = "admin")]
     public class CoursesController : Controller
@@ -27,7 +29,7 @@
         private readonly ICoursesService _coursesService;
         private readonly ICategoryService _categories;
         private readonly IHtmlSanitizer _sanitizer;
-        private readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public CoursesController(ICoursesService coursesService, IHtmlSanitizer sanitizer, ICategoryService categories)
         {

@@ -1,9 +1,9 @@
 ﻿namespace AcademyPlatform.Web.Models.Courses
 {
     using System;
-    using AcademyPlatform.Models.Courses;
     using System.ComponentModel.DataAnnotations;
 
+    using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Web.Infrastructure.Mappings;
 
     public class CoursesListViewModel : IMapFrom<Course>

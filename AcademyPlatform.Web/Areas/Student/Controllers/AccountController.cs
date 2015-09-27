@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace AcademyPlatform.Web.Areas.Student.Controllers
+﻿namespace AcademyPlatform.Web.Areas.Student.Controllers
 {
+    using System.Web.Mvc;
+
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Courses;
 

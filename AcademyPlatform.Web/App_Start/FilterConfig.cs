@@ -1,9 +1,7 @@
-﻿using AcademyPlatform.Web.Infrastructure.Filters;
-using System.Web;
-using System.Web.Mvc;
-
-namespace AcademyPlatform.Web
+﻿namespace AcademyPlatform.Web
 {
+    using System.Web.Mvc;
+
     public class FilterConfig
     {
 

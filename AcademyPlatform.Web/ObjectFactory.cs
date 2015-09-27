@@ -1,7 +1,8 @@
 ﻿namespace AcademyPlatform.Web
 {
-    using Ninject;
     using System;
+
+    using Ninject;
 
     public static class ObjectFactory
     {

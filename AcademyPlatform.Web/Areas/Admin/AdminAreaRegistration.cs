@@ -1,7 +1,7 @@
-﻿using System.Web.Mvc;
-
-namespace AcademyPlatform.Web.Areas.Admin
+﻿namespace AcademyPlatform.Web.Areas.Admin
 {
+    using System.Web.Mvc;
+
     public class AdminAreaRegistration : AreaRegistration 
     {
         public override string AreaName 

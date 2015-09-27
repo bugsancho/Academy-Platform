@@ -1,6 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Infrastructure.Mappings
 {
-   using AutoMapper;
+    using AutoMapper;
 
     public interface IHaveCustomMappings
     {

@@ -1,8 +1,7 @@
 ﻿namespace AcademyPlatform.Web.Infrastructure.Helpers
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Data.Entity;
     using System.Web.Mvc;
 
     public static class ModelMetadataHelpers
@@ -29,7 +28,7 @@
 
         private static bool ShouldShow(ModelMetadata metadata, ViewDataDictionary viewData)
         {
-            return metadata.ModelType != typeof(System.Data.Entity.EntityState) &&
+            return metadata.ModelType != typeof(EntityState) &&
                    !metadata.IsComplexType &&
                    !viewData.TemplateInfo.Visited(metadata);
         }

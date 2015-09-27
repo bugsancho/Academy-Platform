@@ -1,20 +1,30 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AcademyPlatform.Web.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(AcademyPlatform.Web.App_Start.NinjectWebCommon), "Stop")]
+using AcademyPlatform.Web.App_Start;
+
+using WebActivatorEx;
+
+[assembly: PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof(NinjectWebCommon), "Stop")]
 
 namespace AcademyPlatform.Web.App_Start
 {
     using System;
     using System.Reflection;
     using System.Web;
+
     using AcademyPlatform.Data;
     using AcademyPlatform.Data.Repositories;
+    using AcademyPlatform.Models.Courses.Validators;
     using AcademyPlatform.Services;
-    using FluentValidation;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-    using Ninject;
-    using Ninject.Web.Common;
-    using Ninject.Extensions.Conventions;
     using AcademyPlatform.Web.Infrastructure.Sanitizers;
+    using AcademyPlatform.Web.Models.Courses.Validators;
+
+    using FluentValidation;
+
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
+    using Ninject;
+    using Ninject.Extensions.Conventions;
+    using Ninject.Web.Common;
 
     public static class NinjectWebCommon
     {
@@ -67,9 +77,9 @@ namespace AcademyPlatform.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Models.Courses.Validators.CourseValidator)))
+            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(CourseValidator)))
                 .ForEach(match => kernel.Bind(match.InterfaceType).To(match.ValidatorType));
-            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(AcademyPlatform.Web.Models.Courses.Validators.CreateCourseViewModelValidator)))
+            AssemblyScanner.FindValidatorsInAssembly(Assembly.GetAssembly(typeof(CreateCourseViewModelValidator)))
                 .ForEach(match => kernel.Bind(match.InterfaceType).To(match.ValidatorType));
             kernel.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));
             kernel.Bind<IAcademyPlatformDbContext>().To<AcademyPlatformDbContext>();
