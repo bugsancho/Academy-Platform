@@ -1,4 +1,61 @@
-﻿@inherits UmbracoTemplatePage
+﻿@using AcademyPlatform.Models.Courses
+@inherits UmbracoViewPage<IList<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>>
 @{
-    Layout = "~/Views/Site.cshtml";
+//Layout = "~/Views/_ContentPageBase.cshtml";
+    //var courses = ViewBag.Courses as IList<Course>;
 }
+
+@section PreContent{
+    @Umbraco.Field("subHeader")
+}
+<section class="main-container border-clear light-gray-bg padding-bottom-clear">
+    <div class="container">
+        <div class="row">
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-12">
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title text-center">Нашите Курсове</h1>
+                <!-- page-title end -->
+                <!--Isotope filters-->
+                <div class="filters">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#" data-filter="*">Всички</a></li>
+                        @foreach (var category in (IEnumerable<Category>)ViewBag.Categories)
+                        {
+                            <li><a href="#" data-filter="[data-category=@category.Id]">@category.Title</a></li>
+                        }
+                    </ul>
+                </div>
+                <!--Isotope filters END-->
+                <div class="isotope-container-fitrows grid-space-10">
+                    @foreach (var course in Model)
+                    {
+                        <div data-category="@course.Category" class="isotope-item col-md-4">
+                            <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
+                                <div class="overlay-container">
+                                    <img src="@Url.Content(course.ImageUrl)" style=" height:325px" alt="">
+                                    <div class="overlay-to-top">
+                                        <p class="small margin-clear">
+                                            <em>@course.Title</em>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body">
+                                <h3>@course.Title</h3>
+                                <div class="separator"></div>
+                                <p>@Html.Raw(course.ShortDescription).</p>
+                                <a href="@course.CourseUrl" class="btn btn-default btn-sm btn-animated margin-clear">Повече за Курса<i class="fa fa-arrow-right pl-10"></i></a>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+            <!-- main end -->
+        </div>
+    </div>
+</section>

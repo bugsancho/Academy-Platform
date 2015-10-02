@@ -14,6 +14,8 @@
     using global::Umbraco.Core;
     using global::Umbraco.Web;
 
+    using Zone.UmbracoMapper;
+
     public class AutofacConfig : ApplicationEventHandler
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
@@ -27,7 +29,9 @@
 
             builder.RegisterAssemblyTypes(typeof(ICoursesService).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(IUmbracoMapper).Assembly).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>));
+            builder.RegisterType(typeof(UmbracoMapper)).As(typeof(IUmbracoMapper));
 
             var container = builder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);

@@ -1,8 +1,5 @@
 ﻿@inherits UmbracoTemplatePage
 @{
-    Layout = null;
-}
-@{
     var picId = Model.Content.GetPropertyValue("coursePicture");
     var pic = Umbraco.Media(picId);
     var members = pic.GetDynamicMemberNames();

@@ -34,10 +34,6 @@
             return this.courses.GetById(id);
         }
 
-        public Course GetCourseByPrettyUrl(string url)
-        {
-            return this.courses.All().FirstOrDefault(x => x.PrettyUrl == url);
-        }
 
         public void Create(Course course)
         {

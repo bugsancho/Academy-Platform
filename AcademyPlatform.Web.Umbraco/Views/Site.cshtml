@@ -1,5 +1,5 @@
 ﻿@using ClientDependency.Core.Mvc
-@inherits UmbracoTemplatePage
+@inherits UmbracoViewPage<dynamic>
 @{
     Layout = null;
 
@@ -17,7 +17,7 @@
     Html.RequiresCss("~/Content/jasny-bootstrap.css");
     Html.RequiresCss("~/Content/animate.css");
 
-    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js");
+    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js",0);
     Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
     Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
@@ -38,23 +38,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @Html.CachedPartial("Seo", null, 3600, true)
     <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.png")">
     @Html.RenderCssHere()
-    @RenderSection("styles", false)
+    @RenderSection("head", false)
 </head>
 <body>
     <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
     <div class="header-container">
-        @Html.Raw(Model.Content.AncestorOrSelf("Site").GetPropertyValue<string>("header"))
+        @Html.Raw(Umbraco.TypedContentAtRoot().First().DescendantOrSelf("Site").GetPropertyValue<string>("header")))
     </div>
     @RenderSection("PreContent", required: false)
     <div class="container body-content">
         @RenderBody()
         <hr />
     </div>
-    @Html.Raw(Model.Content.AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
+    @Html.Raw(Umbraco.TypedContentAtRoot().First().DescendantOrSelf("Site").GetPropertyValue<string>("footer"))
     @Html.RenderJsHere()
     @RenderSection("scripts", required: false)
 </body>

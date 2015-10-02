@@ -21,12 +21,6 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Course>()
-                        .Property(t => t.PrettyUrl)
-                        .HasMaxLength(50)
-            .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_Name") { IsUnique = true }));
-
-
             base.OnModelCreating(modelBuilder);
         }
 
@@ -36,12 +30,6 @@
         public IDbSet<Category> Categories { get; set; }
 
         public IDbSet<Module> Lectures { get; set; }
-
-        public IDbSet<HomeworkAssignment> HomeworkAssignments { get; set; }
-
-        public IDbSet<HomeworkSubmission> HomeworkSubmissions { get; set; }
-
-        public IDbSet<LectureResource> LectureResources { get; set; }
 
         public static AcademyPlatformDbContext Create()
         {

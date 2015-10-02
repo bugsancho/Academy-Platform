@@ -57,9 +57,9 @@
         {
             if (ModelState.IsValid)
             {
-                var imagePath = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
+                //var imagePath = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
                 var course = Mapper.Map<Course>(courseViewModel);
-                course.ImageUrl = imagePath;
+                //course.ImageUrl = imagePath;
                 _coursesService.Create(course);
 
                 return RedirectToAction("Index");
@@ -97,7 +97,7 @@
             {
                 try
                 {
-                    courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
+                    //courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
                 }
                 catch (Exception exception)//TODO catch more specific exceptions and add more detailed messages
                 {

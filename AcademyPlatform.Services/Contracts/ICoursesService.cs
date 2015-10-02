@@ -12,8 +12,6 @@ namespace AcademyPlatform.Services.Contracts
 
         Course GetById(int id);
 
-        Course GetCourseByPrettyUrl(string url);
-
         IQueryable<Course> GetActiveCourses();
 
         IQueryable<Course> GetCoursesByUserId(string userId);

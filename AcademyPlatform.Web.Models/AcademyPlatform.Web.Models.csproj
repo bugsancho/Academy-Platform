@@ -72,8 +72,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\LoginViewModel.cs" />
+    <Compile Include="Account\RegisterViewModel.cs" />
+    <Compile Include="Common\ImageViewModel.cs" />
     <Compile Include="Courses\CategoryEditViewModel.cs" />
     <Compile Include="Courses\CategoryListViewModel.cs" />
+    <Compile Include="Courses\CourseContentViewModel.cs" />
     <Compile Include="Courses\CoursesListViewModel.cs" />
     <Compile Include="Courses\CourseViewModel.cs" />
     <Compile Include="Courses\Validators\CreateCourseViewModelValidator.cs" />

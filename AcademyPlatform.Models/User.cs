@@ -1,5 +1,6 @@
 ﻿namespace AcademyPlatform.Models
 {
+    using System;
     using System.Collections.Generic;
 
     using AcademyPlatform.Models.Courses;
@@ -12,9 +13,15 @@
         //{
         //    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
         //    var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-        //    // Add custom user claims here
+        //    // Add custom use\r claims here
         //    return userIdentity;
         //}
+
+        public int Id { get; set; }
+
+        public string Username { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
 
         public virtual ICollection<Course> Courses
         {

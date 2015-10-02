@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Site.cshtml";
+}
+
+@section head{
+    @Html.CachedPartial("Seo", null, 3600, true)
+    @RenderSection("head",false)
+}
+@section preContent{
+    @RenderSection("preContent", false)
+}
+
+@RenderBody()
+
+@section scripts{
+    @RenderSection("scripts", false)
+}
+
+
+

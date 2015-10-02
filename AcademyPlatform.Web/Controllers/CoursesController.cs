@@ -31,19 +31,19 @@
 
         // GET: Courses/Courses/Details/5
         //[DonutOutputCache(VaryByParam = "id", Duration = 30, Location = OutputCacheLocation.Server)]
-        [Route("Courses/{prettyUrl}")]
-        public ActionResult Details(string prettyUrl)
-        {
-            //Thread.Sleep(3000);
-            var course = _courses.GetCourseByPrettyUrl(prettyUrl);
-            if (course == null)
-            {
-                return HttpNotFound("Invalid course url");
-            }
+        //[Route("Courses/{prettyUrl}")]
+        //public ActionResult Details(string prettyUrl)
+        //{
+        //    //Thread.Sleep(3000);
+        //    var course = _courses.GetCourseByPrettyUrl(prettyUrl);
+        //    if (course == null)
+        //    {
+        //        return HttpNotFound("Invalid course url");
+        //    }
 
-            var vm = Mapper.Map<CourseViewModel>(course);
-            return View(vm);
-        }
+        //    var vm = Mapper.Map<CourseViewModel>(course);
+        //    return View(vm);
+        //}
 
         [HttpGet]
         [Route("Courses/{prettyUrl}/Apply")]
