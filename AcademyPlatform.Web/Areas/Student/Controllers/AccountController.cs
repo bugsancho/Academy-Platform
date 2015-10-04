@@ -19,7 +19,7 @@
         // GET: Student/Home
         public ActionResult Index()
         {
-            return View("~/Areas/Student/Views/Account/Index.cshtml", _courses.GetActiveCourses().Project().To<CoursesListViewModel>());
+            return View("~/Areas/Student/Views/Account/Index.cshtml" /*,viewModel*/);
         }
     }
 }

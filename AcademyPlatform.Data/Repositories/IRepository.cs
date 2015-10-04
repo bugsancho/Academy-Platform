@@ -1,6 +1,8 @@
 ﻿namespace AcademyPlatform.Data.Repositories
 {
+    using System;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public interface IRepository<T>
         where T : class
@@ -18,5 +20,7 @@
         int SaveChanges();
 
         void Dispose();
+
+        IQueryable<T> AllIncluding<TProp>(params Expression<Func<T,TProp>>[] expressions);
     }
 }

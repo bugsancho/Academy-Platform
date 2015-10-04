@@ -1,7 +1,9 @@
 ﻿namespace AcademyPlatform.Data.Repositories
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
+    using System.Linq.Expressions;
 
     public class EfRepository<T> : IRepository<T>
         where T : class
@@ -18,6 +20,17 @@
         public IQueryable<T> All()
         {
             return this.set;
+        }
+
+        public IQueryable<T> AllIncluding<TProp>(params Expression<Func<T,TProp>>[] expressions)
+        {
+            var query = this.All();
+            foreach (var expression in expressions)
+            {
+                query = query.Include(expression);
+            }
+
+            return query;
         }
 
         public T GetById(object id)

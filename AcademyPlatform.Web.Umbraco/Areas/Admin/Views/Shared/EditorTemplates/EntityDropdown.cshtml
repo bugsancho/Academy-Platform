@@ -1,0 +1,32 @@
+﻿@using AcademyPlatform.Web.Infrastructure.Helpers
+@model Object
+
+@{
+    var propertyName = ViewData.ModelMetadata.PropertyName;
+    var idIndex = propertyName.IndexOf("Id", StringComparison.Ordinal);
+    
+    if (idIndex == -1)
+    {
+        throw new ArgumentException("Property is not a valid entity reference");
+    }
+    
+    var entityName = propertyName.Substring(0, idIndex);
+    var plural = PluralizationHelper.Pluralize(entityName);
+    var viewDataKey = "Possible" + plural;
+    if (!ViewData.ContainsKey(viewDataKey))
+    {
+        throw new ApplicationException("Could not find ViewData property for dropdown entities");
+    }
+
+    var listItems = ViewData[viewDataKey] as IEnumerable<SelectListItem>;
+    if (listItems == null)
+    {
+        throw new ArgumentException("ViewData property is not a valid SelectListItem collection");
+    }
+}
+
+<span>@Html.DropDownList("", listItems,ViewData["htmlAttributes"])</span>
+
+
+
+

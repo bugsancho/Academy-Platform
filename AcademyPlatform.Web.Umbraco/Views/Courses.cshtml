@@ -32,7 +32,7 @@
                 <div class="isotope-container-fitrows grid-space-10">
                     @foreach (var course in Model)
                     {
-                        <div data-category="@course.Category" class="isotope-item col-md-4">
+                        <div data-category="@(course.Category.Id)" class="isotope-item col-md-4">
                             <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
                                 <div class="overlay-container">
                                     <img src="@Url.Content(course.ImageUrl)" style=" height:325px" alt="">

@@ -1,5 +1,6 @@
 namespace AcademyPlatform.Services.Contracts
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using AcademyPlatform.Models.Courses;
@@ -12,11 +13,12 @@ namespace AcademyPlatform.Services.Contracts
 
         Course GetById(int id);
 
-        IQueryable<Course> GetActiveCourses();
-
-        IQueryable<Course> GetCoursesByUserId(string userId);
-
         void Create(Course course);
 
+        IEnumerable<Course> GetActiveCourses();
+
+        IEnumerable<Course> GetCoursesByUserId(string userId);
+
+        IEnumerable<Course> GetAll();
     }
 }

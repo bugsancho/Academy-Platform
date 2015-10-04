@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers.DocumentTypeControllers
 {
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -31,8 +32,9 @@
             _mapper = mapper;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
+        //[UmbracoAuthorize(Roles = "CourseAdmin")]
         public override ActionResult Index(RenderModel model)
         {
             var coursesContentCollection = model.Content.Descendants(nameof(DocumentTypes.Course));
@@ -45,16 +47,23 @@
                               {
                                   SourceProperty = "Url",
                               }
-                      },
+                      }
                     });
 
-            var courses = _courses.GetActiveCourses().ToList();
+            var courses = _courses.GetActiveCourses();
 
             var coursesViewModels = courses.Join(
                 coursesContentViewModels,
                 course => course.Id,
                 coursesContent => coursesContent.CourseId,
-                (course, coursesContent) => new CoursesListViewModel() { Title = course.Title, CourseUrl = coursesContent.CourseUrl,ImageUrl = coursesContent.CoursePicture.Url,ShortDescription = coursesContent.ShortDescription , Category = "2"}).ToList();
+                (course, coursesContent) => new CoursesListViewModel
+                {
+                    Title = course.Title,
+                    CourseUrl = coursesContent.CourseUrl,
+                    ImageUrl = coursesContent.CoursePicture.Url,
+                    ShortDescription = coursesContent.ShortDescription,
+                    Category = course.Category
+                }).ToList();
 
             ViewBag.Categories = _categories.GetAll();
             return CurrentTemplate(coursesViewModels);

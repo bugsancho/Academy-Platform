@@ -1,5 +1,6 @@
 ﻿namespace AcademyPlatform.Services
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using AcademyPlatform.Data.Repositories;
@@ -19,14 +20,19 @@
             this.users = users;
         }
 
-        public IQueryable<Course> GetActiveCourses()
+        public IEnumerable<Course> GetAll()
         {
-            return this.courses.All();
+            return this.courses.All().OrderBy(x => x.Id);
         }
 
-        public IQueryable<Course> GetCoursesByUserId(string userId)
+        public IEnumerable<Course> GetActiveCourses()
         {
-            return this.users.GetById(userId).Courses.AsQueryable();
+            return this.courses.AllIncluding(x => x.Category);
+        }
+
+        public IEnumerable<Course> GetCoursesByUserId(string userId)
+        {
+            return this.users.GetById(userId).Courses;
         }
 
         public Course GetById(int id)

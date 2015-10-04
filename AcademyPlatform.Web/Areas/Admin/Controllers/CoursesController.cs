@@ -41,7 +41,7 @@
         [HttpGet]
         public ActionResult Index()
         {
-            var courses = _coursesService.GetActiveCourses().ToList();
+            var courses = _coursesService.GetActiveCourses();
             return View(courses);
         }
 

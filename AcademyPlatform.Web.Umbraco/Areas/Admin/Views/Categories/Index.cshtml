@@ -1,0 +1,24 @@
+@using GridMvc.Html
+@model IEnumerable<AcademyPlatform.Web.Models.Courses.CategoryListViewModel>
+
+@{
+    ViewBag.PageTitle = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@Html.Grid(Model).Columns(columns =>
+{
+       columns.Add(x => x.Title).Titled("Title");	
+
+
+columns.Add().RenderValueAs(x => Html.ActionLink("Edit", "Edit", "Categories", new { id = x.Id, Area = "Admin" }, new { @class = "btn btn-info"})).Encoded(false).Sanitized(false);
+columns.Add().RenderValueAs(x => Html.ActionLink("Delete", "Delete", "Categories", new { id = x.Id, Area = "Admin" }, new { @class = "btn btn-danger"})).Encoded(false).Sanitized(false);
+}
+
+).Sortable(true).WithPaging(5).Filterable(true)

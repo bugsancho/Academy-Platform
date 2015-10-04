@@ -1,9 +1,75 @@
-﻿@inherits UmbracoTemplatePage
+﻿@inherits UmbracoTemplatePage<AcademyPlatform.Web.Models.Courses.CourseViewModel>
 @{
-    var picId = Model.Content.GetPropertyValue("coursePicture");
-    var pic = Umbraco.Media(picId);
-    var members = pic.GetDynamicMemberNames();
-
 }
 
-@Umbraco.Media(picId).Url
+<section class="main-container padding-ver-clear">
+    <div class="container pv-40">
+        <div class="row">
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-8">
+                <h1 class="title">@Model.Title</h1>
+                <div class="separator"></div>
+                @Html.Raw(Model.DetailedDescription)
+                <h3>Цели на курса</h3>
+                <div class="separator">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-icons">
+                            <li><i class="fa fa-circle-o"></i> цел едно</li>
+                            <li><i class="fa fa-circle-o"></i> цел две</li>
+                            <li><i class="fa fa-circle-o"></i> цел три</li>
+                            <li><i class="fa fa-circle-o"></i> цел четири</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>Сертификация след приключване на курса</h3>
+                <div class="separator">
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-icons">
+                            <li><i class="fa fa-circle-o"></i> сертификат едно (например за 100%) </li>
+                            <li><i class="fa fa-circle-o"></i> сертификат две (от 80 до 99 %) </li>
+                            <li><i class="fa fa-circle-o"></i> сертификат три (60 до 79%) </li>
+                            <li><i class="fa fa-circle-o"></i> сертификат четири (под 60% )</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="separator"></div>
+                <h3>Програма на курса</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ol type="1">
+                            <li> Тема на лекция едно</li>
+                            <li> Тема на лекция две</li>
+                            <li> Тема на лекция три</li>
+                            <li> Тема на лекция четири</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- main end -->
+            <!-- sidebar start -->
+            <!-- ================ -->
+            <aside class="col-md-4 col-lg-3 col-lg-offset-1">
+                <div class="sidebar">
+                    <div class="block clearfix">
+                        <h3 class="title">Project Info</h3>
+                        <div class="separator-2"></div>
+                        <ul class="list margin-clear">
+                            <li><strong>Начало: </strong> <span class="text-left">@Model.StartDate.ToString("dd MMMM yyy")</span></li>
+                            <li><strong>Край: </strong> <span class="text-left">@Model.EndDate.ToString("dd MMMM yyy")</span></li>
+                            <li><strong>Продължителност: </strong> <span class="text-left"> 50 учебни часа</span></li>
+                            <li><strong>Зала: </strong> <span class="text-left"> зала едно на НДК</span></li>
+                            <li><strong>Лектор: </strong> <span class="text-left"> Лектор Х </span></li>
+                        </ul>
+                        <a href="@Url.Action("Apply","CoursesAdmin",new {Area = string.Empty})" class="btn btn-danger btn-lg"> Кандидатствай </a>
+                    </div>
+                </div>
+            </aside>
+            <!-- sidebar end -->
+        </div>
+    </div>
+</section>

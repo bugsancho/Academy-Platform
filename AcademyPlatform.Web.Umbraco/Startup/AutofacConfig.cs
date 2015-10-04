@@ -6,6 +6,9 @@
 
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Services.Contracts;
+    using AcademyPlatform.Web.Infrastructure.Mappings;
+    using AcademyPlatform.Web.Infrastructure.Sanitizers;
+    using AcademyPlatform.Web.Models.Courses;
 
     using Autofac;
     using Autofac.Integration.Mvc;
@@ -29,6 +32,7 @@
 
             builder.RegisterAssemblyTypes(typeof(ICoursesService).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(IHtmlSanitizer).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(IUmbracoMapper).Assembly).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>));
             builder.RegisterType(typeof(UmbracoMapper)).As(typeof(IUmbracoMapper));
@@ -36,6 +40,10 @@
             var container = builder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            //TODO MOVE
+               var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseViewModel)));
+            autoMapperConfig.Execute();
         }
     }
 }

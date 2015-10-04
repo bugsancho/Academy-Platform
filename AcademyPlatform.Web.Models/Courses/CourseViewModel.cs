@@ -10,10 +10,6 @@
 
     public class CourseViewModel : IMapFrom<Course>
     {
-        [Display(Name = "Линк")]
-        [ScaffoldColumn(false)]
-        public string PrettyUrl { get; set; }
-
         [Display(Name = "Заглавие")]
         public string Title { get; set; }
 
