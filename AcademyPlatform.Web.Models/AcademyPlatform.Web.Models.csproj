@@ -77,10 +77,11 @@
     <Compile Include="Common\ImageViewModel.cs" />
     <Compile Include="Courses\CategoryEditViewModel.cs" />
     <Compile Include="Courses\CategoryListViewModel.cs" />
-    <Compile Include="Courses\CourseContentViewModel.cs" />
+    <Compile Include="Courses\CourseDetailsViewModel.cs" />
     <Compile Include="Courses\CoursesListViewModel.cs" />
-    <Compile Include="Courses\CourseViewModel.cs" />
+    <Compile Include="Courses\CourseEditViewModel.cs" />
     <Compile Include="Courses\Validators\CreateCourseViewModelValidator.cs" />
+    <Compile Include="Other\StorylineContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

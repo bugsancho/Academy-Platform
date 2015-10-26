@@ -1,0 +1,28 @@
+﻿<div ng-controller="SingleChoiceQuestionEditor">
+    <table class="table table-colored" width="300" style="width: 400px">
+        <thead>
+            <tr>
+                <th style="width: 100px">Is Answer Correct</th>
+                <th style="width: 250px">Answer Text</th>
+                <th style="width: 50px">Remove</th>
+            </tr>
+        </thead>
+        <tr ng-repeat="answer in answers">
+            <td>
+                <input type="radio" name="isAnswerCorrect" ng-model="answer.isCorrect" />
+            </td>
+            <td>
+                <textarea ng-model="answer.text"></textarea>
+            </td>
+
+            <td>
+                <a class="btn btn-warning" ng-click="removeAnswer($index)">Remove</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn btn-default" ng-click="addAnswer()">Add</a>
+            </td>
+        </tr>
+    </table>
+</div>

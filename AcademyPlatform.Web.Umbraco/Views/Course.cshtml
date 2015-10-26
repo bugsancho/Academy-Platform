@@ -1,6 +1,4 @@
-﻿@inherits UmbracoTemplatePage<AcademyPlatform.Web.Models.Courses.CourseViewModel>
-@{
-}
+﻿@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.CourseDetailsViewModel>
 
 <section class="main-container padding-ver-clear">
     <div class="container pv-40">
@@ -10,6 +8,8 @@
             <div class="main col-md-8">
                 <h1 class="title">@Model.Title</h1>
                 <div class="separator"></div>
+                <a class="btn btn-default" href="@Model.CoursesPageUrl">Обрато към курсовете</a>
+                <img src="@Model.ImageUrl" alt="@Model.Title" />
                 @Html.Raw(Model.DetailedDescription)
                 <h3>Цели на курса</h3>
                 <div class="separator">
@@ -59,11 +59,10 @@
                         <h3 class="title">Project Info</h3>
                         <div class="separator-2"></div>
                         <ul class="list margin-clear">
-                            <li><strong>Начало: </strong> <span class="text-left">@Model.StartDate.ToString("dd MMMM yyy")</span></li>
-                            <li><strong>Край: </strong> <span class="text-left">@Model.EndDate.ToString("dd MMMM yyy")</span></li>
                             <li><strong>Продължителност: </strong> <span class="text-left"> 50 учебни часа</span></li>
                             <li><strong>Зала: </strong> <span class="text-left"> зала едно на НДК</span></li>
-                            <li><strong>Лектор: </strong> <span class="text-left"> Лектор Х </span></li>
+                            <li><strong>Лектор: </strong> <span class="text-left">@Model.LecturerName </span></li>
+                            <li><strong>Категория: </strong> <span class="text-left">@Model.Category.Title </span></li>
                         </ul>
                         <a href="@Url.Action("Apply","CoursesAdmin",new {Area = string.Empty})" class="btn btn-danger btn-lg"> Кандидатствай </a>
                     </div>

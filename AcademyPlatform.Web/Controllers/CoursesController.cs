@@ -41,7 +41,7 @@
         //        return HttpNotFound("Invalid course url");
         //    }
 
-        //    var vm = Mapper.Map<CourseViewModel>(course);
+        //    var vm = Mapper.Map<CourseEditViewModel>(course);
         //    return View(vm);
         //}
 

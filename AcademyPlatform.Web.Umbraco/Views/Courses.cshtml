@@ -1,9 +1,5 @@
 ﻿@using AcademyPlatform.Models.Courses
 @inherits UmbracoViewPage<IList<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>>
-@{
-//Layout = "~/Views/_ContentPageBase.cshtml";
-    //var courses = ViewBag.Courses as IList<Course>;
-}
 
 @section PreContent{
     @Umbraco.Field("subHeader")
@@ -35,7 +31,7 @@
                         <div data-category="@(course.Category.Id)" class="isotope-item col-md-4">
                             <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
                                 <div class="overlay-container">
-                                    <img src="@Url.Content(course.ImageUrl)" style=" height:325px" alt="">
+                                    <img src="@Url.Content(course.ImageUrl)" style="height: 325px" alt="">
                                     <div class="overlay-to-top">
                                         <p class="small margin-clear">
                                             <em>@course.Title</em>
@@ -59,3 +55,11 @@
         </div>
     </div>
 </section>
+
+@*@section scripts{
+    <script>
+        if (window.location.hash) {
+            $('[data-filter="[data-category=' + window.location.hash.substring(1) + ']"]').click();
+        }
+    </script>
+}*@

@@ -33,7 +33,7 @@
             DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = false;
             ModelValidatorProviders.Providers.Add(new FluentValidationModelValidatorProvider(new NinjectValidationFactory()));
             ValidatorOptions.ResourceProviderType = typeof(ErrorMessages);
-            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseViewModel)));
+            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseEditViewModel)));
             autoMapperConfig.Execute();
 
             XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/Web.config")));

@@ -2,6 +2,7 @@
 {
     public static class DocumentTypes
     {
+
         public static class Seo
         {
             public const string Alias = "Seo";

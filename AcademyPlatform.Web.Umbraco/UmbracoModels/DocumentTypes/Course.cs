@@ -1,8 +1,8 @@
-﻿namespace AcademyPlatform.Web.Models.Courses
+﻿namespace AcademyPlatform.Web.Umbraco.DocumentTypeModels
 {
     using AcademyPlatform.Web.Models.Common;
 
-    public class CourseContentViewModel
+    public class Course
     {
         public int CourseId { get; set; }
 

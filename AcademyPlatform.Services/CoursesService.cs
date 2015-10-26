@@ -37,7 +37,7 @@
 
         public Course GetById(int id)
         {
-            return this.courses.GetById(id);
+            return this.courses.AllIncluding(x => x.Category).FirstOrDefault(x => x.Id == id);
         }
 
 

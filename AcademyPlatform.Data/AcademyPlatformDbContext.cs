@@ -21,15 +21,21 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CourseSubscription>()
+                .HasKey(x => new { x.CourseId, x.UserId });
+
             base.OnModelCreating(modelBuilder);
         }
 
         public IDbSet<Course> Courses { get; set; }
+
         public IDbSet<User> Users { get; set; }
 
         public IDbSet<Category> Categories { get; set; }
 
         public IDbSet<Module> Lectures { get; set; }
+
+        public IDbSet<CourseSubscription> CourseSubscriptions { get; set; }
 
         public static AcademyPlatformDbContext Create()
         {

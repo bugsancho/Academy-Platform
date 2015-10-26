@@ -1,13 +1,19 @@
 ﻿namespace AcademyPlatform.Services
 {
+    using System;
     using System.Web.Security;
 
+    using AcademyPlatform.Data.Repositories;
+    using AcademyPlatform.Models;
     using AcademyPlatform.Services.Contracts;
 
     public class MembersService : IMembersService
     {
-        public MembersService()
+        private readonly IRepository<User> _users;
+
+        public MembersService(IRepository<User> users)
         {
+            _users = users;
         }
 
         public MembershipUser GetUser()
@@ -28,8 +34,17 @@
         public MembershipUser CreateUser(string email, string password, bool requireEmailValidation, out MembershipCreateStatus status)
         {
             var user = Membership.CreateUser(email, password, email, "n/q", "n/q", !requireEmailValidation, null, out status);
-            user.Comment = "asd";
-            Membership.UpdateUser(user);
+            if (status == MembershipCreateStatus.Success)
+            {
+                var dbUser = new User
+                {
+                    Username = email,
+                    RegistrationDate = DateTime.Now
+                };
+                _users.Add(dbUser);
+                _users.SaveChanges();
+            }
+
             return user;
         }
 

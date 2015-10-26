@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers
 {
     using System.Web.Mvc;
+    using System.Web.Security;
 
     using AcademyPlatform.Web.Infrastructure.Extensions;
 
@@ -30,7 +31,20 @@
         {
             if (ModelState.IsValid)
             {
-               
+                MembershipCreateStatus status;
+                _members.CreateUser(registerViewModel.Email, registerViewModel.Password, false,out status);
+
+                if (status == MembershipCreateStatus.Success)
+                {
+                    //TODO validate return url!!!!!
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                         return Redirect(returnUrl);
+                    }
+
+                    
+                   
+                }
 
             }
 

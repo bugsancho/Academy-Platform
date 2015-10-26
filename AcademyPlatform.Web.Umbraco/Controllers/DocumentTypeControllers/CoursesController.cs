@@ -1,17 +1,16 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers.DocumentTypeControllers
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
 
-    using AcademyPlatform.Services.Contracts;
-    using AcademyPlatform.Web.Models.Common;
-    using AcademyPlatform.Web.Models.Courses;
-    using AcademyPlatform.Web.Umbraco.Common;
-    using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
+    using Services.Contracts;
+    using Models.Common;
+    using Models.Courses;
 
-    using global::Umbraco.Core.Models;
+    using DocumentTypes = DocumentTypeModels;
+    using UmbracoConfiguration;
+    
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
     using global::Umbraco.Web.Mvc;
@@ -38,7 +37,7 @@
         public override ActionResult Index(RenderModel model)
         {
             var coursesContentCollection = model.Content.Descendants(nameof(DocumentTypes.Course));
-            var coursesContentViewModels = new List<CourseContentViewModel>();
+            var coursesContentViewModels = new List<DocumentTypes.Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
                    .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
                     {
@@ -65,7 +64,8 @@
                     Category = course.Category
                 }).ToList();
 
-            ViewBag.Categories = _categories.GetAll();
+            //TODO Find out why(if) distinct works without implementing IEquitable<T>
+            ViewBag.Categories = coursesViewModels.Select(x => x.Category).Distinct();
             return CurrentTemplate(coursesViewModels);
         }
 

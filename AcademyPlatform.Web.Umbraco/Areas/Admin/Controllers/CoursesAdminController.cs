@@ -54,12 +54,12 @@
         }
 
         [HttpPost]
-        public ActionResult Create(CourseViewModel courseViewModel)
+        public ActionResult Create(CourseEditViewModel courseEditViewModel)
         {
             if (ModelState.IsValid)
             {
                 //var imagePath = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
-                var course = Mapper.Map<Course>(courseViewModel);
+                var course = Mapper.Map<Course>(courseEditViewModel);
                 //course.ImageUrl = imagePath;
                 _coursesService.Create(course);
 
@@ -67,7 +67,7 @@
             }
 
             SetRelatedItemsInViewBag(null);
-            return View(courseViewModel);
+            return View(courseEditViewModel);
         }
 
         [HttpGet]
@@ -79,40 +79,22 @@
                 return HttpNotFound();
             }
 
-            var course = Mapper.Map<CourseViewModel>(courseInDb);
+            var course = Mapper.Map<CourseEditViewModel>(courseInDb);
             SetRelatedItemsInViewBag(courseInDb);
             return View(course);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, CourseViewModel courseViewModel)
+        public ActionResult Edit(int id, CourseEditViewModel courseEditViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(courseViewModel);
+                return View(courseEditViewModel);
             }
 
             var courseInDb = _coursesService.GetById(id);
 
-            if (courseViewModel.CourseImage != null && courseViewModel.CourseImage.ContentLength != 0)
-            {
-                try
-                {
-                    //courseInDb.ImageUrl = FileUploadHelper.UploadImage(courseViewModel.CourseImage, string.Format(ImagesFolderFormat, courseViewModel.CourseImage.FileName));
-                }
-                catch (Exception exception)//TODO catch more specific exceptions and add more detailed messages
-                {
-                    _logger.Error("There was a problem uploading course picture", exception);
-                    ModelState.AddModelError(string.Empty, @"Файлът не може да бъде качен!");
-                    SetRelatedItemsInViewBag(courseInDb);
-                    return View(courseViewModel);
-                }
-            }
-
-            courseViewModel.ShortDescription = _sanitizer.Sanitize(courseViewModel.ShortDescription);
-            courseViewModel.DetailedDescription = _sanitizer.Sanitize(courseViewModel.DetailedDescription);
-
-            var course = Mapper.Map(courseViewModel, courseInDb);
+            var course = Mapper.Map(courseEditViewModel, courseInDb);
             _coursesService.Update(course);
 
             return RedirectToAction("Index");
