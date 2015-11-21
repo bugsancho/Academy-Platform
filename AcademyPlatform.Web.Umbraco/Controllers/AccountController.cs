@@ -26,8 +26,9 @@
 
     using Zone.UmbracoMapper;
 
-    [RequireHttps]
-    public class AccountController : RenderMvcController
+    //[RequireHttps]
+    [EnsurePublishedContentRequest(2055)]
+    public class AccountController : SurfaceController
     {
         private readonly IMembersService _members;
         private readonly IEmailService _email;
@@ -68,7 +69,7 @@
                     var validationLink = Url.RouteUrl("Validate", new RouteValueDictionary
                                                                               {
                                                                                   { "Email", registerViewModel.Email },
-                                                                                  { "ValidationCode", registerViewModel.Email.Encrypt() }
+                                                                                  { "ValidationCode", _members.GenerateValidationCode(registerViewModel.Email) }
                                                                               });
                     validationLink = validationLink.ReplaceFirst("?", "/?");
 
@@ -103,44 +104,49 @@
             return View(registerViewModel);
         }
 
+
         [HttpGet]
+        [RequireAnonymous]
+        public ActionResult Validate(string email, string validationCode)
+        {
+            var model = new ValidateAccountViewModel { Email = email, ValidationCode = validationCode };
+            if (!string.IsNullOrWhiteSpace(model.Email) && !string.IsNullOrWhiteSpace(model.ValidationCode))
+            {
+                return Validate(model);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [RequireAnonymous]
         public ActionResult Validate(ValidateAccountViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-
-                ModelState.AddModelError(string.Empty, "Моля, попълнете валидационният код!");
-                return View(model);
-            }
-            var member = _members.GetUser(model.Email);
-            if (member == null)
-            {
-                ModelState.AddModelError(string.Empty, "Потребител с това име не съществува в системата");
-            }
-            else if (member.IsApproved)
-            {
-                return Redirect("/");
-            }
-            else
-            {
-                try
+                var member = _members.GetUser(model.Email);
+                if (member == null)
                 {
-                    var decrypted = model.ValidationCode.Decrypt();
-                    if (decrypted == model.Email)
+                    ModelState.AddModelError(string.Empty, "Потребител с това име не съществува в системата");
+                }
+                else if (member.IsApproved)
+                {
+                    return Redirect("/");
+                }
+                else
+                {
+                    try
                     {
-                        _members.ApproveUser(model.Email);
+                        _members.ApproveUser(model.Email, model.ValidationCode);
                         return Redirect("/");
                     }
-                }
-                catch (CryptographicException)
-                {
-                    ModelState.AddModelError(nameof(model.ValidationCode), "Валидационният код не е валиден");
-
+                    catch (ArgumentException e)
+                    {
+                        ModelState.AddModelError(string.Empty, e.Message);
+                    }
                 }
             }
-
-
 
             return View(model);
 

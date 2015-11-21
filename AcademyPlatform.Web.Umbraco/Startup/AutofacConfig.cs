@@ -4,6 +4,7 @@
     using System.Web.Http;
     using System.Web.Mvc;
 
+    using AcademyPlatform.Common.Providers;
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Infrastructure.Mappings;
@@ -34,6 +35,7 @@
             builder.RegisterAssemblyTypes(typeof(ICoursesService).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(IRepository<>).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(IHtmlSanitizer).Assembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(IRandomProvider).Assembly).AsImplementedInterfaces();
             builder.RegisterAssemblyTypes(typeof(IUmbracoMapper).Assembly).AsImplementedInterfaces();
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>));
             builder.RegisterType(typeof(UmbracoMapper)).As(typeof(IUmbracoMapper));

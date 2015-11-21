@@ -19,7 +19,7 @@
                 });
 
             RouteTable.Routes.MapRoute("Validate",
-                "validate/{email}/",
+                "validate/{email}/{validationCode}",
                 new
                 {
                     Controller = "Account",

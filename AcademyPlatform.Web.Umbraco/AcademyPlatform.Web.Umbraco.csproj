@@ -619,6 +619,10 @@
     <Compile Include="ViewModels\ValidateAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcademyPlatform.Common\AcademyPlatform.Common.csproj">
+      <Project>{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}</Project>
+      <Name>AcademyPlatform.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Data\AcademyPlatform.Data.csproj">
       <Project>{8ad83099-290d-4b21-b517-6df1099f14b1}</Project>
       <Name>AcademyPlatform.Data</Name>

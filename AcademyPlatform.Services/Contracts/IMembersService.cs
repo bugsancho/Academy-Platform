@@ -8,18 +8,20 @@
 
         MembershipUser GetUser(string username);
 
-        bool ValidateUser(string username, string password);
-        
+        bool ValidateCredentials(string username, string password);
+
+        void ApproveUser(string username, string validationCode);
+
+        MembershipUser CreateUser(string email, string password, string firstName, string lastName, bool requireEmailValidation, out MembershipCreateStatus status);
+
         bool ChangePassword(string username, string oldPassword, string newPassword);
 
         string ResetPassword(string username);
 
+        string GenerateValidationCode(string username);
+
         bool Login(string username, string password, bool isPersistent);
 
         void LogOut();
-
-        MembershipUser CreateUser(string email, string password, string firstName, string lastName, bool requireEmailValidation, out MembershipCreateStatus status);
-
-        void ApproveUser(string username);
     }
 }

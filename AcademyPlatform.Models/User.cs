@@ -27,6 +27,8 @@
 
         public DateTime RegistrationDate { get; set; }
 
+        public string ValidationCode { get; set; }
+
         public virtual ICollection<Course> Courses
         {
             get { return _courses; }
