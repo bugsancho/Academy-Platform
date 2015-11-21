@@ -52,6 +52,10 @@
     <Reference Include="HtmlSanitizer">
       <HintPath>..\packages\HtmlSanitizer.2.0.5623.30465\lib\net40\HtmlSanitizer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Conflicts\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -93,6 +97,8 @@
   <ItemGroup>
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Filters\ExceptionFilter.cs" />
+    <Compile Include="Filters\RequireAnonymousAttribute.cs" />
     <Compile Include="Helpers\FileUploadHelper.cs" />
     <Compile Include="Helpers\ModelMetadataHelpers.cs" />
     <Compile Include="Helpers\PluralizationHelper.cs" />

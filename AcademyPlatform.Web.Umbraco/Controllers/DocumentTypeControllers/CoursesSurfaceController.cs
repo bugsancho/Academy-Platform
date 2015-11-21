@@ -10,33 +10,29 @@
 
     using DocumentTypes = DocumentTypeModels;
     using UmbracoConfiguration;
-    
+
     using global::Umbraco.Web;
-    using global::Umbraco.Web.Models;
     using global::Umbraco.Web.Mvc;
 
     using Zone.UmbracoMapper;
 
-    public class CoursesController : RenderMvcController
+    public class CoursesSurfaceController : SurfaceController
     {
         private readonly ICoursesService _courses;
-        private readonly ICategoryService _categories;
+
         private readonly IUmbracoMapper _mapper;
 
 
-        public CoursesController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper)
+        public CoursesSurfaceController(ICoursesService courses, IUmbracoMapper mapper)
         {
             _courses = courses;
-            _categories = categories;
             _mapper = mapper;
         }
 
-        //[Authorize]
-        [HttpGet]
-        //[UmbracoAuthorize(Roles = "CourseAdmin")]
-        public override ActionResult Index(RenderModel model)
+        [ChildActionOnly]
+        public ActionResult RenderCoursesGrid()
         {
-            var coursesContentCollection = model.Content.Descendants(nameof(DocumentTypes.Course));
+            var coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(DocumentTypes.Course));
             var coursesContentViewModels = new List<DocumentTypes.Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
                    .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
@@ -66,7 +62,7 @@
 
             //TODO Find out why(if) distinct works without implementing IEquitable<T>
             ViewBag.Categories = coursesViewModels.Select(x => x.Category).Distinct();
-            return CurrentTemplate(coursesViewModels);
+            return PartialView(coursesViewModels);
         }
 
 

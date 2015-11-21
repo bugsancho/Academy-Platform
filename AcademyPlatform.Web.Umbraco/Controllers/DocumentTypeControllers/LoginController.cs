@@ -4,6 +4,7 @@
 
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Infrastructure.Extensions;
+    using AcademyPlatform.Web.Infrastructure.Filters;
     using AcademyPlatform.Web.Models.Account;
 
     using global::Umbraco.Web.Models;
@@ -19,6 +20,8 @@
         }
 
         [HttpGet]
+        [RequireHttps]
+        [RequireAnonymous]
         public ActionResult Login(RenderModel model)
         {
 
@@ -26,11 +29,14 @@
         }
 
         [HttpPost]
+        [RequireHttps]
+        [RequireAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel loginViewModel, string returnUrl)
         {
             if (ModelState.IsValid)
             {
+                //TODO add support for persistent login. Currently it's always 3 days
                 if (_members.Login(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe))
                 {
                     if (!string.IsNullOrEmpty(returnUrl))
@@ -38,13 +44,10 @@
                         return Redirect(Url.ToSafeReturnUrl(returnUrl));
                     }
 
-                    return Redirect("/contact-us");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid username and pasword combination");
+                    return Redirect("/");
                 }
 
+                ModelState.AddModelError(string.Empty, "Не успяхме да намерим потребител с това име и парола.");
             }
 
             return View(loginViewModel);

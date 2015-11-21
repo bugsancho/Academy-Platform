@@ -31,7 +31,14 @@
             return Membership.ValidateUser(username, password);
         }
 
-        public MembershipUser CreateUser(string email, string password, bool requireEmailValidation, out MembershipCreateStatus status)
+        public void ApproveUser(string username)
+        {
+            var user = GetUser(username);
+            user.IsApproved = true;
+            Membership.UpdateUser(user);
+        }
+
+        public MembershipUser CreateUser(string email, string password, string firstName, string lastName, bool requireEmailValidation, out MembershipCreateStatus status)
         {
             var user = Membership.CreateUser(email, password, email, "n/q", "n/q", !requireEmailValidation, null, out status);
             if (status == MembershipCreateStatus.Success)
@@ -39,6 +46,8 @@
                 var dbUser = new User
                 {
                     Username = email,
+                    FirstName = firstName,
+                    LastName = lastName,
                     RegistrationDate = DateTime.Now
                 };
                 _users.Add(dbUser);
@@ -60,6 +69,12 @@
             return user.ResetPassword();
         }
 
+        public string GenerateValidationCode(string username)
+        {
+            var user = GetUser(username);
+            return user.ResetPassword();
+        }
+
         public bool Login(string username, string password, bool isPersistent)
         {
             if (ValidateUser(username, password))
@@ -74,6 +89,11 @@
         public void LogOut()
         {
             FormsAuthentication.SignOut();
+        }
+
+        private string GenerateRandomCode(int length)
+        {
+            const string allowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         }
     }
 }

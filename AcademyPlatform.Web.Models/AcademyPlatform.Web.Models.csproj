@@ -74,6 +74,8 @@
   <ItemGroup>
     <Compile Include="Account\LoginViewModel.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
+    <Compile Include="Assessments\AssessmentViewModel.cs" />
+    <Compile Include="Assessments\QuestionViewModel.cs" />
     <Compile Include="Common\ImageViewModel.cs" />
     <Compile Include="Courses\CategoryEditViewModel.cs" />
     <Compile Include="Courses\CategoryListViewModel.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Courses\Validators\CreateCourseViewModelValidator.cs" />
     <Compile Include="Other\StorylineContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Assessments\QuestionAnswer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">

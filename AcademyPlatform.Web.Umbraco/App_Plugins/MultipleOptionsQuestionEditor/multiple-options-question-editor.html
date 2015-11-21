@@ -1,0 +1,32 @@
+﻿<div ng-controller="MultipleOptionsQuestionEditor">
+    <table class="table table-colored" width="300" style="width: 500px">
+        <thead>
+        <tr>
+            <th style="width: 100px">Is Answer Correct</th>
+            <th style="width: 250px">Answer Text</th>
+            <th style="width: 50px">Remove</th>
+        </tr>
+        </thead>
+        <tr ng-repeat="answer in answers">
+            <!--<td>
+                {{answer.index}}
+            </td>-->
+            <td>
+                <input type="checkbox" name="isAnswerCorrect" ng-model="answer.isCorrect" />
+            </td>
+            <td>
+                <textarea ng-model="answer.text"></textarea>
+            </td>
+
+            <td>
+                <a class="btn btn-warning" ng-click="removeAnswer($index)">Remove</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn btn-default" ng-click="addAnswer()">Add Answer</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<span ng-show="propertyForm.$error.noCorrectAnswer" class="alert alert-block alert-danger" val-msg-for="isAnswerCorrect" val-toggle-msg="noCorrectAnswer">Please select at least one correct answer!</span>

@@ -1,13 +1,12 @@
 {
-    //you can define multiple editors
     propertyEditors: [{
         /*this must be a unique alias*/
-        alias: "AcademyPlatform.SingleChoiceQuestionEditor",
+        alias: "AcademyPlatform.MultipleOptionsQuestionEditor",
         /*the name*/
-        name: "[AP] Single Choice Question Editor",
+        name: "[AP] Multiple Options Question Editor",
         /*the html file we will load for the editor*/
         editor: {
-            view: "~/App_Plugins/SingleChoiceQuestionEditor/single-choice-question-editor.html",
+            view: "~/App_Plugins/MultipleOptionsQuestionEditor/multiple-options-question-editor.html",
             valueType: "JSON"
         },
         prevalues: {
@@ -22,6 +21,6 @@
 
     //array of files we want to inject into the application on app_start
     javascript: [
-        '~/App_Plugins/SingleChoiceQuestionEditor/single-choice-question-editor.controller.js'
+        '~/App_Plugins/MultipleOptionsQuestionEditor/multiple-options-question-editor.controller.js'
     ]
 }

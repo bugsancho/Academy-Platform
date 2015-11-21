@@ -18,6 +18,14 @@
                     Action = "Register"
                 });
 
+            RouteTable.Routes.MapRoute("Validate",
+                "validate/{email}/",
+                new
+                {
+                    Controller = "Account",
+                    Action = "Validate"
+                });
+
             RouteTable.Routes.MapRoute("Join Course",
                 "joincourse/{courseId}",
                 new

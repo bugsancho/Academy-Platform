@@ -1,25 +1,24 @@
 ﻿namespace AcademyPlatform.Web.Infrastructure.Extensions
 {
     using System;
-    using System.Linq;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.Security;
 
     public static class StringExtensions
     {
-        public static string Protect(this string unprotectedText, string purpose)
+        public static string Encrypt(this string unprotectedText)
         {
             var unprotectedBytes = Encoding.UTF8.GetBytes(unprotectedText);
-            var protectedBytes = MachineKey.Protect(unprotectedBytes, purpose);
+            var protectedBytes = MachineKey.Protect(unprotectedBytes);
             var protectedText = Convert.ToBase64String(protectedBytes);
             return protectedText;
         }
 
-        public static string Unprotect(this string protectedText, string purpose)
+        public static string Decrypt(this string protectedText)
         {
             var protectedBytes = Convert.FromBase64String(protectedText);
-            var unprotectedBytes = MachineKey.Unprotect(protectedBytes, purpose);
+            var unprotectedBytes = MachineKey.Unprotect(protectedBytes);
             var unprotectedText = Encoding.UTF8.GetString(unprotectedBytes);
             return unprotectedText;
         }

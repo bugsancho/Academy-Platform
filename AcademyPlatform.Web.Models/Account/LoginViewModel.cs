@@ -16,7 +16,6 @@
         public string Password { get; set; }
 
         [Display(Name = "Запомни ме за 2 седмици")]
-        [DisplayName("asdads")]
         public bool RememberMe { get; set; }
     }
 }
