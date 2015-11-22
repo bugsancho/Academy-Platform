@@ -1,7 +1,62 @@
-﻿@inherits UmbracoViewPage
+﻿@using ClientDependency.Core.Mvc
+@inherits UmbracoViewPage<dynamic>
 @{
-    Layout = "~/Views/StudentSite.cshtml";
-}
+    Layout = null;
 
-<h2>Lecture</h2>
-@Umbraco.Field("Content")
+
+    Html.RequiresCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
+    Html.RequiresCss("~/Content/animate.css");
+    Html.RequiresCss("~/Content/animations.css");
+    @*Html.RequiresCss("~/Content/custom.css");*@
+    @*Html.RequiresCss("~/Content/custom-site.css"); *@
+    @*Html.RequiresCss("~/Content/project-theme.css");*@
+    Html.RequiresCss("~/Content/ProjectThemeSkins/light_blue.css");
+    Html.RequiresCss("~/Content/Fonts/font-awesome.css");
+    Html.RequiresCss("~/Content/hover.css");
+    Html.RequiresCss("~/Content/rs-slider.css");
+    Html.RequiresCss("~/Content/jasny-bootstrap.css");
+    Html.RequiresCss("~/Content/animate.css");
+    Html.RequiresCss("/css/CustomAcademyStyles.css");
+    
+    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
+    Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
+    Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
+    
+    Html.RequiresJs("~/Scripts/jquery.validate.min.js");
+    Html.RequiresJs("~/Scripts/jquery.validate.unobtrusive.min.js");
+    Html.RequiresJs("~/Scripts/respond.js");
+    Html.RequiresJs("~/Scripts/Plugins/SmoothScroll.js");
+    Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.revolution.js");
+    Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.tools.min.js");
+    Html.RequiresJs("~/Scripts/Plugins/jquery.waypoints.js");
+    Html.RequiresJs("~/Scripts/Plugins/jquery.browser.js");
+    Html.RequiresJs("~/Scripts/template.js");
+    Html.RequiresJs("~/Scripts/custom.js");
+    Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.js");
+    Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.min.js");
+    Html.RequiresJs("~/Scripts/Plugins/jquery.vide.js");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.png")">
+    @Html.RenderCssHere()
+    @RenderSection("head", false)
+</head>
+<body class="no-trans">
+    <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
+    <div class="page-wrapper">
+        <div class="header-container">
+            @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("header"))
+        </div>
+        @RenderSection("PreContent", required: false)
+        @RenderBody()
+    </div>
+    @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
+    @Html.RenderJsHere()
+    @RenderSection("scripts", required: false)
+</body>
+</html>
