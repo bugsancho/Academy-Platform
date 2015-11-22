@@ -2,6 +2,40 @@
 @{
     Layout = "~/Views/StudentSite.cshtml";
 }
+<section class="pv-30 light-gray-bg padding-bottom-clear clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="main col-md-10 col-sm-12 col-xs-12">
 
-<h2>Lecture</h2>
-@Umbraco.Field("Content")
+
+                @Umbraco.Field("Content")
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <h4>
+                            <i class="fa fa-thumbs-o-up"></i> Край на лекцията
+                        </h4>
+                        Направете бърз <a href="#">тест</a>, за да проверите своите знания!
+                    </div>
+                </div>
+            </div>
+            <aside class="col-md-2 hidden-sm hidden-xs">
+                <div class="sidebar affix-top ">
+                    <nav class="affix-menu scrollspy">
+                        <ul class="smooth-scroll nav nav-pills nav-stacked">
+                            <li class="active"><a href="#info">Информация</a></li>
+                            <li><a href="#1">Лекция - 1</a></li>
+                            <li><a href="#2">Лекция - 2</a></li>
+                            <li><a href="#3">Лекция - 3</a></li>
+                            <li><a href="#4">Лекция - 4</a></li>
+                            <li><a href="#5">Лекция - 5</a></li>
+                            <li><a href="#6">Лекция - 6</a></li>
+                            <li><a href="#7">Лекция - 7</a></li>
+                            <li><a href="#8">Лекция - 8</a></li>
+                            <li><a href="#9">Лекция - 9</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

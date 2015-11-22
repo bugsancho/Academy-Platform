@@ -4,35 +4,36 @@
     Layout = null;
 
     Html.RequiresCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
-    Html.RequiresCss("~/Content/project-theme.css");
-    Html.RequiresCss("~/Content/animate.css");
-    Html.RequiresCss("~/Content/animations.css");
-    Html.RequiresCss("~/Content/site.css");
-    Html.RequiresCss("~/Content/project-theme.css");
-    Html.RequiresCss("~/Content/ProjectThemeSkins/light_blue.css");
-    Html.RequiresCss("~/Content/Fonts/font-awesome.css");
-    Html.RequiresCss("~/Content/hover.css");
-    Html.RequiresCss("~/Content/rs-slider.css");
-    Html.RequiresCss("~/Content/jasny-bootstrap.css");
-    Html.RequiresCss("~/Content/animate.css");
+    @*Html.RequiresCss("~/Content/project-theme.css");*@
+Html.RequiresCss("~/Content/animate.css");
+Html.RequiresCss("~/Content/animations.css");
+    @*Html.RequiresCss("~/Content/site.css");*@
+Html.RequiresCss("~/Content/project-theme.css");
+Html.RequiresCss("~/Content/ProjectThemeSkins/light_blue.css");
+Html.RequiresCss("~/Content/Fonts/font-awesome.css");
+Html.RequiresCss("~/Content/hover.css");
+Html.RequiresCss("~/Content/rs-slider.css");
+Html.RequiresCss("~/Content/jasny-bootstrap.css");
+Html.RequiresCss("~/Content/animate.css");
+Html.RequiresCss("~/css/CustomAcademyStyles.css");
 
-    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
-    Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
-    Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
+Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
+Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
+Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
-    Html.RequiresJs("~/Scripts/jquery.validate.min.js");
-    Html.RequiresJs("~/Scripts/jquery.validate.unobtrusive.min.js");
-    Html.RequiresJs("~/Scripts/respond.js");
-    Html.RequiresJs("~/Scripts/Plugins/SmoothScroll.js");
-    Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.revolution.js");
-    Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.tools.min.js");
-    Html.RequiresJs("~/Scripts/Plugins/jquery.waypoints.js");
-    Html.RequiresJs("~/Scripts/Plugins/jquery.browser.js");
-    Html.RequiresJs("~/Scripts/template.js");
-    Html.RequiresJs("~/Scripts/custom.js");
-    Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.js");
-    Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.min.js");
-    Html.RequiresJs("~/Scripts/Plugins/jquery.vide.js");
+Html.RequiresJs("~/Scripts/jquery.validate.min.js");
+Html.RequiresJs("~/Scripts/jquery.validate.unobtrusive.min.js");
+Html.RequiresJs("~/Scripts/respond.js");
+Html.RequiresJs("~/Scripts/Plugins/SmoothScroll.js");
+Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.revolution.js");
+Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.tools.min.js");
+Html.RequiresJs("~/Scripts/Plugins/jquery.waypoints.js");
+Html.RequiresJs("~/Scripts/Plugins/jquery.browser.js");
+Html.RequiresJs("~/Scripts/template.js");
+Html.RequiresJs("~/Scripts/custom.js");
+Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.js");
+Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.min.js");
+Html.RequiresJs("~/Scripts/Plugins/jquery.vide.js");
 }
 <!DOCTYPE html>
 <html>
@@ -50,48 +51,56 @@
     </div>
     @RenderSection("PreContent", required: false)
     <div class="page-wrapper">
-        <div class="container-fulid">
-            <!-- left navigation start -->
-            <div class="left-navigation">
-                <div class="block clearfix">
-                    <div id="account-logo" class="logo">
-                        <a href="/">
-                            <img id="logo_img" src="" alt="Академия Фокус">
-                        </a>
-                    </div>
-                    <div class="account-sidebar-user clearfix">
-                        <div class="account-sidebar-user-avatar">
-                            <a href="#">
-                                <img src="@Url.Content("~/images/Valq.png")" alt="avatar">
-                            </a>
+        <div class="header-container">
+            <header class="header fixed clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="header-left clearfix">
+                                <div id="logo" class="logo"><a href="/{localLink:2054}" title="Focus Academy" data-id="2054"><img src="/media/1001/logo-focus.png" alt="" rel="2059" data-id="2059" /></a></div>
+                                <!-- name-and-slogan --> <!--<div class="site-slogan"></div>-->
+                            </div>
                         </div>
-                        <div class="account-sidebar-user-name">Валя Йорданова</div>
-                        <div class="account-sidebar-user-links">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Профил"><i class="fa fa-user"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Моите курсове"><i class="fa fa-graduation-cap"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Съобщения"><i class="icon-mail"></i></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Logout"><i class="icon-logout"></i></a>
+                        <div class="col-md-9">
+                            <div class="header-right clearfix">
+                                <div class="main-navigation with-dropdown-buttons">
+                                    <nav class="navbar navbar-default" role="navigation">
+                                        <div class="container-fluid">
+                                            <div class="navbar-header"><button class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button></div>
+                                            <div id="navbar-collapse-1" class="collapse navbar-collapse">
+                                                <ul class="nav navbar-nav">
+                                                    <li><a href="http://www.focus-academy.bg" title="Focus Academy" data-id="2054">Начало</a></li>
+                                                    <li><a href="/{localLink:2074}" title="Courses" data-id="2074">Обучения</a></li>
+                                                    <li><a href="/{localLink:2148}" title="How it works" data-id="2148">Как Работи</a></li>
+                                                    <li><a href="/{localLink:2173}" title="Partners" data-id="2173">Партньори</a></li>
+                                                    <li><a href="/{localLink:2068}" title="Contact Us" data-id="2068">Контакти</a></li>
+                                                    <li class="dropdown">
+                                                        <a href="/{localLink:2210}" title="Login" class="dropdown-toggle" data-toggle="dropdown" data-id="2210"><i class="fa fa-user"></i> Someone@mail.com</a>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a href="#">Настройки на профила</a></li>
+                                                            <li><a href="#">Моите Курсове</a></li>
+                                                            <li><a href="#">Моите Сертификати</a></li>
+                                                            <li><a href="#">Изход <i class="fa fa-unlock"></i> </a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <nav>
-                        <ul class="account-nav">
-                            <li><a href="#"><i class="fa fa-home"></i>Към сайта</a></li>
-                            <li><a href="#"><i class="fa fa-certificate"></i>Сертификати</a></li>
-                            <li><a href="#"><i class="fa fa-folder-open"></i>Материали</a></li>
-                            <li class="active"><a href="#"><i class="fa fa-graduation-cap"></i>Курсове</a></li>
-                        </ul>
-                    </nav>
                 </div>
-            </div>
-            <!-- left navigation end -->
-            <div class="account-main">
-
-                @Html.Partial("StudentSection/_Header")
-                @RenderBody()
-            </div>
-            @Html.Raw(Umbraco.AssignedContentItem.AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
-
+            </header>
         </div>
+        <div class="account-main">
+            @*@Html.Partial("StudentSection/_Header")*@
+            @RenderBody()
+        </div>
+        @Html.Raw(Umbraco.AssignedContentItem.AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
+
+    </div>
     </div>
     @Html.RenderJsHere()
     @RenderSection("scripts", required: false)
