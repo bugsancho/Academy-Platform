@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace AcademyPlatform.Web.Umbraco.DocumentTypeModels
+﻿namespace AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes
 {
-    public class Lecture
+    public class Lecture : DocumentTypeBase
     {
-
+        public string Content { get; set; }
     }
 }

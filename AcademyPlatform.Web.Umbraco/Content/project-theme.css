@@ -506,7 +506,7 @@ tbody {
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .with-dropdown-buttons .navbar-default .navbar-collapse {
-    padding-right: 120px;
+    /*padding-right: 120px;*/
   }
   .with-dropdown-buttons .header-dropdown-buttons {
     position: absolute;

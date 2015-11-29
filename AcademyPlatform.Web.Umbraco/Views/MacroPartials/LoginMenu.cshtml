@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+    @{
+        var loginPage = Umbraco.TypedContentAtRoot().DescendantsOrSelf("Login").FirstOrDefault();
+    }
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <a href="/" title="Login" class="dropdown-toggle" data-toggle="dropdown" data-id="2210"><i class="fa fa-user" style="margin-right: 10px"></i>@User.Identity.Name</a>
+        <ul class="dropdown-menu">
+            <li><a href="#">Настройки на профила</a></li>
+            <li><a href="#">Моите Курсове</a></li>
+            <li><a href="#">Моите Сертификати</a></li>
+            <li><a href="@Url.RouteUrl("LogOut")">Изход <i class="fa fa-lock"></i> </a></li>
+        </ul>
+}
+else
+{
+    <a href="/login/" title="Login" class="dropdown-toggle disabled " data-toggle="dropdown" data-id="2210"><i class="fa fa-user" style="margin-right: 10px"></i> Вход</a>
+        <ul class="dropdown-menu">
+            <li><a href="@loginPage.Url" title="Login">Вход</a></li>
+            <li><a href="@Url.RouteUrl("Register")">Регистрация</a></li>
+            <li><a href="/test-page-ucp/">test user CP</a></li>
+        </ul>
+}

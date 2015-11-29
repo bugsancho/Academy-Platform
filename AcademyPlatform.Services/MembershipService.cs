@@ -7,16 +7,17 @@
     using AcademyPlatform.Common.Providers;
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Exceptions;
     using AcademyPlatform.Services.Contracts;
 
-    public class MembersService : IMembersService
+    public class MembershipService : IMembershipService
     {
         private const int ValidationCodeLength = 6;
 
         private readonly IRepository<User> _users;
         private readonly IRandomProvider _random;
 
-        public MembersService(IRepository<User> users, IRandomProvider random)
+        public MembershipService(IRepository<User> users, IRandomProvider random)
         {
             _users = users;
             _random = random;
@@ -35,59 +36,84 @@
 
         public bool ValidateCredentials(string username, string password)
         {
+            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            if (user != null && user.IsApproved == false)
+            {
+                throw new UserNotApprovedException(username);
+            }
+
             return Membership.ValidateUser(username, password);
         }
 
-        public void ApproveUser(string username, string validationCode)
+        public bool IsApproved(string username)
         {
-            var userInDb = _users.All().FirstOrDefault(x => x.Username == username);
-            if (userInDb == null)
+            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            if (user == null)
             {
-                throw new ArgumentException("Невалидно потребителско име", nameof(username));
+                throw new UserNotFoundException(username);
             }
 
-            if (userInDb.ValidationCode == validationCode)
-            {
-                var user = GetUser(username);
-                user.IsApproved = true;
-                Membership.UpdateUser(user);
-            }
-            else
-            {
-                throw new ArgumentException("Невалиден валидационен код", nameof(validationCode));
-            }
-
+            return user.IsApproved;
         }
 
-        public MembershipUser CreateUser(string email, string password, string firstName, string lastName, bool requireEmailValidation, out MembershipCreateStatus status)
+        public bool ApproveUser(string username, string validationCode)
         {
-            var user = Membership.CreateUser(email, password, email, "n/q", "n/q", !requireEmailValidation, null, out status);
+            if (string.IsNullOrWhiteSpace(validationCode))
+            {
+                throw new ArgumentNullException(nameof(validationCode));
+            }
+
+            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            if (user == null)
+            {
+                throw new UserNotFoundException(username);
+            }
+
+            if (user.ValidationCode == validationCode)
+            {
+                user.ValidationCode = string.Empty;
+                user.IsApproved = true;
+                _users.SaveChanges();
+            }
+
+            return user.IsApproved;
+        }
+
+        public MembershipUser CreateUser(string email, string password, string firstName, string lastName, out MembershipCreateStatus status)
+        {
+            var membershipUser = Membership.CreateUser(email, password, email, "n/q", "n/q", true, out status);
             if (status == MembershipCreateStatus.Success)
             {
-                var dbUser = new User
+                var user = new User
                 {
                     Username = email,
                     FirstName = firstName,
                     LastName = lastName,
                     RegistrationDate = DateTime.Now
                 };
-                _users.Add(dbUser);
+                _users.Add(user);
                 _users.SaveChanges();
             }
 
-            return user;
+            return membershipUser;
         }
 
         public bool ChangePassword(string username, string oldPassword, string newPassword)
         {
-            var user = GetUser(username);
-            return user.ChangePassword(oldPassword, newPassword);
+            if (ValidateCredentials(username, oldPassword))
+            {
+                var membershipUser = GetUser(username);
+                return membershipUser.ChangePassword(oldPassword, newPassword);
+            }
+
+            return false;
+
         }
 
         public string ResetPassword(string username)
         {
-            var user = GetUser(username);
-            return user.ResetPassword();
+            var membershipUser = GetUser(username);
+            return membershipUser.ResetPassword();
         }
 
         public string GenerateValidationCode(string username)
@@ -96,7 +122,7 @@
             var user = _users.All().FirstOrDefault(x => x.Username == username);
             if (user == null)
             {
-                throw new ArgumentException("Невалидно потребителско име", nameof(username));
+                throw new UserNotFoundException(username);
             }
 
             user.ValidationCode = code;
@@ -113,6 +139,11 @@
             }
 
             return false;
+        }
+        public void Login(string username)
+        {
+
+            FormsAuthentication.SetAuthCookie(username, true);
         }
 
         public void LogOut()

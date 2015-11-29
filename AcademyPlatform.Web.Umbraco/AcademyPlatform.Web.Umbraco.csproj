@@ -188,6 +188,10 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="reCAPTCHA.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reCAPTCH.MVC.1.0.1\lib\net45\reCAPTCHA.MVC.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Semver">
       <HintPath>..\packages\semver.1.1.2\lib\net45\Semver.dll</HintPath>
     </Reference>
@@ -486,6 +490,9 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
+    <Content Include="Config\machineKey.config" />
+    <Content Include="Config\smtp.config" />
+    <Content Include="Config\ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\FocusAcademyUmbraco.pubxml" />
     <None Include="Properties\PublishProfiles\LocalUmbracoDeploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -537,11 +544,10 @@
     <Content Include="Scripts\respond.min.js.map" />
     <Content Include="Views\Course.cshtml" />
     <Content Include="Views\Courses.cshtml" />
-    <Content Include="Views\MacroPartials\Login.cshtml" />
-    <Content Include="Views\Partials\RenderLogin.cshtml" />
     <Content Include="Views\Login.cshtml" />
-    <Content Include="Views\Register.cshtml" />
-    <None Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\_ContentPageBase.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
@@ -565,6 +571,9 @@
     <Content Include="Views\Partials\Grid\Bootstrap3.cshtml" />
     <Content Include="Views\Partials\Grid\Bootstrap2.cshtml" />
     <Content Include="Views\Account\Validate.cshtml" />
+    <Content Include="Views\StudentCoursePage.cshtml" />
+    <Content Include="Views\MacroPartials\LoginMenu.cshtml" />
+    <Content Include="Views\Account\ResendValidationEmail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -589,18 +598,24 @@
     <Compile Include="Controllers\DocumentTypeControllers\CourseController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\CoursesSurfaceController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\ErrorPageController.cs" />
+    <Compile Include="Controllers\DocumentTypeControllers\LectureController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\LoginController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\StudentPageController.cs" />
     <Compile Include="Controllers\StoryLineContentSurfaceController.cs" />
     <Compile Include="Controllers\StudentSectionController.cs" />
     <Compile Include="Controllers\SubscriptionsController.cs" />
     <Compile Include="Startup\FiltersConfig.cs" />
+    <Compile Include="UmbracoConfiguration\ContentFinders\StudentCourseContentFinder.cs" />
+    <Compile Include="UmbracoConfiguration\Extensions\UmbracoContextExtensions.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\AccountSection.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\Course.cs" />
+    <Compile Include="UmbracoModels\DocumentTypes\DocumentTypeBase.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\EmailTemplate.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\ErrorPage.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\Lecture.cs" />
+    <Compile Include="UmbracoModels\DocumentTypes\Login.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\Metadata.cs" />
+    <Compile Include="UmbracoModels\DocumentTypes\Module.cs" />
     <Compile Include="UmbracoModels\DocumentTypes\StudentPage.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

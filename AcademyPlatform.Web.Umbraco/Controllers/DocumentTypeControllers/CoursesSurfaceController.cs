@@ -4,6 +4,8 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
+
     using Services.Contracts;
     using Models.Common;
     using Models.Courses;
@@ -32,13 +34,13 @@
         [ChildActionOnly]
         public ActionResult RenderCoursesGrid()
         {
-            var coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(DocumentTypes.Course));
-            var coursesContentViewModels = new List<DocumentTypes.Course>();
+            var coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(Course));
+            var coursesContentViewModels = new List<Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
                    .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
                     {
                       {
-                          "CourseUrl", new PropertyMapping
+                          "Url", new PropertyMapping
                               {
                                   SourceProperty = "Url",
                               }
@@ -54,7 +56,7 @@
                 (course, coursesContent) => new CoursesListViewModel
                 {
                     Title = course.Title,
-                    CourseUrl = coursesContent.CourseUrl,
+                    CourseUrl = coursesContent.Url,
                     ImageUrl = coursesContent.CoursePicture.Url,
                     ShortDescription = coursesContent.ShortDescription,
                     Category = course.Category

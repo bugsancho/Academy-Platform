@@ -95,9 +95,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
+    <Compile Include="Filters\ForceHttpAttribute.cs" />
     <Compile Include="Filters\RequireAnonymousAttribute.cs" />
     <Compile Include="Helpers\FileUploadHelper.cs" />
     <Compile Include="Helpers\ModelMetadataHelpers.cs" />

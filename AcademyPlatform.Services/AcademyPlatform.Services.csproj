@@ -52,15 +52,17 @@
   <ItemGroup>
     <Compile Include="CategoryService.cs" />
     <Compile Include="Contracts\ICategoryService.cs" />
-    <Compile Include="Contracts\IMembersService.cs" />
+    <Compile Include="Contracts\IMembershipService.cs" />
     <Compile Include="CoursesService.cs" />
     <Compile Include="Contracts\ICoursesService.cs" />
     <Compile Include="Contracts\ISubscriptionsService.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Contracts\IEmailService.cs" />
-    <Compile Include="MembersService.cs" />
+    <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="MembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubscriptionsService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcademyPlatform.Common\AcademyPlatform.Common.csproj">

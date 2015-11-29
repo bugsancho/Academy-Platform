@@ -8,6 +8,7 @@
     public class User //: IdentityUser
     {
         private ICollection<Course> _courses;
+        private ICollection<LectureVisit> _lectureVisits;
 
         //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         //{
@@ -29,15 +30,24 @@
 
         public string ValidationCode { get; set; }
 
+        public bool IsApproved { get; set; }
+
         public virtual ICollection<Course> Courses
         {
             get { return _courses; }
             set { _courses = value; }
         }
 
+        public virtual ICollection<LectureVisit> LectureVisits
+        {
+            get { return _lectureVisits; }
+            set { _lectureVisits = value; }
+        }
+
         public User()
         {
             _courses = new HashSet<Course>();
+            _lectureVisits = new HashSet<LectureVisit>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@inherits UmbracoViewPage
+﻿@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.LectureViewModel>
 @{
     Layout = "~/Views/StudentSite.cshtml";
 }
@@ -6,32 +6,43 @@
     <div class="container">
         <div class="row">
             <div class="main col-md-10 col-sm-12 col-xs-12">
+                @Html.Raw(Model.Content)
 
-
-                @Umbraco.Field("Content")
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <h4>
-                            <i class="fa fa-thumbs-o-up"></i> Край на лекцията
-                        </h4>
-                        Направете бърз <a href="#">тест</a>, за да проверите своите знания!
-                    </div>
-                </div>
+                @if (Model.PreviousLecture != null)
+                {
+                    <a href="@Model.PreviousLecture.Url" class="btn btn-sm btn-default pull-left"><i class="fa fa-caret-left" style="margin-right: 10px"></i>@Model.PreviousLecture.Name</a>
+                }
+                @if (Model.NextLecture != null)
+                {
+                    <a href="@Model.NextLecture.Url" class="btn btn-sm btn-default pull-right">@Model.NextLecture.Name<i class="fa fa-caret-right" style="margin-left: 10px"></i></a>
+                }
+                @*<div class="col-md-12">
+                        <div class="alert alert-success">
+                            <h4>
+                                <i class="fa fa-thumbs-o-up"></i> Край на лекцията
+                            </h4>
+                            Направете бърз <a href="#">тест</a>, за да проверите своите знания!
+                        </div>
+                    </div>*@
             </div>
             <aside class="col-md-2 hidden-sm hidden-xs">
                 <div class="sidebar affix-top ">
                     <nav class="affix-menu scrollspy">
                         <ul class="smooth-scroll nav nav-pills nav-stacked">
-                            <li class="active"><a href="#info">Информация</a></li>
-                            <li><a href="#1">Лекция - 1</a></li>
-                            <li><a href="#2">Лекция - 2</a></li>
-                            <li><a href="#3">Лекция - 3</a></li>
-                            <li><a href="#4">Лекция - 4</a></li>
-                            <li><a href="#5">Лекция - 5</a></li>
-                            <li><a href="#6">Лекция - 6</a></li>
-                            <li><a href="#7">Лекция - 7</a></li>
-                            <li><a href="#8">Лекция - 8</a></li>
-                            <li><a href="#9">Лекция - 9</a></li>
+                            @foreach (var lecture in Model.OtherLectures)
+                            {
+                                <li><a href="@lecture.Url">@lecture.Name</a></li>
+                            }
+                            @*<li class="active"><a href="#info">Информация</a></li>
+                                <li><a href="#1">Лекция - 1</a></li>
+                                <li><a href="#2">Лекция - 2</a></li>
+                                <li><a href="#3">Лекция - 3</a></li>
+                                <li><a href="#4">Лекция - 4</a></li>
+                                <li><a href="#5">Лекция - 5</a></li>
+                                <li><a href="#6">Лекция - 6</a></li>
+                                <li><a href="#7">Лекция - 7</a></li>
+                                <li><a href="#8">Лекция - 8</a></li>
+                                <li><a href="#9">Лекция - 9</a></li>*@
                         </ul>
                     </nav>
                 </div>

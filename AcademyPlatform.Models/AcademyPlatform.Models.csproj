@@ -58,9 +58,12 @@
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseDifficultyType.cs" />
     <Compile Include="Courses\CourseSubscription.cs" />
+    <Compile Include="Courses\LectureVisit.cs" />
     <Compile Include="Courses\Module.cs" />
     <Compile Include="Courses\SubscriptionStatus.cs" />
     <Compile Include="Courses\Validators\CourseValidator.cs" />
+    <Compile Include="Exceptions\CourseNotFoundException.cs" />
+    <Compile Include="Exceptions\UserNotApprovedException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

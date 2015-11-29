@@ -8,46 +8,10 @@
             <div class="main col-md-8">
                 <h1 class="title">@Model.Title</h1>
                 <div class="separator"></div>
-                <a class="btn btn-default" href="@Model.CoursesPageUrl">Обрато към курсовете</a>
-                <img src="@Model.ImageUrl" alt="@Model.Title" />
-                @Html.Raw(Model.DetailedDescription)
-                <h3>Цели на курса</h3>
-                <div class="separator">
-                </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-icons">
-                            <li><i class="fa fa-circle-o"></i> цел едно</li>
-                            <li><i class="fa fa-circle-o"></i> цел две</li>
-                            <li><i class="fa fa-circle-o"></i> цел три</li>
-                            <li><i class="fa fa-circle-o"></i> цел четири</li>
-                        </ul>
-                    </div>
-                </div>
-                <h3>Сертификация след приключване на курса</h3>
-                <div class="separator">
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-icons">
-                            <li><i class="fa fa-circle-o"></i> сертификат едно (например за 100%) </li>
-                            <li><i class="fa fa-circle-o"></i> сертификат две (от 80 до 99 %) </li>
-                            <li><i class="fa fa-circle-o"></i> сертификат три (60 до 79%) </li>
-                            <li><i class="fa fa-circle-o"></i> сертификат четири (под 60% )</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="separator"></div>
-                <h3>Програма на курса</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <ol type="1">
-                            <li> Тема на лекция едно</li>
-                            <li> Тема на лекция две</li>
-                            <li> Тема на лекция три</li>
-                            <li> Тема на лекция четири</li>
-                        </ol>
-                    </div>
+                    <a class="btn btn-default" href="@Model.CoursesPageUrl">Обрато към курсовете</a>
+                    <img src="@Model.ImageUrl" alt="@Model.Title" />
+                    @Html.Raw(Model.DetailedDescription)
                 </div>
             </div>
             <!-- main end -->
@@ -64,7 +28,14 @@
                             <li><strong>Лектор: </strong> <span class="text-left">@Model.LecturerName </span></li>
                             <li><strong>Категория: </strong> <span class="text-left">@Model.Category.Title </span></li>
                         </ul>
-                        <a href="@Url.Action("Apply","CoursesAdmin",new {Area = string.Empty})" class="btn btn-danger btn-lg"> Кандидатствай </a>
+                        @if (ViewBag.StudentPageUrl!= null)
+                        {
+                            <a href="@ViewBag.StudentPageUrl" class="btn btn-danger btn-lg"> Към курса </a>
+                        }
+                        else
+                        {
+                            <a href="@Model.JoinCourseUrl" class="btn btn-danger btn-lg"> Запиши се </a>
+                        }
                     </div>
                 </div>
             </aside>

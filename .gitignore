@@ -176,3 +176,7 @@ logs
 Images
 App_Data
 StorylineContent
+.vs
+machineKey.config
+smtp.config
+ConnectionStrings.config

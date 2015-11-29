@@ -2,7 +2,7 @@
 {
     using System.Web.Security;
 
-    public interface IMembersService
+    public interface IMembershipService
     {
         MembershipUser GetUser();
 
@@ -10,9 +10,9 @@
 
         bool ValidateCredentials(string username, string password);
 
-        void ApproveUser(string username, string validationCode);
+        bool ApproveUser(string username, string validationCode);
 
-        MembershipUser CreateUser(string email, string password, string firstName, string lastName, bool requireEmailValidation, out MembershipCreateStatus status);
+        MembershipUser CreateUser(string email, string password, string firstName, string lastName, out MembershipCreateStatus status);
 
         bool ChangePassword(string username, string oldPassword, string newPassword);
 
@@ -23,5 +23,9 @@
         bool Login(string username, string password, bool isPersistent);
 
         void LogOut();
+
+        bool IsApproved(string username);
+
+        void Login(string username);
     }
 }

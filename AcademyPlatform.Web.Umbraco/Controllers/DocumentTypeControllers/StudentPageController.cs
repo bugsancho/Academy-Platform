@@ -8,6 +8,7 @@
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
+    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
@@ -32,18 +33,10 @@
         public override ActionResult Index(RenderModel model)
         {
             // TODO improve query
-            var coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(DocumentTypeModels.Course));
-            var coursesContentViewModels = new List<DocumentTypeModels.Course>();
+            var coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(Course));
+            var coursesContentViewModels = new List<Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
-                   .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
-                    {
-                      {
-                          "CourseUrl", new PropertyMapping
-                              {
-                                  SourceProperty = "Url",
-                              }
-                      }
-                    });
+                   .MapCollection(coursesContentCollection, coursesContentViewModels);
 
             var courses = _courses.GetActiveCourses();
 
@@ -54,7 +47,7 @@
                 (course, coursesContent) => new CoursesListViewModel
                 {
                     Title = course.Title,
-                    CourseUrl = coursesContent.CourseUrl,
+                    CourseUrl = coursesContent.Url,
                     ImageUrl = coursesContent.CoursePicture.Url,
                     ShortDescription = coursesContent.ShortDescription,
                     Category = course.Category

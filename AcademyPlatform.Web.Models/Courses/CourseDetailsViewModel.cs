@@ -4,9 +4,13 @@
 
     public class CourseDetailsViewModel
     {
+         public int CourseId { get; set; }
+
          public string Title { get; set; }
 
         public string CoursesPageUrl { get; set; }
+
+        public string JoinCourseUrl { get; set; }
 
         public string ImageUrl { get; set; }
 

@@ -5,6 +5,7 @@
     using System.Linq;
 
     using AcademyPlatform.Web.Umbraco.DocumentTypeModels;
+    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Routing;

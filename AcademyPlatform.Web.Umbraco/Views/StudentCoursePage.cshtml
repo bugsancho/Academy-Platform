@@ -1,0 +1,77 @@
+﻿@model AcademyPlatform.Web.Models.Courses.CourseStudentPageViewModel
+@{
+    //Layout = "~/Views/StudentSite.cshtml";
+    int moduleIndex = 1;
+}
+
+<section class="pv-30 light-gray-bg padding-bottom-clear clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="main col-md-9 col-sm-12 col-xs-12">
+                <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                    <span class="icon default-bg small"><i class="fa fa-info"></i></span>
+                    <div class="body">
+                        <h4 class="title">Информация за курса</h4>
+                        @Html.Raw(Model.DetailedDescription)
+                    </div>
+                </div>
+                @foreach (var module in Model.Modules)
+                {
+                    <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                        <span class="icon default-bg small">@moduleIndex</span>
+                        <div class="body">
+                            <h4 class="title">@module.Name</h4>
+                            <p>Текст описващ нещо за модула</p>
+                            <div class="col-md-1">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tbody>
+                                            @{
+                                                var lectureIndex = 1;
+                                            }
+                                            @foreach (var lecture in module.LectureLinks)
+                                                {
+                                                    <tr>
+                                                        <td class="text-left">@(moduleIndex).@lectureIndex <a href="@lecture.Url">@lecture.Name</a></td>
+                                                        <td class="text-right">
+                                                            @if (lecture.IsVisited)
+                                                            {
+                                                                <i class="fa fa-check"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="@lecture.Url"><i class="fa fa-play"></i> Старт</a>
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    lectureIndex++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                                        moduleIndex++;
+                                                    }
+
+            </div>
+            <aside class="col-md-3  hidden-sm hidden-xs">
+                <div class="sidebar ph-20 feature-box-2 boxed white-bg space-bottom affix-top ">
+                    <nav class="affix-menu scrollspy">
+                        <h4>Статус</h4>
+                        <div><strong>Модул: </strong>0/14       </div>
+                        <div><strong>Лекции: </strong>0/30      </div>
+                        <div><strong>Изпит: </strong>Недостъпен </div>
+                        <div><strong>Сертификат: </strong>Невзет</div>
+                        <div><strong>Последно посещавана лекция: </strong><a href="#">1.2 HTML Основни елементи</a></div>
+                    </nav>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

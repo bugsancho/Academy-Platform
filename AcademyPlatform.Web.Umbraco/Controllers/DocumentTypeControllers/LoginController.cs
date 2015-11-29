@@ -1,7 +1,9 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers.DocumentTypeControllers
 {
+    using System;
     using System.Web.Mvc;
 
+    using AcademyPlatform.Models.Exceptions;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Infrastructure.Extensions;
     using AcademyPlatform.Web.Infrastructure.Filters;
@@ -12,11 +14,11 @@
 
     public class LoginController : RenderMvcController
     {
-        private readonly IMembersService _members;
+        private readonly IMembershipService _membership;
 
-        public LoginController(IMembersService members)
+        public LoginController(IMembershipService membership)
         {
-            _members = members;
+            _membership = membership;
         }
 
         [HttpGet]
@@ -32,22 +34,29 @@
         [RequireHttps]
         [RequireAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel loginViewModel, string returnUrl)
+        public ActionResult Login(LoginViewModel loginViewModel, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
                 //TODO add support for persistent login. Currently it's always 3 days
-                if (_members.Login(loginViewModel.Email, loginViewModel.Password, loginViewModel.RememberMe))
+                try
                 {
-                    if (!string.IsNullOrEmpty(returnUrl))
+                    if (_membership.Login(loginViewModel.Email, loginViewModel.Password, true))
                     {
-                        return Redirect(Url.ToSafeReturnUrl(returnUrl));
+                        if (!string.IsNullOrEmpty(returnUrl))
+                        {
+                            return Redirect(Url.ToSafeReturnUrl(returnUrl));
+                        }
+
+                        return Redirect("/");
                     }
 
-                    return Redirect("/");
+                    ModelState.AddModelError(string.Empty, "Не успяхме да намерим потребител с това име и парола.");
                 }
-
-                ModelState.AddModelError(string.Empty, "Не успяхме да намерим потребител с това име и парола.");
+                catch (UserNotApprovedException)
+                {
+                    ModelState.AddModelError(string.Empty, "Потребителят не е порвърдил своя Email. Моля проверете пощата си за съобщение от Focus Academy и следвайте инструкциите");
+                }
             }
 
             return View(loginViewModel);

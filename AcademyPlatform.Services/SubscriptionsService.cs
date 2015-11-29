@@ -24,6 +24,55 @@
             _courses = courses;
         }
 
+        //TODO move to separate service
+        public bool IsLectureVisited(string username, int lectureId)
+        {
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
+            return user != null && user.LectureVisits.Any(x => x.LectureId == lectureId);
+        }
+
+        public void TrackLectureVisit(string username, int lectureId)
+        {
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
+            if (user == null)
+            {
+                throw new UserNotFoundException(username);
+            }
+
+            var lectureVisit = user.LectureVisits.FirstOrDefault(x => x.LectureId == lectureId);
+            if (lectureVisit == null)
+            {
+                user.LectureVisits.Add(new LectureVisit { User = user, LectureId = lectureId, LastVisitDate = DateTime.Now });
+            }
+            else
+            {
+                lectureVisit.LastVisitDate = DateTime.Now;
+            }
+
+            _users.SaveChanges();
+        }
+
+        public bool HasSubscription(string username, int courseId)
+        {
+            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            var course = _courses.GetById(courseId);
+            if (user == null)
+            {
+                throw new UserNotFoundException(username);
+            }
+            if (course == null)
+            {
+                throw new CourseNotFoundException(courseId);
+            }
+
+            if (_courseSubscriptions.All().Any(x => x.UserId == user.Id && x.CourseId == courseId))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public void JoinCourse(string username, int courseId)
         {
             var user = _users.All().FirstOrDefault(x => x.Username == username);
@@ -47,7 +96,7 @@
 
             if (course == null)
             {
-                throw new ArgumentException($"Could not find course with id: {courseId}", nameof(courseId));
+                throw new CourseNotFoundException(courseId);
             }
 
             var existingSubscription = _courseSubscriptions.All().FirstOrDefault(x => x.UserId == userId && x.CourseId == courseId);

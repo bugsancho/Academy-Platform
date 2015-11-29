@@ -72,16 +72,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\ChangePasswordViewModel.cs" />
+    <Compile Include="Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Account\LoginViewModel.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
+    <Compile Include="Account\ResendValidationEmailViewModel.cs" />
     <Compile Include="Assessments\AssessmentViewModel.cs" />
     <Compile Include="Assessments\QuestionViewModel.cs" />
     <Compile Include="Common\ImageViewModel.cs" />
+    <Compile Include="Common\PageLink.cs" />
     <Compile Include="Courses\CategoryEditViewModel.cs" />
     <Compile Include="Courses\CategoryListViewModel.cs" />
     <Compile Include="Courses\CourseDetailsViewModel.cs" />
     <Compile Include="Courses\CoursesListViewModel.cs" />
     <Compile Include="Courses\CourseEditViewModel.cs" />
+    <Compile Include="Courses\CourseStudentPageViewModel.cs" />
+    <Compile Include="Courses\JoinCourseViewModel.cs" />
+    <Compile Include="Courses\LectureLinkViewModel.cs" />
+    <Compile Include="Courses\LectureViewModel.cs" />
+    <Compile Include="Courses\ModuleViewModel.cs" />
     <Compile Include="Courses\Validators\CreateCourseViewModelValidator.cs" />
     <Compile Include="Other\StorylineContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

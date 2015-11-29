@@ -28,6 +28,7 @@
 
             builder.Register(c => UmbracoContext.Current).AsSelf();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterControllers(typeof(UmbracoApplication).Assembly);
             builder.RegisterApiControllers(typeof(UmbracoApplication).Assembly);
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
@@ -45,7 +46,7 @@
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             //TODO MOVE
-               var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseEditViewModel)));
+            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseEditViewModel)));
             autoMapperConfig.Execute();
         }
     }

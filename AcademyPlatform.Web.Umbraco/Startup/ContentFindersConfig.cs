@@ -9,6 +9,7 @@
     {
         protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
+            ContentFinderResolver.Current.InsertTypeBefore<ContentFinderByNotFoundHandlers, StudentCourseContentFinder>();
             ContentFinderResolver.Current.InsertTypeBefore<ContentFinderByNotFoundHandlers, LectureContentFinder>();
             ContentFinderResolver.Current.InsertTypeBefore<ContentFinderByNotFoundHandlers, NotFoundContentFinder>();
 
