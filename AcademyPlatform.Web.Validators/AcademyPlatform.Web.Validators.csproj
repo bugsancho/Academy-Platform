@@ -49,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AcademyPlatfor.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
-      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
-      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">
       <Project>{A9F65F1E-F7FA-4C33-8092-CBA90776843B}</Project>
       <Name>AcademyPlatform.Models</Name>
@@ -68,6 +64,10 @@
     <ProjectReference Include="..\AcademyPlatform.Web.Models\AcademyPlatform.Web.Models.csproj">
       <Project>{3f351c2d-799a-48fe-84f8-6c5412b6d060}</Project>
       <Name>AcademyPlatform.Web.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
+      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
+      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

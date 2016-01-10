@@ -614,10 +614,6 @@
     <Compile Include="ViewModels\ValidateAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AcademyPlatfor.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
-      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
-      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Common\AcademyPlatform.Common.csproj">
       <Project>{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}</Project>
       <Name>AcademyPlatform.Common</Name>
@@ -641,6 +637,10 @@
     <ProjectReference Include="..\AcademyPlatform.Web.Models\AcademyPlatform.Web.Models.csproj">
       <Project>{3F351C2D-799A-48FE-84F8-6C5412B6D060}</Project>
       <Name>AcademyPlatform.Web.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
+      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
+      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Web.Validators\AcademyPlatform.Web.Validators.csproj">
       <Project>{ff873eed-a590-4d65-9797-de5084889ac4}</Project>
