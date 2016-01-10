@@ -57,7 +57,11 @@
         {
             this.courses.Delete(course);
             this.courses.SaveChanges();
+        }
 
+        public bool IsPaidCourse(Course course)
+        {
+            return course.PricingType == CoursePricingType.PaidAccess || course.PricingType == CoursePricingType.PaidAccessAndCertificate;
         }
     }
 }

@@ -14,10 +14,10 @@
             RouteTable.Routes.MapRoute("Validate", "validate/{email}/{validationCode}", new { Controller = "Account", Action = "Validate", ValidationCode = UrlParameter.Optional });
             RouteTable.Routes.MapRoute("ForgotPassword", "forgotpassword", new { Controller = "Account", Action = "ForgotPassword" });
             RouteTable.Routes.MapRoute("ChangePassword", "changepassword", new { Controller = "Account", Action = "ChangePassword" });
-            RouteTable.Routes.MapRoute("ResendValidationEmail", "ResendValidationEmail/{email}", new { Controller = "Account", Action = "ResendValidationEmail" });
+            RouteTable.Routes.MapRoute("ResendValidationEmail", "ResendValidationEmail/{email}", new { Controller = "Account", Action = "ResendValidationEmail",Email = UrlParameter.Optional });
             RouteTable.Routes.MapRoute("LogOut", "logout", new { Controller = "Account", Action = "LogOut" });
 
-            RouteTable.Routes.MapRoute("JoinCourse", "join/{courseUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" });
+            RouteTable.Routes.MapRoute("JoinCourse", "join/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" });
 
 
 

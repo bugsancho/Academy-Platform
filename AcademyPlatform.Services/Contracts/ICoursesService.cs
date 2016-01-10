@@ -20,5 +20,7 @@ namespace AcademyPlatform.Services.Contracts
         IEnumerable<Course> GetCoursesByUserId(string userId);
 
         IEnumerable<Course> GetAll();
+
+        bool IsPaidCourse(Course course);
     }
 }

@@ -7,8 +7,8 @@
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;

@@ -1,15 +1,10 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Startup
 {
     using System;
-    using System.Linq;
     using System.Web;
-
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.Macros;
+    
 
     using global::Umbraco.Core;
-    using global::Umbraco.Core.Events;
-    using global::Umbraco.Core.Models;
-    using global::Umbraco.Core.Services;
     using global::Umbraco.Web;
     using global::Umbraco.Web.Routing;
 
@@ -38,11 +33,11 @@
                 };
 
 
-            //ContentService.Saving += delegate(IContentService sender, SaveEventArgs<IContent> args)
+            //ContentService.Saving += delegate (IContentService sender, SaveEventArgs<IContent> args)
             //    {
             //        var questions = args.SavedEntities.Where(x => x.ContentType.Alias == "Question");
 
-            //        args.CancelOperation(new EventMessage("Error", "This should be cancelled immediately!!!",EventMessageType.Error));
+            //        args.CancelOperation(new EventMessage("Error", "This should be cancelled immediately!!!", EventMessageType.Error));
 
             //    };
         }

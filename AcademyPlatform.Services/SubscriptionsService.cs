@@ -12,16 +12,19 @@
     public class SubscriptionsService : ISubscriptionsService
     {
         private readonly IRepository<User> _users;
-
+        private readonly IUserService _usersService;
         private readonly IRepository<Course> _courses;
-
         private readonly IRepository<CourseSubscription> _courseSubscriptions;
 
-        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses)
+        private readonly ICoursesService _coursesService;
+
+        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService)
         {
             _users = users;
             _courseSubscriptions = courseSubscriptions;
             _courses = courses;
+            _coursesService = coursesService;
+            _usersService = usersService;
         }
 
         //TODO move to separate service
@@ -39,7 +42,7 @@
                 throw new UserNotFoundException(username);
             }
 
-            var lectureVisit = user.LectureVisits.FirstOrDefault(x => x.LectureId == lectureId);
+            LectureVisit lectureVisit = user.LectureVisits.FirstOrDefault(x => x.LectureId == lectureId);
             if (lectureVisit == null)
             {
                 user.LectureVisits.Add(new LectureVisit { User = user, LectureId = lectureId, LastVisitDate = DateTime.Now });
@@ -49,49 +52,47 @@
                 lectureVisit.LastVisitDate = DateTime.Now;
             }
 
+            //TODO implement proper Unit of Work 
             _users.SaveChanges();
         }
 
-        public bool HasSubscription(string username, int courseId)
+        public bool HasActiveSubscription(string username, int courseId)
         {
-            var user = _users.All().FirstOrDefault(x => x.Username == username);
-            var course = _courses.GetById(courseId);
+            SubscriptionStatus status = GetSubscriptionStatus(username, courseId);
+            return status == SubscriptionStatus.Active;
+        }
+
+        public SubscriptionStatus GetSubscriptionStatus(string username, int courseId)
+        {
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
             if (user == null)
             {
                 throw new UserNotFoundException(username);
             }
+
+            Course course = _courses.GetById(courseId);
             if (course == null)
             {
                 throw new CourseNotFoundException(courseId);
             }
 
-            if (_courseSubscriptions.All().Any(x => x.UserId == user.Id && x.CourseId == courseId))
+            CourseSubscription subscription = _courseSubscriptions.All().FirstOrDefault(x => x.UserId == user.Id && x.CourseId == courseId);
+            if (subscription != null)
             {
-                return true;
+                return subscription.Status;
             }
 
-            return false;
+            return SubscriptionStatus.None;
         }
 
         public void JoinCourse(string username, int courseId)
         {
-            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            User user = _usersService.GetByUsername(username);
+            Course course = _courses.GetById(courseId);
+
             if (user == null)
             {
                 throw new UserNotFoundException(username);
-            }
-
-            JoinCourse(user.Id, courseId);
-        }
-
-        public void JoinCourse(int userId, int courseId)
-        {
-            var user = _users.GetById(userId);
-            var course = _courses.GetById(courseId);
-
-            if (user == null)
-            {
-                throw new UserNotFoundException(userId.ToString());
             }
 
             if (course == null)
@@ -99,7 +100,7 @@
                 throw new CourseNotFoundException(courseId);
             }
 
-            var existingSubscription = _courseSubscriptions.All().FirstOrDefault(x => x.UserId == userId && x.CourseId == courseId);
+            CourseSubscription existingSubscription = _courseSubscriptions.All().FirstOrDefault(x => x.UserId == user.Id && x.CourseId == courseId);
             if (existingSubscription != null)
             {
                 existingSubscription.Status = SubscriptionStatus.Active;
@@ -107,9 +108,9 @@
             }
             else
             {
-                var subscription = new CourseSubscription
+                CourseSubscription subscription = new CourseSubscription
                 {
-                    UserId = userId,
+                    UserId = user.Id,
                     CourseId = courseId,
                     SubscriptionDate = DateTime.Now,
                     Status = SubscriptionStatus.Active
@@ -117,7 +118,7 @@
 
                 _courseSubscriptions.Add(subscription);
             }
-
+            //TODO implement proper Unit of Work 
             _courseSubscriptions.SaveChanges();
 
         }

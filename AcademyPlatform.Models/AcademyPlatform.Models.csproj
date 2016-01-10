@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcademyPlatform.Models</RootNamespace>
     <AssemblyName>AcademyPlatform.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=6.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.0.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -57,14 +58,25 @@
     <Compile Include="Courses\Category.cs" />
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseDifficultyType.cs" />
+    <Compile Include="Courses\CoursePricingType.cs" />
     <Compile Include="Courses\CourseSubscription.cs" />
     <Compile Include="Courses\LectureVisit.cs" />
     <Compile Include="Courses\Module.cs" />
     <Compile Include="Courses\SubscriptionStatus.cs" />
+    <Compile Include="Courses\SubscriptionType.cs" />
     <Compile Include="Courses\Validators\CourseValidator.cs" />
     <Compile Include="Exceptions\CourseNotFoundException.cs" />
     <Compile Include="Exceptions\UserNotApprovedException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Payments\BillingInfo.cs" />
+    <Compile Include="Payments\LineItem.cs" />
+    <Compile Include="Payments\Order.cs" />
+    <Compile Include="Payments\OrderStatusType.cs" />
+    <Compile Include="Payments\Payment.cs" />
+    <Compile Include="Payments\PaymentStatus.cs" />
+    <Compile Include="Payments\PaymentType.cs" />
+    <Compile Include="Payments\Product.cs" />
+    <Compile Include="Payments\ProductType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

@@ -4,7 +4,7 @@
 
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Courses;
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
@@ -26,7 +26,7 @@
 
         public override ActionResult Index(RenderModel model)
         {
-            if (!_subscriptions.HasSubscription(User.Identity.Name, model.Content.AncestorOrSelf(nameof(Course)).GetPropertyValue<int>(nameof(Course.CourseId))))
+            if (!_subscriptions.HasActiveSubscription(User.Identity.Name, model.Content.AncestorOrSelf(nameof(Course)).GetPropertyValue<int>(nameof(Course.CourseId))))
             {
                 return HttpNotFound();
             }

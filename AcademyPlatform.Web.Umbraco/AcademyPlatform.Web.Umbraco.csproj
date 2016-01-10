@@ -16,7 +16,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcademyPlatform.Web.Umbraco</RootNamespace>
     <AssemblyName>AcademyPlatform.Web.Umbraco</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -92,6 +93,14 @@
     </Reference>
     <Reference Include="Examine">
       <HintPath>..\packages\Examine.0.1.68.0\lib\Examine.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.0.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc, Version=6.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.MVC5.6.0.2.0\lib\Net45\FluentValidation.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Glimpse.Ado">
       <HintPath>..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
@@ -355,23 +364,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\custom-site.css" />
     <Content Include="Content\custom.css" />
     <Content Include="Content\Fonts\font-awesome.css" />
     <Content Include="Content\Fonts\font-awesome.min.css" />
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
-    <Content Include="Content\Images\baloons.jpg" />
-    <Content Include="Content\Images\csharp.png" />
-    <Content Include="Content\Images\EvoX-GRD.jpg" />
-    <Content Include="Content\Images\html_css.png" />
-    <Content Include="Content\Images\java.png" />
-    <Content Include="Content\Images\logo_light_blue.png" />
-    <Content Include="Content\Images\page-contact-banner.jpg" />
-    <Content Include="Content\Images\team-member.jpg" />
-    <Content Include="Content\Images\timer.png" />
-    <Content Include="Content\Images\аdvertising.png" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Less\project-theme.css" />
@@ -393,8 +391,6 @@
     <Content Include="Content\ProjectThemeSkins\red.css" />
     <Content Include="Content\ProjectThemeSkins\vivid_red.css" />
     <Content Include="Content\rs-slider.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\Site.min.css" />
     <Content Include="Content\Videos\background-video-banner.mp4" />
     <Content Include="default.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -448,7 +444,6 @@
     <Content Include="Content\Less\_sections.less" />
     <Content Include="Content\Less\_typography.less" />
     <Content Include="Content\project-theme.css.map" />
-    <Content Include="Content\Site.css.map" />
     <Content Include="Content\Videos\background-video-banner.webm" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
@@ -468,7 +463,6 @@
     <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
-    <Content Include="Grid.mvc.readme" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\EntityDropdown.cshtml" />
@@ -490,9 +484,6 @@
     <Content Include="Config\BaseRestExtensions.config" />
     <Content Include="Config\applications.config" />
     <Content Include="Config\404handlers.config" />
-    <Content Include="Config\machineKey.config" />
-    <Content Include="Config\smtp.config" />
-    <Content Include="Config\ConnectionStrings.config" />
     <None Include="Properties\PublishProfiles\FocusAcademyUmbraco.pubxml" />
     <None Include="Properties\PublishProfiles\LocalUmbracoDeploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -574,6 +565,8 @@
     <Content Include="Views\StudentCoursePage.cshtml" />
     <Content Include="Views\MacroPartials\LoginMenu.cshtml" />
     <Content Include="Views\Account\ResendValidationEmail.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\BillingInfoViewModel.cshtml" />
+    <None Include="Views\Subscriptions\JoinCourse.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -591,12 +584,11 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesAdminController.cs" />
-    <Compile Include="Common\DocumentTypes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\CoursesController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\AssessmentController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\CourseController.cs" />
-    <Compile Include="Controllers\DocumentTypeControllers\CoursesSurfaceController.cs" />
+    <Compile Include="Controllers\SurfaceControllers\CoursesSurfaceController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\ErrorPageController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\LectureController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\LoginController.cs" />
@@ -605,19 +597,9 @@
     <Compile Include="Controllers\StudentSectionController.cs" />
     <Compile Include="Controllers\SubscriptionsController.cs" />
     <Compile Include="Startup\FiltersConfig.cs" />
+    <Compile Include="Startup\FluentValidationConfig.cs" />
     <Compile Include="UmbracoConfiguration\ContentFinders\StudentCourseContentFinder.cs" />
     <Compile Include="UmbracoConfiguration\Extensions\UmbracoContextExtensions.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\AccountSection.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\Course.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\DocumentTypeBase.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\EmailTemplate.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\ErrorPage.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\Lecture.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\Login.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\Metadata.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\Module.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\StudentPage.cs" />
-    <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup\AutofacConfig.cs" />
     <Compile Include="Startup\ContentFindersConfig.cs" />
@@ -628,12 +610,14 @@
     <Compile Include="UmbracoConfiguration\ContentFinders\NotFoundContentFinder.cs" />
     <Compile Include="UmbracoConfiguration\UmbracoMapperMappings.cs" />
     <Compile Include="UmbracoConfiguration\UrlProviders\LectureUrlProvider.cs" />
-    <Compile Include="UmbracoModels\Macros\StorylineContent.cs" />
-    <Compile Include="UmbracoModels\DocumentTypes\MultipleOptionsQuestion.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\ValidateAccountViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcademyPlatfor.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
+      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
+      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Common\AcademyPlatform.Common.csproj">
       <Project>{4FE2CE8A-36FF-4FE7-9459-E72B1DA8652C}</Project>
       <Name>AcademyPlatform.Common</Name>
@@ -658,10 +642,13 @@
       <Project>{3F351C2D-799A-48FE-84F8-6C5412B6D060}</Project>
       <Name>AcademyPlatform.Web.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Web.Validators\AcademyPlatform.Web.Validators.csproj">
+      <Project>{ff873eed-a590-4d65-9797-de5084889ac4}</Project>
+      <Name>AcademyPlatform.Web.Validators</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="UmbracoModels\PropertyEditors\" />
     <Folder Include="Views\ErrorPage\" />
   </ItemGroup>
   <PropertyGroup>

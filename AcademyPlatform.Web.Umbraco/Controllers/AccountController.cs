@@ -6,13 +6,13 @@
     using System.Web.Routing;
     using System.Web.Security;
 
+    using AcademyPlatform.Models;
     using AcademyPlatform.Models.Exceptions;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Infrastructure.Extensions;
     using AcademyPlatform.Web.Infrastructure.Filters;
     using AcademyPlatform.Web.Models.Account;
-    using AcademyPlatform.Web.Umbraco.Common;
-
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.ViewModels;
 
     using global::Umbraco.Core.Models;
@@ -25,7 +25,6 @@
 
     using reCAPTCHA.MVC;
 
-    using DocumentTypes = AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
     using UmbracoContextExtensions = AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions;
 
     [RequireHttps]
@@ -47,7 +46,7 @@
                 {
                     _accountSection =
                         Umbraco.TypedContentAtRoot()
-                               .DescendantsOrSelf(nameof(DocumentTypes.AccountSection))
+                               .DescendantsOrSelf(nameof(Models.Umbraco.DocumentTypes.AccountSection))
                                .SingleOrDefault();
                 }
 
@@ -94,9 +93,9 @@
                 {
 
                     SendAccountValidationEmail(registerViewModel.Email, registerViewModel.FirstName);
-                    var thankYouPageId =
+                    int thankYouPageId =
                         AccountSection.GetPropertyValue<int>(
-                            nameof(DocumentTypes.AccountSection.RegistrationThankYouPage));
+                            nameof(Models.Umbraco.DocumentTypes.AccountSection.RegistrationThankYouPage));
                     return new RedirectToUmbracoPageResult(thankYouPageId);
 
                 }
@@ -124,7 +123,7 @@
                 return Redirect("/");
             }
 
-            var model = new ValidateAccountViewModel { Email = email, ValidationCode = validationCode };
+            ValidateAccountViewModel model = new ValidateAccountViewModel { Email = email, ValidationCode = validationCode };
             if (!string.IsNullOrWhiteSpace(model.Email) && !string.IsNullOrWhiteSpace(model.ValidationCode))
             {
                 return Validate(model);
@@ -178,18 +177,18 @@
         [RequireAnonymous]
         public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
-            var user = _user.GetByUsername(model.Email);
+            User user = _user.GetByUsername(model.Email);
             if (user != null)
             {
                 // No null checks because there's no possible handing if the properties are not configured and we opt for the 500 page and error log to resolve the issue
-                var accountSection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(AccountSection)).SingleOrDefault();
+                IPublishedContent accountSection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(AccountSection)).SingleOrDefault();
 
-                var forgotPasswordEmailId =
-                    accountSection.GetPropertyValue<Picker>(nameof(DocumentTypes.AccountSection.ForgotPasswordEmail)).SavedValue;
+                object forgotPasswordEmailId =
+                    accountSection.GetPropertyValue<Picker>(nameof(Models.Umbraco.DocumentTypes.AccountSection.ForgotPasswordEmail)).SavedValue;
 
-                var forgotPasswordEmailNode = Umbraco.TypedContent(forgotPasswordEmailId);
+                IPublishedContent forgotPasswordEmailNode = Umbraco.TypedContent(forgotPasswordEmailId);
 
-                var emailTemplate = new DocumentTypes.EmailTemplate();
+                EmailTemplate emailTemplate = new EmailTemplate();
                 _mapper.Map(forgotPasswordEmailNode, emailTemplate);
 
                 emailTemplate.Content = emailTemplate.Content.Replace("{{firstName}}", user.FirstName);
@@ -223,7 +222,7 @@
         [RequireAnonymous]
         public ActionResult ResendValidationEmail(ResendValidationEmailViewModel model)
         {
-            var user = _user.GetByUsername(model.Email);
+            User user = _user.GetByUsername(model.Email);
             if (user != null)
             {
                 if (user.IsApproved)
@@ -259,7 +258,7 @@
                     ModelState.AddModelError(nameof(ChangePasswordViewModel.NewPassword), "Паролите не съвпадат");
                 }
 
-                var changeSuccessful = _membership.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                bool changeSuccessful = _membership.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                 if (changeSuccessful)
                 {
                     return Redirect("/");
@@ -281,20 +280,19 @@
 
         private bool SendAccountValidationEmail(string email, string firstName)
         {
-            var validationPath = Url.RouteUrl("Validate", new RouteValueDictionary
+            string validationPath = Url.RouteUrl("Validate", new RouteValueDictionary
                                                                               {
                                                                                   { "Email", email },
                                                                                   { "ValidationCode",   _membership.GenerateValidationCode(email) }
                                                                               });
+            UriBuilder validationLink = new UriBuilder("https", Request.Url.Host, 443, validationPath);
 
-            var validationLink = new UriBuilder("https", Request.Url.Host, 80, validationPath);
-
-            var accountValidationMailId =
-                AccountSection.GetPropertyValue<Picker>(nameof(DocumentTypes.AccountSection.AccountValidationEmail)).SavedValue;
-            var accountValidationMailNode = Umbraco.Content(accountValidationMailId);
+            object accountValidationMailId =
+                AccountSection.GetPropertyValue<Picker>(nameof(Models.Umbraco.DocumentTypes.AccountSection.AccountValidationEmail)).SavedValue;
+            IPublishedContent accountValidationMailNode = Umbraco.TypedContent(accountValidationMailId);
             if (accountValidationMailNode != null)
             {
-                var emailTemplate = new DocumentTypes.EmailTemplate();
+                EmailTemplate emailTemplate = new EmailTemplate();
                 _mapper.Map(accountValidationMailNode, emailTemplate);
 
                 emailTemplate.Content = emailTemplate.Content.Replace("{{firstName}}", firstName);
@@ -303,7 +301,6 @@
 
                 return _email.SendMail(email, emailTemplate.Content, emailTemplate.Subject);
             }
-
 
             return false;
         }

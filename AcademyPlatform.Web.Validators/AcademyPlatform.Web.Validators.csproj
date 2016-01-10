@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcademyPlatform.Web.Validators</RootNamespace>
     <AssemblyName>AcademyPlatform.Web.Validators</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,10 +43,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\BillingInfoViewModelValidator.cs" />
     <Compile Include="Courses\CreateCourseViewModelValidator.cs" />
+    <Compile Include="Courses\JoinCourseViewModelValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcademyPlatfor.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
+      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
+      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">
+      <Project>{A9F65F1E-F7FA-4C33-8092-CBA90776843B}</Project>
+      <Name>AcademyPlatform.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Services\AcademyPlatform.Services.csproj">
+      <Project>{3901efc5-27fe-4590-bb9a-9ffd3a0b6617}</Project>
+      <Name>AcademyPlatform.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Web.Infrastructure\AcademyPlatform.Web.Infrastructure.csproj">
       <Project>{8ae5320d-2ee3-4891-8363-59d3e1ca3059}</Project>
       <Name>AcademyPlatform.Web.Infrastructure</Name>

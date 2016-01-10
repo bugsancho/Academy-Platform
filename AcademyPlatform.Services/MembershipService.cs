@@ -8,6 +8,7 @@
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Exceptions;
+    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
 
     public class MembershipService : IMembershipService
@@ -36,7 +37,7 @@
 
         public bool ValidateCredentials(string username, string password)
         {
-            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
             if (user != null && user.IsApproved == false)
             {
                 throw new UserNotApprovedException(username);
@@ -47,7 +48,7 @@
 
         public bool IsApproved(string username)
         {
-            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
             if (user == null)
             {
                 throw new UserNotFoundException(username);
@@ -63,7 +64,7 @@
                 throw new ArgumentNullException(nameof(validationCode));
             }
 
-            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
             if (user == null)
             {
                 throw new UserNotFoundException(username);
@@ -81,16 +82,18 @@
 
         public MembershipUser CreateUser(string email, string password, string firstName, string lastName, out MembershipCreateStatus status)
         {
-            var membershipUser = Membership.CreateUser(email, password, email, "n/q", "n/q", true, out status);
+            MembershipUser membershipUser = Membership.CreateUser(email, password, email, "n/q", "n/q", true, out status);
             if (status == MembershipCreateStatus.Success)
             {
-                var user = new User
+                User user = new User
                 {
                     Username = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    RegistrationDate = DateTime.Now
+                    RegistrationDate = DateTime.Now,
+                    BillingInfo = new BillingInfo { FirstName = firstName, LastName = lastName }
                 };
+
                 _users.Add(user);
                 _users.SaveChanges();
             }
@@ -102,7 +105,7 @@
         {
             if (ValidateCredentials(username, oldPassword))
             {
-                var membershipUser = GetUser(username);
+                MembershipUser membershipUser = GetUser(username);
                 return membershipUser.ChangePassword(oldPassword, newPassword);
             }
 
@@ -112,14 +115,14 @@
 
         public string ResetPassword(string username)
         {
-            var membershipUser = GetUser(username);
+            MembershipUser membershipUser = GetUser(username);
             return membershipUser.ResetPassword();
         }
 
         public string GenerateValidationCode(string username)
         {
-            var code = _random.GenerateRandomCode(ValidationCodeLength);
-            var user = _users.All().FirstOrDefault(x => x.Username == username);
+            string code = _random.GenerateRandomCode(ValidationCodeLength);
+            User user = _users.All().FirstOrDefault(x => x.Username == username);
             if (user == null)
             {
                 throw new UserNotFoundException(username);
@@ -140,6 +143,7 @@
 
             return false;
         }
+
         public void Login(string username)
         {
 

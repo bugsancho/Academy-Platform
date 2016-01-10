@@ -13,22 +13,28 @@
 <div class="isotope-container-fitrows grid-space-10">
     @foreach (var course in Model)
     {
-        <div data-category="@(course.Category.Id)" class="isotope-item col-md-4">
-            <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
-                <div class="overlay-container">
-                    <img src="@Url.Content(course.ImageUrl)" style="height: 325px" alt="">
-                    <div class="overlay-to-top">
-                        <p class="small margin-clear">
-                            <em>@course.Title</em>
+        <div data-category="@(course.Category.Id)" class="isotope-item col-md-4 col-sm-6 col-xs-12 course-box">
+            <div class="pv-30 ph-20 feature-box courses text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                <div class="course-bg">
+                    <img src="@Url.Content(course.ImageUrl)" class="course-img" style="height: 325px" alt="@course.Title">
+                    <div class="course-owner">
+                        <a href="#">
+                            @*TODO Replace with asset image or dynamic link*@
+                            <img src="/media/1111/owner-logo-3.png" class="course-owner-logo" alt="" rel="2327" data-id="2327"/>
+                        </a>
+                    </div>
+                    <div class="ph-30 clearfix">
+                        <h3 class="course-title">@course.Title</h3>
+                        <p class="course-category">Платено обучение</p>
+                        <p>
+                            @Html.Raw(course.ShortDescription)<a href="@course.CourseUrl"> виж повече</a>
+                        </p>
+                        <p class="course-start-date">Начална дата: 2016</p>
+                        <p class="pb-20">
+                            <a href="@course.CourseUrl" class="btn-orange btn-lg">Записване</a>
                         </p>
                     </div>
                 </div>
-            </div>
-            <div class="body">
-                <h3>@course.Title</h3>
-                <div class="separator"></div>
-                <p>@Html.Raw(course.ShortDescription).</p>
-                <a href="@course.CourseUrl" class="btn btn-default btn-sm btn-animated margin-clear">Повече за Курса<i class="fa fa-arrow-right pl-10"></i></a>
             </div>
         </div>
 

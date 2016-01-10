@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using AcademyPlatform.Web.Umbraco.DocumentTypeModels;
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Routing;

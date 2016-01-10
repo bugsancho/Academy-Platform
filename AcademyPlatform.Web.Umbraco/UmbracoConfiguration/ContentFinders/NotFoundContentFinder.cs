@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    using AcademyPlatform.Web.Umbraco.DocumentTypeModels;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Routing;

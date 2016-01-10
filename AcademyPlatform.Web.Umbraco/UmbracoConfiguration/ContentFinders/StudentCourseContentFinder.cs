@@ -4,8 +4,7 @@
     using System.Linq;
 
     using AcademyPlatform.Services;
-    using AcademyPlatform.Web.Umbraco.DocumentTypeModels;
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
 
     using global::Umbraco.Core;
     using global::Umbraco.Web;

@@ -4,19 +4,12 @@
     using System.Collections.Generic;
 
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Payments;
 
-    public class User //: IdentityUser
+    public class User
     {
         private ICollection<Course> _courses;
         private ICollection<LectureVisit> _lectureVisits;
-
-        //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
-        //{
-        //    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-        //    var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-        //    // Add custom use\r claims here
-        //    return userIdentity;
-        //}
 
         public int Id { get; set; }
 
@@ -26,11 +19,15 @@
 
         public string LastName { get; set; }
 
+        public string Company { get; set; }
+
         public DateTime RegistrationDate { get; set; }
 
         public string ValidationCode { get; set; }
 
         public bool IsApproved { get; set; }
+        
+        public virtual BillingInfo BillingInfo { get; set; }
 
         public virtual ICollection<Course> Courses
         {

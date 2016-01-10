@@ -8,12 +8,10 @@
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.DocumentTypes;
 
-    using DocumentTypes = DocumentTypeModels;
     using global::Umbraco.Web;
-    using global::Umbraco.Web.Media;
     using global::Umbraco.Web.Models;
     using global::Umbraco.Web.Mvc;
 
@@ -43,7 +41,7 @@
                    .Map(model.Content.AncestorOrSelf(), coursePublishedContentViewModel);
 
             var course = _courses.GetById(coursePublishedContentViewModel.CourseId);
-            var joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseUrl = model.Content.UrlName });
+            var joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
             var courseDetailsViewModel = new CourseDetailsViewModel
             {
                 CourseId = course.Id,
@@ -56,13 +54,11 @@
                 DetailedDescription = coursePublishedContentViewModel.DetailedDescription
             };
 
-            if (User.Identity.IsAuthenticated && _subscriptions.HasSubscription(User.Identity.Name, courseDetailsViewModel.CourseId))
+            if (User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, courseDetailsViewModel.CourseId))
             {
                 var studentPageUrl = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault()?.Url + model.Content.UrlName;
                 ViewBag.StudentPageUrl = studentPageUrl;
             }
-
-
 
             return CurrentTemplate(courseDetailsViewModel);
         }
@@ -71,7 +67,7 @@
         [Authorize]
         public ActionResult StudentCoursePage(RenderModel model)
         {
-            if (!_subscriptions.HasSubscription(User.Identity.Name, model.Content.GetPropertyValue<int>(nameof(Common.DocumentTypes.Course.CourseId))))
+            if (!_subscriptions.HasActiveSubscription(User.Identity.Name, model.Content.GetPropertyValue<int>(nameof(Models.Umbraco.DocumentTypes.Course.CourseId))))
             {
                 return HttpNotFound();
             }
