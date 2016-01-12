@@ -9,7 +9,9 @@
 
         public int UserId { get; set; }
 
-        public DateTime SubscriptionDate { get; set; }
+        public DateTime RequestedDate { get; set; }
+
+        public DateTime? ApprovedDate { get; set; }
 
         public SubscriptionStatus Status { get; set; }
 

@@ -17,7 +17,7 @@
             _coursesContent = coursesContent;
             _courses = courses;
 
-            RuleFor(x => x.AcceptLicenseTerms).Equal(true).WithMessage("Трябва да приемете тъпите лиценс търмс");
+            RuleFor(x => x.AcceptLicenseTerms).Equal(true).WithMessage("Трябва да приемете общите условия");
             When(
                 x =>
                     {

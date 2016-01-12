@@ -4,7 +4,7 @@
 
     public interface ISubscriptionsService
     {
-        void JoinCourse(string username, int courseId);
+        SubscriptionStatus JoinCourse(string username, int courseId);
 
         bool HasActiveSubscription(string username, int courseId);
 

@@ -94,6 +94,7 @@
     <Compile Include="Courses\LectureLinkViewModel.cs" />
     <Compile Include="Courses\LectureViewModel.cs" />
     <Compile Include="Courses\ModuleViewModel.cs" />
+    <Compile Include="Other\AwaitingPaymentViewModel.cs" />
     <Compile Include="Other\StorylineContentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assessments\QuestionAnswer.cs" />

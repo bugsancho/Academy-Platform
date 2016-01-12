@@ -6,7 +6,7 @@ namespace AcademyPlatform.Web.Umbraco.Areas.Admin
     {
         public override string AreaName => "Admin";
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Admin_default",

@@ -10,7 +10,7 @@
     {
         public BillingInfoViewModelValidator()
         {
-            RuleFor(x => x.FirstName).NotNull().WithMessage("Моля попълнете името - nested");
+           // RuleFor(x => x.FirstName).NotNull().WithMessage("Моля попълнете името - nested");
         }
     }
 }

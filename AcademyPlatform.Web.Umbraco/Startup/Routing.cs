@@ -12,12 +12,13 @@
         {
             RouteTable.Routes.MapRoute("Register", "register", new { Controller = "Account", Action = "Register" });
             RouteTable.Routes.MapRoute("Validate", "validate/{email}/{validationCode}", new { Controller = "Account", Action = "Validate", ValidationCode = UrlParameter.Optional });
-            RouteTable.Routes.MapRoute("ForgotPassword", "forgotpassword", new { Controller = "Account", Action = "ForgotPassword" });
-            RouteTable.Routes.MapRoute("ChangePassword", "changepassword", new { Controller = "Account", Action = "ChangePassword" });
-            RouteTable.Routes.MapRoute("ResendValidationEmail", "ResendValidationEmail/{email}", new { Controller = "Account", Action = "ResendValidationEmail",Email = UrlParameter.Optional });
+            RouteTable.Routes.MapRoute("ForgotPassword", "forgot-password", new { Controller = "Account", Action = "ForgotPassword" });
+            RouteTable.Routes.MapRoute("ChangePassword", "change-password", new { Controller = "Account", Action = "ChangePassword" });
+            RouteTable.Routes.MapRoute("ResendValidationEmail", "resend-validation-email/{email}", new { Controller = "Account", Action = "ResendValidationEmail",Email = UrlParameter.Optional });
             RouteTable.Routes.MapRoute("LogOut", "logout", new { Controller = "Account", Action = "LogOut" });
 
             RouteTable.Routes.MapRoute("JoinCourse", "join/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" });
+            RouteTable.Routes.MapRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" });
 
 
 

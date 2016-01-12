@@ -85,7 +85,7 @@
             return SubscriptionStatus.None;
         }
 
-        public void JoinCourse(string username, int courseId)
+        public SubscriptionStatus JoinCourse(string username, int courseId)
         {
             User user = _usersService.GetByUsername(username);
             Course course = _courses.GetById(courseId);
@@ -100,27 +100,35 @@
                 throw new CourseNotFoundException(courseId);
             }
 
-            CourseSubscription existingSubscription = _courseSubscriptions.All().FirstOrDefault(x => x.UserId == user.Id && x.CourseId == courseId);
-            if (existingSubscription != null)
+            CourseSubscription subscription = _courseSubscriptions.All().FirstOrDefault(x => x.UserId == user.Id && x.CourseId == courseId);
+            if (subscription == null)
             {
-                existingSubscription.Status = SubscriptionStatus.Active;
-                _courseSubscriptions.Update(existingSubscription);
-            }
-            else
-            {
-                CourseSubscription subscription = new CourseSubscription
+                bool isPaidCourse = _coursesService.IsPaidCourse(course);
+                subscription = new CourseSubscription
                 {
                     UserId = user.Id,
                     CourseId = courseId,
-                    SubscriptionDate = DateTime.Now,
-                    Status = SubscriptionStatus.Active
+                    RequestedDate = DateTime.Now
                 };
 
-                _courseSubscriptions.Add(subscription);
-            }
-            //TODO implement proper Unit of Work 
-            _courseSubscriptions.SaveChanges();
+                if (isPaidCourse)
+                {
+                    subscription.Status = SubscriptionStatus.AwaitingPayment;
+                    subscription.SubscriptionType = SubscriptionType.Paid;
+                }
+                else
+                {
+                    subscription.Status = SubscriptionStatus.Active;
+                    subscription.SubscriptionType = SubscriptionType.Free;
+                    subscription.ApprovedDate = DateTime.Now;
+                }
 
+                _courseSubscriptions.Add(subscription);
+                //TODO implement proper Unit of Work 
+                _courseSubscriptions.SaveChanges();
+            }
+
+            return subscription.Status;
         }
     }
 }

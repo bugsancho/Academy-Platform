@@ -4,9 +4,11 @@
     using System.Web.Mvc;
 
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Account;
     using AcademyPlatform.Web.Models.Courses;
+    using AcademyPlatform.Web.Models.Other;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
 
@@ -41,11 +43,17 @@
             {
                 return HttpNotFound();
             }
+
             string username = User.Identity.Name;
-            if (_subscriptions.HasActiveSubscription(username, course.Id))
+            SubscriptionStatus subscriptionStatus = _subscriptions.GetSubscriptionStatus(username, course.Id);
+            if (subscriptionStatus == SubscriptionStatus.Active)
             {
                 IPublishedContent studentPageContent = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault();
                 return Redirect(studentPageContent.Url + courseNiceUrl);
+            }
+            else if(subscriptionStatus == SubscriptionStatus.AwaitingPayment)
+            {
+                return RedirectToAction(nameof(AwaitingPayment), new { courseNiceUrl = courseNiceUrl });
             }
 
             JoinCourseViewModel viewModel = new JoinCourseViewModel();
@@ -84,16 +92,44 @@
                     return HttpNotFound();
                 }
 
-                bool requiresBillingInfo = _courses.IsPaidCourse(course);
-
                 string username = User.Identity.Name;
-                _subscriptions.JoinCourse(username, course.Id);
+                SubscriptionStatus status = _subscriptions.JoinCourse(username, course.Id);
 
-                IPublishedContent studentPageContent = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault();
-                return Redirect(studentPageContent.Url + model.CourseNiceUrl);
+                if (status == SubscriptionStatus.Active)
+                {
+                    IPublishedContent studentPageContent = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault();
+                    return Redirect(studentPageContent.Url + model.CourseNiceUrl);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(AwaitingPayment), new { courseNiceUrl = model.CourseNiceUrl });
+                }
+
             }
 
             return JoinCourse(model.CourseNiceUrl);
+        }
+
+        [HttpGet]
+        public ActionResult AwaitingPayment(string courseNiceUrl)
+        {
+            Course course = _coursesContent.GetCourseByNiceUrl(courseNiceUrl);
+            string username = User.Identity.Name;
+            SubscriptionStatus status = _subscriptions.GetSubscriptionStatus(username, course.Id);
+
+            if (status != SubscriptionStatus.AwaitingPayment)
+            {
+                return Redirect("/");
+            }
+
+            AwaitingPaymentViewModel viewModel = new AwaitingPaymentViewModel
+            {
+                CourseName = course.Title,
+                CourseId = course.Id,
+                Username = username
+            };
+
+            return View(viewModel);
         }
     }
 }

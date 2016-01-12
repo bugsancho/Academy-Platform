@@ -1,9 +1,7 @@
 ﻿namespace AcademyPlatform.Data
 {
     using System;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure.Annotations;
     using System.Linq;
 
     using AcademyPlatform.Data.Migrations;
