@@ -1,0 +1,17 @@
+﻿@model AcademyPlatform.Web.Models.Other.AwaitingPaymentViewModel
+@{
+    Layout = "~/Views/Site.cshtml";
+}
+
+@section head
+{
+    <title>Очаквано плащане - Фокус Академия</title>
+}
+
+<div class="container">
+    <h2>Очаквано плащане за курс - @Model.CourseName</h2>
+    <p>Успешно сте записани за курс - @(Model.CourseName).</p>
+    <p>За да получите достъп до обучението, моля направете плащане към нашата сметка: като посочите основание за плащане</p>
+    <p >&quot;Курс № <span class="bold">@Model.CourseId</span>, потребител: <span class="bold">@Model.Username</span>&quot;</p>
+    <p>Сметка, сметка, сметка</p>
+</div>

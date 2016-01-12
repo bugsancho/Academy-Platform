@@ -372,6 +372,7 @@
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
+    <Content Include="Content\Images\falogo-dark.png" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Less\project-theme.css" />
@@ -393,7 +394,7 @@
     <Content Include="Content\ProjectThemeSkins\red.css" />
     <Content Include="Content\ProjectThemeSkins\vivid_red.css" />
     <Content Include="Content\rs-slider.css" />
-    <Content Include="Content\Videos\background-video-banner.mp4" />
+    <Content Include="Content\site.css" />
     <Content Include="default.aspx" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -446,7 +447,6 @@
     <Content Include="Content\Less\_sections.less" />
     <Content Include="Content\Less\_typography.less" />
     <Content Include="Content\project-theme.css.map" />
-    <Content Include="Content\Videos\background-video-banner.webm" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -520,6 +520,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\template.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="umbraco\Views\dashboard\custom\adminPortal.html" />
     <Content Include="Views\Web.config" />
     <Content Include="Config\umbracoSettings.config" />
     <Content Include="Config\tinyMceConfig.config" />
@@ -570,6 +571,7 @@
     <Content Include="Views\MacroPartials\LoginMenu.cshtml" />
     <Content Include="Views\Account\ResendValidationEmail.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BillingInfoViewModel.cshtml" />
+    <Content Include="Views\Subscriptions\AwaitingPayment.cshtml" />
     <None Include="Views\Subscriptions\JoinCourse.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -588,6 +590,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubscriptionsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\CoursesController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\AssessmentController.cs" />
