@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Payments;
 
-    public class Course
+    public class Course : SoftDeletableEntity
     {
         private ICollection<Module> _lectures;
         private ICollection<User> _participants;
@@ -25,6 +26,8 @@
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }
+
+        public decimal? Price { get; set; }
 
         public CoursePricingType PricingType { get; set; }
 

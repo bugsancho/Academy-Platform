@@ -1,0 +1,19 @@
+﻿@using GridMvc.Html
+@model System.Collections.Generic.List<AcademyPlatform.Models.Courses.CourseSubscription>
+
+@{
+    ViewBag.PageTitle = "Очаквани плащания";
+}
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(x => x.User.Username).Titled("Потребител");
+    columns.Add(x => x.Course.Title).Titled("Курс");
+    columns.Add(x => x.CourseId).Titled("Номер на курс");
+    columns.Add(x => x.RequestedDate).Titled("Дата на записване").Format("{0:dd/MM/yyyy}");
+    columns.Add().RenderValueAs(x => Html.ActionLink("Добави плащане", "AddPayment", "SubscriptionsAdmin", new { Area = "Admin", subscriptionId = x.Id }, new { @class = "btn btn-info" })).Encoded(false).Sanitized(false);
+    //columns.Add().RenderValueAs(x => Html.ActionLink("Редактирай", "Edit", "Subscriptions", new { Area = "Admin", id = x.Id }, new { @class = "btn btn-info" })).Encoded(false).Sanitized(false);
+    //columns.Add().RenderValueAs(x => Html.ActionLink("Изтрий", "Delete", "Subscriptions", new { Area = "Admin", id = x.Id }, new { @class = "btn btn-danger" })).Encoded(false).Sanitized(false);
+}
+
+).Sortable(true).WithPaging(10).Filterable(true)
+

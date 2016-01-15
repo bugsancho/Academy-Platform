@@ -2,7 +2,6 @@
 @{
     Layout = null;
 
-
     Html.RequiresCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
     Html.RequiresCss("~/Content/project-theme.css");
     Html.RequiresCss("~/Content/animate.css");
@@ -15,8 +14,9 @@
     Html.RequiresCss("~/Content/rs-slider.css");
     Html.RequiresCss("~/Content/jasny-bootstrap.css");
     Html.RequiresCss("~/Content/animate.css");
+    Html.RequiresCss("~/Content/Gridmvc.css");
 
-    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
+    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js");
     Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
     Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
@@ -34,7 +34,6 @@
     Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.min.js");
     Html.RequiresJs("~/Scripts/Plugins/jquery.vide.js");
     Html.RequiresJs("~/Scripts/gridmvc.min.js");
-
 }
 
 <!DOCTYPE html>
@@ -43,7 +42,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Администрация - Фокус Академия</title>
-    <link href="/Content/Gridmvc.css" rel="stylesheet" type="text/css" />
     <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="@Url.Content("~/Content/Images/falogo-dark.png")">
     @Html.RenderCssHere()
@@ -61,7 +59,7 @@
                         <div class="header-left clearfix">
                             <!-- logo -->
                             <div id="logo" class="logo">
-                                <a href="/Umbraco/Backoffice/Admin/CoursesAdmin"><img src="@Url.Content("~/Content/Images/falogo-dark.png")" alt="Академията"></a>
+                                <a href="@Url.Action("Index", "CoursesAdmin")"><img src="@Url.Content("~/Content/Images/falogo-dark.png")" alt="Академията"></a>
                             </div>
                             <!-- name-and-slogan -->
                             <div class="site-slogan">
@@ -107,6 +105,9 @@
                                                 <li>
                                                     @Html.ActionLink("Категории", "Index", "Categories")
                                                 </li>
+                                                <li>
+                                                    @Html.ActionLink("Очаквани плащания", "Index", "SubscriptionsAdmin")
+                                                </li>
                                             </ul>
                                         </div>
                                         <!-- header dropdown buttons end-->
@@ -144,7 +145,7 @@
         </div>
     </footer>
 
-   
+
     @Html.RenderJsHere()
     @RenderSection("scripts", required: false)
 </body>

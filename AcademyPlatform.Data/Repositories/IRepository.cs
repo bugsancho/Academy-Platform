@@ -21,6 +21,6 @@
 
         void Dispose();
 
-        IQueryable<T> AllIncluding<TProp>(params Expression<Func<T,TProp>>[] expressions);
+        IQueryable<T> AllIncluding<TProp>(params Expression<Func<T, TProp>>[] expressions);
     }
 }

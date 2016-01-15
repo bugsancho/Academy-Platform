@@ -96,6 +96,7 @@
     <Compile Include="Courses\ModuleViewModel.cs" />
     <Compile Include="Other\AwaitingPaymentViewModel.cs" />
     <Compile Include="Other\StorylineContentViewModel.cs" />
+    <Compile Include="Payments\PaymentEditViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assessments\QuestionAnswer.cs" />
     <Compile Include="Umbraco\DocumentTypes\AccountSection.cs" />

@@ -4,7 +4,9 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public class LectureVisit
+    using AcademyPlatform.Models.Base;
+
+    public class LectureVisit : SoftDeletableEntity
     {
         //public int Id { get; set; }
 

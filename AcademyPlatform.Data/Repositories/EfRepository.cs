@@ -5,8 +5,10 @@
     using System.Linq;
     using System.Linq.Expressions;
 
+    using AcademyPlatform.Models.Base;
+
     public class EfRepository<T> : IRepository<T>
-        where T : class
+        where T : class, ISoftDeletableEntity
     {
         protected IAcademyPlatformDbContext context;
         protected IDbSet<T> set;
@@ -19,7 +21,7 @@
 
         public IQueryable<T> All()
         {
-            return this.set;
+            return this.set.Where(x => x.IsDeleted == false);
         }
 
         public IQueryable<T> AllIncluding<TProp>(params Expression<Func<T,TProp>>[] expressions)

@@ -23,7 +23,9 @@
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; }
-        
+
+        //public CoursePricingType PricingType { get; set; }
+
         [Display(Name = "Крайна дата")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]

@@ -3,10 +3,11 @@
     using System;
     using System.Collections.Generic;
 
+    using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Payments;
 
-    public class User
+    public class User : SoftDeletableEntity
     {
         private ICollection<Course> _courses;
         private ICollection<LectureVisit> _lectureVisits;

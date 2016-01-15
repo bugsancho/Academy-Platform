@@ -1,13 +1,16 @@
 ﻿namespace AcademyPlatform.Data
 {
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Linq;
 
     using AcademyPlatform.Data.Migrations;
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Payments;
 
     public class AcademyPlatformDbContext : DbContext, IAcademyPlatformDbContext
     {
@@ -20,7 +23,19 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CourseSubscription>()
-                .HasKey(x => new { x.CourseId, x.UserId });
+                .Property(x => x.CourseId)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_CourseIdUserId", 1) { IsUnique = true }));
+
+            modelBuilder.Entity<CourseSubscription>()
+                .Property(x => x.UserId)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_CourseIdUserId", 2) { IsUnique = true }));
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -35,9 +50,19 @@
 
         public IDbSet<CourseSubscription> CourseSubscriptions { get; set; }
 
+        public IDbSet<Payment> Payments { get; set; }
+
         public static AcademyPlatformDbContext Create()
         {
             return new AcademyPlatformDbContext();
+        }
+
+        public override int SaveChanges()
+        {
+            ApplyAuditInfoRules();
+            ApplyDeletableEntityRules();
+
+            return base.SaveChanges();
         }
 
         private void ApplyAuditInfoRules()

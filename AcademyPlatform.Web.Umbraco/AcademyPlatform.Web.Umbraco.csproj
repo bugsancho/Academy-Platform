@@ -488,6 +488,8 @@
     <Content Include="Config\404handlers.config" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Areas\Admin\Views\SubscriptionsAdmin\Index.cshtml" />
+    <None Include="Areas\Admin\Views\SubscriptionsAdmin\AddPayment.cshtml" />
     <None Include="Properties\PublishProfiles\FocusAcademyUmbraco.pubxml" />
     <None Include="Properties\PublishProfiles\LocalUmbracoDeploy.pubxml" />
     <None Include="Scripts\jquery-1.12.0.intellisense.js" />
@@ -590,7 +592,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoursesAdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SubscriptionsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubscriptionsAdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\CoursesController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\AssessmentController.cs" />

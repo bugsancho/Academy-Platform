@@ -2,9 +2,13 @@
 {
     using System;
 
-    public class CourseSubscription
+    using AcademyPlatform.Models.Base;
+
+    public class CourseSubscription : SoftDeletableEntity
     {
-        //Composite primary key(CourseId & UserId)
+        public int Id { get; set; }
+
+        //Unique constraint on(CourseId & UserId)
         public int CourseId { get; set; }
 
         public int UserId { get; set; }
