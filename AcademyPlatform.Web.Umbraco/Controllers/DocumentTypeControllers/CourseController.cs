@@ -42,6 +42,7 @@
 
             var course = _courses.GetById(coursePublishedContentViewModel.CourseId);
             var joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
+
             var courseDetailsViewModel = new CourseDetailsViewModel
             {
                 CourseId = course.Id,
@@ -51,8 +52,30 @@
                 ImageUrl = coursePublishedContentViewModel.CoursePicture.Url,
                 CoursesPageUrl = model.Content.Parent.Url,
                 JoinCourseUrl = joinCourseUrl,
-                DetailedDescription = coursePublishedContentViewModel.DetailedDescription
+                DetailedDescription = coursePublishedContentViewModel.DetailedDescription,
+                ShortDescription = coursePublishedContentViewModel.ShortDescription,
+
             };
+            //========================================================================================
+            var modulesPublishedContent = new List<Module>();
+            var modulesContent = model.Content.DescendantsOrSelf(nameof(Module)).ToList();
+            _mapper.Map(model.Content, coursePublishedContentViewModel)
+                .MapCollection(modulesContent, modulesPublishedContent);
+            foreach (var moduleContent in modulesContent)
+            {
+                var module = new ModuleViewModel();
+                module.Name = moduleContent.Name;
+                var lecturesContent = moduleContent.DescendantsOrSelf(nameof(Lecture)).ToList();
+                foreach (var lectureContent in lecturesContent)
+                {
+                    var lecture = new LectureLinkViewModel();
+                    _mapper.Map(lectureContent, lecture);
+                    lecture.IsVisited = _subscriptions.IsLectureVisited(User.Identity.Name, lectureContent.Id);
+                    module.LectureLinks.Add(lecture);
+                }
+                courseDetailsViewModel.Modules.Add(module);
+            }
+            //====================================================================
 
             if (User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, courseDetailsViewModel.CourseId))
             {

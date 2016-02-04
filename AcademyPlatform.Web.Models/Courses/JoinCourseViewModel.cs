@@ -12,8 +12,11 @@
 
         public BillingInfoViewModel BillingInfo { get; set; }
 
-        public string LicenseTerms { get; set; }
-        
+        public string LicenseTermsUrl { get; set; }
+
+        [Display(Name = "Общи условия.")]
         public bool AcceptLicenseTerms { get; set; }
+
+        public string CourseName { get; set; }
     }
 }

@@ -20,12 +20,15 @@
     {
         private readonly ICoursesService _courses;
 
+        private readonly ISubscriptionsService _subscriptions;
+
         private readonly IUmbracoMapper _mapper;
 
-        public CoursesSurfaceController(ICoursesService courses, IUmbracoMapper mapper)
+        public CoursesSurfaceController(ICoursesService courses, IUmbracoMapper mapper, ISubscriptionsService subscriptions)
         {
             _courses = courses;
             _mapper = mapper;
+            _subscriptions = subscriptions;
         }
 
         [ChildActionOnly]
@@ -56,14 +59,16 @@
                     CourseUrl = coursesContent.Url,
                     ImageUrl = coursesContent.CoursePicture.Url,
                     ShortDescription = coursesContent.ShortDescription,
-                    Category = course.Category
-                }).ToList();
+                    Category = course.Category,
+                    IsJoined = User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, course.Id),
+                    JoinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = coursesContent.UrlName }),
+
+        }).ToList();
 
             //TODO Find out why(if) distinct works without implementing IEquitable<T>
             ViewBag.Categories = coursesViewModels.Select(x => x.Category).Distinct();
             return PartialView(coursesViewModels);
         }
-
 
     }
 

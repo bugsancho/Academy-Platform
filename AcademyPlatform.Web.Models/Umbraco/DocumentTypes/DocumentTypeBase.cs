@@ -8,5 +8,7 @@
 
         public string Name { get; set; }
 
+        public string UrlName { get; set; }
+
     }
 }

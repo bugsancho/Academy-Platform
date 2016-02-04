@@ -4,6 +4,9 @@
     ViewBag.PageTitle = "Курсове";
 }
 
+@Html.ActionLink("Създаване на обучение", "Create", null , new { @class = "btn btn-danger" })
+
+
 @Html.Grid(Model).Columns(columns =>
 {
     columns.Add(x => x.Id);

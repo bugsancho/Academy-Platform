@@ -1,12 +1,19 @@
 ﻿namespace AcademyPlatform.Web.Models.Courses
 {
+    using System.Collections.Generic;
+
     using AcademyPlatform.Models.Courses;
 
     public class CourseDetailsViewModel
     {
-         public int CourseId { get; set; }
+        public CourseDetailsViewModel()
+        {
+            Modules = new List<ModuleViewModel>();
+        }
 
-         public string Title { get; set; }
+        public int CourseId { get; set; }
+
+        public string Title { get; set; }
 
         public string CoursesPageUrl { get; set; }
 
@@ -19,5 +26,9 @@
         public string LecturerName { get; set; }
 
         public string DetailedDescription { get; set; }
+
+        public ICollection<ModuleViewModel> Modules { get; set; }
+
+        public string ShortDescription { get; set; }
     }
 }

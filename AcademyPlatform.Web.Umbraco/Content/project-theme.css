@@ -2951,8 +2951,8 @@ ul.pagination li.active a,
   border-color: transparent;
 }
 .nav-pills.nav-stacked:not(.list-style-icons) > li > a:after {
-  font-family: "FontAwesome";
-  content: "\f101";
+  /*font-family: "FontAwesome";
+  content: "\f101";*/
   font-size: 12px;
   position: absolute;
   right: 15px;
@@ -2988,8 +2988,8 @@ ul.pagination li.active a,
   position: relative;
 }
 .process .nav-pills > li + li:after {
-  font-family: "FontAwesome";
-  content: "\f101";
+  /*font-family: "FontAwesome";
+  content: "\f101";*/
   position: absolute;
   top: 6px;
   left: -24px;

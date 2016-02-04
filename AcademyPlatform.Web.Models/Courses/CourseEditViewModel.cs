@@ -17,6 +17,7 @@
         public string Tagline { get; set; }
 
         [UIHint("EntityDropdown")]
+        [Display(Name = "Категория")]
         public int CategoryId { get; set; }
         
         [Display(Name = "Начална дата")]
@@ -24,11 +25,15 @@
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime StartDate { get; set; }
 
-        //public CoursePricingType PricingType { get; set; }
-
         [Display(Name = "Крайна дата")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime EndDate { get; set; }
+
+        [Display(Name = "Вид на курса")]
+        public CoursePricingType PricingType { get; set; }
+
+        [Display(Name = "Цена")]
+        public decimal Price { get; set; }
     }
 }

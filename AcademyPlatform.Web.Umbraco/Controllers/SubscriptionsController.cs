@@ -39,6 +39,7 @@
         public ActionResult JoinCourse(string courseNiceUrl)
         {
             Course course = _coursesContent.GetCourseByNiceUrl(courseNiceUrl);
+            
             if (course == null)
             {
                 return HttpNotFound();
@@ -57,6 +58,7 @@
             }
 
             JoinCourseViewModel viewModel = new JoinCourseViewModel();
+            viewModel.CourseName = course.Title;
             viewModel.RequiresBillingInfo = _courses.IsPaidCourse(course);
             if (viewModel.RequiresBillingInfo)
             {
@@ -73,7 +75,7 @@
             if (licenseAgreement != default(int))
             {
                 IPublishedContent licenseAgreementPage = Umbraco.TypedContent(licenseAgreement);
-                viewModel.LicenseTerms = licenseAgreementPage.GetPropertyValue<string>(nameof(ContentPage.Content));
+                viewModel.LicenseTermsUrl = licenseAgreementPage.Url;
             }
 
 

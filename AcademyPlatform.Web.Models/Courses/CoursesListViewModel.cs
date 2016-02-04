@@ -15,5 +15,8 @@
 
         public string ShortDescription { get; set; }
 
+        public string JoinCourseUrl { get; set; }
+
+        public bool IsJoined { get; set; }
     }
 }

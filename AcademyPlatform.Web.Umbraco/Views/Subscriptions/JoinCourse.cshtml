@@ -3,29 +3,32 @@
     Layout = "~/Views/Site.cshtml";
 }
 <div class="container">
-    <h2>Записване за курс - </h2>
-    @using (Html.BeginForm())
-    {
-        if (Model.RequiresBillingInfo)
+    <h2>Записване за курс - @Model.CourseName</h2>
+    <div class="form-horizontal">
+
+        @using (Html.BeginForm())
         {
-            @Html.EditorFor(x => x.BillingInfo)
+
+            if (Model.RequiresBillingInfo)
+            {
+                @Html.EditorFor(x => x.BillingInfo)
+            }
+           
+            <div class="form-group">
+                @Html.LabelFor(model => model.AcceptLicenseTerms, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AcceptLicenseTerms)
+                    @Html.ValidationMessageFor(model => model.AcceptLicenseTerms, "", new { @class = "text-danger" })
+                    <span>Прочетох и приемам <a href="@Model.LicenseTermsUrl" target="_blank">общите условия за ползване</a> на Focus Academy.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-2">
+                    <button class="btn btn-group btn-danger btn-animated">Запиши се <i class="fa fa-check"></i></button>
+                </div>
+            </div>
+
         }
-        <div class="form-group">
-            @Html.Raw(Model.LicenseTerms)
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AcceptLicenseTerms, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AcceptLicenseTerms)
-                @Html.ValidationMessageFor(model => model.AcceptLicenseTerms, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-8">
-                <button class="btn btn-group btn-danger btn-animated">Запиши се <i class="fa fa-check"></i></button>
-            </div>
-        </div>
-    }
+    </div>
 </div>

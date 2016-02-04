@@ -1,5 +1,6 @@
 ﻿@using AcademyPlatform.Models.Courses
 @inherits UmbracoViewPage<IList<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>>
+
 <div class="filters">
     <ul class="nav nav-pills">
         <li class="active"><a href="#" data-filter="*">Всички</a></li>
@@ -16,23 +17,32 @@
         <div data-category="@(course.Category.Id)" class="isotope-item col-md-4 col-sm-6 col-xs-12 course-box">
             <div class="pv-30 ph-20 feature-box courses text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                 <div class="course-bg">
-                    <img src="@Url.Content(course.ImageUrl)" class="course-img" style="height: 325px" alt="@course.Title">
+                    <img src="@Url.Content(course.ImageUrl)" class="course-img" style="max-height: 195px" alt="@course.Title">
                     <div class="course-owner">
-                        <a href="#">
+                        @* TODO Replace with real owner information *@
+                        <a href="/partners/training-partner-icl/" target="_blank">
                             @*TODO Replace with asset image or dynamic link*@
-                            <img src="/media/1111/owner-logo-3.png" class="course-owner-logo" alt="" rel="2327" data-id="2327"/>
+                            <img src="/media/1111/owner-logo-3.png" class="course-owner-logo" alt="" rel="2327" data-id="2327" />
                         </a>
                     </div>
                     <div class="ph-30 clearfix">
                         <h3 class="course-title">@course.Title</h3>
-                        <p class="course-category">Платено обучение</p>
-                        <p>
-                            @Html.Raw(course.ShortDescription)<a href="@course.CourseUrl"> виж повече</a>
-                        </p>
-                        <p class="course-start-date">Начална дата: 2016</p>
-                        <p class="pb-20">
-                            <a href="@course.CourseUrl" class="btn-orange btn-lg">Записване</a>
-                        </p>
+                        @*<p class="course-category">Платено обучение</p>*@
+                        <div class="course-short-description">
+                            @Html.Raw(course.ShortDescription)
+                        </div>
+                        <div class="pb-30">
+                            @if (course.IsJoined)
+                            {
+                                <br />
+                                <a href="@course.CourseUrl" class="btn-default btn-lg">Към курса</a>
+                            }
+                            else
+                            {
+                                <p><a href="@course.CourseUrl"> виж повече</a></p>
+                                <a href="@course.JoinCourseUrl" class="btn-orange btn-lg">Запиши се</a>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,4 +50,3 @@
 
     }
 </div>
-

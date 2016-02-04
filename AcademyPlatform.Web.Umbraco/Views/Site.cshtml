@@ -5,17 +5,17 @@
 
 
     Html.RequiresCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
-    Html.RequiresCss("~/Content/custom.css");
     Html.RequiresCss("~/Content/site.css");
     Html.RequiresCss("~/Content/animate.css");
     Html.RequiresCss("~/Content/animations.css");
-    Html.RequiresCss("~/Content/project-theme.css");
-    Html.RequiresCss("~/Content/ProjectThemeSkins/light_blue.css");
     Html.RequiresCss("~/Content/Fonts/font-awesome.css");
     Html.RequiresCss("~/Content/hover.css");
+    Html.RequiresCss("~/Content/animate.css");
     Html.RequiresCss("~/Content/rs-slider.css");
     Html.RequiresCss("~/Content/jasny-bootstrap.css");
-    Html.RequiresCss("~/Content/animate.css");
+    Html.RequiresCss("~/Content/project-theme.css");
+    Html.RequiresCss("~/Content/ProjectThemeSkins/green.css");
+    Html.RequiresCss("~/Content/custom.css");
 
     Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
     Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
@@ -27,13 +27,13 @@
     Html.RequiresJs("~/Scripts/Plugins/SmoothScroll.js");
     Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.revolution.js");
     Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.tools.min.js");
-    Html.RequiresJs("~/Scripts/Plugins/jquery.waypoints.js");
     Html.RequiresJs("~/Scripts/Plugins/jquery.browser.js");
-    Html.RequiresJs("~/Scripts/template.js");
-    Html.RequiresJs("~/Scripts/custom.js");
+    Html.RequiresJs("~/Scripts/Plugins/jquery.waypoints.js");
     Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.js");
     Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.min.js");
     Html.RequiresJs("~/Scripts/Plugins/jquery.vide.js");
+    Html.RequiresJs("~/Scripts/template.js");
+    Html.RequiresJs("~/Scripts/Custom.js");
 }
 <!DOCTYPE html>
 <html>
@@ -42,6 +42,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.png")">
+    @* NEW *@
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Jura:400,500,600,300&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    @* NEW END *@
     @Html.RenderCssHere()
     @RenderSection("head", false)
 </head>
@@ -60,6 +68,9 @@
     </div>
     @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
     @Html.RenderJsHere()
-    @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6iMoH6Ha1MoMKpSYrsaX-7ItFRTpizPQ" type="text/javascript"></script>
+
+    <script src="~/Scripts/Plugins/googleMaps.js"></script>
 </body>
 </html>

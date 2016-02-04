@@ -372,7 +372,6 @@
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
-    <Content Include="Content\Images\falogo-dark.png" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Less\project-theme.css" />
@@ -490,6 +489,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Areas\Admin\Views\SubscriptionsAdmin\Index.cshtml" />
     <None Include="Areas\Admin\Views\SubscriptionsAdmin\AddPayment.cshtml" />
+    <Content Include="Config\ConnectionStrings.config" />
+    <Content Include="Config\machineKey.config" />
+    <Content Include="Config\smtp.config" />
     <None Include="Properties\PublishProfiles\FocusAcademyUmbraco.pubxml" />
     <None Include="Properties\PublishProfiles\LocalUmbracoDeploy.pubxml" />
     <None Include="Scripts\jquery-1.12.0.intellisense.js" />
@@ -503,6 +505,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\Plugins\googleMaps.js" />
     <Content Include="Scripts\Plugins\isotope.pkgd.js" />
     <Content Include="Scripts\Plugins\isotope.pkgd.min.js" />
     <Content Include="Scripts\Plugins\jasny-bootstrap.js" />
@@ -658,6 +661,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Content\Images\" />
     <Folder Include="Views\ErrorPage\" />
   </ItemGroup>
   <PropertyGroup>
