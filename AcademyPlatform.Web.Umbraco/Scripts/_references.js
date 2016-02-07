@@ -15,6 +15,7 @@
 /// <reference path="plugins/isotope.pkgd.js" />
 /// <reference path="plugins/jasny-bootstrap.js" />
 /// <reference path="plugins/jquery.browser.js" />
+/// <reference path="plugins/jquery.magnific-popup.min.js" />
 /// <reference path="plugins/jquery.themepunch.revolution.js" />
 /// <reference path="plugins/jquery.themepunch.tools.min.js" />
 /// <reference path="plugins/jquery.vide.js" />

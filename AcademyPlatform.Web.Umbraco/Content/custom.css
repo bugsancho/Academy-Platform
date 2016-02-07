@@ -520,6 +520,12 @@ h4 {
     height: 550px;
 }
 
+@media screen and (min-width: 1080px) {
+    #map {
+        height: 700px;
+    }
+}
+
 
 /*================= Contacts Styles =================*/
 .contacts-page-title {
@@ -730,7 +736,7 @@ h4 {
             color: #ffffff;
         }
 
-        .course-img-container .inner > p {
+        .course-img-container .inner > h4 {
             font-size: 20px;
             color: #ffffff;
             text-align: justify;

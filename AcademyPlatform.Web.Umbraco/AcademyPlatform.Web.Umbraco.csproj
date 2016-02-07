@@ -376,6 +376,7 @@
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Less\project-theme.css" />
     <Content Include="Content\Less\project-theme.min.css" />
+    <Content Include="Content\magnific-popup.css" />
     <Content Include="Content\project-theme.css" />
     <Content Include="Content\project-theme.min.css" />
     <Content Include="Content\ProjectThemeSkins\blue.css" />
@@ -518,6 +519,7 @@
     <Content Include="Scripts\Plugins\jquery.vide.min.js" />
     <Content Include="Scripts\Plugins\jquery.waypoints.js" />
     <Content Include="Scripts\Plugins\jquery.waypoints.min.js" />
+    <Content Include="Scripts\Plugins\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\Plugins\SmoothScroll.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
