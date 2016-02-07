@@ -36,6 +36,20 @@
                     new IndexAnnotation(
                         new IndexAttribute("IX_CourseIdUserId", 2) { IsUnique = true }));
 
+            modelBuilder.Entity<Lecture>()
+                .Property(x => x.ExternalId)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_LectureExternalId") { IsUnique = true }));
+
+            modelBuilder.Entity<Lecture>()
+                .Property(x => x.CourseId)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IX_LectureCourseId")));
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -46,7 +60,9 @@
 
         public IDbSet<Category> Categories { get; set; }
 
-        public IDbSet<Module> Lectures { get; set; }
+        public IDbSet<Lecture> Lectures { get; set; }
+
+        public IDbSet<LectureVisit> LectureVisits { get; set; }
 
         public IDbSet<CourseSubscription> CourseSubscriptions { get; set; }
 

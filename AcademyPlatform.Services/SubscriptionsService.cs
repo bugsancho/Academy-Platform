@@ -27,35 +27,6 @@
             _usersService = usersService;
         }
 
-        //TODO move to separate service
-        public bool IsLectureVisited(string username, int lectureId)
-        {
-            User user = _users.All().FirstOrDefault(x => x.Username == username);
-            return user != null && user.LectureVisits.Any(x => x.LectureId == lectureId);
-        }
-
-        public void TrackLectureVisit(string username, int lectureId)
-        {
-            User user = _users.All().FirstOrDefault(x => x.Username == username);
-            if (user == null)
-            {
-                throw new UserNotFoundException(username);
-            }
-
-            LectureVisit lectureVisit = user.LectureVisits.FirstOrDefault(x => x.LectureId == lectureId);
-            if (lectureVisit == null)
-            {
-                user.LectureVisits.Add(new LectureVisit { User = user, LectureId = lectureId, LastVisitDate = DateTime.Now });
-            }
-            else
-            {
-                lectureVisit.LastVisitDate = DateTime.Now;
-            }
-
-            //TODO implement proper Unit of Work 
-            _users.SaveChanges();
-        }
-
         public bool HasActiveSubscription(string username, int courseId)
         {
             SubscriptionStatus status = GetSubscriptionStatus(username, courseId);

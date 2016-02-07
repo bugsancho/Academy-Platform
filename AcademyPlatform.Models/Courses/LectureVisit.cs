@@ -14,9 +14,13 @@
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
+        
+        public int ExternalLectureId { get; set; }
 
         [Key, Column(Order = 1)]
         public int LectureId { get; set; }
+
+        public Lecture Lecture { get; set; }
 
         public DateTime LastVisitDate { get; set; }
     }

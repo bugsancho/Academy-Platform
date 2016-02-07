@@ -58,7 +58,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException($"Storyline content archive doesnt contain file with name {StorylineFileName}");
+                    throw new ArgumentException($"Storyline content archive {archivePath} doesnt contain file with name {StorylineFileName}");
                 }
             }
             else

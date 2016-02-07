@@ -15,13 +15,15 @@
     [Authorize]
     public class LectureController : RenderMvcController
     {
+        private readonly ILecturesService _lectures;
         private readonly IUmbracoMapper _mapper;
         private readonly ISubscriptionsService _subscriptions;
 
-        public LectureController(IUmbracoMapper mapper, ISubscriptionsService subscriptions)
+        public LectureController(IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures)
         {
             _mapper = mapper;
             _subscriptions = subscriptions;
+            _lectures = lectures;
         }
 
         public override ActionResult Index(RenderModel model)
@@ -56,7 +58,7 @@
                 lectureViewModel.OtherLectures.Add(lecture);
             }
 
-            _subscriptions.TrackLectureVisit(User.Identity.Name, model.Content.Id);
+            _lectures.TrackLectureVisit(User.Identity.Name, model.Content.Id);
             return CurrentTemplate(lectureViewModel);
         }
     }

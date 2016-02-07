@@ -1,5 +1,4 @@
-﻿@using AcademyPlatform.Web.Umbraco.UmbracoModels.Macros
-@inherits Umbraco.Web.Macros.PartialViewMacroPage
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @{
     int contentMediaId = Convert.ToInt32(Model.MacroParameters["ContentZipArchive"]);
 
@@ -7,11 +6,6 @@
     Html.RenderAction("RenderStorylineContent", "StoryLineContentSurface", new RouteValueDictionary
     {
          {"ContentZipArchive", contentMediaId}
-
-
-
-
-
     });
 
 }

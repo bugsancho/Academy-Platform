@@ -60,6 +60,8 @@
     <Compile Include="EmailService.cs" />
     <Compile Include="Contracts\IEmailService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Contracts\ILecturesService.cs" />
+    <Compile Include="LecturesService.cs" />
     <Compile Include="MembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubscriptionsService.cs" />

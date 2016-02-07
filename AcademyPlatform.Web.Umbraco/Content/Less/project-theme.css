@@ -2495,7 +2495,7 @@ fieldset[disabled] .btn-default {
 }
 /* Tabs
 ---------------------------------- */
-.nav-tabs.style-1 {
+/*.nav-tabs.style-1 {
   border-bottom: 1px solid #e1e1e1;
   margin-bottom: 15px;
 }
@@ -2576,7 +2576,7 @@ fieldset[disabled] .btn-default {
 .nav-tabs.style-1 + .tab-content > .tab-pane {
   padding-bottom: 0;
   border-bottom: none;
-}
+}*/
 .nav-tabs.style-2 {
   border-bottom: 1px solid #f1f1f1;
 }

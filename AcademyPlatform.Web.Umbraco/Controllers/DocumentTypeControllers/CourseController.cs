@@ -22,18 +22,20 @@
         private readonly ICoursesService _courses;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICategoryService _categories;
+        private readonly ILecturesService _lectures;
         private readonly IUmbracoMapper _mapper;
 
 
-        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions)
+        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures)
         {
             _courses = courses;
             _categories = categories;
             _mapper = mapper;
             _subscriptions = subscriptions;
+            _lectures = lectures;
         }
 
-        [HttpGet]
+        [HttpGet]   
         public ActionResult Course(RenderModel model)
         {
             var coursePublishedContentViewModel = new Course();
@@ -42,7 +44,7 @@
 
             var course = _courses.GetById(coursePublishedContentViewModel.CourseId);
             var joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
-
+           
             var courseDetailsViewModel = new CourseDetailsViewModel
             {
                 CourseId = course.Id,
@@ -70,7 +72,7 @@
                 {
                     var lecture = new LectureLinkViewModel();
                     _mapper.Map(lectureContent, lecture);
-                    lecture.IsVisited = _subscriptions.IsLectureVisited(User.Identity.Name, lectureContent.Id);
+                    lecture.IsVisited = _lectures.IsLectureVisited(User.Identity.Name, lectureContent.Id);
                     module.LectureLinks.Add(lecture);
                 }
                 courseDetailsViewModel.Modules.Add(module);
@@ -118,7 +120,7 @@
                 {
                     var lecture = new LectureLinkViewModel();
                     _mapper.Map(lectureContent, lecture);
-                    lecture.IsVisited = _subscriptions.IsLectureVisited(User.Identity.Name, lectureContent.Id);
+                    lecture.IsVisited = _lectures.IsLectureVisited(User.Identity.Name, lectureContent.Id);
                     module.LectureLinks.Add(lecture);
                 }
                 courseViewModel.Modules.Add(module);

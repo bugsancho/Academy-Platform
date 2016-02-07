@@ -60,6 +60,7 @@
     <Compile Include="Courses\CourseDifficultyType.cs" />
     <Compile Include="Courses\CoursePricingType.cs" />
     <Compile Include="Courses\CourseSubscription.cs" />
+    <Compile Include="Courses\Lecture.cs" />
     <Compile Include="Courses\LectureVisit.cs" />
     <Compile Include="Courses\Module.cs" />
     <Compile Include="Courses\SubscriptionStatus.cs" />
