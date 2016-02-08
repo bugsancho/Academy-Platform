@@ -1,21 +1,27 @@
 ﻿@using AcademyPlatform.Models.Courses
 @inherits UmbracoViewPage<IList<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>>
-
-<div class="filters">
-    <ul class="nav nav-pills">
-        <li class="active"><a href="#" data-filter="*">Всички</a></li>
-        @foreach (var category in (IEnumerable<Category>)ViewBag.Categories)
-        {
-            <li><a href="#" data-filter="[data-category=@category.Id]">@category.Title</a></li>
-        }
-    </ul>
-</div>
+@{
+    //TODO Use this variable and to the filter hiding magic!
+    bool shouldHideFilters = ViewBag.ShouldHideFilters;
+}
+@if (!shouldHideFilters)
+{
+    <div class="filters">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#" data-filter="*">Всички</a></li>
+            @foreach (var category in (IEnumerable<Category>)ViewBag.Categories)
+            {
+                <li><a href="#" data-filter="[data-category=@category.Id]">@category.Title</a></li>
+            }
+        </ul>
+    </div>
+}
 <!--Isotope filters END-->
 <div class="isotope-container-fitrows grid-space-10">
     @foreach (var course in Model)
     {
         <div data-category="@(course.Category.Id)" class="isotope-item col-md-4 col-sm-6 col-xs-12 course-box">
-            <div class="pv-30 ph-20 feature-box courses text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+            <div class="pv-30 ph-20 feature-box courses text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall">
                 <div class="course-bg">
                     <img src="@Url.Content(course.ImageUrl)" class="course-img" style="max-height: 195px" alt="@course.Title">
                     <div class="course-owner">

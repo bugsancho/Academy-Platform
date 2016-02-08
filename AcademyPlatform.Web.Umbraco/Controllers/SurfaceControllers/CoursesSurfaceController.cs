@@ -32,9 +32,14 @@
         }
 
         [ChildActionOnly]
-        public ActionResult RenderCoursesGrid()
+        public ActionResult RenderCoursesGrid(int numberOfCourses, bool shouldHideFilters)
         {
-            IEnumerable<IPublishedContent> coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(Course));
+            IEnumerable<IPublishedContent> coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(Course)).OrderByDescending(x => x.CreateDate);
+            if (numberOfCourses != default(int))
+            {
+                coursesContentCollection = coursesContentCollection.Take(numberOfCourses);
+            }
+
             List<Course> coursesContentViewModels = new List<Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
                    .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
@@ -47,7 +52,7 @@
                       }
                     });
 
-            IEnumerable<AcademyPlatform.Models.Courses.Course> courses = _courses.GetActiveCourses();
+            IEnumerable<AcademyPlatform.Models.Courses.Course> courses = _courses.GetActiveCourses().ToList();
 
             List<CoursesListViewModel> coursesViewModels = courses.Join(
                 coursesContentViewModels,
@@ -63,10 +68,11 @@
                     IsJoined = User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, course.Id),
                     JoinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = coursesContent.UrlName }),
 
-        }).ToList();
+                }).ToList();
 
             //TODO Find out why(if) distinct works without implementing IEquitable<T>
             ViewBag.Categories = coursesViewModels.Select(x => x.Category).Distinct();
+            ViewBag.ShouldHideFilters = shouldHideFilters;
             return PartialView(coursesViewModels);
         }
 

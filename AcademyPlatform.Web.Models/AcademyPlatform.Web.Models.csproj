@@ -117,6 +117,7 @@
     <Compile Include="Umbraco\DocumentTypes\MultipleOptionsQuestion.cs" />
     <Compile Include="Umbraco\DocumentTypes\Seo.cs" />
     <Compile Include="Umbraco\DocumentTypes\StudentPage.cs" />
+    <Compile Include="Umbraco\Macros\CoursesGrid.cs" />
     <Compile Include="Umbraco\Macros\StorylineContent.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -662,6 +662,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Plugins\BoxPlaceholderEditor\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Views\ErrorPage\" />
