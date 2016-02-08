@@ -3,20 +3,20 @@
     using System;
     using System.Collections.Generic;
 
-    public class AssessmentSubmission
+    using AcademyPlatform.Models.Base;
+
+    public class AssessmentSubmission :SoftDeletableEntity
     {
         public int Id { get; set; }
 
-        public int AssessmentId { get; set; }
+        public int AssessmentRequestId { get; set; }
 
-        public virtual Assessment Assessment { get; set; }
-
-        public string UserId { get; set; }
-
-        public virtual User User { get; set; }
+        public AssessmentRequest AssessmentRequest { get; set; }
 
         public DateTime SubmissionDate { get; set; }
 
-        public ICollection<QuestionSubmission> QuestionSubmissions { get; set; }
+        public string Submission { get; set; }
+
+        public bool IsSuccessful { get; set; }
     }
 }

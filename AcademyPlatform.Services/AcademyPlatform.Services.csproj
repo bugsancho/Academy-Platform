@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssessmentsService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="Contracts\ICategoryService.cs" />
     <Compile Include="Contracts\IMembershipService.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Contracts\IEmailService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Contracts\ILecturesService.cs" />
+    <Compile Include="Contracts\IAssessmentsService.cs" />
     <Compile Include="LecturesService.cs" />
     <Compile Include="MembershipService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

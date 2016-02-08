@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Assessments\Answer.cs" />
     <Compile Include="Assessments\Assessment.cs" />
+    <Compile Include="Assessments\AssessmentRequest.cs" />
     <Compile Include="Assessments\AssessmentSubmission.cs" />
     <Compile Include="Assessments\Question.cs" />
     <Compile Include="Assessments\QuestionSubmission.cs" />

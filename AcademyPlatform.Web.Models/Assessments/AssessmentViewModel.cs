@@ -4,9 +4,13 @@
 
     public class AssessmentViewModel
     {
-        public int Id { get; set; }
+        public int AssessmentRequestId { get; set; }
 
         public string IntroText { get; set; }
+
+        public int NumberOfQuestions { get; set; }
+
+        public int RequiredCorrectAnswers { get; set; }
 
         public IEnumerable<QuestionViewModel> Questions { get; set; }
 

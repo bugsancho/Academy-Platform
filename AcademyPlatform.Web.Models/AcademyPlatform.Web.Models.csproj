@@ -100,6 +100,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Assessments\QuestionAnswer.cs" />
     <Compile Include="Umbraco\DocumentTypes\AccountSection.cs" />
+    <Compile Include="Umbraco\DocumentTypes\Assessment.cs" />
     <Compile Include="Umbraco\DocumentTypes\ContentBlock.cs" />
     <Compile Include="Umbraco\DocumentTypes\ContentBlocksFolder.cs" />
     <Compile Include="Umbraco\DocumentTypes\ContentPage.cs" />

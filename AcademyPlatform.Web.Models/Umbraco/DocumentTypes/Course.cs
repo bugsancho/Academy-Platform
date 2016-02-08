@@ -20,6 +20,8 @@
 
         public string DetailedDescription { get; set; }
 
+        public string Assessment { get; set; }
+
         public IEnumerable<Module> Modules { get; set; }
     }
 }

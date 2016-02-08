@@ -8,6 +8,7 @@
 
     using AcademyPlatform.Data.Migrations;
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Payments;
@@ -63,6 +64,12 @@
         public IDbSet<Lecture> Lectures { get; set; }
 
         public IDbSet<LectureVisit> LectureVisits { get; set; }
+
+        public IDbSet<Assessment> Assessments { get; set; }
+
+        public IDbSet<AssessmentRequest> AssessmentRequests { get; set; }
+
+        public IDbSet<AssessmentSubmission> AssessmentSubmissions { get; set; }
 
         public IDbSet<CourseSubscription> CourseSubscriptions { get; set; }
 
