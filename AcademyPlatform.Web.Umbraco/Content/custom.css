@@ -264,7 +264,15 @@ h4 {
         font-weight: 300;
     }
 
+@media (max-width: 1366px) {
+    .page-title {
+        top: 100px;
+    }
+}
+
 @media (max-width: 768px) {
+
+
     .resize-button {
         padding: 5px 10px;
         font-size: 12px;
