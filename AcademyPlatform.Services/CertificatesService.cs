@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Services
 {
     using System;
+    using System.Diagnostics;
     using System.Drawing;
     using System.IO;
 
@@ -66,10 +67,11 @@
                     var filePath = Path.Combine(
                         certificateGenerationInfo.BaseFilePath,
                         string.Format(CertificateFilePathFormat, certificate.UniqueCode));
-
-                    if (!Directory.Exists(Path.GetDirectoryName(filePath)))
+                    var directoryPath = Path.GetDirectoryName(filePath);
+                    Debug.Assert(!string.IsNullOrEmpty(directoryPath));
+                    if (!Directory.Exists(directoryPath))
                     {
-                        Directory.CreateDirectory(filePath);
+                        Directory.CreateDirectory(directoryPath);
                     }
 
                     bitmap.Save(filePath);
