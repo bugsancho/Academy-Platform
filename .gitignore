@@ -181,4 +181,4 @@ machineKey.config
 smtp.config
 ConnectionStrings.config
 Media
-Certificates
+/Certificates/
