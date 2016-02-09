@@ -56,6 +56,9 @@
     <Compile Include="Base\ISoftDeletableEntity.cs" />
     <Compile Include="Base\LoggedEntity.cs" />
     <Compile Include="Base\SoftDeletableEntity.cs" />
+    <Compile Include="Certificates\Certificate.cs" />
+    <Compile Include="Certificates\CertificateGenerationInfo.cs" />
+    <Compile Include="Certificates\PlaceholderInfo.cs" />
     <Compile Include="Courses\Category.cs" />
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseDifficultyType.cs" />

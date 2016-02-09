@@ -15,6 +15,9 @@
 
         public DateTime SubmissionDate { get; set; }
 
+        /// <summary>
+        /// JSON representation of all the answers including the questions themseves.
+        /// </summary>
         public string Submission { get; set; }
 
         public bool IsSuccessful { get; set; }

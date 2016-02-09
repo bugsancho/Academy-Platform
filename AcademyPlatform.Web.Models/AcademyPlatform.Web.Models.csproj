@@ -101,6 +101,7 @@
     <Compile Include="Assessments\QuestionAnswer.cs" />
     <Compile Include="Umbraco\DocumentTypes\AccountSection.cs" />
     <Compile Include="Umbraco\DocumentTypes\Assessment.cs" />
+    <Compile Include="Umbraco\DocumentTypes\Certificate.cs" />
     <Compile Include="Umbraco\DocumentTypes\ContentBlock.cs" />
     <Compile Include="Umbraco\DocumentTypes\ContentBlocksFolder.cs" />
     <Compile Include="Umbraco\DocumentTypes\ContentPage.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Umbraco\DocumentTypes\StudentPage.cs" />
     <Compile Include="Umbraco\Macros\CoursesGrid.cs" />
     <Compile Include="Umbraco\Macros\StorylineContent.cs" />
+    <Compile Include="Umbraco\PropertyEditors\PlaceholderEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">
@@ -133,9 +135,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Umbraco\PropertyEditors\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,27 @@
+    {
+    propertyEditors: [{
+        /*this must be a unique alias*/
+        alias: "AcademyPlatform.RectangularPlaceholderEditor",
+        /*the name*/
+        name: "[AP] Rectangular Placeholder Editor",
+        /*the html file we will load for the editor*/
+        editor: {
+            view: "~/App_Plugins/RectangularPlaceholderEditor/rectangular-placeholder-editor.html",
+            valueType: "JSON"
+        }
+
+        //prevalues: {
+        //    fields: [{
+        //        label: "Is Multi Choice Question?",
+        //        description: "Select if you want the question to be multiple choice(By default it's single choice)",
+        //        key: "multichoice",
+        //        view: "boolean"
+        //    }]
+        //},
+    }],
+
+    //array of files we want to inject into the application on app_start
+    javascript: [
+        '~/App_Plugins/RectangularPlaceholderEditor/rectangular-placeholder-editor.controller.js'
+    ]
+}

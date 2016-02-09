@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Web.Models.Assessments;
     using AcademyPlatform.Web.Models.Common;
 
@@ -31,8 +32,18 @@
         {
             if (contentToMapFrom.HasProperty(propName))
             {
-                 var answers = contentToMapFrom.GetPropertyValue<string>(propName);
-            return JsonConvert.DeserializeObject<IEnumerable<QuestionAnswer>>(answers);
+                var answers = contentToMapFrom.GetPropertyValue<string>(propName);
+                return JsonConvert.DeserializeObject<IEnumerable<QuestionAnswer>>(answers);
+            }
+            return null;
+
+        }
+        public static object MapPlaceholder(IUmbracoMapper mapper, IPublishedContent contentToMapFrom, string propName, bool isRecursive)
+        {
+            if (contentToMapFrom.HasProperty(propName))
+            {
+                var placeholderInfo = contentToMapFrom.GetPropertyValue<string>(propName);
+                return JsonConvert.DeserializeObject<PlaceholderInfo>(placeholderInfo);
             }
             return null;
 

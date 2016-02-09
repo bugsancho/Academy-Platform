@@ -1,5 +1,6 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../app_plugins/multipleoptionsquestioneditor/multiple-options-question-editor.controller.js" />
+/// <reference path="../app_plugins/rectangularplaceholdereditor/rectangular-placeholder-editor.controller.js" />
 /// <reference path="../config/grid.editors.config.js" />
 /// <reference path="bootstrap.min.js" />
 /// <reference path="custom.js" />

@@ -1,0 +1,45 @@
+﻿<div ng-controller="RectangularPlaceholderEditor">
+    <div class="row">
+        <div class="span2">
+            <label for="rectangle-topLeftX">Top Left X (px)</label>
+        </div>
+        <div class="span2">
+            <label for="rectangle-topLeftY">Top Left Y (px)</label>
+        </div>
+        <div class="span2">
+            <label for="rectangle-width">Width (px)</label>
+        </div>
+        <div class="span2">
+            <label for="rectangle-height">Height (px)</label>
+        </div>
+        <div class="span2">
+            <label for="rectangle-color">Text Color (Hex)</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span2">
+            <input id="rectangle-topLeftX" type="number" ng-model="rectangle.topLeftX" />
+        </div>
+        <div class="span2">
+            <input id="rectangle-topLeftY" type="number" ng-model="rectangle.topLeftY" />
+        </div>
+        <div class="span2">
+            <input id="rectangle-width" type="number" ng-model="rectangle.width" />
+        </div>
+        <div class="span2">
+            <input id="rectangle-height" type="number" ng-model="rectangle.height" />
+        </div>
+        <div class="span2">
+            <input id="rectangle-color" type="text" ng-model="rectangle.color" />
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 30px">
+    <span ng-show="propertyForm.$error.topLeftX" class="alert alert-block alert-danger" val-msg-for="topLeftX" val-toggle-msg="topLeftX">Please specify the Top Left X!</span>
+    <span ng-show="propertyForm.$error.topLeftY" class="alert alert-block alert-danger" val-msg-for="topLeftY" val-toggle-msg="topLeftY">Please specify the Top Left Y!</span>
+    <span ng-show="propertyForm.$error.width" class="alert alert-block alert-danger" val-msg-for="width" val-toggle-msg="width">Please specify the width!</span>
+    <span ng-show="propertyForm.$error.height" class="alert alert-block alert-danger" val-msg-for="height" val-toggle-msg="noCorrecheighttAnswer">Please specify the height!</span>
+    <span ng-show="propertyForm.$error.color" class="alert alert-block alert-danger" val-msg-for="color" val-toggle-msg="color">Please specify text color!</span>
+    <span ng-show="propertyForm.$error.colorFormat" class="alert alert-block alert-danger" val-msg-for="color" val-toggle-msg="color">Please use Hexadecimal color format. <a href="http://www.color-hex.com/" style="color:blue" target="_blank">Click for info</a> !</span>
+</div>

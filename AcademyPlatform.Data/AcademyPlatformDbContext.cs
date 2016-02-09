@@ -10,6 +10,7 @@
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Base;
+    using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Payments;
 
@@ -66,6 +67,8 @@
         public IDbSet<LectureVisit> LectureVisits { get; set; }
 
         public IDbSet<Assessment> Assessments { get; set; }
+
+        public IDbSet<Certificate> Certificates { get; set; }
 
         public IDbSet<AssessmentRequest> AssessmentRequests { get; set; }
 

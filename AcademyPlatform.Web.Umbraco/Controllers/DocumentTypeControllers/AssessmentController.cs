@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
 
     using AcademyPlatform.Models.Assessments;
+    using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Assessments;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
@@ -14,6 +17,9 @@
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
     using global::Umbraco.Web.Mvc;
+
+    using ImageProcessor;
+    using ImageProcessor.Imaging;
 
     using nuPickers;
 
@@ -25,13 +31,15 @@
     {
         private readonly IUmbracoMapper _mapper;
         private readonly IAssessmentsService _assessments;
+        private readonly ICertificatesService _certificates;
         private readonly IUserService _users;
 
-        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users)
+        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates)
         {
             _mapper = mapper;
             _assessments = assessments;
             _users = users;
+            _certificates = certificates;
         }
 
         [HttpGet]
@@ -153,9 +161,29 @@
                 submission.IsSuccessful = true;
             }
 
-             _assessments.CreateAssessmentSubmission(submission);
+            _assessments.CreateAssessmentSubmission(submission);
 
-            return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers, IncorrectlyAnswered = wrongAnswers });
+            var courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+
+            object certificateId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
+            IPublishedContent certificateContent = Umbraco.TypedContent(certificateId);
+            var certificateGenerationInfo = new CertificateGenerationInfo();
+
+            var certificateTemplate = UmbracoContext.Current.MediaCache.GetById(
+                certificateContent.GetPropertyValue<int>(
+                    nameof(AcademyPlatform.Web.Models.Umbraco.DocumentTypes.Certificate.CertificateTemplate)));
+
+            _mapper.AddCustomMapping(
+                    typeof(PlaceholderInfo).FullName,
+                    UmbracoMapperMappings.MapPlaceholder)
+                .Map(certificateContent, certificateGenerationInfo);
+
+            certificateGenerationInfo.TemplateFilePath = Server.MapPath(certificateTemplate.Url);
+            certificateGenerationInfo.BaseFilePath = Server.MapPath("/");
+            var certificate = _certificates.GenerateCertificate(User.Identity.Name, courseId, submission, certificateGenerationInfo);
+
+            return View("~/Views/Certificates/Certificate.cshtml", model: $"\\certificates\\{certificate.UniqueCode}.jpeg");
+            //return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers, IncorrectlyAnswered = wrongAnswers });
         }
     }
 

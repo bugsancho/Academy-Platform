@@ -12,6 +12,8 @@
         }
         public int CourseId { get; set; }
 
+        public int  Certificate { get; set; }
+
         public ImageViewModel CoursePicture { get; set; }
 
         public int LicenseTerms { get; set; }
