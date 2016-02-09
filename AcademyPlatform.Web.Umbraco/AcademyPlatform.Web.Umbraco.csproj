@@ -584,6 +584,7 @@
     <Content Include="Views\Subscriptions\AwaitingPayment.cshtml" />
     <Content Include="Views\Certificates\Certificate.cshtml" />
     <None Include="Views\Subscriptions\JoinCourse.cshtml" />
+    <Content Include="Views\UserControlPanel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

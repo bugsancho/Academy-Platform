@@ -1,0 +1,107 @@
+﻿@using AcademyPlatform.Web.Umbraco.ViewModels
+@{
+    var firstName = "Пенчо";
+    var famlilyName = "Пешов";
+    bool userHasCertificate = true;
+    bool userHasFinishedLectures = true;
+    //var userCoursesCollection = ICollection<CoursesViewModel>;
+}
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="main col-md-12">
+                <h1 class="text-center">@firstName @famlilyName</h1>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="image-box text-center mb-20">
+                    <div class="overlay-container">
+                        <img src="/media/1029/valq.png" alt="" /><br />
+                        <div class="overlay-top">
+                            <div class="text">
+                                <h3>@firstName</h3>
+                            </div>
+                        </div>
+                        <div class="overlay-bottom">
+                            @* TODO: Logic for user picture *@
+                            <div class="links">
+                                <a href="#" class="btn btn-gray-transparent btn-animated btn-sm">Смени снимката<i class="pl-10 fa fa-picture-o"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <div class="pv-20 ph-20 feature-box-2 boxed light-gray-bg">
+                    <h3>Обща информация</h3>
+                    @* Not all of this information is needed? *@
+                    <ul>
+                        <li><strong>Заетост: </strong>Студент</li>
+                        <li><strong>Специалност: </strong>Телекомуникации</li>
+                        <li><strong>Имейл адрес: </strong><a href="mailto:@User.Identity" target="_blank">stefankoserkov@gmail.com</a></li>
+                        <li><strong>Уебсайт: </strong><a href="https://google.bg">google.bg</a></li>
+                        <li><strong>Телефон: </strong>0888 888 888</li>
+                    </ul>
+                    <h3>Образование</h3>
+                    <ul>
+                        <li><strong>Образователна степен: </strong>Висше</li>
+                        <li><strong>Училище: </strong>ПГТК</li>
+                        <li><strong>Университет: </strong>НБУ</li>
+                        <li><strong>Допълнителни: </strong>Британика</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h2 class="text-center">Моите обучения</h2>
+                <div class="table-responsive">
+                    <table border="0" class="table table-bordered table-colored">
+                        <thead>
+                            <tr>
+                                <th>Мойте курсове</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var course in userCoursesCollection)
+                            {
+                                <tr>
+                                    <td><a href="#">Курс: @course.Name</a></td>
+                                    @if (userHasCertificate)
+                                    {
+                                        <td>Отворете вашия <a href="@Model.UserCourseCertificate">сертификат</a>.</td>
+                                    }
+                                    else if (!userHasFinishedLectures)
+                                    {
+                                        <td>Остават ви още <a href="@course.Url">лекции</a>, преди изпит.</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Направете вашия <a href="#">изпит</a>.</td>
+                                    }
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="pv-20 ph-20 feature-box-2 boxed light-gray-bg">
+                    <h4>Моите серификати</h4>
+                    @if (userHasCertificate)
+                    {
+                        <ol>
+                            @foreach (var certificate in certificates)
+                            {
+                                <li>@certificate.CourseName</li>
+                            }
+                        </ol>
+                    }
+                    else
+                    {
+                        <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате взет сертификат. За да получите сертификат трябва да прочетете всички лекции на дадено обучение, и след това да преминете успешно изпита му!</div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

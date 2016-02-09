@@ -797,3 +797,13 @@ h4 {
     overflow: hidden;
     max-height: 200px;
 }
+.exam-box {
+    color: black;
+    border: 2px solid #27ae60;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.exam-box > p {
+    display: initial;
+}

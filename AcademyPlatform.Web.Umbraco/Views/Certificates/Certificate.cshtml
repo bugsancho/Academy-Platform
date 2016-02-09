@@ -1,6 +1,14 @@
 ﻿@model string
 
-<h1>Congratulations</h1>
-<p>Here's your certificate:</p>
-
-<img src="@Model" alt="" />
+<div class="container">
+    <h1>Поздравления!</h1>
+    <p>Ето го и вашия сертификат:</p>
+    <div class="overlay-container">
+        <img src="@Model" alt="">
+        <a href="@Model" class="overlay-link popup-img-single" title="Сертификат">
+            <i class="fa fa-plus"></i>
+        </a>
+    </div>
+    <a href="@Model" download class="btn btn-animated btn-lg btn-default-transparent">Свали сертификата <i class="fa fa-download"></i></a>
+    <div class="space-bottom"></div>
+</div>
