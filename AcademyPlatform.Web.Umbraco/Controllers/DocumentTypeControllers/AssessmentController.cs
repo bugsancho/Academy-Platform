@@ -184,7 +184,7 @@
             certificateGenerationInfo.BaseFilePath = Server.MapPath("/");
             var certificate = _certificates.GenerateCertificate(User.Identity.Name, courseId, submission, certificateGenerationInfo);
 
-            return RedirectToRoute("Certificate", new { courseUniqueCode = certificate.UniqueCode });
+            return RedirectToRoute("Certificate", new { certificateUniqueCode = certificate.UniqueCode });
             //ViewBag.AssessmentSuccessful = true;
             //return View("~/Views/Certificate/Certificate.cshtml", model: $"\\certificates\\{certificate.UniqueCode}.jpeg");
             //return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers, IncorrectlyAnswered = wrongAnswers });
