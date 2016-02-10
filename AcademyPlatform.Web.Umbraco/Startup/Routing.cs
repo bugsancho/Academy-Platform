@@ -24,7 +24,9 @@
             RouteTable.Routes.MapRoute("LogOut", "logout", new { Controller = "Account", Action = "LogOut" });
 
             RouteTable.Routes.MapRoute("JoinCourse", "join/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" });
-            RouteTable.Routes.MapUmbracoRoute("Exam", "assessment/{courseNiceUrl}", new { Controller = "Assessment", Action = "Assessment" }, new CourseNodeProvider());
+            RouteTable.Routes.MapUmbracoRoute("Assessment", "assessment/{courseNiceUrl}", new { Controller = "Assessment", Action = "Assessment" }, new CourseNodeProvider());
+            RouteTable.Routes.MapUmbracoRoute("Profile", "profile", new { Controller = "Profile", Action = "Index" }, new RootNodeRouteHandler());
+            RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateUniqueCode}", new { Controller = "Certificate", Action = "Certificate" }, new RootNodeRouteHandler());
             RouteTable.Routes.MapRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" });
 
 
@@ -46,6 +48,18 @@
             //    namespaces: new[] { " AcademyPlatform.Web.Umbraco.Areas.Admin.Controllers" }
 
             //);
+        }
+    }
+    public class RootNodeRouteHandler : UmbracoVirtualNodeRouteHandler
+    {
+        protected override IPublishedContent FindContent(RequestContext requestContext, UmbracoContext umbracoContext)
+        {
+            IPublishedContent rootNode = umbracoContext.ContentCache.GetAtRoot().FirstOrDefault();
+            if (rootNode == null)
+            {
+                throw new ApplicationException("No root content found in Umbraco database");
+            }
+            return rootNode;
         }
     }
 

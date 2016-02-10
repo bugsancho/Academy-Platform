@@ -4,6 +4,7 @@
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
+    using System.Linq;
 
     using AcademyPlatform.Common.Providers;
     using AcademyPlatform.Data.Repositories;
@@ -31,6 +32,12 @@
             _random = random;
             _users = users;
             _courses = courses;
+        }
+
+        public Certificate GetByUniqueCode(string uniqueCode)
+        {
+            var certificate =_certificates.All().FirstOrDefault(x => x.UniqueCode == uniqueCode);
+            return certificate;
         }
 
         public Certificate GenerateCertificate(string username, int courseId, AssessmentSubmission assessmentSubmission, CertificateGenerationInfo certificateGenerationInfo)

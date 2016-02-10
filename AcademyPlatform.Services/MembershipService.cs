@@ -90,7 +90,6 @@
                     Username = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    RegistrationDate = DateTime.Now,
                     BillingInfo = new BillingInfo { FirstName = firstName, LastName = lastName }
                 };
 

@@ -18,17 +18,19 @@
 
         public string FirstName { get; set; }
 
+        public string MiddleName { get; set; }
+
         public string LastName { get; set; }
 
         public string Company { get; set; }
-
-        public DateTime RegistrationDate { get; set; }
-
+        
         public string ValidationCode { get; set; }
 
         public bool IsApproved { get; set; }
         
         public virtual BillingInfo BillingInfo { get; set; }
+
+        //public virtual Profile Profile { get; set; }
 
         public virtual ICollection<Course> Courses
         {

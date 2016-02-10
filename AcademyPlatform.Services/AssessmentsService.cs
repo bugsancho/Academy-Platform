@@ -49,6 +49,17 @@
             return request;
         }
 
+        public bool HasSuccessfulSubmission(string username, int courseId)
+        {
+            bool hasSuccessfulSubmission = _assessmentSubmissions.All()
+                                  .Any(x =>
+                                      x.AssessmentRequest.User.Username == username
+                                      && x.CourseId == courseId
+                                      && x.IsSuccessful);
+
+            return hasSuccessfulSubmission;
+        }
+
         public void CreateAssessmentSubmission(AssessmentSubmission submission)
         {
             if (submission == null)

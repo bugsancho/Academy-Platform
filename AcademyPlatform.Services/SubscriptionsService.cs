@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using AcademyPlatform.Data.Repositories;
@@ -14,17 +15,44 @@
         private readonly IRepository<User> _users;
         private readonly IUserService _usersService;
         private readonly IRepository<Course> _courses;
+        private readonly ILecturesService _lectures;
+        private readonly IAssessmentsService _assessments;
         private readonly IRepository<CourseSubscription> _courseSubscriptions;
 
         private readonly ICoursesService _coursesService;
 
-        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService)
+        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments)
         {
             _users = users;
             _courseSubscriptions = courseSubscriptions;
             _courses = courses;
             _coursesService = coursesService;
             _usersService = usersService;
+            _lectures = lectures;
+            _assessments = assessments;
+        }
+
+        public IEnumerable<CourseProgress> GetCoursesProgress(string username)
+        {
+            var user = _usersService.GetByUsername(username);
+            var userSubscriptions = _courseSubscriptions.All().Where(x => x.UserId == user.Id).ToList();
+            List<CourseProgress> courseProgresses = new List<CourseProgress>(userSubscriptions.Count);
+            foreach (var subscription in userSubscriptions)
+            {
+                var courseProgress = new CourseProgress();
+                courseProgress.CourseId = subscription.CourseId;
+                courseProgress.TotalLecturesCount = _lectures.GetLecturesCount(subscription.CourseId);
+                courseProgress.SubscriptionStatus = subscription.Status;
+
+                if (subscription.Status == SubscriptionStatus.Active)
+                {
+                    courseProgress.VisitedLecturesCount = _lectures.GetLectureVisitsCount(username, subscription.CourseId);
+                    courseProgress.AssessmentPassed = _assessments.HasSuccessfulSubmission(username, subscription.CourseId);
+                }
+                courseProgresses.Add(courseProgress);
+            }
+
+            return courseProgresses;
         }
 
         public bool HasActiveSubscription(string username, int courseId)

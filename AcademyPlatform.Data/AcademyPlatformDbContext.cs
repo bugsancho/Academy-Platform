@@ -52,6 +52,12 @@
                     new IndexAnnotation(
                         new IndexAttribute("IX_LectureCourseId")));
 
+            modelBuilder.Entity<AssessmentSubmission>()
+                        .HasRequired(x => x.Course)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
+
 
             base.OnModelCreating(modelBuilder);
         }
@@ -65,9 +71,7 @@
         public IDbSet<Lecture> Lectures { get; set; }
 
         public IDbSet<LectureVisit> LectureVisits { get; set; }
-
-        public IDbSet<Assessment> Assessments { get; set; }
-
+        
         public IDbSet<Certificate> Certificates { get; set; }
 
         public IDbSet<AssessmentRequest> AssessmentRequests { get; set; }

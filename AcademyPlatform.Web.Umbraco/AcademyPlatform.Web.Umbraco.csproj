@@ -582,7 +582,9 @@
     <Content Include="Views\Account\ResendValidationEmail.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\BillingInfoViewModel.cshtml" />
     <Content Include="Views\Subscriptions\AwaitingPayment.cshtml" />
-    <Content Include="Views\Certificates\Certificate.cshtml" />
+    <Content Include="Views\Certificate\Certificate.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Assessment\AssessmentFailure.cshtml" />
     <None Include="Views\Subscriptions\JoinCourse.cshtml" />
     <Content Include="Views\UserControlPanel.cshtml" />
     <None Include="Web.Debug.config">
@@ -605,8 +607,10 @@
     <Compile Include="Areas\Admin\Controllers\SubscriptionsAdminController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\CoursesController.cs" />
+    <Compile Include="Controllers\CertificatesController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\AssessmentController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\CourseController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SurfaceControllers\CoursesSurfaceController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\ErrorPageController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\LectureController.cs" />

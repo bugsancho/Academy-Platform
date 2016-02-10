@@ -149,8 +149,10 @@
                 }
             }
 
+            var courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
             var submission = new AssessmentSubmission
             {
+                CourseId = courseId,
                 AssessmentRequestId = assessmentRequest.Id,
                 SubmissionDate = DateTime.Now,
                 Submission = JsonConvert.SerializeObject(assessment.Questions)
@@ -163,7 +165,7 @@
 
             _assessments.CreateAssessmentSubmission(submission);
 
-            var courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+            
 
             object certificateId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
             IPublishedContent certificateContent = Umbraco.TypedContent(certificateId);
@@ -182,7 +184,9 @@
             certificateGenerationInfo.BaseFilePath = Server.MapPath("/");
             var certificate = _certificates.GenerateCertificate(User.Identity.Name, courseId, submission, certificateGenerationInfo);
 
-            return View("~/Views/Certificates/Certificate.cshtml", model: $"\\certificates\\{certificate.UniqueCode}.jpeg");
+            return RedirectToRoute("Certificate", new { courseUniqueCode = certificate.UniqueCode });
+            //ViewBag.AssessmentSuccessful = true;
+            //return View("~/Views/Certificate/Certificate.cshtml", model: $"\\certificates\\{certificate.UniqueCode}.jpeg");
             //return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers, IncorrectlyAnswered = wrongAnswers });
         }
     }

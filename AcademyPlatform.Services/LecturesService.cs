@@ -48,6 +48,28 @@
             _lectures.SaveChanges();
         }
 
+        public int GetLecturesCount(int courseId)
+        {
+            int lecturesCount = _lectures.All().Count(x => x.CourseId == courseId && x.IsActive);
+            return lecturesCount;
+        }
+
+        public int GetLectureVisitsCount(string username, int courseId)
+        {
+            int lectureVisitsCount =
+                _lectureVisits.All().Count(x => x.User.Username == username && x.Lecture.CourseId == courseId && x.Lecture.IsActive);
+
+            return lectureVisitsCount;
+        }
+
+        public IEnumerable<LectureVisit> GetAllLectureVisits(string username, int courseId)
+        {
+            List<LectureVisit> lectureVisits =
+                _lectureVisits.All().Where(x => x.User.Username == username && x.Lecture.CourseId == courseId && x.Lecture.IsActive).ToList();
+
+            return lectureVisits;
+        }
+
         public bool HasVisitedAllLectures(string username, int courseId, out List<int> unvisitedLectureIds)
         {
             var user = _users.GetByUsername(username);

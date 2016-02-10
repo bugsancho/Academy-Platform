@@ -11,5 +11,7 @@
         AssessmentRequest GetAssessmentRequest(int requestId);
 
         AssessmentRequest GetLatestForUser(string username, int assessmentId);
+
+        bool HasSuccessfulSubmission(string username, int courseId);
     }
 }

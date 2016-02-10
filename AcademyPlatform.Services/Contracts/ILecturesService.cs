@@ -15,5 +15,11 @@
         bool IsLectureVisited(string username, int externalLectureId);
 
         void TrackLectureVisit(string username, int externalLectureId);
+
+        int GetLecturesCount(int courseId);
+
+        int GetLectureVisitsCount(string username, int courseId);
+
+        IEnumerable<LectureVisit> GetAllLectureVisits(string username, int courseId);
     }
 }

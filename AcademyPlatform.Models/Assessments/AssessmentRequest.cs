@@ -1,8 +1,5 @@
 ﻿namespace AcademyPlatform.Models.Assessments
 {
-    using System;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     using AcademyPlatform.Models.Base;
 
     public class AssessmentRequest : SoftDeletableEntity

@@ -63,6 +63,7 @@
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseDifficultyType.cs" />
     <Compile Include="Courses\CoursePricingType.cs" />
+    <Compile Include="Courses\CourseProgress.cs" />
     <Compile Include="Courses\CourseSubscription.cs" />
     <Compile Include="Courses\Lecture.cs" />
     <Compile Include="Courses\LectureVisit.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Payments\PaymentType.cs" />
     <Compile Include="Payments\Product.cs" />
     <Compile Include="Payments\ProductType.cs" />
+    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
