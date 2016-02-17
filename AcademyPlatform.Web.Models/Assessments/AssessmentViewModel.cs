@@ -6,7 +6,7 @@
     {
         public int AssessmentRequestId { get; set; }
 
-        public string IntroText { get; set; }
+        public string Description { get; set; }
 
         public int NumberOfQuestions { get; set; }
 

@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Drawing;
-    using System.IO;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -18,33 +16,39 @@
     using global::Umbraco.Web;
     using global::Umbraco.Web.Mvc;
 
-    using ImageProcessor;
-    using ImageProcessor.Imaging;
-
     using nuPickers;
 
     using Newtonsoft.Json;
 
     using Zone.UmbracoMapper;
 
+    [Authorize]
     public class AssessmentController : UmbracoController
     {
         private readonly IUmbracoMapper _mapper;
         private readonly IAssessmentsService _assessments;
+        private readonly ISubscriptionsService _subscriptions;
         private readonly ICertificatesService _certificates;
         private readonly IUserService _users;
 
-        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates)
+        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ISubscriptionsService subscriptions)
         {
             _mapper = mapper;
             _assessments = assessments;
             _users = users;
             _certificates = certificates;
+            _subscriptions = subscriptions;
         }
 
         [HttpGet]
         public ActionResult Assessment()
         {
+            int courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+            if (!_subscriptions.IsEligibleForAssessment(User.Identity.Name, courseId))
+            {
+                return Redirect(Umbraco.AssignedContentItem.Url);
+            }
+
             object assessmentId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Assessment)).SavedValue;
             IPublishedContent assessmentContnet = Umbraco.TypedContent(assessmentId);
             var user = _users.GetByUsername(User.Identity.Name);
@@ -76,7 +80,7 @@
             }
             else
             {
-                questions = Umbraco.TypedContent(assessmentRequest.QuestionIds.Split(',').ToList());
+                questions = Umbraco.TypedContent(assessmentRequest.QuestionIds.Split(',')).ToList();
             }
 
             _mapper.AddCustomMapping(
@@ -94,6 +98,12 @@
         [HttpPost]
         public ActionResult Assessment(AssessmentViewModel assessment)
         {
+            int courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+            if (!_subscriptions.IsEligibleForAssessment(User.Identity.Name, courseId))
+            {
+                return Redirect(Umbraco.AssignedContentItem.Url);
+            }
+
             if (assessment.AssessmentRequestId == default(int))
             {
                 throw new ArgumentException("Assessment Id is missing from Assessment Submission. Cannot evaluate assessment");
@@ -122,7 +132,6 @@
 
             assessmentViewModel.Questions = questionViewModel;
             int correctAnswers = 0;
-            int wrongAnswers = 0;
             foreach (QuestionViewModel questionInDb in assessmentViewModel.Questions)
             {
                 QuestionViewModel questionAnswered = assessment.Questions.Single(x => x.Id == questionInDb.Id);
@@ -143,13 +152,9 @@
                 {
                     correctAnswers++;
                 }
-                else
-                {
-                    wrongAnswers++;
-                }
             }
 
-            var courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+
             var submission = new AssessmentSubmission
             {
                 CourseId = courseId,
@@ -165,7 +170,7 @@
 
             _assessments.CreateAssessmentSubmission(submission);
 
-            
+
 
             object certificateId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
             IPublishedContent certificateContent = Umbraco.TypedContent(certificateId);

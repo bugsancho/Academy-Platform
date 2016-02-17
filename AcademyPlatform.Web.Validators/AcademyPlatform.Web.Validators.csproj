@@ -45,10 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\BillingInfoViewModelValidator.cs" />
+    <Compile Include="Account\RegisterViewModelValidator.cs" />
     <Compile Include="Account\ResendValidationEmailValidator.cs" />
     <Compile Include="Courses\CreateCourseViewModelValidator.cs" />
     <Compile Include="Courses\JoinCourseViewModelValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ErrorMessages.Designer.cs">
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="Subscriptions\PaymentEditViewModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,13 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

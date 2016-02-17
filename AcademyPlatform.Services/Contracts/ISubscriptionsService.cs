@@ -13,5 +13,7 @@
         SubscriptionStatus GetSubscriptionStatus(string username, int courseId);
 
         IEnumerable<CourseProgress> GetCoursesProgress(string username);
+
+        bool IsEligibleForAssessment(string username, int courseId);
     }
 }

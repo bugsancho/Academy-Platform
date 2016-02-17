@@ -61,6 +61,18 @@
             return status == SubscriptionStatus.Active;
         }
 
+        public bool IsEligibleForAssessment(string username, int courseId)
+        {
+            bool hasActiveSubscription = HasActiveSubscription(username, courseId);
+            List<int> unvisitedLectures;
+            if (hasActiveSubscription && _lectures.HasVisitedAllLectures(username, courseId, out unvisitedLectures))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public SubscriptionStatus GetSubscriptionStatus(string username, int courseId)
         {
             User user = _users.All().FirstOrDefault(x => x.Username == username);

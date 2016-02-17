@@ -21,9 +21,10 @@
 
     using nuPickers;
 
-    using Zone.UmbracoMapper;
+    using Recaptcha.Web;
+    using Recaptcha.Web.Mvc;
 
-    using reCAPTCHA.MVC;
+    using Zone.UmbracoMapper;
 
     using UmbracoContextExtensions = AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions;
 
@@ -74,24 +75,22 @@
 
         [HttpPost]
         [RequireAnonymous]
-        [CaptchaValidator]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel registerViewModel)
         {
+            var validator = this.GetRecaptchaVerificationHelper().VerifyRecaptchaResponse();
+            if (validator != RecaptchaVerificationResult.Success)
+            {
+                ModelState.AddModelError("ReCaptcha", "Моля, попълнете предизвикателството за да сме сигурни че не сте робот");
+            }
+
             if (ModelState.IsValid)
             {
                 MembershipCreateStatus status;
-                if (registerViewModel.Password != registerViewModel.ConfirmPassword) //TODO add this validation on the model level
-                {
-                    ModelState.AddModelError(nameof(RegisterViewModel.Password), "Паролите не съвпадат!");
-                    return View(registerViewModel);
-                }
-
                 _membership.CreateUser(registerViewModel.Email, registerViewModel.Password, registerViewModel.FirstName, registerViewModel.LastName, out status);
 
                 if (status == MembershipCreateStatus.Success)
                 {
-
                     SendAccountValidationEmail(registerViewModel.Email, registerViewModel.FirstName);
                     int thankYouPageId =
                         AccountSection.GetPropertyValue<int>(
@@ -103,11 +102,6 @@
                 {
                     ModelState.AddModelError(nameof(registerViewModel.Email), "Имейлът вече се използва");
                 }
-            }
-            else if (ModelState["ReCaptcha"].Errors.Any())
-            {
-                ModelState["ReCaptcha"].Errors.Clear();
-                ModelState.AddModelError("ReCaptcha", "Моля, попълнете предизвикателството за да сме сигурни че не сте робот");
             }
 
             return View(registerViewModel);
