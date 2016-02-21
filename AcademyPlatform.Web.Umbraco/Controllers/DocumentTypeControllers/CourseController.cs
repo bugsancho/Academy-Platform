@@ -9,8 +9,10 @@
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
+    using AcademyPlatform.Web.Umbraco.Services.Contracts;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
 
+    using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
     using global::Umbraco.Web.Mvc;
@@ -20,32 +22,35 @@
     public class CourseController : RenderMvcController
     {
         private readonly ICoursesService _courses;
+        private readonly ICoursesContentService _coursesContentService;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICategoryService _categories;
         private readonly ILecturesService _lectures;
         private readonly IUmbracoMapper _mapper;
 
 
-        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures)
+        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures, ICoursesContentService coursesContentService)
         {
             _courses = courses;
             _categories = categories;
             _mapper = mapper;
             _subscriptions = subscriptions;
             _lectures = lectures;
+            _coursesContentService = coursesContentService;
         }
 
-        [HttpGet]   
+        [HttpGet]
         public ActionResult Course(RenderModel model)
         {
-            var coursePublishedContentViewModel = new Course();
+            Course coursePublishedContentViewModel = new Course();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
+                   .AddCustomMapping(typeof(int).FullName, UmbracoMapperMappings.MapPicker, nameof(Models.Umbraco.DocumentTypes.Course.CourseId))
                    .Map(model.Content.AncestorOrSelf(), coursePublishedContentViewModel);
 
-            var course = _courses.GetById(coursePublishedContentViewModel.CourseId);
-            var joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
-           
-            var courseDetailsViewModel = new CourseDetailsViewModel
+            AcademyPlatform.Models.Courses.Course course = _courses.GetById(coursePublishedContentViewModel.CourseId);
+            string joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
+
+            CourseDetailsViewModel courseDetailsViewModel = new CourseDetailsViewModel
             {
                 CourseId = course.Id,
                 Category = course.Category,
@@ -59,18 +64,17 @@
 
             };
             //========================================================================================
-            var modulesPublishedContent = new List<Module>();
-            var modulesContent = model.Content.DescendantsOrSelf(nameof(Module)).ToList();
+            List<Module> modulesPublishedContent = new List<Module>();
+            List<IPublishedContent> modulesContent = model.Content.DescendantsOrSelf(nameof(Module)).ToList();
             _mapper.Map(model.Content, coursePublishedContentViewModel)
                 .MapCollection(modulesContent, modulesPublishedContent);
-            foreach (var moduleContent in modulesContent)
+            foreach (IPublishedContent moduleContent in modulesContent)
             {
-                var module = new ModuleViewModel();
-                module.Name = moduleContent.Name;
-                var lecturesContent = moduleContent.DescendantsOrSelf(nameof(Lecture)).ToList();
-                foreach (var lectureContent in lecturesContent)
+                ModuleViewModel module = new ModuleViewModel { Name = moduleContent.Name };
+                List<IPublishedContent> lecturesContent = moduleContent.DescendantsOrSelf(nameof(Lecture)).ToList();
+                foreach (IPublishedContent lectureContent in lecturesContent)
                 {
-                    var lecture = new LectureLinkViewModel();
+                    LectureLinkViewModel lecture = new LectureLinkViewModel();
                     _mapper.Map(lectureContent, lecture);
                     lecture.IsVisited = _lectures.IsLectureVisited(User.Identity.Name, lectureContent.Id);
                     module.LectureLinks.Add(lecture);
@@ -79,12 +83,15 @@
             }
             //====================================================================
 
-            if (User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, courseDetailsViewModel.CourseId))
+            courseDetailsViewModel.HasActiveSubscription = User.Identity.IsAuthenticated
+                                     && _subscriptions.HasActiveSubscription(
+                                         User.Identity.Name,
+                                         courseDetailsViewModel.CourseId);
+          
+            if (TempData.ContainsKey("ErrorMessage"))
             {
-                var studentPageUrl = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault()?.Url + model.Content.UrlName;
-                ViewBag.StudentPageUrl = studentPageUrl;
+                courseDetailsViewModel.ErrorMessage = (string)TempData["ErrorMessage"];
             }
-
             return CurrentTemplate(courseDetailsViewModel);
         }
 
@@ -92,45 +99,7 @@
         [Authorize]
         public ActionResult StudentCoursePage(RenderModel model)
         {
-            if (!_subscriptions.HasActiveSubscription(User.Identity.Name, model.Content.GetPropertyValue<int>(nameof(Models.Umbraco.DocumentTypes.Course.CourseId))))
-            {
-                return HttpNotFound();
-            }
-            var coursePublishedContentViewModel = new Course();
-            var modulesPublishedContent = new List<Module>();
-            var courseViewModel = new CourseStudentPageViewModel();
-            var modulesContent = model.Content.DescendantsOrSelf(nameof(Module)).ToList();
-
-            _mapper.Map(model.Content, coursePublishedContentViewModel)
-                .MapCollection(modulesContent, modulesPublishedContent);
-
-            var course = _courses.GetById(coursePublishedContentViewModel.CourseId);
-
-            courseViewModel.Title = course.Title;
-            courseViewModel.DetailedDescription = coursePublishedContentViewModel.DetailedDescription;
-
-
-
-            foreach (var moduleContent in modulesContent)
-            {
-                var module = new ModuleViewModel();
-                module.Name = moduleContent.Name;
-                var lecturesContent = moduleContent.DescendantsOrSelf(nameof(Lecture)).ToList();
-                foreach (var lectureContent in lecturesContent)
-                {
-                    var lecture = new LectureLinkViewModel();
-                    _mapper.Map(lectureContent, lecture);
-                    lecture.IsVisited = _lectures.IsLectureVisited(User.Identity.Name, lectureContent.Id);
-                    module.LectureLinks.Add(lecture);
-                }
-                courseViewModel.Modules.Add(module);
-            }
-
-
-            return CurrentTemplate(courseViewModel);
+            throw new ArgumentException("This should never be called!!!" + Request.Url.AbsolutePath);
         }
-
-
-
     }
 }

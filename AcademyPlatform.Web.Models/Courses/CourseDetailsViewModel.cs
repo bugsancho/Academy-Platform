@@ -30,5 +30,9 @@
         public ICollection<ModuleViewModel> Modules { get; set; }
 
         public string ShortDescription { get; set; }
+
+        public bool HasActiveSubscription { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

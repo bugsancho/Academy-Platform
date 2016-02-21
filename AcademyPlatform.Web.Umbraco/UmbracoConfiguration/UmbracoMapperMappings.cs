@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.UmbracoConfiguration
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Web.Models.Assessments;
@@ -8,6 +9,8 @@
 
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
+
+    using nuPickers;
 
     using Newtonsoft.Json;
 
@@ -35,9 +38,10 @@
                 var answers = contentToMapFrom.GetPropertyValue<string>(propName);
                 return JsonConvert.DeserializeObject<IEnumerable<QuestionAnswer>>(answers);
             }
-            return null;
 
+            return null;
         }
+
         public static object MapPlaceholder(IUmbracoMapper mapper, IPublishedContent contentToMapFrom, string propName, bool isRecursive)
         {
             if (contentToMapFrom.HasProperty(propName))
@@ -45,6 +49,18 @@
                 var placeholderInfo = contentToMapFrom.GetPropertyValue<string>(propName);
                 return JsonConvert.DeserializeObject<PlaceholderInfo>(placeholderInfo);
             }
+
+            return null;
+        }
+
+        public static object MapPicker(IUmbracoMapper mapper, IPublishedContent contentToMapFrom, string propName, bool isRecursive)
+        {
+            if (contentToMapFrom.HasProperty(propName))
+            {
+                var picker = contentToMapFrom.GetPropertyValue<Picker>(propName);
+                return int.Parse(picker.PickedKeys.First());
+            }
+
             return null;
 
         }

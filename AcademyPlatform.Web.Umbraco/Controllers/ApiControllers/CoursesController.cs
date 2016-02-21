@@ -7,7 +7,7 @@
 
     using global::Umbraco.Web.WebApi;
 
-    public class CoursesController : UmbracoApiController
+    public class CoursesController : UmbracoAuthorizedApiController
     {
         private readonly ICoursesService _courses;
 
@@ -15,12 +15,10 @@
         {
             _courses = courses;
         }
-
-        //Authorize attribute will never pass with current route. Keeping this for future use
-        [UmbracoAuthorize]
+        
         public IHttpActionResult GetAll()
         {
-            return Json(_courses.GetAll().Select(x => new { Id= x.Id, Title = x.Title }));
+            return Json(_courses.GetAll().Select(x => new { Id= x.Id, Title = x.Title }).ToList());
         }
     }
 }

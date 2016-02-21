@@ -16,6 +16,8 @@
     using global::Umbraco.Web;
     using global::Umbraco.Web.Routing;
 
+    using nuPickers;
+
     public class UmbracoEvents : ApplicationEventHandler
     {
         private readonly ILecturesService _lectures;
@@ -87,14 +89,17 @@
         private Lecture GetLectureFromContent(IContent lectureContent)
         {
             //TODO handle trashed lectures.
-            object courseId = lectureContent?.Ancestors()?.FirstOrDefault(x => x.ContentType.Alias == nameof(DocumentTypes.Course))?.Properties[nameof(DocumentTypes.Course.CourseId)]?.Value;
-           
+            IContent course = lectureContent?.Ancestors()?.FirstOrDefault(x => x.ContentType.Alias == nameof(DocumentTypes.Course));
+            Picker courseIdPicker = course?.Properties[(nameof(DocumentTypes.Course.CourseId))].Value as Picker;
+            int courseId = int.Parse(courseIdPicker.PickedKeys.First());
+            
             Lecture lecture = new Lecture
             {
-                CourseId = int.Parse(courseId.ToString()),
+                CourseId = courseId,
                 Title = lectureContent.Name,
                 ExternalId = lectureContent.Id
             };
+
             return lecture;
         }
 

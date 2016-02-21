@@ -9,5 +9,7 @@
         IPublishedContent GetCoursePublishedContentByNiceUrl(string niceUrl);
 
         Course GetCourseByNiceUrl(string niceUrl);
+
+        int GetCourseId(IPublishedContent content);
     }
 }

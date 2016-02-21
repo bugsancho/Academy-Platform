@@ -42,6 +42,7 @@
 
             List<Course> coursesContentViewModels = new List<Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
+                   .AddCustomMapping(typeof(int).FullName, UmbracoMapperMappings.MapPicker, nameof(Course.CourseId))
                    .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
                     {
                       {

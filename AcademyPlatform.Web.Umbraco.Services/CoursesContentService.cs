@@ -7,10 +7,12 @@
 
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
+    
+    using nuPickers;
 
     using Course = AcademyPlatform.Models.Courses.Course;
 
-    public class CoursesContentService :ICoursesContentService
+    public class CoursesContentService : ICoursesContentService
     {
         private readonly ICoursesService _courses;
 
@@ -33,9 +35,14 @@
                 return null;
             }
 
-            int courseId = coursePublishedContent.GetPropertyValue<int>(nameof(Models.Umbraco.DocumentTypes.Course.CourseId));
+            int courseId = GetCourseId(coursePublishedContent);
             Course course = _courses.GetById(courseId);
             return course;
+        }
+
+        public int GetCourseId(IPublishedContent content)
+        {
+            return int.Parse(content.GetPropertyValue<Picker>(nameof(Models.Umbraco.DocumentTypes.Course.CourseId)).PickedKeys.First());
         }
     }
 }

@@ -6,11 +6,12 @@
     {
         public LectureViewModel()
         {
-            OtherLectures = new List<LectureLinkViewModel>();
+            Modules = new List<ModuleViewModel>();
         }
+
         public string Content { get; set; }
 
-        public ICollection<LectureLinkViewModel> OtherLectures { get; set; }
+        public ICollection<ModuleViewModel> Modules { get; set; }
 
         public LectureLinkViewModel PreviousLecture { get; set; }
 

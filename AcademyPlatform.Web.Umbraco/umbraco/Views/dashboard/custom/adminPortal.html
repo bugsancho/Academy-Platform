@@ -1,2 +1,10 @@
-﻿<div><a target="_blank" class="btn btn-danger pull-right" href="/Umbraco/Backoffice/Admin/CoursesAdmin">Отвори в нов прозорец</a></div>
-<iframe style="margin-top: 30px" src="/Umbraco/Backoffice/Admin/CoursesAdmin"></iframe>
+﻿<div>
+    <a id="website-admin-panel-link" target="_blank" class="btn btn-danger pull-right" href="/Umbraco/Backoffice/Admin/CoursesAdmin">Отвори в нов прозорец</a>
+</div>
+
+<script>
+    $('#website-admin-panel').load(function () {
+        $('#website-admin-panel-link').attr('href', this.contentWindow.location);
+    });
+</script>
+<iframe id="website-admin-panel" style="margin-top: 30px" src="/Umbraco/Backoffice/Admin/CoursesAdmin"></iframe>

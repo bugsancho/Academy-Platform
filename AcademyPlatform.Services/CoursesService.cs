@@ -61,7 +61,7 @@
 
         public bool IsPaidCourse(Course course)
         {
-            return course.PricingType == CoursePricingType.PaidAccess || course.PricingType == CoursePricingType.PaidAccessAndCertificate;
+            return course.PricingType == CoursePricingType.PaidAccess;
         }
     }
 }

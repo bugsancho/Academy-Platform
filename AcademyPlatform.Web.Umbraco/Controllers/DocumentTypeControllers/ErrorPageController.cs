@@ -14,7 +14,7 @@
         public override ActionResult Index(RenderModel model)
         {
             Response.StatusCode = model.Content.GetPropertyValue<int>(nameof(ErrorPage.ErrorCode));
-            Response.TrySkipIisCustomErrors = true;
+            //Response.TrySkipIisCustomErrors = true;
             return base.Index(model);
         }
     }

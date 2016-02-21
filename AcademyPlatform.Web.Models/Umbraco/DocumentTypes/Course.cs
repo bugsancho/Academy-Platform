@@ -10,6 +10,7 @@
         {
             Modules = new List<Module>();
         }
+        
         public int CourseId { get; set; }
 
         public int  Certificate { get; set; }

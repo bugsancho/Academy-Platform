@@ -32,7 +32,7 @@
 
 
             AreaRegistration.RegisterAllAreas();
-            RouteTable.Routes.MapHttpRoute("Default_Api", "api/{controller}/{action}/{id}", new { Id = UrlParameter.Optional }, null);
+            RouteTable.Routes.MapHttpRoute("Default_Api", "umbraco/backoffice/api/{controller}/{action}/{id}", new { Id = UrlParameter.Optional }, null);
 
             //RouteTable.Routes.MapRoute("Register",
             //    "register",

@@ -226,6 +226,9 @@
       <HintPath>..\packages\UmbracoCms.Core.7.3.1\lib\TidyNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="uComponents.nuPickers">
+      <HintPath>..\Dependencies\uComponents.nuPickers.dll</HintPath>
+    </Reference>
     <Reference Include="umbraco, Version=1.0.5780.28255, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.3.1\lib\umbraco.dll</HintPath>
       <Private>True</Private>

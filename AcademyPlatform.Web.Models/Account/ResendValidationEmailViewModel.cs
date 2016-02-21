@@ -5,6 +5,7 @@
     public class ResendValidationEmailViewModel
     {
         [Display(Name = "E-mail")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
 }

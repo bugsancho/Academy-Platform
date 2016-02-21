@@ -19,6 +19,7 @@
     using Course = AcademyPlatform.Models.Courses.Course;
 
     [Authorize]
+    //TODO use virtual node route handler
     [EnsurePublishedContentRequest(2055)]
     public class SubscriptionsController : UmbracoController
     {
@@ -39,7 +40,7 @@
         public ActionResult JoinCourse(string courseNiceUrl)
         {
             Course course = _coursesContent.GetCourseByNiceUrl(courseNiceUrl);
-            
+
             if (course == null)
             {
                 return HttpNotFound();
@@ -49,17 +50,20 @@
             SubscriptionStatus subscriptionStatus = _subscriptions.GetSubscriptionStatus(username, course.Id);
             if (subscriptionStatus == SubscriptionStatus.Active)
             {
-                IPublishedContent studentPageContent = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault();
-                return Redirect(studentPageContent.Url + courseNiceUrl);
+                IPublishedContent coursesPage = _coursesContent.GetCoursePublishedContentByNiceUrl(courseNiceUrl);
+                return Redirect(coursesPage.Url);
             }
-            else if(subscriptionStatus == SubscriptionStatus.AwaitingPayment)
+            else if (subscriptionStatus == SubscriptionStatus.AwaitingPayment)
             {
                 return RedirectToAction(nameof(AwaitingPayment), new { courseNiceUrl = courseNiceUrl });
             }
 
-            JoinCourseViewModel viewModel = new JoinCourseViewModel();
-            viewModel.CourseName = course.Title;
-            viewModel.RequiresBillingInfo = _courses.IsPaidCourse(course);
+            JoinCourseViewModel viewModel = new JoinCourseViewModel
+            {
+                CourseName = course.Title,
+                RequiresBillingInfo = _courses.IsPaidCourse(course)
+            };
+
             if (viewModel.RequiresBillingInfo)
             {
                 User user = _users.GetByUsername(username);
@@ -99,8 +103,8 @@
 
                 if (status == SubscriptionStatus.Active)
                 {
-                    IPublishedContent studentPageContent = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(StudentPage)).FirstOrDefault();
-                    return Redirect(studentPageContent.Url + model.CourseNiceUrl);
+                    IPublishedContent coursesPage = _coursesContent.GetCoursePublishedContentByNiceUrl(model.CourseNiceUrl);
+                    return Redirect(coursesPage.Url);
                 }
                 else
                 {

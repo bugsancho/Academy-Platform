@@ -13,10 +13,7 @@
                         <br />
                         @Html.Raw(Model.ShortDescription)
                         <br />
-                        @if (ViewBag.StudentPageUrl != null)
-                        {
-                        }
-                        else
+                        @if (!Model.HasActiveSubscription)
                         {
                             <a href="@Model.JoinCourseUrl" class="btn btn-animated btn-course-unsigned-transparent btn-lg">Запиши се <i class="fa fa-sign-in"></i></a>
                         }
@@ -24,11 +21,16 @@
                     </div>
                 </div>
             </div>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="col-md-12">
+                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i>@Model.ErrorMessage</div>
+                </div>
+            }
+
             <!-- main start -->
             <!-- ================ -->
             <div class="main col-md-9">
-
-
                 <ul class="nav nav-tabs style-1 space-top" role="tablist">
                     <li class="active"><a href="#htab1" role="tab" data-toggle="tab"><i class="fa fa-book pr-10"></i>Модули</a></li>
                     <li><a href="#htab2" role="tab" data-toggle="tab"><i class="fa fa-list pr-10"></i>Описание</a></li>
@@ -42,114 +44,133 @@
                             <div>
                                 @foreach (var module in Model.Modules)
                                 {
-                                <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
-                                    <span class="icon default-bg small">@moduleIndex</span>
-                                    <div class="body">
-                                        <h4 class="title">@module.Name</h4>
+                                    <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                                        <span class="icon default-bg small">@moduleIndex</span>
+                                        <div class="body">
+                                            <h4 class="title">@module.Name</h4>
 
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tbody>
-                                                            @{
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                @{
                                                                     var lectureIndex = 1;
-                                                            }
-                                                            @foreach (var lecture in module.LectureLinks)
+                                                                }
+                                                                @foreach (var lecture in module.LectureLinks)
                                                                 {
-                                                            <tr>
-                                                                <td class="text-left">@(moduleIndex).@lectureIndex <a href="@lecture.Url">@lecture.Name</a></td>
-                                                                <td class="text-right">
-                                                                    @if (lecture.IsVisited)
-                                                                            {
-                                                                        <i class="fa fa-check"></i>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                        <a href="@lecture.Url"><i class="fa fa-play"></i> Старт</a>
-                                                                            }
-                                                                </td>
-                                                            </tr>
+                                                                    <tr>
+                                                                        @if (lecture.IsDemo || Model.HasActiveSubscription)
+                                                                        {
+                                                                            <td class="text-left">@(moduleIndex).@lectureIndex <a href="@lecture.Url">@lecture.Name</a></td>
+                                                                            <td class="text-right">
+
+                                                                                @if (Model.HasActiveSubscription)
+                                                                                {
+                                                                                    if (lecture.IsVisited)
+                                                                                    {
+                                                                                        <i class="fa fa-check"></i>
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
+                                                                                    }
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
+                                                                                }
+                                                                            </td>
+                                                                        }
+                                                                        else if (!Model.HasActiveSubscription)
+                                                                        {
+                                                                            <td class="text-left text-muted">@(moduleIndex).@lectureIndex @lecture.Name</td>
+                                                                            <td class="text-right">
+                                                                                <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>&nbsp;Платена лекция</span>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+
                                                                     lectureIndex++;
                                                                 }
-                                                        </tbody>
-                                                    </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                                                         moduleIndex++;
                                                                     }
                             </div>
                             <div>
 
                                 @*<div class="pv-20 ph-20 feature-box-2 boxed white-bg">
-                                    <span class="icon default-bg small">1</span>
-                                    <div class="body">
-                                        <h4 class="title">Active Demo Module</h4>
+                                        <span class="icon default-bg small">1</span>
+                                        <div class="body">
+                                            <h4 class="title">Active Demo Module</h4>
 
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tbody>
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <tbody>
 
-                                                            <tr>
-                                                                <td class="text-left">1.1 <a href="/student-page/web-design/html-stuff/html-5">HTML 5</a></td>
-                                                                <td class="text-right">
-                                                                    <span class="text-default">Демо Лекция</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-left">1.2 <a href="/student-page/web-design/html-stuff/random-lecture">Random Lecture</a></td>
-                                                                <td class="text-right">
-                                                                    <span class="text-default">Демо Лекция</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-left">1.3 <a href="/student-page/web-design/html-stuff/more-lectures">More Lectures</a></td>
-                                                                <td class="text-right">
-                                                                    <span class="text-default"></span><i class="fa fa-play"></i> Демо Лекция
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                                <tr>
+                                                                    <td class="text-left">1.1 <a href="/student-page/web-design/html-stuff/html-5">HTML 5</a></td>
+                                                                    <td class="text-right">
+                                                                        <span class="text-default">Демо Лекция</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-left">1.2 <a href="/student-page/web-design/html-stuff/random-lecture">Random Lecture</a></td>
+                                                                    <td class="text-right">
+                                                                        <span class="text-default">Демо Лекция</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="text-left">1.3 <a href="/student-page/web-design/html-stuff/more-lectures">More Lectures</a></td>
+                                                                    <td class="text-right">
+                                                                        <span class="text-default"></span><i class="fa fa-play"></i> Демо Лекция
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
-                                    <span class="icon small inactive-demo-bg">2</span>
-                                    <div class="body">
-                                        <h4 class="title inactive-demo">inactive Demo Module </h4>
+                                    <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                                        <span class="icon small inactive-demo-bg">2</span>
+                                        <div class="body">
+                                            <h4 class="title inactive-demo">inactive Demo Module </h4>
 
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <tbody>
+                                            <div class="col-md-1">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <tbody>
 
-                                                            <tr>
-                                                                <td class="text-left">2.1 Another lecture</td>
-                                                                <td class="text-right">
-                                                                    <span data-toggle="tooltip" title="Заключен, палти си лек!"><i class="fa fa-lock"></i> Старт</span>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                                <tr>
+                                                                    <td class="text-left">2.1 Another lecture</td>
+                                                                    <td class="text-right">
+                                                                        <span data-toggle="tooltip" title="Заключен, палти си лек!"><i class="fa fa-lock"></i> Старт</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>*@
+                                    </div>*@
                             </div>
                         </div>
                     </div>

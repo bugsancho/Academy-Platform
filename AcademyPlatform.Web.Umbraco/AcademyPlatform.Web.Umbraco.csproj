@@ -282,9 +282,9 @@
       <HintPath>..\packages\UmbracoCms.Core.7.3.1\lib\TidyNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="uComponents.nuPickers, Version=1.5.2.135, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\nuPickers.1.5.2\lib\net45\uComponents.nuPickers.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="uComponents.nuPickers, Version=1.5.2.111, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Dependencies\uComponents.nuPickers.dll</HintPath>
     </Reference>
     <Reference Include="umbraco, Version=1.0.5780.28255, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.3.1\lib\umbraco.dll</HintPath>
@@ -401,7 +401,9 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Custom.js" />
@@ -532,7 +534,9 @@
     <None Include="Scripts\_references.js" />
     <Content Include="umbraco\Views\dashboard\custom\adminPortal.html" />
     <Content Include="Views\Web.config" />
-    <Content Include="Config\umbracoSettings.config" />
+    <Content Include="Config\umbracoSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Config\tinyMceConfig.config" />
     <Content Include="Config\log4net.config" />
     <Content Include="Config\ClientDependency.config" />
@@ -629,10 +633,8 @@
     <Compile Include="Startup\Routing.cs" />
     <Compile Include="Startup\UmbracoEvents.cs" />
     <Compile Include="Startup\UrlProvidersConfig.cs" />
-    <Compile Include="UmbracoConfiguration\ContentFinders\LectureContentFinder.cs" />
     <Compile Include="UmbracoConfiguration\ContentFinders\NotFoundContentFinder.cs" />
     <Compile Include="UmbracoConfiguration\UmbracoMapperMappings.cs" />
-    <Compile Include="UmbracoConfiguration\UrlProviders\LectureUrlProvider.cs" />
     <Compile Include="ViewModels\CoursesViewModel.cs" />
     <Compile Include="ViewModels\ValidateAccountViewModel.cs" />
   </ItemGroup>
@@ -673,6 +675,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\Images\" />
+    <Folder Include="UmbracoConfiguration\UrlProviders\" />
     <Folder Include="Views\ErrorPage\" />
   </ItemGroup>
   <PropertyGroup>

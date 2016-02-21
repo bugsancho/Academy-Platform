@@ -1,5 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Validators.Courses
 {
+    using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Web.Models.Courses;
 
     using FluentValidation;
@@ -8,8 +9,7 @@
     {
         public CreateCourseViewModelValidator()
         {
-            RuleFor(x => x.StartDate).NotEmpty();
-            RuleFor(x => x.EndDate).GreaterThanOrEqualTo(x => x.StartDate.Date).NotEmpty();
+            RuleFor(x => x.PricingType).NotEqual(x => CoursePricingType.None).WithMessage("Моля, посочете тип на курса");
             RuleFor(x => x.Title).Length(10, 50).NotEmpty();
         }
     }

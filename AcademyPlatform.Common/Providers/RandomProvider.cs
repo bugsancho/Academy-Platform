@@ -4,15 +4,15 @@
 
     public class RandomProvider : IRandomProvider
     {
-        private static readonly Random _rnd = new Random();
+        private static readonly Random Rnd = new Random();
 
         public string GenerateRandomCode(int length, string allowedCharacters = "abcdefghijklmnopqrstuvwxyz1234567890")
 		{
-			var allowedCharactersUpperCase = allowedCharacters.ToUpperInvariant();
-			var code = new char[length];
+			string allowedCharactersUpperCase = allowedCharacters.ToUpperInvariant();
+			char[] code = new char[length];
 			for (int i = 0; i < code.Length; i++)
 			{
-				code[i] = allowedCharactersUpperCase[_rnd.Next(allowedCharactersUpperCase.Length)];
+				code[i] = allowedCharactersUpperCase[Rnd.Next(allowedCharactersUpperCase.Length)];
 			}
 
 			return new string(code);

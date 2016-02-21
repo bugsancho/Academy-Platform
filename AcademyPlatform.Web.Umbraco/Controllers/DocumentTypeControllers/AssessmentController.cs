@@ -10,6 +10,7 @@
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Assessments;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
+    using AcademyPlatform.Web.Umbraco.Services.Contracts;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
 
     using global::Umbraco.Core.Models;
@@ -29,21 +30,23 @@
         private readonly IAssessmentsService _assessments;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICertificatesService _certificates;
+        private readonly ICoursesContentService _coursesContentService;
         private readonly IUserService _users;
 
-        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ISubscriptionsService subscriptions)
+        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ISubscriptionsService subscriptions, ICoursesContentService coursesContentService)
         {
             _mapper = mapper;
             _assessments = assessments;
             _users = users;
             _certificates = certificates;
             _subscriptions = subscriptions;
+            _coursesContentService = coursesContentService;
         }
 
         [HttpGet]
         public ActionResult Assessment()
         {
-            int courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+            int courseId =  _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
             if (!_subscriptions.IsEligibleForAssessment(User.Identity.Name, courseId))
             {
                 return Redirect(Umbraco.AssignedContentItem.Url);
@@ -98,7 +101,7 @@
         [HttpPost]
         public ActionResult Assessment(AssessmentViewModel assessment)
         {
-            int courseId = Umbraco.AssignedContentItem.GetPropertyValue<int>(nameof(Course.CourseId));
+            int courseId = _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
             if (!_subscriptions.IsEligibleForAssessment(User.Identity.Name, courseId))
             {
                 return Redirect(Umbraco.AssignedContentItem.Url);
