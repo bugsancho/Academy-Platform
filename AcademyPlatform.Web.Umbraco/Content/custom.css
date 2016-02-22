@@ -797,6 +797,7 @@ h4 {
     overflow: hidden;
     max-height: 200px;
 }
+
 .exam-box {
     color: black;
     border: 2px solid #27ae60;
@@ -804,6 +805,83 @@ h4 {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-.exam-box > p {
-    display: initial;
+
+    .exam-box > p {
+        display: initial;
+    }
+
+.lectures-list {
+    list-style: none;
+    padding: 0;
+}
+
+    .lectures-list > li {
+        padding-left: 1.3em;
+    }
+
+        .lecture-list > li:before {
+            content: "\f00c"; /* FontAwesome Unicode */
+            font-family: FontAwesome;
+            display: inline-block;
+            margin-left: -1.3em; /* same as padding-left set on li */
+            width: 1.3em; /* same as padding-left set on li */
+        }
+/* new tree*/
+.tree {
+    min-height:20px;
+    padding:1px;
+    margin-bottom:1px;
+    background-color: #FAFAFA
+    }
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative
+}
+.tree li::before, .tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+.tree li::before {
+    border-left:1px solid #777777;
+    bottom:50px;
+    height:100%;
+    top:0;
+    width:1px
+}
+.tree li::after {
+    border-top:1px solid #777777;
+    height:20px;
+    top:25px;
+    width:25px
+}
+.tree li span {
+    color: #777777;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid #777777;
+    border-radius:5px;
+    display:inline-block;
+    padding:3px 8px;
+    text-decoration:none
+}
+.tree li.parent_li>span {
+    cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:30px
+}
+.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+    background:#eee;
+    border:1px solid #777777;
+    color:#000
+}
+.well {
+    border: none;
 }

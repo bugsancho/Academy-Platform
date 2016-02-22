@@ -1,11 +1,15 @@
-﻿@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.LectureViewModel>
+﻿@using ClientDependency.Core.Mvc
+@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.LectureViewModel>
 @{
     Layout = "~/Views/Site.cshtml";
+    Html.RequiresJs("~/scripts/treeMenu.js");
 }
+
+
 <section class="pv-30 light-gray-bg padding-bottom-clear clearfix">
     <div class="container">
         <div class="row space-bottom">
-            <div class="main col-md-10 col-sm-10 col-xs-10">
+            <div class="main col-md-9 col-sm-12 col-xs-12">
 
                 <div class="space-bottom"> @Html.Raw(Model.Content)</div>
                 <div class="space-bottom">
@@ -19,27 +23,69 @@
                     }
                 </div>
             </div>
-            <aside class="col-md-2 hidden-sm hidden-xs">
-                <div class="sidebar">
-                    <nav class="scrollspy">
-                        <ul class="nav nav-pills nav-stacked">
+            <aside class="col-md-3 hidden-sm hidden-xs">
+                <div>
+                    @*<ul class="lectures-list">
+                        <li>
                             @foreach (var module in Model.Modules)
                             {
-                                <li>
-                                    <span>@module.Name</span>
-                                    <ul>
-                                        @foreach (var lecture in module.LectureLinks)
-                                        {
-                                            <li>
-                                                <a href="@lecture.Url" class="@(lecture.IsCurrent ? "active" : "")">@lecture.Name</a>
-                                            </li>
-                                        }
-                                    </ul>
-                                </li>
+                                <ul class="tree lectures-list">
+                                    <li>
+                                        <label class="tree-toggle nav-header">@module.Name</label>
+                                        <ul class="tree lectures-list">
+                                            @foreach (var lecture in module.LectureLinks)
+                                            {
+                                                if (lecture.IsCurrent)
+                                                {
+                                                    <li><i class="fa fa-arrow-right">&nbsp</i><a href="@lecture.Url">@lecture.Name</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="@lecture.Url">@lecture.Name</a></li>
+                                                }
+                                            }
+
+                                        </ul>
+                                    </li>
+                                    <li class="divider"></li>
+                                </ul>
                             }
+
+                        </li>
+                    </ul>*@
+                    <div class="tree well">
+                        <ul>
+                            <li>
+                                <span><i class="fa fa-list-ul"></i> Падащо меню</span>
+                                <ul>
+                                    @foreach (var module in Model.Modules)
+                                    {
+                                        <li>
+                                            <span><i class="fa fa-minus"></i> @module.Name</span>
+                                            <ul>
+                                                @foreach (var lecture in module.LectureLinks)
+                                                {
+                                                    if (lecture.IsCurrent)
+                                                    {
+                                                        <li><i style="color: #777777" class="fa fa-arrow-right">&nbsp</i><a href="@lecture.Url">@lecture.Name</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="@lecture.Url">@lecture.Name</a></li>
+                                                    }
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
                         </ul>
-                    </nav>
+                    </div>
+
                 </div>
+
+                @*<a href="@lecture.Url" class="@(lecture.IsCurrent ? "active" : "")">@lecture.Name</a>*@
+
             </aside>
         </div>
     </div>

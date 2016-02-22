@@ -8,86 +8,99 @@
     Html.RequiresJs("~/Scripts/jquery.validate.unobtrusive.min.js", 10);
 }
 @section head{
-    <title>Регистрация - Фокус Академия</title>
+    <title>Създаване на профил - Фокус Академия</title>
 }
-<div class="main-container dark-translucent-bg" style="background-image:url('/media/1035/stars.jpg')">
+@*<div class="main-container dark-translucent-bg" style="background-image: url('/media/1035/stars.jpg')">*@
+<section id="fatarget" class="section pt-70 clearfix">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-block center-block p-30 light-gray-bg border-clear">
+        <div class="row form-block center-block p-30 light-gray-bg border-clear full-width-section">
+            <div class="pv-10 ph-20 target object-visible">
+                <h1 > Създаване на профил </h1>
+                <div class="col-md-7">
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Email)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })
 
-                            <div class="col-md-10">
+                            <div class="col-md-9">
                                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.FirstName)
                             </div>
                         </div>
                         @*<div class="form-group">
-                                @Html.LabelFor(m => m.MiddleName, new { @class = "col-md-2 control-label" })
+                                @Html.LabelFor(m => m.MiddleName, new { @class = "col-md-3 control-label" })
                                 @Html.ValidationMessageFor(m => m.MiddleName)
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
                                 </div>
                             </div>*@
                         <div class="form-group">
-                            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.LastName, new { @class = "col-md-3 control-label" })
 
-                            <div class="col-md-10">
+                            <div class="col-md-9">
                                 @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.LastName)
                             </div>
                         </div>
-                            @*<div class="form-group">
-                                    @Html.LabelFor(m => m.Company, new { @class = "col-md-2 control-label" })
-                                    @Html.ValidationMessageFor(m => m.Company)
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
-                                    </div>
-                                </div>*@
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password)
+                        @*<div class="form-group">
+                                @Html.LabelFor(m => m.Company, new { @class = "col-md-3 control-label" })
+                                @Html.ValidationMessageFor(m => m.Company)
+                                <div class="col-md-9">
+                                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
                                 </div>
+                            </div>*@
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password)
+                            </div>
 
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 control-label" })
+                            <div class="col-md-9">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
                             </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reCaptcha" class="col-md-3 control-label ">
+                                Рекаптча
+                            </label>
+                            @Html.ValidationMessage("ReCaptcha")
+                            <div class="col-md-9" id="reCaptcha">
+                                @Html.Recaptcha(language: "bg")
                             </div>
-                            <div class="form-group">
-                                <label for="reCaptcha" class="col-md-2 control-label ">
-                                    Рекаптча
-                                </label>
-                                @Html.ValidationMessage("ReCaptcha")
-                                <div class="col-md-10" id="reCaptcha">
-                                    @Html.Recaptcha(language: "bg")
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" class="btn btn-default" value="Регистрация" />
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" class="btn btn-default" value="Регистрация" />
-                                </div>
-                            </div>
+                        </div>
                     }
+                </div>
+            </div>
+
+            <div class="col-md-5 target">
+                <div class="pv-30 ph-20 target object-visible">
+                    <h3 style="color: #777777">Какви са ползите от регистрацията:</h3>
+                    <ul class="pv-30 target-points">
+                        <li> <i class="fa fa-check-square-o"></i> Имате собствен профил, който пази информация за всички ваши обучения и напредъка ви;</li>
+                        <li> <i class="fa fa-check-square-o"></i> Неограничен достъп до вашите учебни материали;</li>
+                        <li> <i class="fa fa-check-square-o"></i> Достъп по всяко време до сертификатите ви за всички обучения, които сте завършили успешно.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
