@@ -6,7 +6,7 @@
 }
 
 
-<section class="pv-30 light-gray-bg padding-bottom-clear clearfix">
+<section class="pv-30 padding-bottom-clear clearfix"> @* used to have 'light-gray-bg' CSS class *@
     <div class="container">
         <div class="row space-bottom">
             <div class="main col-md-9 col-sm-12 col-xs-12">
@@ -53,10 +53,10 @@
 
                         </li>
                     </ul>*@
-                    <div class="tree well">
+                    <div class="tree">
                         <ul>
                             <li>
-                                <span><i class="fa fa-list-ul"></i> Падащо меню</span>
+                                <span class="course-tree-name"><i class="fa fa-list-ul"></i> Име на курса</span>
                                 <ul>
                                     @foreach (var module in Model.Modules)
                                     {
