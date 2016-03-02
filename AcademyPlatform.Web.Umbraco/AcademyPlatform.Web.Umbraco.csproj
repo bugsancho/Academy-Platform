@@ -624,6 +624,9 @@
     <Compile Include="Controllers\StoryLineContentSurfaceController.cs" />
     <Compile Include="Controllers\StudentSectionController.cs" />
     <Compile Include="Controllers\SubscriptionsController.cs" />
+    <Compile Include="Providers\MessageTemplateProvider.cs" />
+    <Compile Include="Providers\MailSettingsProvider.cs" />
+    <Compile Include="Providers\RouteProvider.cs" />
     <Compile Include="Startup\FiltersConfig.cs" />
     <Compile Include="Startup\FluentValidationConfig.cs" />
     <Compile Include="UmbracoConfiguration\ContentFinders\StudentCourseContentFinder.cs" />

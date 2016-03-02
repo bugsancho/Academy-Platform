@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AccountCreationStatus.cs" />
     <Compile Include="Assessments\Answer.cs" />
     <Compile Include="Assessments\Assessment.cs" />
     <Compile Include="Assessments\AssessmentRequest.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Courses\SubscriptionStatus.cs" />
     <Compile Include="Courses\SubscriptionType.cs" />
     <Compile Include="Courses\Validators\CourseValidator.cs" />
+    <Compile Include="Emails\MessageTemplate.cs" />
     <Compile Include="Exceptions\CourseNotFoundException.cs" />
     <Compile Include="Exceptions\UserNotApprovedException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />

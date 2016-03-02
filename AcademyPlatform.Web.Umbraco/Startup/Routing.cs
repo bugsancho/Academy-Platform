@@ -6,7 +6,6 @@
     using System.Web.Routing;
 
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
-
     using global::Umbraco.Core;
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
@@ -16,18 +15,19 @@
     {
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
-            RouteTable.Routes.MapRoute("Register", "register", new { Controller = "Account", Action = "Register" });
+            RootNodeRouteHandler rootNodeHandler = new RootNodeRouteHandler();
+            RouteTable.Routes.MapUmbracoRoute("Register", "register", new { Controller = "Account", Action = "Register" }, rootNodeHandler);
             RouteTable.Routes.MapRoute("Validate", "validate/{email}/{validationCode}", new { Controller = "Account", Action = "Validate", ValidationCode = UrlParameter.Optional });
-            RouteTable.Routes.MapRoute("ForgotPassword", "forgot-password", new { Controller = "Account", Action = "ForgotPassword" });
-            RouteTable.Routes.MapRoute("ChangePassword", "change-password", new { Controller = "Account", Action = "ChangePassword" });
-            RouteTable.Routes.MapRoute("ResendValidationEmail", "resend-validation-email/{email}", new { Controller = "Account", Action = "ResendValidationEmail", Email = UrlParameter.Optional });
-            RouteTable.Routes.MapRoute("LogOut", "logout", new { Controller = "Account", Action = "LogOut" });
+            RouteTable.Routes.MapUmbracoRoute("ForgotPassword", "forgot-password", new { Controller = "Account", Action = "ForgotPassword" }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("ChangePassword", "change-password", new { Controller = "Account", Action = "ChangePassword" }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("ResendValidationEmail", "resend-validation-email/{email}", new { Controller = "Account", Action = "ResendValidationEmail", Email = UrlParameter.Optional }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("LogOut", "logout", new { Controller = "Account", Action = "LogOut" }, rootNodeHandler);
 
-            RouteTable.Routes.MapRoute("JoinCourse", "join/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" });
+            RouteTable.Routes.MapUmbracoRoute("JoinCourse", "join/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("Assessment", "assessment/{courseNiceUrl}", new { Controller = "Assessment", Action = "Assessment" }, new CourseNodeProvider());
-            RouteTable.Routes.MapUmbracoRoute("Profile", "profile", new { Controller = "Profile", Action = "Index" }, new RootNodeRouteHandler());
-            RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateUniqueCode}", new { Controller = "Certificate", Action = "Certificate" }, new RootNodeRouteHandler());
-            RouteTable.Routes.MapRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" });
+            RouteTable.Routes.MapUmbracoRoute("Profile", "profile", new { Controller = "Profile", Action = "Index" }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateUniqueCode}", new { Controller = "Certificate", Action = "Certificate" }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" }, rootNodeHandler);
 
 
 
@@ -54,26 +54,23 @@
     {
         protected override IPublishedContent FindContent(RequestContext requestContext, UmbracoContext umbracoContext)
         {
+            umbracoContext = umbracoContext ?? AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions.GetOrCreateContext();
             IPublishedContent rootNode = umbracoContext.ContentCache.GetAtRoot().FirstOrDefault();
             if (rootNode == null)
             {
                 throw new ApplicationException("No root content found in Umbraco database");
             }
+
             return rootNode;
         }
     }
 
-    public class CourseNodeProvider : UmbracoVirtualNodeRouteHandler
+    public class CourseNodeProvider : RootNodeRouteHandler //TODO see if inheritance is the best way to achieve this functionality
     {
         protected override IPublishedContent FindContent(RequestContext requestContext, UmbracoContext umbracoContext)
         {
+            IPublishedContent rootNode = base.FindContent(requestContext, umbracoContext);
             string courseUrl = (string)requestContext.RouteData.Values["courseNiceUrl"];
-            IPublishedContent rootNode = umbracoContext.ContentCache.GetAtRoot().FirstOrDefault();
-            if (rootNode == null)
-            {
-                throw new ApplicationException("No root content found in Umbraco database");
-            }
-
             IPublishedContent courseNode = rootNode.DescendantsOrSelf(nameof(Course)).FirstOrDefault(x => x.UrlName == courseUrl);
             return courseNode;
         }

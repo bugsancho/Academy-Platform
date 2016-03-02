@@ -10,7 +10,7 @@
     using AcademyPlatform.Web.Infrastructure.Mappings;
     using AcademyPlatform.Web.Infrastructure.Sanitizers;
     using AcademyPlatform.Web.Models.Courses;
-    using AcademyPlatform.Web.Models.Properties;
+    using AcademyPlatform.Web.Umbraco.Providers;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
 
     using Autofac;
@@ -47,12 +47,16 @@
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerRequest();
             builder.RegisterType(typeof(UmbracoMapper)).As(typeof(IUmbracoMapper)).InstancePerRequest();
 
-            var container = builder.Build();
+            builder.RegisterType(typeof(MailSettingsProvider)).As(typeof(IMailSettingsProvider)).InstancePerLifetimeScope();
+            builder.RegisterType(typeof(RouteProvider)).As(typeof(IRouteProvider)).InstancePerRequest();
+            builder.RegisterType(typeof(MessageTemplateProvider)).As(typeof(IMessageTemplateProvider)).InstancePerRequest();
+
+            IContainer container = builder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             //TODO MOVE
-            var autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseEditViewModel)));
+            AutoMapperConfig autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseEditViewModel)));
             autoMapperConfig.Execute();
         }
 

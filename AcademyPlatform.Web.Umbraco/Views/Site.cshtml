@@ -1,4 +1,5 @@
-﻿@using ClientDependency.Core.Mvc
+﻿@using AcademyPlatform.Web.Models.Umbraco.DocumentTypes
+@using ClientDependency.Core.Mvc
 @inherits UmbracoViewPage<dynamic>
 @{
     Layout = null;
@@ -86,12 +87,12 @@
     </div>
     <div class="page-wrapper">
         <div class="header-container">
-            @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("header"))
+            @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf(nameof(Site)).GetPropertyValue<string>(nameof(Site.Header)))
         </div>
         @RenderSection("PreContent", required: false)
         @RenderBody()
     </div>
-    @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
+    @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf(nameof(Site)).GetPropertyValue<string>(nameof(Site.Footer)))
     @Html.RenderJsHere()
     @RenderSection("scripts", required: false)
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6iMoH6Ha1MoMKpSYrsaX-7ItFRTpizPQ" type="text/javascript"></script>

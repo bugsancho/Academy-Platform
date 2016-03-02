@@ -7,16 +7,23 @@
     public class EmailService : IEmailService
     {
         private readonly SmtpClient _smtp;
+        private readonly IMailSettingsProvider _mailSettings;
 
-        public EmailService()
+        public EmailService(IMailSettingsProvider mailSettings)
         {
+            _mailSettings = mailSettings;
             _smtp = new SmtpClient();
         }
 
-        public bool SendMail(string recipient, string body, string subject)
+        public bool SendMail(string recipient, string subject, string body)
         {
-            using (var message = new MailMessage("alexander.todorov@soft-solutions.bg", recipient))
+            using (var message = new MailMessage(new MailAddress(_mailSettings.FromEmail, _mailSettings.FromEmailName), new MailAddress(recipient)))
             {
+                if (_mailSettings.BccAllEmails)
+                {
+                    message.Bcc.Add(_mailSettings.BccEmail);
+                }
+
                 message.IsBodyHtml = true;
                 message.Body = body;
                 message.Subject = subject;

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\BillingInfoViewModelValidator.cs" />
+    <Compile Include="Account\ChangePasswordViewModelValidator.cs" />
     <Compile Include="Account\RegisterViewModelValidator.cs" />
     <Compile Include="Account\ResendValidationEmailValidator.cs" />
     <Compile Include="Courses\CreateCourseViewModelValidator.cs" />

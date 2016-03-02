@@ -1,25 +1,20 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers
 {
-    using System;
     using System.Linq;
     using System.Web.Mvc;
-    using System.Web.Routing;
-    using System.Web.Security;
 
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Account;
     using AcademyPlatform.Models.Exceptions;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Infrastructure.Extensions;
     using AcademyPlatform.Web.Infrastructure.Filters;
     using AcademyPlatform.Web.Models.Account;
-    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.ViewModels;
 
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
     using global::Umbraco.Web.Mvc;
-
-    using nuPickers;
 
     using Recaptcha.Web;
     using Recaptcha.Web.Mvc;
@@ -29,7 +24,7 @@
     using UmbracoContextExtensions = AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions;
 
     [RequireHttps]
-    [EnsurePublishedContentRequest(2055)]
+    [EnsurePublishedContentRequest(2055)]//TODO create an attribute that specifies a node name, rather than node Id
     public class AccountController : UmbracoController
     {
         private readonly IMembershipService _membership;
@@ -86,19 +81,17 @@
 
             if (ModelState.IsValid)
             {
-                MembershipCreateStatus status;
-                _membership.CreateUser(registerViewModel.Email, registerViewModel.Password, registerViewModel.FirstName, registerViewModel.LastName, out status);
+                AccountCreationStatus status = _membership.CreateUser(registerViewModel.Email, registerViewModel.Password, registerViewModel.FirstName, registerViewModel.LastName);
 
-                if (status == MembershipCreateStatus.Success)
+                if (status == AccountCreationStatus.Success)
                 {
-                    SendAccountValidationEmail(registerViewModel.Email, registerViewModel.FirstName);
                     int thankYouPageId =
                         AccountSection.GetPropertyValue<int>(
                             nameof(Models.Umbraco.DocumentTypes.AccountSection.RegistrationThankYouPage));
                     return new RedirectToUmbracoPageResult(thankYouPageId);
 
                 }
-                if (status == MembershipCreateStatus.DuplicateEmail || status == MembershipCreateStatus.DuplicateUserName)
+                if (status == AccountCreationStatus.DuplicateEmail)
                 {
                     ModelState.AddModelError(nameof(registerViewModel.Email), "Имейлът вече се използва");
                 }
@@ -142,7 +135,6 @@
 
                     if (_membership.ApproveUser(model.Email, model.ValidationCode))
                     {
-                        _membership.Login(model.Email);
                         return Redirect("/");
                     }
 
@@ -174,25 +166,8 @@
             User user = _user.GetByUsername(model.Email);
             if (user != null)
             {
-                // No null checks because there's no possible handing if the properties are not configured and we opt for the 500 page and error log to resolve the issue
-                IPublishedContent accountSection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(AccountSection)).SingleOrDefault();
-
-                object forgotPasswordEmailId =
-                    accountSection.GetPropertyValue<Picker>(nameof(Models.Umbraco.DocumentTypes.AccountSection.ForgotPasswordEmail)).SavedValue;
-
-                IPublishedContent forgotPasswordEmailNode = Umbraco.TypedContent(forgotPasswordEmailId);
-
-                EmailTemplate emailTemplate = new EmailTemplate();
-                _mapper.Map(forgotPasswordEmailNode, emailTemplate);
-
-                emailTemplate.Content = emailTemplate.Content.Replace("{{firstName}}", user.FirstName);
-                emailTemplate.Content = emailTemplate.Content.Replace("{{username}}", user.Username);
-                emailTemplate.Content = emailTemplate.Content.Replace("{{password}}", _membership.ResetPassword(user.Username));
-
-                _email.SendMail(user.Username, emailTemplate.Content, emailTemplate.Subject);
-
+                _membership.ResetPassword(user.Username);
                 return Redirect("/Login");
-
             }
 
             ModelState.AddModelError(nameof(ForgotPasswordViewModel.Email), "Не успяхме да намерим потребител с този Email");
@@ -224,7 +199,7 @@
                     return Redirect("/");
                 }
 
-                SendAccountValidationEmail(user.Username, user.FirstName);
+                _membership.ResendValidationEmail(model.Email);
                 return RedirectToAction(nameof(Validate), nameof(AccountController).StripControllerSufix(), new { model.Email });
             }
 
@@ -246,12 +221,6 @@
         {
             if (ModelState.IsValid)
             {
-                //TODO move this to model validation
-                if (model.NewPassword != model.ConfirmPassword)
-                {
-                    ModelState.AddModelError(nameof(ChangePasswordViewModel.NewPassword), "Паролите не съвпадат");
-                }
-
                 bool changeSuccessful = _membership.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                 if (changeSuccessful)
                 {
@@ -270,33 +239,6 @@
         {
             _membership.LogOut();
             return Redirect("/");
-        }
-
-        private bool SendAccountValidationEmail(string email, string firstName)
-        {
-            string validationPath = Url.RouteUrl("Validate", new RouteValueDictionary
-                                                                              {
-                                                                                  { "Email", email },
-                                                                                  { "ValidationCode",   _membership.GenerateValidationCode(email) }
-                                                                              });
-            UriBuilder validationLink = new UriBuilder("https", Request.Url.Host, 443, validationPath);
-
-            object accountValidationMailId =
-                AccountSection.GetPropertyValue<Picker>(nameof(Models.Umbraco.DocumentTypes.AccountSection.AccountValidationEmail)).SavedValue;
-            IPublishedContent accountValidationMailNode = Umbraco.TypedContent(accountValidationMailId);
-            if (accountValidationMailNode != null)
-            {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                _mapper.Map(accountValidationMailNode, emailTemplate);
-
-                emailTemplate.Content = emailTemplate.Content.Replace("{{firstName}}", firstName);
-                // Umbraco's TinyMCE inserts forward slash ('/') at the begining of href's, so we have to manually remove it as part of the link insertion
-                emailTemplate.Content = emailTemplate.Content.Replace("/{{validationLink}}", validationLink.Uri.AbsoluteUri);
-
-                return _email.SendMail(email, emailTemplate.Content, emailTemplate.Subject);
-            }
-
-            return false;
         }
     }
 }
