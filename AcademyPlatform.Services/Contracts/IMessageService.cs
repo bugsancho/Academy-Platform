@@ -1,19 +1,22 @@
 ﻿namespace AcademyPlatform.Services.Contracts
 {
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Courses;
 
     public interface IMessageService
     {
         void SendAccountValidationMessage(User user, string validationLink);
 
         void SendForgotPasswordMessage(User user, string newPassword);
+        
+        void SendPaymentApprovedMessage(User user, Course course);
 
-        void SendCourseSignUpMessage();
+        void SendExamAvailableMessage(User user, Course course);
 
-        void SendPaymentApprovedMessage();
+        void SendExamSuccessfulMessage(User user, Course course);
 
-        void SendExamAvailableMessage();
+        void SendFreeCourseSignUpMessage(User user, Course course);
 
-        void SendExamSuccessfulMessage();
+        void SendPaidCourseSignUpMessage(User user, Course course);
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Services
 {
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Emails;
     using AcademyPlatform.Services.Contracts;
 
@@ -35,24 +36,44 @@
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendCourseSignUpMessage()
+        public void SendFreeCourseSignUpMessage(User user, Course course)
         {
-
+            MessageTemplate template = _templateProvider.GetFreeCourseSignUpTemplate();
+            template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
+            //TODO add placeholders
+            _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendPaymentApprovedMessage()
+        public void SendPaidCourseSignUpMessage(User user, Course course)
         {
-
+            MessageTemplate template = _templateProvider.GetPaidCourseSignUpTemplate();
+            template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
+            //TODO add placeholders
+            _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendExamAvailableMessage()
+        public void SendPaymentApprovedMessage(User user, Course course)
         {
-
+            MessageTemplate template = _templateProvider.GetPaymentApprovedTemplate();
+            template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
+            //TODO add placeholders
+            _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendExamSuccessfulMessage()
+        public void SendExamAvailableMessage(User user, Course course)
         {
+            MessageTemplate template = _templateProvider.GetExamAvailableTemplate();
+            template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
+            //TODO add placeholders
+            _emailService.SendMail(user.Username, template.Subject, template.Body);
+        }
 
+        public void SendExamSuccessfulMessage(User user, Course course)
+        {
+            MessageTemplate template = _templateProvider.GetExamSuccessfulTemplate();
+            template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
+            //TODO add placeholders
+            _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
     }
 }

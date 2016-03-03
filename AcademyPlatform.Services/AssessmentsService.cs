@@ -12,12 +12,14 @@
         private readonly IRepository<AssessmentRequest> _assessmentRequests;
         private readonly IRepository<AssessmentSubmission> _assessmentSubmissions;
         private readonly IUserService _users;
+        private readonly IMessageService _messageService;
 
-        public AssessmentsService(IRepository<AssessmentRequest> assessmentRequests, IUserService users, IRepository<AssessmentSubmission> assessmentSubmissions)
+        public AssessmentsService(IRepository<AssessmentRequest> assessmentRequests, IUserService users, IRepository<AssessmentSubmission> assessmentSubmissions, IMessageService messageService)
         {
             _assessmentRequests = assessmentRequests;
             _users = users;
             _assessmentSubmissions = assessmentSubmissions;
+            _messageService = messageService;
         }
 
         public void CreateAssesmentRequest(AssessmentRequest request)
@@ -75,6 +77,11 @@
 
             _assessmentSubmissions.Add(submission);
             _assessmentSubmissions.SaveChanges();
+
+            if (submission.IsSuccessful)
+            {
+                _messageService.SendExamSuccessfulMessage(request.User, submission.Course);
+            }
         }
     }
 }

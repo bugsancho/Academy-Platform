@@ -7,13 +7,15 @@
         MessageTemplate GetAccountValidationTemplate();
 
         MessageTemplate GetForgotPasswordTemplate();
-
-        MessageTemplate GetCourseSignUpTemplate();
-
+        
         MessageTemplate GetPaymentApprovedTemplate();
 
         MessageTemplate GetExamAvailableTemplate();
 
         MessageTemplate GetExamSuccessfulTemplate();
+
+        MessageTemplate GetPaidCourseSignUpTemplate();
+
+        MessageTemplate GetFreeCourseSignUpTemplate();
     }
 }

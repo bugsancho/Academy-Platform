@@ -2,10 +2,13 @@
 {
     using System;
     using System.Linq;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
 
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
+    using AcademyPlatform.Web.Umbraco.Areas.Admin;
+
     using global::Umbraco.Core;
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
@@ -17,7 +20,7 @@
         {
             RootNodeRouteHandler rootNodeHandler = new RootNodeRouteHandler();
             RouteTable.Routes.MapUmbracoRoute("Register", "register", new { Controller = "Account", Action = "Register" }, rootNodeHandler);
-            RouteTable.Routes.MapRoute("Validate", "validate/{email}/{validationCode}", new { Controller = "Account", Action = "Validate", ValidationCode = UrlParameter.Optional });
+            RouteTable.Routes.MapUmbracoRoute("Validate", "validate/{email}/{validationCode}", new { Controller = "Account", Action = "Validate", ValidationCode = UrlParameter.Optional }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("ForgotPassword", "forgot-password", new { Controller = "Account", Action = "ForgotPassword" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("ChangePassword", "change-password", new { Controller = "Account", Action = "ChangePassword" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("ResendValidationEmail", "resend-validation-email/{email}", new { Controller = "Account", Action = "ResendValidationEmail", Email = UrlParameter.Optional }, rootNodeHandler);
@@ -31,27 +34,20 @@
 
 
 
-            AreaRegistration.RegisterAllAreas();
+            //AreaRegistration.RegisterAllAreas();
+            RouteTable.Routes.RegisterArea<AdminAreaRegistration>();
             RouteTable.Routes.MapHttpRoute("Default_Api", "umbraco/backoffice/api/{controller}/{action}/{id}", new { Id = UrlParameter.Optional }, null);
-
-            //RouteTable.Routes.MapRoute("Register",
-            //    "register",
-            //    new
-            //    {
-            //        Controller = "Account",
-            //        Action = "Register"
-            //    });
-            //RouteTable.Routes.MapHttpRoute(
-            //    "Admin_default",
-            //    "umbraco/backoffice/admin/{action}/{id}",
-            //    new { Controller = "Admin", action = "get", id = UrlParameter.Optional },
-            //    namespaces: new[] { " AcademyPlatform.Web.Umbraco.Areas.Admin.Controllers" }
-
-            //);
+            
         }
     }
     public class RootNodeRouteHandler : UmbracoVirtualNodeRouteHandler
     {
+        public new IHttpHandler GetHttpHandler(RequestContext requestContext)
+        {
+            AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions.GetOrCreateContext();
+            return base.GetHttpHandler(requestContext);
+        }
+
         protected override IPublishedContent FindContent(RequestContext requestContext, UmbracoContext umbracoContext)
         {
             umbracoContext = umbracoContext ?? AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions.GetOrCreateContext();

@@ -66,9 +66,13 @@
             return GetAccountMessageTemplate(nameof(Models.Umbraco.DocumentTypes.AccountSection.ForgotPasswordEmail));
         }
 
-        public MessageTemplate GetCourseSignUpTemplate()
+        public MessageTemplate GetPaidCourseSignUpTemplate()
         {
-            return GetCoursesMessageTemplate(nameof(Models.Umbraco.DocumentTypes.Courses.SignUpForCourseTemplate));
+            return GetCoursesMessageTemplate(nameof(Models.Umbraco.DocumentTypes.Courses.SignUpPaidCourseTemplate));
+        }
+        public MessageTemplate GetFreeCourseSignUpTemplate()
+        {
+            return GetCoursesMessageTemplate(nameof(Models.Umbraco.DocumentTypes.Courses.SignUpFreeCourseTemplate));
         }
 
         public MessageTemplate GetPaymentApprovedTemplate()

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Payments;
 
     public interface ISubscriptionsService
     {
@@ -15,5 +16,7 @@
         IEnumerable<CourseProgress> GetCoursesProgress(string username);
 
         bool IsEligibleForAssessment(string username, int courseId);
+
+        void AddPayment(Payment payment);
     }
 }

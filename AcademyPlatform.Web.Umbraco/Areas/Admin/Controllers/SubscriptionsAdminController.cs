@@ -9,22 +9,24 @@
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Payments;
+    using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Payments;
 
     using AutoMapper;
 
     using global::Umbraco.Web.Mvc;
 
+    [EnsurePublishedContentRequest(2055)]
     public class SubscriptionsAdminController : SurfaceController
     {
         private readonly IRepository<CourseSubscription> _subscriptions;
 
-        private readonly IRepository<Payment> _payments;
+        private readonly ISubscriptionsService _subscriptionsService;
 
-        public SubscriptionsAdminController(IRepository<CourseSubscription> subscriptions, IRepository<Payment> payments)
+        public SubscriptionsAdminController(IRepository<CourseSubscription> subscriptions, ISubscriptionsService subscriptionsService)
         {
             _subscriptions = subscriptions;
-            _payments = payments;
+            _subscriptionsService = subscriptionsService;
         }
 
         public ActionResult Index()
@@ -51,7 +53,7 @@
 
             ViewBag.SubscriptionName = subscription.Course.Title;
 
-            return View(new PaymentEditViewModel() {SubscriptionId = subscriptionId});
+            return View(new PaymentEditViewModel { SubscriptionId = subscriptionId });
         }
 
         [HttpPost]
@@ -63,15 +65,7 @@
             }
 
             Payment payment = Mapper.Map<Payment>(viewModel);
-            _payments.Add(payment);
-            //TODO UoW
-            _payments.SaveChanges();
-            CourseSubscription subscription = _subscriptions.GetById(viewModel.SubscriptionId);
-            subscription.ApprovedDate = DateTime.Now;
-            subscription.Status = SubscriptionStatus.Active;
-            _subscriptions.Update(subscription);
-            //TODO implement proper UoW pattern
-            _subscriptions.SaveChanges();
+            _subscriptionsService.AddPayment(payment);
 
             return RedirectToAction(nameof(Index));
         }

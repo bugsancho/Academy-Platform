@@ -8,6 +8,7 @@
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Exceptions;
+    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
 
     public class SubscriptionsService : ISubscriptionsService
@@ -17,11 +18,13 @@
         private readonly IRepository<Course> _courses;
         private readonly ILecturesService _lectures;
         private readonly IAssessmentsService _assessments;
+        private readonly IMessageService _messageService;
         private readonly IRepository<CourseSubscription> _courseSubscriptions;
+        private readonly IRepository<Payment> _payments;
 
         private readonly ICoursesService _coursesService;
 
-        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments)
+        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments, IMessageService messageService, IRepository<Payment> payments)
         {
             _users = users;
             _courseSubscriptions = courseSubscriptions;
@@ -30,6 +33,8 @@
             _usersService = usersService;
             _lectures = lectures;
             _assessments = assessments;
+            _messageService = messageService;
+            _payments = payments;
         }
 
         public IEnumerable<CourseProgress> GetCoursesProgress(string username)
@@ -39,10 +44,12 @@
             List<CourseProgress> courseProgresses = new List<CourseProgress>(userSubscriptions.Count);
             foreach (var subscription in userSubscriptions)
             {
-                var courseProgress = new CourseProgress();
-                courseProgress.CourseId = subscription.CourseId;
-                courseProgress.TotalLecturesCount = _lectures.GetLecturesCount(subscription.CourseId);
-                courseProgress.SubscriptionStatus = subscription.Status;
+                var courseProgress = new CourseProgress
+                {
+                    CourseId = subscription.CourseId,
+                    TotalLecturesCount = _lectures.GetLecturesCount(subscription.CourseId),
+                    SubscriptionStatus = subscription.Status
+                };
 
                 if (subscription.Status == SubscriptionStatus.Active)
                 {
@@ -137,9 +144,32 @@
                 _courseSubscriptions.Add(subscription);
                 //TODO implement proper Unit of Work 
                 _courseSubscriptions.SaveChanges();
+                if (isPaidCourse)
+                {
+                    _messageService.SendPaidCourseSignUpMessage(user, course);
+                }
+                else
+                {
+                    _messageService.SendFreeCourseSignUpMessage(user, course);
+                }
             }
 
             return subscription.Status;
+        }
+
+        public void AddPayment(Payment payment)
+        {
+            _payments.Add(payment);
+            //TODO UoW
+            _payments.SaveChanges();
+            CourseSubscription subscription = _courseSubscriptions.GetById(payment.SubscriptionId);
+            subscription.ApprovedDate = DateTime.Now;
+            subscription.Status = SubscriptionStatus.Active;
+            _courseSubscriptions.Update(subscription);
+            //TODO implement proper UoW pattern
+            _courseSubscriptions.SaveChanges();
+
+            _messageService.SendPaymentApprovedMessage(subscription.User, subscription.Course);
         }
     }
 }
