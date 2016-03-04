@@ -20,13 +20,6 @@
 
     public class UmbracoEvents : ApplicationEventHandler
     {
-        private readonly ILecturesService _lectures;
-
-        public UmbracoEvents()
-        {
-            _lectures = DependencyResolver.Current.GetService(typeof(ILecturesService)) as ILecturesService;
-        }
-
         protected override void ApplicationStarted(
             UmbracoApplicationBase umbracoApplication,
             ApplicationContext applicationContext)

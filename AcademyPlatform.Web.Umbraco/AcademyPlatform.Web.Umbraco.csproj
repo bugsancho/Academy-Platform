@@ -121,6 +121,18 @@
       <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Hangfire.Autofac, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Autofac.2.2.0\lib\net45\Hangfire.Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.5.3\lib\net45\Hangfire.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.5.3\lib\net45\Hangfire.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -627,8 +639,11 @@
     <Compile Include="Providers\MessageTemplateProvider.cs" />
     <Compile Include="Providers\MailSettingsProvider.cs" />
     <Compile Include="Providers\RouteProvider.cs" />
+    <Compile Include="Providers\TaskRunner.cs" />
+    <Compile Include="Startup\AcademyPlatformOwinStartup.cs" />
     <Compile Include="Startup\FiltersConfig.cs" />
     <Compile Include="Startup\FluentValidationConfig.cs" />
+    <Compile Include="Startup\SerializationConfig.cs" />
     <Compile Include="UmbracoConfiguration\ContentFinders\StudentCourseContentFinder.cs" />
     <Compile Include="UmbracoConfiguration\Extensions\UmbracoContextExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

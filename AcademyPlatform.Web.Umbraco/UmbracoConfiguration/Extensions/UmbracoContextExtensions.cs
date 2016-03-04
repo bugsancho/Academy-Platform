@@ -1,6 +1,8 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions
 {
+    using System.IO;
     using System.Web;
+    using System.Web.Hosting;
 
     using global::Umbraco.Core;
     using global::Umbraco.Core.Configuration;
@@ -14,7 +16,7 @@
         {
             if (UmbracoContext.Current == null)
             {
-                HttpContextWrapper httpContext = new HttpContextWrapper(HttpContext.Current);
+                HttpContextWrapper httpContext = new HttpContextWrapper(HttpContext.Current ?? new HttpContext(new SimpleWorkerRequest("/", "", new StringWriter())));
 
                 UmbracoContext.EnsureContext(
                     httpContext,

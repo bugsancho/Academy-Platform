@@ -13,13 +13,15 @@
         private readonly IRepository<AssessmentSubmission> _assessmentSubmissions;
         private readonly IUserService _users;
         private readonly IMessageService _messageService;
+        private readonly ITaskRunner _taskRunner;
 
-        public AssessmentsService(IRepository<AssessmentRequest> assessmentRequests, IUserService users, IRepository<AssessmentSubmission> assessmentSubmissions, IMessageService messageService)
+        public AssessmentsService(IRepository<AssessmentRequest> assessmentRequests, IUserService users, IRepository<AssessmentSubmission> assessmentSubmissions, IMessageService messageService, ITaskRunner taskRunner)
         {
             _assessmentRequests = assessmentRequests;
             _users = users;
             _assessmentSubmissions = assessmentSubmissions;
             _messageService = messageService;
+            _taskRunner = taskRunner;
         }
 
         public void CreateAssesmentRequest(AssessmentRequest request)
@@ -81,6 +83,10 @@
             if (submission.IsSuccessful)
             {
                 _messageService.SendExamSuccessfulMessage(request.User, submission.Course);
+            }
+            else
+            {
+                _taskRunner.Schedule<IMessageService>(x => x.SendExamAvailableMessage(request.User, submission.Course), new DateTimeOffset(DateTime.UtcNow.AddMinutes(5)));
             }
         }
     }

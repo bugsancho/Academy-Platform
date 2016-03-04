@@ -64,6 +64,7 @@
     <Compile Include="Contracts\IMailSettingsProvider.cs" />
     <Compile Include="Contracts\IMembershipService.cs" />
     <Compile Include="Contracts\IRouteProvider.cs" />
+    <Compile Include="Contracts\ITaskRunner.cs" />
     <Compile Include="CoursesService.cs" />
     <Compile Include="Contracts\ICoursesService.cs" />
     <Compile Include="Contracts\ISubscriptionsService.cs" />
