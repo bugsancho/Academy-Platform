@@ -59,6 +59,7 @@
     <Compile Include="AssessmentsService.cs" />
     <Compile Include="CategoryService.cs" />
     <Compile Include="CertificatesService.cs" />
+    <Compile Include="Contracts\IApplicationSettings.cs" />
     <Compile Include="Contracts\ICategoryService.cs" />
     <Compile Include="Contracts\IMessageTemplateProvider.cs" />
     <Compile Include="Contracts\IMailSettingsProvider.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="CoursesService.cs" />
     <Compile Include="Contracts\ICoursesService.cs" />
     <Compile Include="Contracts\ISubscriptionsService.cs" />
+    <Compile Include="DeferredMessageService.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Contracts\IEmailService.cs" />
     <Compile Include="Contracts\IUserService.cs" />

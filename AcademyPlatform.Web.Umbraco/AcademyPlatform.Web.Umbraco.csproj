@@ -510,6 +510,7 @@
     <Content Include="Config\ConnectionStrings.config" />
     <Content Include="Config\machineKey.config" />
     <Content Include="Config\smtp.config" />
+    <Content Include="Config\ConnectionStrings.Release.config" />
     <None Include="Properties\PublishProfiles\FocusAcademyUmbraco.pubxml" />
     <None Include="Properties\PublishProfiles\LocalUmbracoDeploy.pubxml" />
     <None Include="Scripts\jquery-1.12.0.intellisense.js" />
@@ -636,6 +637,7 @@
     <Compile Include="Controllers\StoryLineContentSurfaceController.cs" />
     <Compile Include="Controllers\StudentSectionController.cs" />
     <Compile Include="Controllers\SubscriptionsController.cs" />
+    <Compile Include="Providers\ApplicationSettingsProvider.cs" />
     <Compile Include="Providers\MessageTemplateProvider.cs" />
     <Compile Include="Providers\MailSettingsProvider.cs" />
     <Compile Include="Providers\RouteProvider.cs" />

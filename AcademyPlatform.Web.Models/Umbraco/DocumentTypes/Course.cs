@@ -13,6 +13,8 @@
         
         public int CourseId { get; set; }
 
+        public IEnumerable<int> Files { get; set; }
+
         public int  Certificate { get; set; }
 
         public ImageViewModel CoursePicture { get; set; }

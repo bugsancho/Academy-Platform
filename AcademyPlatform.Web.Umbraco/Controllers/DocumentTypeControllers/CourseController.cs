@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-
+    
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
@@ -25,11 +25,12 @@
         private readonly ICoursesContentService _coursesContentService;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICategoryService _categories;
+        private readonly IAssessmentsService _assessmentsService;
         private readonly ILecturesService _lectures;
         private readonly IUmbracoMapper _mapper;
 
 
-        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures, ICoursesContentService coursesContentService)
+        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures, ICoursesContentService coursesContentService, IAssessmentsService assessmentsService)
         {
             _courses = courses;
             _categories = categories;
@@ -37,6 +38,7 @@
             _subscriptions = subscriptions;
             _lectures = lectures;
             _coursesContentService = coursesContentService;
+            _assessmentsService = assessmentsService;
         }
 
         [HttpGet]
@@ -45,20 +47,24 @@
             Course coursePublishedContentViewModel = new Course();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
                    .AddCustomMapping(typeof(int).FullName, UmbracoMapperMappings.MapPicker, nameof(Models.Umbraco.DocumentTypes.Course.CourseId))
-                   .Map(model.Content.AncestorOrSelf(), coursePublishedContentViewModel);
+                   .Map(model.Content, coursePublishedContentViewModel);
 
             AcademyPlatform.Models.Courses.Course course = _courses.GetById(coursePublishedContentViewModel.CourseId);
             string joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
-
+            string assessmentUrl = Url.RouteUrl("Assessment", new { courseNiceUrl = model.Content.UrlName });
+            string profileUrl = Url.RouteUrl("Profile");
+            var files = model.Content.GetPropertyValue(nameof(Models.Umbraco.DocumentTypes.Course.Files));
             CourseDetailsViewModel courseDetailsViewModel = new CourseDetailsViewModel
             {
                 CourseId = course.Id,
                 Category = course.Category,
                 Title = course.Title,
-                LecturerName = "The great Lecturer",
                 ImageUrl = coursePublishedContentViewModel.CoursePicture.Url,
                 CoursesPageUrl = model.Content.Parent.Url,
                 JoinCourseUrl = joinCourseUrl,
+                AssessmentUrl = assessmentUrl,
+                ProfileUrl = profileUrl,
+                AssessmentEligibilityStatus = _assessmentsService.GetEligibilityStatus(User.Identity.Name, coursePublishedContentViewModel.CourseId),
                 DetailedDescription = coursePublishedContentViewModel.DetailedDescription,
                 ShortDescription = coursePublishedContentViewModel.ShortDescription,
 
@@ -87,7 +93,7 @@
                                      && _subscriptions.HasActiveSubscription(
                                          User.Identity.Name,
                                          courseDetailsViewModel.CourseId);
-          
+
             if (TempData.ContainsKey("ErrorMessage"))
             {
                 courseDetailsViewModel.ErrorMessage = (string)TempData["ErrorMessage"];

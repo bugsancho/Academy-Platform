@@ -1,11 +1,11 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Startup
 {
     using System.Reflection;
-    using System.Web.Http;
     using System.Web.Mvc;
 
     using AcademyPlatform.Common.Providers;
     using AcademyPlatform.Data.Repositories;
+    using AcademyPlatform.Services;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Infrastructure.Mappings;
     using AcademyPlatform.Web.Infrastructure.Sanitizers;
@@ -48,16 +48,19 @@
             builder.RegisterGeneric(typeof(EfRepository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(UmbracoMapper)).As(typeof(IUmbracoMapper)).InstancePerLifetimeScope();
 
+            builder.RegisterType<ApplicationSettingsProvider>().As<IApplicationSettings>().InstancePerLifetimeScope();
             builder.RegisterType(typeof(MailSettingsProvider)).As(typeof(IMailSettingsProvider)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(TaskRunner)).As(typeof(ITaskRunner)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(RouteProvider)).As(typeof(IRouteProvider)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(MessageTemplateProvider)).As(typeof(IMessageTemplateProvider)).InstancePerLifetimeScope();
 
+            builder.RegisterType<DeferredMessageService>().As<IMessageService>();
 
             IContainer container = builder.Build();
-            Hangfire.GlobalConfiguration.Configuration.UseAutofacActivator(container);
             System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            Hangfire.GlobalConfiguration.Configuration.UseAutofacActivator(container.BeginLifetimeScope(b => b.RegisterType<MessageService>().As<IMessageService>()));
 
             //TODO MOVE
             AutoMapperConfig autoMapperConfig = new AutoMapperConfig(Assembly.GetAssembly(typeof(CourseEditViewModel)));

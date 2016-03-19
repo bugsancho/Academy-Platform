@@ -57,6 +57,11 @@
                         .WithMany()
                         .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Certificate>()
+                        .HasRequired(x => x.User)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
 
 
             base.OnModelCreating(modelBuilder);

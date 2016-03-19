@@ -1,6 +1,7 @@
 ﻿[assembly: Microsoft.Owin.OwinStartup("AcademyPlatformOwinStartup", typeof(AcademyPlatform.Web.Umbraco.Startup.AcademyPlatformOwinStartup))]
 namespace AcademyPlatform.Web.Umbraco.Startup
 {
+    using System.Collections.Generic;
     using System.Web.Security;
 
     using global::Umbraco.Core.Configuration;
@@ -9,7 +10,12 @@ namespace AcademyPlatform.Web.Umbraco.Startup
 
     using Hangfire;
     using Hangfire.Common;
+    using Hangfire.Dashboard;
     using Hangfire.Server;
+
+    using Microsoft.Owin;
+
+    using Newtonsoft.Json;
 
     using Owin;
 
@@ -21,11 +27,24 @@ namespace AcademyPlatform.Web.Umbraco.Startup
             base.Configuration(app);
 
             GlobalConfiguration.Configuration.UseLog4NetLogProvider();
-            GlobalConfiguration.Configuration.UseSqlServerStorage("Hangfire");
-            
+            GlobalConfiguration.Configuration.UseSqlServerStorage(nameOrConnectionString: "Hangfire");
+
             GlobalJobFilters.Filters.Add(new PrepareUmbracoRequestFilter());
+            JobHelper.SetSerializerSettings(new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             app.UseHangfireServer();
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire", new DashboardOptions { AuthorizationFilters = new IAuthorizationFilter[] { new RoleAuthorizationFilter() } });
+        }
+    }
+
+    public class RoleAuthorizationFilter : IAuthorizationFilter
+    {
+        public bool Authorize(IDictionary<string, object> owinEnvironment)
+        {
+            OwinContext owinContext = new OwinContext(owinEnvironment);
+            return owinContext.Request.User.IsInRole("Hangfire");
+            //TODO add authorization for local requests
+            //string remoteIpAddress = owinContext.Request.RemoteIpAddress;
+            //return !string.IsNullOrEmpty(remoteIpAddress) && (remoteIpAddress == "127.0.0.1" || remoteIpAddress == "::1" || remoteIpAddress == owinContext.Request.LocalIpAddress);
         }
     }
 

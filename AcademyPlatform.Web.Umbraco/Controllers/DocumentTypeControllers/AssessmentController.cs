@@ -33,6 +33,9 @@
         private readonly ICoursesContentService _coursesContentService;
         private readonly IUserService _users;
 
+        //TODO improve code quality:
+        // * Use xxxContentService to retrieve umbraco content
+        // * Extract duplicate code between GET and POST methods
         public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ISubscriptionsService subscriptions, ICoursesContentService coursesContentService)
         {
             _mapper = mapper;
@@ -46,9 +49,10 @@
         [HttpGet]
         public ActionResult Assessment()
         {
-            int courseId =  _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
-            if (!_subscriptions.IsEligibleForAssessment(User.Identity.Name, courseId))
+            int courseId = _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
+            if (_assessments.GetEligibilityStatus(User.Identity.Name, courseId) != AssessmentEligibilityStatus.Eligible)
             {
+                TempData["ErrorMessage"] = $"В момента нямате достъп до изпита за този курс. Моля посетете <a href=\"{Url.RouteUrl("Profile")}\" title=\"Профил\">Вашия профил </a> за повече информация.";
                 return Redirect(Umbraco.AssignedContentItem.Url);
             }
 
@@ -102,7 +106,7 @@
         public ActionResult Assessment(AssessmentViewModel assessment)
         {
             int courseId = _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
-            if (!_subscriptions.IsEligibleForAssessment(User.Identity.Name, courseId))
+            if (_assessments.GetEligibilityStatus(User.Identity.Name, courseId) != AssessmentEligibilityStatus.Eligible)
             {
                 return Redirect(Umbraco.AssignedContentItem.Url);
             }
@@ -173,29 +177,33 @@
 
             _assessments.CreateAssessmentSubmission(submission);
 
+            if (submission.IsSuccessful)
+            {
+                object certificateId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
+                IPublishedContent certificateContent = Umbraco.TypedContent(certificateId);
+                var certificateGenerationInfo = new CertificateGenerationInfo();
+
+                var certificateTemplate = UmbracoContext.Current.MediaCache.GetById(
+                    certificateContent.GetPropertyValue<int>(
+                        nameof(AcademyPlatform.Web.Models.Umbraco.DocumentTypes.Certificate.CertificateTemplate)));
+
+                _mapper.AddCustomMapping(
+                        typeof(PlaceholderInfo).FullName,
+                        UmbracoMapperMappings.MapPlaceholder)
+                    .Map(certificateContent, certificateGenerationInfo);
+
+                certificateGenerationInfo.TemplateFilePath = Server.MapPath(certificateTemplate.Url);
+                certificateGenerationInfo.BaseFilePath = Server.MapPath("/");
+                var certificate = _certificates.GenerateCertificate(User.Identity.Name, courseId, submission, certificateGenerationInfo);
+
+                return RedirectToRoute("Certificate", new { certificateUniqueCode = certificate.UniqueCode });
+            }
 
 
-            object certificateId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
-            IPublishedContent certificateContent = Umbraco.TypedContent(certificateId);
-            var certificateGenerationInfo = new CertificateGenerationInfo();
 
-            var certificateTemplate = UmbracoContext.Current.MediaCache.GetById(
-                certificateContent.GetPropertyValue<int>(
-                    nameof(AcademyPlatform.Web.Models.Umbraco.DocumentTypes.Certificate.CertificateTemplate)));
-
-            _mapper.AddCustomMapping(
-                    typeof(PlaceholderInfo).FullName,
-                    UmbracoMapperMappings.MapPlaceholder)
-                .Map(certificateContent, certificateGenerationInfo);
-
-            certificateGenerationInfo.TemplateFilePath = Server.MapPath(certificateTemplate.Url);
-            certificateGenerationInfo.BaseFilePath = Server.MapPath("/");
-            var certificate = _certificates.GenerateCertificate(User.Identity.Name, courseId, submission, certificateGenerationInfo);
-
-            return RedirectToRoute("Certificate", new { certificateUniqueCode = certificate.UniqueCode });
             //ViewBag.AssessmentSuccessful = true;
             //return View("~/Views/Certificate/Certificate.cshtml", model: $"\\certificates\\{certificate.UniqueCode}.jpeg");
-            //return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers, IncorrectlyAnswered = wrongAnswers });
+            return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers });
         }
     }
 

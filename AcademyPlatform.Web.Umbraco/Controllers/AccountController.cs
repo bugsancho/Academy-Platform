@@ -138,7 +138,6 @@
                         return Redirect("/");
                     }
 
-
                     ModelState.AddModelError(string.Empty, "Невалиден валидационен код");
 
                 }
@@ -167,7 +166,7 @@
             if (user != null)
             {
                 _membership.ResetPassword(user.Username);
-                return Redirect("/Login");
+                return Redirect("/Login"); //TODO add routeName or umbraco content finder
             }
 
             ModelState.AddModelError(nameof(ForgotPasswordViewModel.Email), "Не успяхме да намерим потребител с този Email");

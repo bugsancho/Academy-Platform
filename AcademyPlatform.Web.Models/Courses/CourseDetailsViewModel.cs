@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Courses;
 
     public class CourseDetailsViewModel
@@ -19,6 +20,10 @@
 
         public string JoinCourseUrl { get; set; }
 
+        public string AssessmentUrl { get; set; }
+
+        public string ProfileUrl { get; set; }
+
         public string ImageUrl { get; set; }
 
         public Category Category { get; set; }
@@ -32,6 +37,8 @@
         public string ShortDescription { get; set; }
 
         public bool HasActiveSubscription { get; set; }
+
+        public AssessmentEligibilityStatus AssessmentEligibilityStatus { get; set; }
 
         public string ErrorMessage { get; set; }
     }
