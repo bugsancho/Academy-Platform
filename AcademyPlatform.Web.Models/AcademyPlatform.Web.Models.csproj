@@ -82,6 +82,7 @@
     <Compile Include="Account\ResendValidationEmailViewModel.cs" />
     <Compile Include="Assessments\AssessmentViewModel.cs" />
     <Compile Include="Assessments\QuestionViewModel.cs" />
+    <Compile Include="Common\FileViewModel.cs" />
     <Compile Include="Common\ImageViewModel.cs" />
     <Compile Include="Common\PageLink.cs" />
     <Compile Include="Account\BillingInfoViewModel.cs" />

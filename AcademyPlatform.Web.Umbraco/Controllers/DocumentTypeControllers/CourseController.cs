@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
-    
+
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
@@ -22,22 +22,18 @@
     public class CourseController : RenderMvcController
     {
         private readonly ICoursesService _courses;
-        private readonly ICoursesContentService _coursesContentService;
         private readonly ISubscriptionsService _subscriptions;
-        private readonly ICategoryService _categories;
         private readonly IAssessmentsService _assessmentsService;
         private readonly ILecturesService _lectures;
         private readonly IUmbracoMapper _mapper;
 
 
-        public CourseController(ICoursesService courses, ICategoryService categories, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures, ICoursesContentService coursesContentService, IAssessmentsService assessmentsService)
+        public CourseController(ICoursesService courses, IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures, IAssessmentsService assessmentsService)
         {
             _courses = courses;
-            _categories = categories;
             _mapper = mapper;
             _subscriptions = subscriptions;
             _lectures = lectures;
-            _coursesContentService = coursesContentService;
             _assessmentsService = assessmentsService;
         }
 
@@ -45,21 +41,39 @@
         public ActionResult Course(RenderModel model)
         {
             Course coursePublishedContentViewModel = new Course();
+
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
                    .AddCustomMapping(typeof(int).FullName, UmbracoMapperMappings.MapPicker, nameof(Models.Umbraco.DocumentTypes.Course.CourseId))
                    .Map(model.Content, coursePublishedContentViewModel);
+
+            List<FileViewModel> files = new List<FileViewModel>();
+            string[] fileIds = model.Content.GetPropertyValue<string>(nameof(Models.Umbraco.DocumentTypes.Course.Files)).Split(',');
+            IEnumerable<IPublishedContent> fileContent = Umbraco.TypedMedia(fileIds);
+            _mapper.MapCollection(fileContent, files, new Dictionary<string, PropertyMapping>
+                                                          {
+                                                              { nameof(FileViewModel.Size), new PropertyMapping
+                                                                                                {
+                                                                                                    SourceProperty = global::Umbraco.Core.Constants.Conventions.Media.Bytes
+                                                                                                }
+                                                              },
+                                                              { nameof(FileViewModel.FileExtension), new PropertyMapping
+                                                                                                {
+                                                                                                    SourceProperty = global::Umbraco.Core.Constants.Conventions.Media.Extension
+                                                                                                }
+                                                              }
+                                                          });
 
             AcademyPlatform.Models.Courses.Course course = _courses.GetById(coursePublishedContentViewModel.CourseId);
             string joinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = model.Content.UrlName });
             string assessmentUrl = Url.RouteUrl("Assessment", new { courseNiceUrl = model.Content.UrlName });
             string profileUrl = Url.RouteUrl("Profile");
-            var files = model.Content.GetPropertyValue(nameof(Models.Umbraco.DocumentTypes.Course.Files));
             CourseDetailsViewModel courseDetailsViewModel = new CourseDetailsViewModel
             {
                 CourseId = course.Id,
                 Category = course.Category,
                 Title = course.Title,
                 ImageUrl = coursePublishedContentViewModel.CoursePicture.Url,
+                Files = files,
                 CoursesPageUrl = model.Content.Parent.Url,
                 JoinCourseUrl = joinCourseUrl,
                 AssessmentUrl = assessmentUrl,
@@ -93,7 +107,6 @@
                                      && _subscriptions.HasActiveSubscription(
                                          User.Identity.Name,
                                          courseDetailsViewModel.CourseId);
-
             if (TempData.ContainsKey("ErrorMessage"))
             {
                 courseDetailsViewModel.ErrorMessage = (string)TempData["ErrorMessage"];

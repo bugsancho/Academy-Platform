@@ -9,11 +9,10 @@
         public Course()
         {
             Modules = new List<Module>();
+            Files = new List<FileViewModel>();
         }
         
         public int CourseId { get; set; }
-
-        public IEnumerable<int> Files { get; set; }
 
         public int  Certificate { get; set; }
 
@@ -28,5 +27,7 @@
         public string Assessment { get; set; }
 
         public IEnumerable<Module> Modules { get; set; }
+
+        public IEnumerable<FileViewModel> Files { get; set; }
     }
 }

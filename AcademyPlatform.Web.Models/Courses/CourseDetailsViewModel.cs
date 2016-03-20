@@ -4,12 +4,14 @@
 
     using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Web.Models.Common;
 
     public class CourseDetailsViewModel
     {
         public CourseDetailsViewModel()
         {
             Modules = new List<ModuleViewModel>();
+            Files = new List<FileViewModel>();
         }
 
         public int CourseId { get; set; }
@@ -33,6 +35,8 @@
         public string DetailedDescription { get; set; }
 
         public ICollection<ModuleViewModel> Modules { get; set; }
+        
+        public IEnumerable<FileViewModel> Files { get; set; }
 
         public string ShortDescription { get; set; }
 

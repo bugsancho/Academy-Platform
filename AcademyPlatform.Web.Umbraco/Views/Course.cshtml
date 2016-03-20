@@ -1,4 +1,5 @@
 ﻿@using AcademyPlatform.Models.Assessments
+@using AcademyPlatform.Web.Infrastructure.Extensions
 @inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.CourseDetailsViewModel>
 @{
     int moduleIndex = 1;
@@ -37,6 +38,10 @@
                     <li><a href="#description" role="tab" data-toggle="tab"><i class="fa fa-list pr-10"></i>Описание</a></li>
                     <li><a href="#certificate" role="tab" data-toggle="tab"><i class="fa fa-certificate pr-10"></i>Сертификат</a></li>
                     <li><a href="#assessment" role="tab" data-toggle="tab"><i class="fa fa-certificate pr-10"></i>Изпит</a></li>
+                    @if (Model.Files.Any())
+                    {
+                        <li><a href="#files" role="tab" data-toggle="tab"><i class="fa fa-certificate pr-10"></i>Материали</a></li>
+                    }
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -179,6 +184,42 @@
                             </div>
                         </div>
                     </div>
+                    @if (Model.Files.Any())
+                    {
+                        <div class="tab-pane fade" id="files">
+                            <h3>Материали</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (Model.HasActiveSubscription)
+                                    {
+                                        <table class="table table-bordered table-colored">
+                                            <thead>
+                                                <tr>
+                                                    <th>Име</th>
+                                                    <th>Размер</th>
+                                                    @*<th>Изпит</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var file in Model.Files)
+                                                {
+                                                    <tr>
+                                                        <td><a href="@file.Url" alt="@file.Name" title="@file.Name" download target="_blank">@file.Name</a></td>
+                                                        <td>@file.Size.ToFileSize()</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <span>След като се запишете, тук ще може да намерите полезни материали, свързани с курса</span>
+                                    }
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <!-- tabs end -->
             </div>
