@@ -1,6 +1,7 @@
 ﻿[assembly: Microsoft.Owin.OwinStartup("AcademyPlatformOwinStartup", typeof(AcademyPlatform.Web.Umbraco.Startup.AcademyPlatformOwinStartup))]
 namespace AcademyPlatform.Web.Umbraco.Startup
 {
+    using System;
     using System.Collections.Generic;
     using System.Web.Security;
 
@@ -12,6 +13,7 @@ namespace AcademyPlatform.Web.Umbraco.Startup
     using Hangfire.Common;
     using Hangfire.Dashboard;
     using Hangfire.Server;
+    using Hangfire.SqlServer;
 
     using Microsoft.Owin;
 
@@ -27,10 +29,14 @@ namespace AcademyPlatform.Web.Umbraco.Startup
             base.Configuration(app);
 
             GlobalConfiguration.Configuration.UseLog4NetLogProvider();
-            GlobalConfiguration.Configuration.UseSqlServerStorage(nameOrConnectionString: "Hangfire");
+            GlobalConfiguration.Configuration.UseSqlServerStorage("Hangfire", new SqlServerStorageOptions
+                                                                                                              {
+                                                                                                                  JobExpirationCheckInterval = TimeSpan.FromDays(7),
+                                                                                                                  QueuePollInterval = TimeSpan.FromMinutes(1)
+                                                                                                              });
 
             GlobalJobFilters.Filters.Add(new PrepareUmbracoRequestFilter());
-            JobHelper.SetSerializerSettings(new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            JobHelper.SetSerializerSettings(new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             app.UseHangfireServer();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions { AuthorizationFilters = new IAuthorizationFilter[] { new RoleAuthorizationFilter() } });
         }
