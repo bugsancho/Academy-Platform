@@ -5,12 +5,15 @@
 
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Account;
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Models.Other;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
+
+    using AutoMapper;
 
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
@@ -67,11 +70,7 @@
             if (viewModel.RequiresBillingInfo)
             {
                 User user = _users.GetByUsername(username);
-                viewModel.BillingInfo = new BillingInfoViewModel
-                {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName
-                };
+                viewModel.BillingInfo = Mapper.Map<BillingInfoViewModel>(user.BillingInfo);
             }
 
             IPublishedContent legalPage = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(LegalContent)).FirstOrDefault();
@@ -99,6 +98,13 @@
                 }
 
                 string username = User.Identity.Name;
+                if (model.BillingInfo != null)
+                {
+                    var user = _users.GetByUsername(username);
+                    user.BillingInfo = Mapper.Map(model.BillingInfo, user.BillingInfo);
+                    _users.UpdateUser(user);
+                }
+
                 SubscriptionStatus status = _subscriptions.JoinCourse(username, course.Id);
 
                 if (status == SubscriptionStatus.Active)

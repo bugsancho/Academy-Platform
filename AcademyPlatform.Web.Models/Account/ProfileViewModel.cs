@@ -2,9 +2,11 @@
 {
     using System.Collections.Generic;
 
+    using AcademyPlatform.Models;
+    using AcademyPlatform.Web.Infrastructure.Mappings;
     using AcademyPlatform.Web.Models.Courses;
 
-    public class ProfileViewModel
+    public class ProfileViewModel : IMapFrom<User>
     {
         public string Username { get; set; }
 

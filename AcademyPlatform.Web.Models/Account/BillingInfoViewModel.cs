@@ -2,7 +2,10 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class BillingInfoViewModel
+    using AcademyPlatform.Models.Payments;
+    using AcademyPlatform.Web.Infrastructure.Mappings;
+
+    public class BillingInfoViewModel : IMapFrom<BillingInfo>
     {
         [Display(Name = "Малко име")]
         public string FirstName { get; set; }

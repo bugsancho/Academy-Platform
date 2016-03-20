@@ -1,7 +1,9 @@
 ﻿@using AcademyPlatform.Models.Courses
+@using AcademyPlatform.Web.Models.Account
 @model AcademyPlatform.Web.Models.Account.ProfileViewModel
 @{
     Layout = "~/Views/Site.cshtml";
+
 }
 <section class="main-container">
     <div class="container">
@@ -9,7 +11,7 @@
             <div class="container">
                 <ul class="nav nav-tabs style-1 space-top">
                     <li class="active"><a href="#htab1" data-toggle="tab"><i class="fa fa-user pr-10"></i>Обща информация</a></li>
-                    <li><a href="#htab2" data-toggle="tab"><i class="fa fa-lock pr-10"></i>Смяна на парлола</a></li>
+                    <li><a href="#change-password" data-toggle="tab"><i class="fa fa-lock pr-10"></i>Смяна на парлола</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -45,43 +47,22 @@
                                 </div>*@
                         </div>
                     </div>
-                    <div id="htab2" class="tab-pane fade">
+                    <div id="change-password" class="tab-pane fade">
                         <h3>Смяна на паролата</h3>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">Стара парола</label>
-                                    <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword3" placeholder="Стара парола" /></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">Нова парола</label>
-                                    <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword4" placeholder="Нова парола"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">Потвърждение на новата парола</label>
-                                    <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword5" placeholder="Потвържение на новата парола" /></div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10"><button class="btn btn-default">Промени паролата</button></div>
-                                </div>
-                            </div>
-                        </div>
+                        <section id="change-password-placeholder">
+                            @{
+                                Html.RenderPartial("~/Views/Profile/_ProfilePartial.cshtml", new ChangePasswordViewModel());
+                            }
+                        </section>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
             <div class="col-md-12">
                 <h2 class="text-center">Моите обучения</h2>
                 <div class="table-responsive">
                     @if (Model.ProgressViewModels.Any())
                     {
-                        <table border="0" class="table table-bordered table-colored">
+                        <table class="table table-bordered table-colored">
                             <thead>
                                 <tr>
                                     <th>Обучение</th>
@@ -125,32 +106,14 @@
                                         </td>
                                     </tr>
                                                 }
-
-                                @*@foreach (var course in userCoursesCollection)
-                                    {
-                                        <tr>
-                                            <td><a href="#">Курс: @course.Name</a></td>
-                                            @if (userHasCertificate)
-                                            {
-                                                <td>Отворете вашия <a href="@Model.UserCourseCertificate">сертификат</a>.</td>
-                                            }
-                                            else if (!userHasFinishedLectures)
-                                            {
-                                                <td>Остават ви още <a href="@course.Url">лекции</a>, преди изпит.</td>
-                                            }
-                                            else
-                                            {
-                                                <td>Направете вашия <a href="#">изпит</a>.</td>
-                                            }
-                                        </tr>
-                                    }*@
-
                             </tbody>
                         </table>
                                                 }
                                                 else
                                                 {
-                                                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате записани обучения. Моля, разгледайте <a href="/courses" class="alert-link">нашите предложения</a>.</div>
+                                                    <div class="alert  alert-icon alert-warning">
+                                                        <i class="fa fa-warning"></i> Нямате записани обучения. Моля, разгледайте <a href="/courses" class="alert-link">нашите предложения</a>.
+                                                    </div>
                                                 }
                 </div>
             </div>
@@ -175,3 +138,8 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    function initalizeUnobtrusiveValidation(formSelector) {
+        $.validator.unobtrusive.parse(formSelector);
+    }
+</script>

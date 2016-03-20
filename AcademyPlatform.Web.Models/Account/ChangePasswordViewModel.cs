@@ -4,6 +4,8 @@
 
     public class ChangePasswordViewModel
     {
+        public string SuccessMessage { get; set; }
+
         [Display(Name = "Стара парола")]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }

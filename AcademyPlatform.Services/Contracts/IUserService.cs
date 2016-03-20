@@ -8,5 +8,7 @@
         User GetByUsername(string username);
 
         BillingInfo GetBillingInfo(string username);
+
+        void UpdateUser(User user);
     }
 }

@@ -6,6 +6,7 @@
 /// <reference path="custom.js" />
 /// <reference path="gridmvc.js" />
 /// <reference path="gridmvc.lang.ru.js" />
+/// <reference path="jquery.unobtrusive-ajax.min.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="jquery-1.12.0.js" />
