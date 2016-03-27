@@ -1,0 +1,49 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<AcademyPlatform.Web.Models.Other.InquiryViewModel>
+@using Recaptcha.Web.Mvc
+
+@if (TempData.ContainsKey("SuccessMessage"))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @TempData["SuccessMessage"]
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginUmbracoForm("ContactUs", "ContactUs", new { @class = "contact-form" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="form-group has-feedback">
+        @Html.LabelFor(x => x.CustomerName) <span>*</span>
+        @Html.TextBoxFor(x => x.CustomerName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CustomerName)
+        <i class="fa fa-user form-control-feedback"></i>
+    </div>
+    <div class="form-group has-feedback">
+        @Html.LabelFor(x => x.Email) <span>*</span>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Email)
+        <i class="fa fa-envelope form-control-feedback"></i>
+    </div>
+    <div class="form-group has-feedback">
+        @Html.LabelFor(x => x.Subject) <span>*</span>
+        @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Subject)
+        <i class="fa fa-navicon form-control-feedback"></i>
+    </div>
+    <div class="form-group has-feedback">
+        @Html.LabelFor(x => x.Message) <span>*</span>
+        @Html.TextBoxFor(x => x.Message, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Message)
+        <i class="fa fa-pencil form-control-feedback"></i>
+    </div>
+    <div class="form-group has-feedback">
+        @Html.Recaptcha(language: Culture)
+        @Html.ValidationMessage("ReCaptcha")
+    </div>
+    <input type="submit" value="Изпратете Запитване" class="submit-button btn btn-default" />
+}

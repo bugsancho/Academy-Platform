@@ -77,6 +77,8 @@
     <Compile Include="Contracts\IAssessmentsService.cs" />
     <Compile Include="Contracts\ICertificatesService.cs" />
     <Compile Include="Contracts\IMessageService.cs" />
+    <Compile Include="Contracts\IInquiryService.cs" />
+    <Compile Include="InquiryService.cs" />
     <Compile Include="LecturesService.cs" />
     <Compile Include="MembershipService.cs" />
     <Compile Include="MessageService.cs" />

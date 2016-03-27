@@ -12,6 +12,7 @@
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Emails;
     using AcademyPlatform.Models.Payments;
 
     public class AcademyPlatformDbContext : DbContext, IAcademyPlatformDbContext
@@ -86,6 +87,8 @@
         public IDbSet<CourseSubscription> CourseSubscriptions { get; set; }
 
         public IDbSet<Payment> Payments { get; set; }
+
+        public IDbSet<Inquiry> Inquiries { get; set; }
 
         public static AcademyPlatformDbContext Create()
         {

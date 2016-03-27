@@ -73,6 +73,7 @@
     <Compile Include="Courses\SubscriptionStatus.cs" />
     <Compile Include="Courses\SubscriptionType.cs" />
     <Compile Include="Courses\Validators\CourseValidator.cs" />
+    <Compile Include="Emails\Inquiry.cs" />
     <Compile Include="Emails\MessageTemplate.cs" />
     <Compile Include="Exceptions\CourseNotFoundException.cs" />
     <Compile Include="Exceptions\UserNotApprovedException.cs" />
