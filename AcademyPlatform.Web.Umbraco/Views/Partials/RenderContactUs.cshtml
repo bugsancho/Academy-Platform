@@ -37,7 +37,7 @@
     </div>
     <div class="form-group has-feedback">
         @Html.LabelFor(x => x.Message) <span>*</span>
-        @Html.TextBoxFor(x => x.Message, new { @class = "form-control" })
+        @Html.TextAreaFor(x => x.Message, new { @class = "form-control", rows = "6" })
         @Html.ValidationMessageFor(x => x.Message)
         <i class="fa fa-pencil form-control-feedback"></i>
     </div>
@@ -45,5 +45,5 @@
         @Html.Recaptcha(language: Culture)
         @Html.ValidationMessage("ReCaptcha")
     </div>
-    <input type="submit" value="Изпратете Запитване" class="submit-button btn btn-default" />
+    <input type="submit" value="Изпратете запитване" class="submit-button btn btn-default" />
 }

@@ -4,5 +4,6 @@
     {
         int AssessmentLockoutTime { get; }
 
+        string InquiryRecievedEmail { get; }
     }
 }

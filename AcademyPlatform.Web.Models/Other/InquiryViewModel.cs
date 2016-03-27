@@ -17,7 +17,6 @@
         public string Subject { get; set; }
 
         [Display(Name = "Съобщение")]
-        [DataType(DataType.MultilineText)]
         public string Message { get; set; }
     }
 }

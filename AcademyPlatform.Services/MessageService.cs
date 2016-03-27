@@ -9,11 +9,28 @@
     {
         private readonly IMessageTemplateProvider _templateProvider;
         private readonly IEmailService _emailService;
+        private readonly IApplicationSettings _settings;
 
-        public MessageService(IMessageTemplateProvider templateProvider, IEmailService emailService)
+        public MessageService(IMessageTemplateProvider templateProvider, IEmailService emailService, IApplicationSettings settings)
         {
             _templateProvider = templateProvider;
             _emailService = emailService;
+            _settings = settings;
+        }
+
+        public void SendInquiryRecievedMessage(Inquiry inquiry)
+        {
+            MessageTemplate template = new MessageTemplate();
+            template.Subject = $"Получено запитване: {inquiry.Subject}";
+            template.Body =
+$@"Номер на запитване: {inquiry.Id} <br/>
+Дата на подаване: {inquiry.CreatedOn} <br/>
+E-mail: {inquiry.Email} <br/>
+Име на клиент: {inquiry.CustomerName} <br/>
+Заглавие: {inquiry.Subject} <br/>
+Съобщение: {inquiry.Message}";
+
+            _emailService.SendMail(_settings.InquiryRecievedEmail, template.Subject, template.Body);
         }
 
         public void SendAccountValidationMessage(User user, string validationLink)

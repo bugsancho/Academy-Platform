@@ -2,9 +2,12 @@
 {
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Emails;
 
     public interface IMessageService
     {
+        void SendInquiryRecievedMessage(Inquiry inquiry);
+
         void SendAccountValidationMessage(User user, string validationLink);
 
         void SendForgotPasswordMessage(User user, string newPassword);

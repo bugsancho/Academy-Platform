@@ -2,6 +2,7 @@
 {
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Emails;
     using AcademyPlatform.Services.Contracts;
 
     public class DeferredMessageService : IMessageService
@@ -11,6 +12,11 @@
         public DeferredMessageService(ITaskRunner taskRunner)
         {
             _taskRunner = taskRunner;
+        }
+
+        public void SendInquiryRecievedMessage(Inquiry inquiry)
+        {
+            _taskRunner.Run<IMessageService>(x => x.SendInquiryRecievedMessage(inquiry));
         }
 
         public void SendAccountValidationMessage(User user, string validationLink)
