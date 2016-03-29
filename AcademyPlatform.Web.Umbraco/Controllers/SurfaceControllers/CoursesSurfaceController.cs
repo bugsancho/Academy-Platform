@@ -47,11 +47,11 @@
 
             IEnumerable<AcademyPlatform.Models.Courses.Course> courses = _courses.GetActiveCourses().ToList();
 
-            List<CoursesListViewModel> coursesViewModels = courses.Join(
-                coursesContentViewModels,
-                course => course.Id,
+            List<CoursesListViewModel> coursesViewModels = coursesContentViewModels.Join(
+                courses,
                 coursesContent => coursesContent.CourseId,
-                (course, coursesContent) => new CoursesListViewModel
+                course => course.Id,
+                (coursesContent,course) => new CoursesListViewModel
                 {
                     Title = course.Title,
                     CourseUrl = coursesContent.Url,
