@@ -28,7 +28,7 @@
             //We want that to be a redirect with returnUrl.
             PublishedContentRequest.Prepared += delegate (object sender, EventArgs args)
                 {
-                    var pcr = (PublishedContentRequest)sender;
+                    PublishedContentRequest pcr = (PublishedContentRequest)sender;
                     if (pcr.HasPublishedContent && !pcr.IsInitialPublishedContent && !pcr.Is404
                         && !pcr.IsInternalRedirectPublishedContent && pcr.PublishedContent.DocumentTypeAlias == "Login")
                     {
@@ -84,7 +84,7 @@
             IContent moduleContent = content.FirstOrDefault(x => x.ContentType.Alias == nameof(DocumentTypes.Module));
             if (lectureContent != null && lectureContent.HasIdentity)
             {
-                var lecturesService = DependencyResolver.Current.GetService(typeof(ILecturesService)) as ILecturesService;
+                ILecturesService lecturesService = DependencyResolver.Current.GetService(typeof(ILecturesService)) as ILecturesService;
                 if (lecturesService == null)
                 {
                     throw new InvalidOperationException("LecturesService failed to instantiate");
@@ -99,15 +99,17 @@
                         Title = lectureContent.Name
                     };
                 }
-                if (lectureContent.Parent()?.ContentType.Alias == nameof(DocumentTypes.Course))
+
+                IContent courseParentNode = lectureContent.Ancestors().FirstOrDefault(x => x.ContentType.Alias == nameof(DocumentTypes.Course));
+                if (courseParentNode?.ContentType.Alias == nameof(DocumentTypes.Course))
                 {
-                    Picker courseIdPicker = lectureContent.Parent().Properties[(nameof(DocumentTypes.Course.CourseId))].Value as Picker;
-                    if (courseIdPicker == null)
+                    string courseId = (string)courseParentNode.Properties[(nameof(DocumentTypes.Course.CourseId))].Value;
+                    if (string.IsNullOrWhiteSpace(courseId))
                     {
-                        throw new ArgumentException($"Course with Id: {lectureContent.Parent().Id} doesn't have a CourseId field present");
+                        throw new ArgumentException($"Course with Id: {courseParentNode.Id} doesn't have a CourseId field present");
                     }
 
-                    lecture.CourseId = int.Parse(courseIdPicker.PickedKeys.First());
+                    lecture.CourseId = int.Parse(courseId);
                 }
 
                 lecture.IsActive = isActive(lectureContent);
@@ -115,14 +117,14 @@
             }
             else if (moduleContent != null)
             {
-                var lecturesService = DependencyResolver.Current.GetService(typeof(ILecturesService)) as ILecturesService;
+                ILecturesService lecturesService = DependencyResolver.Current.GetService(typeof(ILecturesService)) as ILecturesService;
                 if (lecturesService == null)
                 {
                     throw new InvalidOperationException("LecturesService failed to instantiate");
                 }
 
                 bool isModuleActive = isActive(moduleContent);
-                foreach (var lect in moduleContent.Descendants().Where(x => x.ContentType.Alias == nameof(DocumentTypes.Lecture)))
+                foreach (IContent lect in moduleContent.Descendants().Where(x => x.ContentType.Alias == nameof(DocumentTypes.Lecture)))
                 {
                     Lecture lecture = lecturesService.GetLectureByExternalId(lect.Id);
                     lecture.IsActive = isModuleActive && isActive(lect);
