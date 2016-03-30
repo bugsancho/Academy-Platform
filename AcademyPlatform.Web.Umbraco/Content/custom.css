@@ -813,41 +813,69 @@ h4 {
 
 /* new tree*/
 .tree {
-    min-height:20px;
-    padding:1px;
-    margin-bottom:1px;
-    background-color: #ffffff
-    }
-.tree ul {
-    margin-left: 5px;
-    margin-right: 0px;
-    padding-left: 10px;
-    padding-right: 0px;
-}
-.tree li {
-    list-style-type:none;
-    margin:0;
-    padding:8px 1px 0 1px;
-    position: static
+    min-height: 20px;
+    padding: 1px;
+    margin-bottom: 1px;
+    background-color: #ffffff;
 }
 
-.tree li span {
-    color: #777777;
-    display:inline-block;
-    text-decoration:none
-}
-.tree li.parent_li>span {
-    cursor:pointer
-}
-.tree>ul>li::before, .tree>ul>li::after {
-    border:0
-}
-.tree li:last-child::before {
-    height:30px
-}
+    .tree ul {
+        margin-left: 5px;
+        margin-right: 0px;
+        padding-left: 10px;
+        padding-right: 0px;
+    }
+
+    .tree li {
+        list-style-type: none;
+        margin: 0;
+        padding: 8px 1px 0 1px;
+        position: static;
+    }
+
+        .tree li span {
+            color: #777777;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .tree li.parent_li > span {
+            cursor: pointer;
+        }
+
+    .tree > ul > li::before, .tree > ul > li::after {
+        border: 0;
+    }
+
+    .tree li:last-child::before {
+        height: 30px;
+    }
+
 .well {
     border: none;
 }
+
 .course-tree-name {
     font-size: 20px;
 }
+/* Partners
+---------------------------------- */
+.clients-container {
+    text-align: center;
+}
+
+.clients {
+    margin: 10px auto;
+}
+
+    .clients .client-image {
+        text-align: center;
+        margin: 5px;
+        height: inherit;
+        display: block;
+        max-width: 100%;
+    }
+
+    .clients img {
+        margin: 0px auto;
+    }
