@@ -870,12 +870,19 @@ h4 {
 
     .clients .client-image {
         text-align: center;
-        margin: 5px;
-        height: inherit;
-        display: block;
         max-width: 100%;
+        width: 40%;
+        height: auto;
+        margin: 5px;
+        display: inline-block;
     }
 
     .clients img {
         margin: 0px auto;
     }
+
+.cliends > img {
+    display: inline-block;
+    max-width: 40%;
+    height: auto;
+}
