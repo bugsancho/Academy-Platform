@@ -80,6 +80,7 @@
     <Compile Include="Account\ProfileViewModel.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
     <Compile Include="Account\ResendValidationEmailViewModel.cs" />
+    <Compile Include="Surveys\AssessmentFailureViewModel.cs" />
     <Compile Include="Surveys\AssessmentViewModel.cs" />
     <Compile Include="Surveys\FeedbackViewModel.cs" />
     <Compile Include="Surveys\QuestionViewModel.cs" />

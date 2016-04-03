@@ -1,1 +1,47 @@
-﻿
+﻿@model AcademyPlatform.Web.Models.Surveys.AssessmentFailureViewModel
+<section id="fapartners" class="section pt-20 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 clearfix">
+                <h2 class="text-center">Опитайте отново!</h2>
+                <p class="large text-justify">Вие получихте @Model.CorrectAnswers от максималния брой @Model.NumberOfQuestions точки, нужни са Ви @Model.RequiredAnswers от @Model.NumberOfQuestions, за да преминете успешно изпита.</p>
+                <p class="large text-justify">Съжаляваме, но не успяхте да преминете изпита. Следващият опит ще бъде наличен в @Model.NextAttempt.ToString("dd MMMM yyyy - HH:mm")</p>
+                <p class="large text-justify">До тогава можете да се върнете към обучението - <a href="@Model.CourseUrl" title="@Model.CourseTitle">@Model.CourseTitle</a> и да преговорите учебния материал. Пожелаваме Ви успех!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="section-separator"><a href="#faregsteps" class="go-down-btn circle"> <span class="go-down-btn-inner circle"> <i class="fa fa-arrow-down"></i> </span> </a></div>
+<section id="faregsteps" class="section pt-70 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h4 class="text-center text-orange">НАУЧЕТЕ НОВИ НЕЩА</h4>
+                <h2 class="text-center">В ТРИ ЛЕСНИ СТЪПКИ</h2>
+            </div>
+            <div class="col-md-4 ">
+                <div class="pv-30 ph-20 step object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="orange-circle">1</span> <i class="fa fa-desktop step-icon"></i>
+                    <h3 class="pt-20 step-title">Запишете се за обучение</h3>
+                    <p class="step-text">Разгледайте нашия каталог с обучения и изберете това, което Ви интересува. С нас можете да учите навсякъде, по всяко време!</p>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="pv-30 ph-20 step object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="orange-circle">2</span> <i class="fa fa-bar-chart step-icon"></i>
+                    <h3 class="pt-20 step-title">Положете успешно изпит</h3>
+                    <p class="step-text">Всяко обучение завършва с изпит като задължително трябва да постигнете 80% верни отговори, за да го преминете успешно.</p>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="pv-30 ph-20 step object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="orange-circle">3</span> <i class="fa fa-flag-o step-icon"></i>
+                    <h3 class="pt-20 step-title">Вземете си сертификата</h3>
+                    @*TODO format should change to PDF*@
+                    <p class="step-text">Вече можете да свалите вашия сертификат в .jpeg формат и да се похвалите с него.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p></p>

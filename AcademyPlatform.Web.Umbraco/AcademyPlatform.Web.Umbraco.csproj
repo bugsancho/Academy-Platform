@@ -587,7 +587,6 @@
     <Content Include="Views\Assessment.cshtml" />
     <Content Include="Views\Partials\RenderCoursesGrid.cshtml" />
     <Content Include="Views\MacroPartials\CoursesGrid.cshtml" />
-    <Content Include="Views\Assessment\AssesmentCompletion.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />

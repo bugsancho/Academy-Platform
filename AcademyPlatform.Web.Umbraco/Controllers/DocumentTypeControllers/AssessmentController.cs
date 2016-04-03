@@ -194,14 +194,16 @@
                 return RedirectToRoute("Certificate", new { certificateCode = certificate.Code });
             }
 
-            return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers });
+            return View("AssessmentFailure", new AssessmentFailureViewModel
+            {
+                CorrectAnswers = correctAnswers,
+                RequiredAnswers = requiredCorrectAnswers,
+                NumberOfQuestions = questions.Count(),
+                CourseTitle = Umbraco.AssignedContentItem.Name,
+                CourseUrl = Umbraco.AssignedContentItem.Url,
+                // ReSharper disable once PossibleInvalidOperationException - This should never be null as we've just done a submission
+                NextAttempt = _assessments.GetNextAssessmentAttemptDate(username, courseId).Value
+            });
         }
-    }
-
-    public class AssessmentSubmissionResult
-    {
-        public int CorrectlyAnswered { get; set; }
-
-        public int IncorrectlyAnswered { get; set; }
     }
 }
