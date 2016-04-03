@@ -5,7 +5,7 @@
 
     public interface ICertificatesService
     {
-        Certificate GenerateCertificate(string username, int courseId, AssessmentSubmission assessmentSubmission, CertificateGenerationInfo certificateGenerationInfo);
+        Certificate GenerateCertificate(string username, int courseId, AssessmentSubmission assessmentSubmission);
 
         Certificate GetByUniqueCode(string uniqueCode);
     }

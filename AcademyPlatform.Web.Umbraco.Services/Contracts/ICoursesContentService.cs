@@ -11,5 +11,7 @@
         Course GetCourseByNiceUrl(string niceUrl);
 
         int GetCourseId(IPublishedContent content);
+
+        IPublishedContent GetCoursePublishedContentById(int courseId);
     }
 }

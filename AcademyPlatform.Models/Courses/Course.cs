@@ -1,11 +1,7 @@
 ﻿namespace AcademyPlatform.Models.Courses
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     using AcademyPlatform.Models.Base;
-    using AcademyPlatform.Models.Payments;
 
     public class Course : SoftDeletableEntity
     {

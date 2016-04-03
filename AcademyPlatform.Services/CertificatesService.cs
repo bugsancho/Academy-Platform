@@ -21,60 +21,61 @@
         private readonly IRepository<Certificate> _certificates;
         private readonly IUserService _users;
         private readonly ICoursesService _courses;
+        private readonly ICertificateGenerationInfoProvider _generationInfoProvider;
         private readonly IRandomProvider _random;
 
         private const string CertificateUrlFormat = "https:\\focus-academy.bg\\certificate\\{0}";
         private const string CertificateFilePathFormat = "certificates\\{0}.jpeg";
 
-        public CertificatesService(IRepository<Certificate> certificates, IRandomProvider random, IUserService users, ICoursesService courses)
+        public CertificatesService(IRepository<Certificate> certificates, IRandomProvider random, IUserService users, ICoursesService courses, ICertificateGenerationInfoProvider generationInfoProvider)
         {
             _certificates = certificates;
             _random = random;
             _users = users;
             _courses = courses;
+            _generationInfoProvider = generationInfoProvider;
         }
 
         public Certificate GetByUniqueCode(string uniqueCode)
         {
-            var certificate =_certificates.All().FirstOrDefault(x => x.UniqueCode == uniqueCode);
+            Certificate certificate = _certificates.All().FirstOrDefault(x => x.Code == uniqueCode);
             return certificate;
         }
 
-        public Certificate GenerateCertificate(string username, int courseId, AssessmentSubmission assessmentSubmission, CertificateGenerationInfo certificateGenerationInfo)
+        public Certificate GenerateCertificate(string username, int courseId, AssessmentSubmission assessmentSubmission)
         {
-            var user = _users.GetByUsername(username);
-            var course = _courses.GetById(courseId);
-
-            var certificate = new Certificate
+            User user = _users.GetByUsername(username);
+            Course course = _courses.GetById(courseId);
+            CertificateGenerationInfo certificateGenerationInfo = _generationInfoProvider.GetByCourseId(courseId);
+            Certificate certificate = new Certificate
             {
                 //UserId = user.Id,
                 AssesmentSubmissionId = assessmentSubmission.Id,
                 CourseId = course.Id,
-                UniqueCode = _random.GenerateRandomCode(10)
+                Code = _random.GenerateRandomCode(10)
             };
 
             Bitmap bitmap = (Bitmap)Image.FromFile(Path.GetFullPath(certificateGenerationInfo.TemplateFilePath));//load the image file
 
             QRCodeEncoder encoder = new QRCodeEncoder();
-            Bitmap certificateUrlQrCode = encoder.Encode(string.Format(CertificateUrlFormat, certificate.UniqueCode));
+            Bitmap certificateUrlQrCode = encoder.Encode(string.Format(CertificateUrlFormat, certificate.Code));
 
             using (Graphics certificateTemplate = Graphics.FromImage(bitmap))
             {
                 using (Font arialFont = new Font("Arial", 16, FontStyle.Bold))
                 {
-                    var studentData = certificateGenerationInfo.StudentName;
-                    var courseData = certificateGenerationInfo.CourseName;
-                    var datePlaceholder = certificateGenerationInfo.IssueDate;
-                    var qrPlaceholder = certificateGenerationInfo.QrCode;
-                    //TODO replace with middle name
-                    certificateTemplate.DrawString($"{user.FirstName} {user.LastName} {user.LastName}", arialFont, new SolidBrush(ColorTranslator.FromHtml(studentData.Color)), new Rectangle(studentData.TopLeftX, studentData.TopLeftY, studentData.Width, studentData.Height));
+                    PlaceholderInfo studentData = certificateGenerationInfo.StudentName;
+                    PlaceholderInfo courseData = certificateGenerationInfo.CourseName;
+                    PlaceholderInfo datePlaceholder = certificateGenerationInfo.IssueDate;
+                    PlaceholderInfo qrPlaceholder = certificateGenerationInfo.QrCode;
+                    certificateTemplate.DrawString($"{user.FirstName} {user.MiddleName} {user.LastName}", arialFont, new SolidBrush(ColorTranslator.FromHtml(studentData.Color)), new Rectangle(studentData.TopLeftX, studentData.TopLeftY, studentData.Width, studentData.Height));
                     certificateTemplate.DrawString(course.Title, arialFont, new SolidBrush(ColorTranslator.FromHtml(courseData.Color)), new Rectangle(courseData.TopLeftX, courseData.TopLeftY, courseData.Width, courseData.Height));
                     certificateTemplate.DrawString(DateTime.Today.ToString("dd.MM.yyy") + "г.", arialFont, new SolidBrush(ColorTranslator.FromHtml(datePlaceholder.Color)), new Rectangle(datePlaceholder.TopLeftX, datePlaceholder.TopLeftY, datePlaceholder.Width, datePlaceholder.Height));
                     certificateTemplate.DrawImage(certificateUrlQrCode, new Rectangle(qrPlaceholder.TopLeftX, qrPlaceholder.TopLeftY, qrPlaceholder.Width, qrPlaceholder.Height));
-                    var filePath = Path.Combine(
+                    string filePath = Path.Combine(
                         certificateGenerationInfo.BaseFilePath,
-                        string.Format(CertificateFilePathFormat, certificate.UniqueCode));
-                    var directoryPath = Path.GetDirectoryName(filePath);
+                        string.Format(CertificateFilePathFormat, certificate.Code));
+                    string directoryPath = Path.GetDirectoryName(filePath);
                     Debug.Assert(!string.IsNullOrEmpty(directoryPath));
                     if (!Directory.Exists(directoryPath))
                     {
@@ -85,7 +86,6 @@
                 }
             }
 
-            
             _certificates.Add(certificate);
             _certificates.SaveChanges();
             return certificate;

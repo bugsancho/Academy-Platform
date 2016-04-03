@@ -2,6 +2,7 @@
 {
     using System.Web.Mvc;
 
+    using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Services.Contracts;
 
     using global::Umbraco.Web.Mvc;
@@ -15,12 +16,12 @@
             _certificates = certificates;
         }
 
-        public ActionResult Certificate(string certificateUniqueCode)
+        public ActionResult Certificate(string certificateCode)
         {
-            var certificate = _certificates.GetByUniqueCode(certificateUniqueCode);
+            Certificate certificate = _certificates.GetByUniqueCode(certificateCode);
             if (certificate != null)
             {
-                return View(model: $"\\certificates\\{certificateUniqueCode}.jpeg");
+                return View(model: $"\\certificates\\{certificateCode}.jpeg");
             }
 
             //ViewBag.AssessmentSuccessful = false;

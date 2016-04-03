@@ -53,6 +53,7 @@
             builder.RegisterType(typeof(TaskRunner)).As(typeof(ITaskRunner)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(RouteProvider)).As(typeof(IRouteProvider)).InstancePerLifetimeScope();
             builder.RegisterType(typeof(MessageTemplateProvider)).As(typeof(IMessageTemplateProvider)).InstancePerLifetimeScope();
+            builder.RegisterType(typeof(CertificateGenerationInfoProvider)).As<ICertificateGenerationInfoProvider>().InstancePerLifetimeScope();
 
             builder.RegisterType<DeferredMessageService>().As<IMessageService>();
 

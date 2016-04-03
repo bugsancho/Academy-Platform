@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
 
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Account;
     using AcademyPlatform.Web.Models.Courses;
+    using AcademyPlatform.Web.Umbraco.Services.Contracts;
 
     using AutoMapper;
 
@@ -21,12 +21,14 @@
         private readonly IUserService _users;
         private readonly IMembershipService _membershipService;
         private readonly ISubscriptionsService _subscriptions;
+        private readonly ICoursesContentService _coursesContentService;
 
-        public ProfileController(IUserService users, ISubscriptionsService subscriptions, IMembershipService membershipService)
+        public ProfileController(IUserService users, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService)
         {
             _users = users;
             _subscriptions = subscriptions;
             _membershipService = membershipService;
+            _coursesContentService = coursesContentService;
         }
 
         public ActionResult Index()
@@ -39,7 +41,7 @@
             foreach (CourseProgress courseProgress in courseProgresses)
             {
                 CourseProgressViewModel viewModel = new CourseProgressViewModel();
-                IPublishedContent course = Umbraco.TypedContentAtXPath($"//Course[courseId={courseProgress.CourseId}]").FirstOrDefault();
+                IPublishedContent course = _coursesContentService.GetCoursePublishedContentById(courseProgress.CourseId);
                 if (course == null)
                 {
                     throw new ArgumentNullException(nameof(courseProgress.CourseId), $"Could not find published content with the specified course Id: {courseProgress.CourseId}");
@@ -71,13 +73,13 @@
                 if (_membershipService.ChangePassword(User.Identity.Name, viewModel.OldPassword, viewModel.NewPassword))
                 {
                     viewModel = new ChangePasswordViewModel
-                                    {
-                                        SuccessMessage = "Успешно променихте Вашата парола"
-                                    };
+                    {
+                        SuccessMessage = "Успешно променихте Вашата парола"
+                    };
                 }
                 else
                 {
-                    ModelState.AddModelError(nameof(viewModel.OldPassword),"Невалидна парола");
+                    ModelState.AddModelError(nameof(viewModel.OldPassword), "Невалидна парола");
                 }
             }
 

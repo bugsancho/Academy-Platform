@@ -32,7 +32,7 @@
             RouteTable.Routes.MapUmbracoRoute("Assessment", "assessment/{courseNiceUrl}", new { Controller = "Assessment", Action = "Assessment" }, courseRouteHandler);
             RouteTable.Routes.MapUmbracoRoute("Profile", "profile", new { Controller = "Profile", Action = "Index" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("Profile_Defailt", "profile/{action}", new { Controller = "Profile" }, rootNodeHandler);
-            RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateUniqueCode}", new { Controller = "Certificate", Action = "Certificate" }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateCode}", new { Controller = "Certificate", Action = "Certificate" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" }, rootNodeHandler);
 
 

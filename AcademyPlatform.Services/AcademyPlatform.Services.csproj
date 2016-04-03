@@ -61,6 +61,7 @@
     <Compile Include="CertificatesService.cs" />
     <Compile Include="Contracts\IApplicationSettings.cs" />
     <Compile Include="Contracts\ICategoryService.cs" />
+    <Compile Include="Contracts\ICertificateGenerationInfoProvider.cs" />
     <Compile Include="Contracts\IMessageTemplateProvider.cs" />
     <Compile Include="Contracts\IMailSettingsProvider.cs" />
     <Compile Include="Contracts\IMembershipService.cs" />

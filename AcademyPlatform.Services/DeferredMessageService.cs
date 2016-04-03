@@ -3,6 +3,7 @@
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Emails;
+    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
 
     public class DeferredMessageService : IMessageService
@@ -29,29 +30,31 @@
             _taskRunner.Run<IMessageService>(x => x.SendForgotPasswordMessage(user, newPassword));
         }
 
-        public void SendPaymentApprovedMessage(User user, Course course)
+        public void SendPaymentApprovedMessage(User user, Course course, Payment payment, string courseUrl, string coursePictureUrl)
         {
-            _taskRunner.Run<IMessageService>(x => x.SendPaymentApprovedMessage(user, course));
+            _taskRunner.Run<IMessageService>(x => x.SendPaymentApprovedMessage(user, course, payment, courseUrl, coursePictureUrl));
         }
 
-        public void SendExamAvailableMessage(User user, Course course)
+        public void SendExamAvailableMessage(User user, Course course, string assessmentUrl)
         {
-            _taskRunner.Run<IMessageService>(x => x.SendExamAvailableMessage(user, course));
+            _taskRunner.Run<IMessageService>(x => x.SendExamAvailableMessage(user, course, assessmentUrl));
         }
 
-        public void SendExamSuccessfulMessage(User user, Course course)
+        public void SendExamSuccessfulMessage(User user, Course course, string certificateUrl, string certificatePictureUrl)
         {
-            _taskRunner.Run<IMessageService>(x => x.SendExamSuccessfulMessage(user, course));
+            _taskRunner.Run<IMessageService>(x => x.SendExamSuccessfulMessage(user, course, certificateUrl, certificatePictureUrl));
         }
 
-        public void SendFreeCourseSignUpMessage(User user, Course course)
+        public void SendFreeCourseSignUpMessage(User user, Course course, string courseUrl, string coursePictureUrl)
         {
-            _taskRunner.Run<IMessageService>(x => x.SendFreeCourseSignUpMessage(user, course));
+            _taskRunner.Run<IMessageService>(x => x.SendFreeCourseSignUpMessage(user, course, courseUrl, coursePictureUrl));
         }
 
-        public void SendPaidCourseSignUpMessage(User user, Course course)
+        public void SendPaidCourseSignUpMessage(User user, Course course, CourseSubscription subscription, string courseUrl, string coursePictureUrl)
         {
-            _taskRunner.Run<IMessageService>(x => x.SendPaidCourseSignUpMessage(user, course));
+            _taskRunner.Run<IMessageService>(x => x.SendPaidCourseSignUpMessage(user, course, subscription, courseUrl, coursePictureUrl));
         }
+
+
     }
 }

@@ -27,6 +27,12 @@
             return coursePublishedContent;
         }
 
+        public IPublishedContent GetCoursePublishedContentById(int courseId)
+        {
+            IPublishedContent coursePublishedContent = UmbracoContext.Current.ContentCache.GetByXPath($"//Course[courseId={courseId}]").FirstOrDefault();
+            return coursePublishedContent;
+        }
+
         public Course GetCourseByNiceUrl(string niceUrl)
         {
             IPublishedContent coursePublishedContent = GetCoursePublishedContentByNiceUrl(niceUrl);

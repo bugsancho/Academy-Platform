@@ -6,7 +6,6 @@
     using System.Web.Mvc;
 
     using AcademyPlatform.Models.Assessments;
-    using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Assessments;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
@@ -23,25 +22,26 @@
 
     using Zone.UmbracoMapper;
 
+    using Certificate = AcademyPlatform.Models.Certificates.Certificate;
+
     [Authorize]
     public class AssessmentController : UmbracoController
     {
         private readonly IUmbracoMapper _mapper;
         private readonly IAssessmentsService _assessments;
         private readonly IFeedbackService _feedbackService;
-        private readonly ICertificatesService _certificates;
+
         private readonly ICoursesContentService _coursesContentService;
         private readonly IUserService _users;
 
         //TODO improve code quality:
         // * Use xxxContentService to retrieve umbraco content
         // * Extract duplicate code between GET and POST methods
-        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ICoursesContentService coursesContentService, IFeedbackService feedbackService)
+        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICoursesContentService coursesContentService, IFeedbackService feedbackService)
         {
             _mapper = mapper;
             _assessments = assessments;
             _users = users;
-            _certificates = certificates;
             _coursesContentService = coursesContentService;
             _feedbackService = feedbackService;
         }
@@ -173,7 +173,6 @@
                 }
             }
 
-
             var submission = new AssessmentSubmission
             {
                 CourseId = courseId,
@@ -186,34 +185,15 @@
                 submission.IsSuccessful = true;
             }
 
-            _assessments.CreateAssessmentSubmission(submission);
+            Certificate certificate;
+            _assessments.CreateAssessmentSubmission(submission, out certificate);
 
             if (submission.IsSuccessful)
             {
-                object certificateId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
-                IPublishedContent certificateContent = Umbraco.TypedContent(certificateId);
-                var certificateGenerationInfo = new CertificateGenerationInfo();
-
-                var certificateTemplate = UmbracoContext.Current.MediaCache.GetById(
-                    certificateContent.GetPropertyValue<int>(
-                        nameof(AcademyPlatform.Web.Models.Umbraco.DocumentTypes.Certificate.CertificateTemplate)));
-
-                _mapper.AddCustomMapping(
-                        typeof(PlaceholderInfo).FullName,
-                        UmbracoMapperMappings.MapPlaceholder)
-                    .Map(certificateContent, certificateGenerationInfo);
-
-                certificateGenerationInfo.TemplateFilePath = Server.MapPath(certificateTemplate.Url);
-                certificateGenerationInfo.BaseFilePath = Server.MapPath("/");
-                var certificate = _certificates.GenerateCertificate(User.Identity.Name, courseId, submission, certificateGenerationInfo);
-
-                return RedirectToRoute("Certificate", new { certificateUniqueCode = certificate.UniqueCode });
+                TempData["SuccessfullSubmission"] = true;
+                return RedirectToRoute("Certificate", new { certificateCode = certificate.Code });
             }
 
-
-
-            //ViewBag.AssessmentSuccessful = true;
-            //return View("~/Views/Certificate/Certificate.cshtml", model: $"\\certificates\\{certificate.UniqueCode}.jpeg");
             return View("AssesmentCompletion", new AssessmentSubmissionResult { CorrectlyAnswered = correctAnswers });
         }
     }

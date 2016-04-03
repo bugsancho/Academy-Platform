@@ -19,12 +19,13 @@
         private readonly ILecturesService _lectures;
         private readonly IAssessmentsService _assessments;
         private readonly IMessageService _messageService;
+        private readonly IRouteProvider _routeProvider;
         private readonly IRepository<CourseSubscription> _courseSubscriptions;
         private readonly IRepository<Payment> _payments;
 
         private readonly ICoursesService _coursesService;
 
-        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments, IMessageService messageService, IRepository<Payment> payments)
+        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments, IMessageService messageService, IRepository<Payment> payments, IRouteProvider routeProvider)
         {
             _users = users;
             _courseSubscriptions = courseSubscriptions;
@@ -35,6 +36,7 @@
             _assessments = assessments;
             _messageService = messageService;
             _payments = payments;
+            _routeProvider = routeProvider;
         }
 
         public IEnumerable<CourseProgress> GetCoursesProgress(string username)
@@ -67,7 +69,7 @@
             SubscriptionStatus status = GetSubscriptionStatus(username, courseId);
             return status == SubscriptionStatus.Active;
         }
-        
+
         public SubscriptionStatus GetSubscriptionStatus(string username, int courseId)
         {
             User user = _users.All().FirstOrDefault(x => x.Username == username);
@@ -132,13 +134,15 @@
                 _courseSubscriptions.Add(subscription);
                 //TODO implement proper Unit of Work 
                 _courseSubscriptions.SaveChanges();
+                string courseUrl = _routeProvider.GetCourseRoute(subscription.CourseId);
+                string coursePictureUrl = _routeProvider.GetCoursePictureRoute(subscription.CourseId);
                 if (isPaidCourse)
                 {
-                    _messageService.SendPaidCourseSignUpMessage(user, course);
+                    _messageService.SendPaidCourseSignUpMessage(user, course, subscription, courseUrl, coursePictureUrl);
                 }
                 else
                 {
-                    _messageService.SendFreeCourseSignUpMessage(user, course);
+                    _messageService.SendFreeCourseSignUpMessage(user, course, courseUrl, coursePictureUrl);
                 }
             }
 
@@ -157,7 +161,9 @@
             //TODO implement proper UoW pattern
             _courseSubscriptions.SaveChanges();
 
-            _messageService.SendPaymentApprovedMessage(subscription.User, subscription.Course);
+            string courseUrl = _routeProvider.GetCourseRoute(subscription.CourseId);
+            string coursePictureUrl = _routeProvider.GetCoursePictureRoute(subscription.CourseId);
+            _messageService.SendPaymentApprovedMessage(subscription.User, subscription.Course, payment, courseUrl, coursePictureUrl);
         }
     }
 }

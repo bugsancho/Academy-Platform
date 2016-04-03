@@ -8,7 +8,7 @@
     {
         public int Id { get; set; }
 
-        public string UniqueCode { get; set; }
+        public string Code { get; set; }
 
         public string FilePath { get; set; }
 
@@ -22,6 +22,6 @@
 
         public int AssesmentSubmissionId { get; set; }
 
-        public AssessmentSubmission AssesmentSubmission { get; set; }
+        public virtual AssessmentSubmission AssesmentSubmission { get; set; }
     }
 }

@@ -3,6 +3,7 @@
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Emails;
+    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
 
     public class MessageService : IMessageService
@@ -53,43 +54,61 @@ E-mail: {inquiry.Email} <br/>
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendFreeCourseSignUpMessage(User user, Course course)
+        public void SendFreeCourseSignUpMessage(User user, Course course, string courseUrl, string coursePictureUrl)
         {
             MessageTemplate template = _templateProvider.GetFreeCourseSignUpTemplate();
             template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
-            //TODO add placeholders
+            template.Body = template.Body.Replace("{{courseName}}", course.Title);
+            template.Body = template.Body.Replace("{{courseShortDescription}}", course.Description);
+            template.Body = template.Body.Replace("/{{courseUrl}}", courseUrl);
+            template.Body = template.Body.Replace("/{{courseImageUrl}}", coursePictureUrl);
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendPaidCourseSignUpMessage(User user, Course course)
+        public void SendPaidCourseSignUpMessage(User user, Course course, CourseSubscription subscription, string courseUrl, string coursePictureUrl)
         {
             MessageTemplate template = _templateProvider.GetPaidCourseSignUpTemplate();
             template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
-            //TODO add placeholders
+            template.Body = template.Body.Replace("{{courseName}}", course.Title);
+            template.Body = template.Body.Replace("{{courseShortDescription}}", course.Description);
+            template.Body = template.Body.Replace("{{coursePrice}}", course.Price?.ToString());
+            template.Body = template.Body.Replace("/{{courseUrl}}", courseUrl);
+            template.Body = template.Body.Replace("/{{courseImageUrl}}", coursePictureUrl);
+            template.Body = template.Body.Replace("{{subscriptionNumber}}", subscription.Id.ToString());
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendPaymentApprovedMessage(User user, Course course)
+        public void SendPaymentApprovedMessage(User user, Course course, Payment payment, string courseUrl, string coursePictureUrl)
         {
             MessageTemplate template = _templateProvider.GetPaymentApprovedTemplate();
             template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
-            //TODO add placeholders
+            template.Body = template.Body.Replace("{{courseName}}", course.Title);
+            template.Body = template.Body.Replace("{{courseShortDescription}}", course.Description);
+            template.Body = template.Body.Replace("/{{courseUrl}}", courseUrl);
+            template.Body = template.Body.Replace("/{{courseImageUrl}}", coursePictureUrl);
+            template.Body = template.Body.Replace("{{subscriptionNumber}}", payment.SubscriptionId.ToString());
+            template.Body = template.Body.Replace("{{transactionDate}}", payment.PaymentDate.ToString());
+            template.Body = template.Body.Replace("{{transactionSum}}", payment.Total.ToString());
+            template.Body = template.Body.Replace("{{transactionAccount}}", payment.BankAccount);
+            template.Body = template.Body.Replace("{{transactionDetails}}", payment.Details);
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendExamAvailableMessage(User user, Course course)
+        public void SendExamAvailableMessage(User user, Course course, string assessmentUrl)
         {
             MessageTemplate template = _templateProvider.GetExamAvailableTemplate();
             template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
-            //TODO add placeholders
+            template.Body = template.Body.Replace("{{courseName}}", course.Title);
+            template.Body = template.Body.Replace("/{{assessmentUrl}}", assessmentUrl);
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
 
-        public void SendExamSuccessfulMessage(User user, Course course)
+        public void SendExamSuccessfulMessage(User user, Course course, string certificateUrl, string certificatePictureUrl)
         {
             MessageTemplate template = _templateProvider.GetExamSuccessfulTemplate();
             template.Body = template.Body.Replace("{{firstName}}", user.FirstName);
-            //TODO add placeholders
+            template.Body = template.Body.Replace("/{{certificateUrl}}", certificateUrl);
+            template.Body = template.Body.Replace("/{{certificateImageUrl}}", certificatePictureUrl);
             _emailService.SendMail(user.Username, template.Subject, template.Body);
         }
     }
