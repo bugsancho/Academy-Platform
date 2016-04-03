@@ -44,6 +44,7 @@
             ContentService.Saving += (sender, args) =>
                 {
                     AddOrUpdateLecture(args.SavedEntities, x => x.Published && (x.Parent()?.Published ?? false));
+                    UpdateCourse(args.SavedEntities);
                 };
 
             //Adding a Save post-event because during the Saving event, new items still have no Id so syncing won't work.
@@ -60,6 +61,7 @@
             ContentService.RollingBack += (sender, args) =>
                 {
                     AddOrUpdateLecture(Enumerable.Repeat(args.Entity, 1), x => x.Published && (x.Parent()?.Published ?? false));
+                     UpdateCourse(Enumerable.Repeat(args.Entity, 1));
                 };
 
             ContentService.Moving += (sender, args) =>
@@ -76,6 +78,26 @@
                 {
                     AddOrUpdateLecture(args.DeletedEntities, x => false);
                 };
+        }
+
+        private void UpdateCourse(IEnumerable<IContent> content)
+        {
+            IContent courseContent =
+                       content.FirstOrDefault(x => x.ContentType.Alias == nameof(DocumentTypes.Course));
+            if (courseContent != null)
+            {
+                int courseId = int.Parse((string)courseContent.Properties[nameof(DocumentTypes.Course.CourseId)].Value);
+                ICoursesService coursesService = DependencyResolver.Current.GetService(typeof(ICoursesService)) as ICoursesService;
+                if (coursesService == null)
+                {
+                    throw new InvalidOperationException("ICoursesService failed to instantiate");
+                }
+
+                Course course = coursesService.GetById(courseId);
+                course.Description =
+                    (string)courseContent.Properties[nameof(DocumentTypes.Course.ShortDescription)].Value;
+                coursesService.Update(course);
+            }
         }
 
         private void AddOrUpdateLecture(IEnumerable<IContent> content, Func<IContent, bool> isActive)
