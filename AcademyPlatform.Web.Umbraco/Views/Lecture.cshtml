@@ -2,16 +2,16 @@
 @inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.LectureViewModel>
 @{
     Layout = "~/Views/Site.cshtml";
-    Html.RequiresJs("~/scripts/treeMenu.js");
 }
 
-
-<section class="pv-30 padding-bottom-clear clearfix"> @* used to have 'light-gray-bg' CSS class *@
+<section class="pv-30 padding-bottom-clear clearfix">
+    @* used to have 'light-gray-bg' CSS class *@
     <div class="container">
         <div class="row space-bottom">
             <div class="main col-md-9 col-sm-12 col-xs-12">
-
-                <div class="space-bottom"> @Html.Raw(Model.Content)</div>
+                <div class="space-bottom">
+                    @Html.Raw(Model.Content)
+                </div>
                 <div class="space-bottom">
                     @if (Model.PreviousLecture != null)
                     {
@@ -22,37 +22,10 @@
                         <a href="@Model.NextLecture.Url" class="btn btn-default pull-right">@Model.NextLecture.Name<i class="fa fa-caret-right" style="margin-left: 10px"></i></a>
                     }
                 </div>
+                <div class="row" id="disqus_thread"></div>
             </div>
             <aside class="col-md-3 hidden-sm hidden-xs">
                 <div>
-                    @*<ul class="lectures-list">
-                        <li>
-                            @foreach (var module in Model.Modules)
-                            {
-                                <ul class="tree lectures-list">
-                                    <li>
-                                        <label class="tree-toggle nav-header">@module.Name</label>
-                                        <ul class="tree lectures-list">
-                                            @foreach (var lecture in module.LectureLinks)
-                                            {
-                                                if (lecture.IsCurrent)
-                                                {
-                                                    <li><i class="fa fa-arrow-right">&nbsp</i><a href="@lecture.Url">@lecture.Name</a></li>
-                                                }
-                                                else
-                                                {
-                                                    <li><a href="@lecture.Url">@lecture.Name</a></li>
-                                                }
-                                            }
-
-                                        </ul>
-                                    </li>
-                                    <li class="divider"></li>
-                                </ul>
-                            }
-
-                        </li>
-                    </ul>*@
                     <div class="tree">
                         <ul>
                             <li>
@@ -81,12 +54,31 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
-
-                @*<a href="@lecture.Url" class="@(lecture.IsCurrent ? "active" : "")">@lecture.Name</a>*@
-
             </aside>
         </div>
     </div>
 </section>
+
+<script>
+    /**
+    * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+    */
+
+    var disqus_config = function () {
+        this.page.url = '@Request.Url.AbsoluteUri'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'lecture_' + '@Model.Id'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    
+    };
+
+    (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//asdasddsfadsf.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>

@@ -9,8 +9,7 @@
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
-
-    using global::Umbraco.Core;
+    
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
@@ -88,6 +87,7 @@
             }
 
             lectureViewModel.Content = model.Content.GetPropertyValue<string>(nameof(Lecture.Content));
+            lectureViewModel.Id = model.Content.Id;
 
             Dictionary<int, ModuleViewModel> modulesDictionary = new Dictionary<int, ModuleViewModel>();
             foreach (IPublishedContent lectureContent in lectures)

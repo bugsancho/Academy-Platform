@@ -9,6 +9,8 @@
             Modules = new List<ModuleViewModel>();
         }
 
+        public int Id { get; set; }
+
         public string Content { get; set; }
 
         public ICollection<ModuleViewModel> Modules { get; set; }
