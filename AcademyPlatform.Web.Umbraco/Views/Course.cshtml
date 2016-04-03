@@ -47,68 +47,66 @@
                 <div class="tab-content">
                     <div class="tab-pane fade in active" id="modules">
                         <h3>Модули</h3>
-                        <div class="row">
-                            <div>
-                                @foreach (var module in Model.Modules)
-                                {
-                                    <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
-                                        <span class="icon default-bg small">@moduleIndex</span>
-                                        <div class="body">
-                                            <h4 class="title">@module.Name</h4>
+                        <div>
+                            @foreach (var module in Model.Modules)
+                            {
+                                <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                                    <span class="icon default-bg small">@moduleIndex</span>
+                                    <div class="body">
+                                        <h4 class="title">@module.Name</h4>
 
-                                            <div class="col-md-1">
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div @*class="table-responsive"*@>
-                                                        <table class="table table-colored table-hover">
-                                                            <tbody>
-                                                                @{
-                                                                    var lectureIndex = 1;
-                                                                }
-                                                                @foreach (var lecture in module.LectureLinks)
-                                                                {
-                                                                    <tr>
-                                                                        @if (lecture.IsDemo || Model.HasActiveSubscription)
-                                                                        {
-                                                                            <td class="text-left">@(moduleIndex++).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
-                                                                            <td class="text-right">
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div @*class="table-responsive"*@>
+                                                    <table class="table table-colored table-hover">
+                                                        <tbody>
+                                                            @{
+                                                                var lectureIndex = 1;
+                                                            }
+                                                            @foreach (var lecture in module.LectureLinks)
+                                                            {
+                                                                <tr>
+                                                                    @if (lecture.IsDemo || Model.HasActiveSubscription)
+                                                                    {
+                                                                        <td class="text-left">@(moduleIndex++).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
+                                                                        <td class="text-right">
 
-                                                                                @if (Model.HasActiveSubscription)
+                                                                            @if (Model.HasActiveSubscription)
+                                                                            {
+                                                                                if (lecture.IsVisited)
                                                                                 {
-                                                                                    if (lecture.IsVisited)
-                                                                                    {
-                                                                                        <i class="fa fa-check"></i>
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
-                                                                                    }
+                                                                                    <i class="fa fa-check"></i>
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                                    <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
+                                                                                    <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
                                                                                 }
-                                                                            </td>
-                                                                        }
-                                                                        else if (!Model.HasActiveSubscription)
-                                                                        {
-                                                                            <td class="text-left text-muted">@(moduleIndex++).@(lectureIndex++) @lecture.Name</td>
-                                                                            <td class="text-right">
-                                                                                <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>&nbsp;Платена лекция</span>
-                                                                            </td>
-                                                                        }
-                                                                    </tr>
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
+                                                                            }
+                                                                        </td>
+                                                                    }
+                                                                    else if (!Model.HasActiveSubscription)
+                                                                    {
+                                                                        <td class="text-left text-muted">@(moduleIndex++).@(lectureIndex++) @lecture.Name</td>
+                                                                        <td class="text-right">
+                                                                            <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>&nbsp;Платена лекция</span>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                                                    }
-                            </div>
+                                </div>
+                                                                }
                         </div>
                     </div>
                     <div class="tab-pane fade" id="description">
@@ -215,7 +213,7 @@
                                     {
                                         <span>След като се запишете, тук ще може да намерите полезни материали, свързани с курса</span>
                                     }
-                                   
+
                                 </div>
                             </div>
                         </div>
@@ -224,29 +222,7 @@
                 <!-- tabs end -->
             </div>
             <!-- main end -->
-            <!-- sidebar start -->
-            <!-- ================ -->
-            <aside class="col-md-3 col-lg-3 space-top">
-                <div class="sidebar">
-                    <div class="block clearfix">
-                        <h3 class="title">Информация за курса</h3>
-                        <div class="separator-2"></div>
-                        <ul class="list margin-clear">
-
-                            <li><strong>Продължителност: </strong> <span class="text-left"> 30 учебни часа</span></li>
-                            <li><strong>Собственик на обучението: </strong> <span class="text-left"> <a href="/partners/training-partner-icl/">"Интернешънал Сертификейшънс България" ЕООД</a></span></li>
-                            <li><strong>Видео: </strong> <span class="text-left"> Да</span></li>
-                            <li><strong>Аудио: </strong> <span class="text-left"> Да</span></li>
-                            <li><strong>Сертификат: </strong> <span class="text-left"> Да, при 80% верни отговорина изпитта</span></li>
-                            <li><strong>Вид на курса: </strong> <span class="text-left"> Платен</span></li>
-                            <li><strong>Цена: </strong> <span class="text-left"> 100 лв. без ДДС</span></li>
-                            @*<li><strong>Лектор: </strong> <span class="text-left">@Model.LecturerName </span></li>*@
-                            <li><strong>Категория: </strong> <span class="text-left">@Model.Category.Title </span></li>
-                        </ul>
-                    </div>
-                </div>
-            </aside>
-            <!-- sidebar end -->
+            @Html.Raw(Model.Features)
         </div>
     </div>
 </section>

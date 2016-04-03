@@ -34,8 +34,10 @@
 
         public string DetailedDescription { get; set; }
 
+        public string Features { get; set; }
+
         public ICollection<ModuleViewModel> Modules { get; set; }
-        
+
         public IEnumerable<FileViewModel> Files { get; set; }
 
         public string ShortDescription { get; set; }

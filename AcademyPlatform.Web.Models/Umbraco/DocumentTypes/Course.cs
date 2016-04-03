@@ -24,9 +24,11 @@
 
         public string DetailedDescription { get; set; }
 
+        public string Features { get; set; }
+
         public string Assessment { get; set; }
 
-        public string FeedbackForm { get; set; }
+        public int FeedbackForm { get; set; }
 
         public IEnumerable<Module> Modules { get; set; }
 

@@ -9,7 +9,6 @@
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
-    using AcademyPlatform.Web.Umbraco.Services.Contracts;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
 
     using global::Umbraco.Core.Models;
@@ -81,6 +80,7 @@
                 AssessmentEligibilityStatus = _assessmentsService.GetEligibilityStatus(User.Identity.Name, coursePublishedContentViewModel.CourseId),
                 DetailedDescription = coursePublishedContentViewModel.DetailedDescription,
                 ShortDescription = coursePublishedContentViewModel.ShortDescription,
+                Features = coursePublishedContentViewModel.Features
 
             };
             //========================================================================================
