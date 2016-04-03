@@ -30,10 +30,9 @@ namespace AcademyPlatform.Web.Umbraco.Startup
 
             GlobalConfiguration.Configuration.UseLog4NetLogProvider();
             GlobalConfiguration.Configuration.UseSqlServerStorage("Hangfire", new SqlServerStorageOptions
-                                                                                                              {
-                                                                                                                  JobExpirationCheckInterval = TimeSpan.FromDays(7),
-                                                                                                                  QueuePollInterval = TimeSpan.FromMinutes(1)
-                                                                                                              });
+            {
+                JobExpirationCheckInterval = TimeSpan.FromDays(7)
+            });
 
             GlobalJobFilters.Filters.Add(new PrepareUmbracoRequestFilter());
             JobHelper.SetSerializerSettings(new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
