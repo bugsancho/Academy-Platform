@@ -176,7 +176,7 @@
             var submission = new AssessmentSubmission
             {
                 CourseId = courseId,
-                AssessmentRequestId = assessmentRequest.Id,
+                AssessmentRequest = assessmentRequest,
                 Submission = JsonConvert.SerializeObject(assessment.Questions)
             };
 

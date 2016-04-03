@@ -29,7 +29,7 @@
         public CertificateGenerationInfo GetByCourseId(int courseId)
         {
             IPublishedContent courseContent = _coursesContentService.GetCoursePublishedContentById(courseId);
-            int certificateId = int.Parse((string)courseContent.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue);
+            int certificateId = (int)courseContent.GetPropertyValue<Picker>(nameof(Course.Certificate)).SavedValue;
             IPublishedContent certificateContent = UmbracoContext.Current.ContentCache.GetById(certificateId);
             CertificateGenerationInfo certificateGenerationInfo = new CertificateGenerationInfo();
 

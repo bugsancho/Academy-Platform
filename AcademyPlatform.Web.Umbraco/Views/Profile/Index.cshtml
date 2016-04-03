@@ -1,6 +1,7 @@
-﻿@using AcademyPlatform.Models.Courses
+﻿@using AcademyPlatform.Models.Assessments
+@using AcademyPlatform.Models.Courses
 @using AcademyPlatform.Web.Models.Account
-@model AcademyPlatform.Web.Models.Account.ProfileViewModel
+@model ProfileViewModel
 @{
     Layout = "~/Views/Site.cshtml";
 
@@ -64,77 +65,81 @@
                     {
                         <table class="table table-bordered table-colored">
                             <thead>
-                                <tr>
-                                    <th>Обучение</th>
-                                    <th>Статус</th>
-                                    <th>Изпит</th>
-                                </tr>
+                            <tr>
+                                <th>Обучение</th>
+                                <th>Статус</th>
+                                <th>Изпит</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var courseProgress in Model.ProgressViewModels)
-                                {
-                                    <tr>
-                                        <td>
-                                            <a href="@courseProgress.CourseUrl">@courseProgress.CourseName</a>
-                                        </td>
-                                        <td>
-                                            @if (courseProgress.CourseProgress.SubscriptionStatus == SubscriptionStatus.Active)
-                                            {
-                                                <span>Преминали сте @courseProgress.CourseProgress.VisitedLecturesCount от @courseProgress.CourseProgress.TotalLecturesCount лекции</span>
-                                            }
-                                            else if (courseProgress.CourseProgress.SubscriptionStatus == SubscriptionStatus.AwaitingPayment)
-                                            {
-                                                <span>Очаква се плащане за този курс <a href="@courseProgress.AwaitingPaymentUrl">детайли</a></span>
-                                            }
-                                        </td>
-                                        <td>
-                                            @{
-                                                var eligibleForExam = courseProgress.CourseProgress.VisitedLecturesCount == courseProgress.CourseProgress.TotalLecturesCount;
-                                            }
-                                            @if (courseProgress.CourseProgress.AssessmentPassed)
-                                            {
-                                                <span>Изпитът е успешно положен</span>
-                                            }
-                                            else if (eligibleForExam)
-                                            {
-                                                <span>Направете изпита <a href="@courseProgress.AssessmentUrl" title="изпит">сега</a></span>
-                                            }
-                                            else
-                                            {
-                                                <span>Преминете всички лекции преди да отключите изпита</span>
-                                            }
-                                        </td>
-                                    </tr>
-                                                }
+                            @foreach (var courseProgress in Model.ProgressViewModels)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="@courseProgress.CourseUrl">@courseProgress.CourseName</a>
+                                    </td>
+                                    <td>
+                                        @if (courseProgress.CourseProgress.SubscriptionStatus == SubscriptionStatus.Active)
+                                        {
+                                            <span>Преминали сте @courseProgress.CourseProgress.VisitedLecturesCount от @courseProgress.CourseProgress.TotalLecturesCount лекции</span>
+                                        }
+                                        else if (courseProgress.CourseProgress.SubscriptionStatus == SubscriptionStatus.AwaitingPayment)
+                                        {
+                                            <span>Очаква се плащане за този курс <a href="@courseProgress.AwaitingPaymentUrl">детайли</a></span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            var assessmentEligibilityStatus = courseProgress.CourseProgress.AssessmentEligibilityStatus;
+                                        }
+                                        @if (assessmentEligibilityStatus == AssessmentEligibilityStatus.AlreadyCompleted)
+                                        {
+                                            <span>Изпитът е успешно положен</span>
+                                        }
+                                        else if (assessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
+                                        {
+                                            <span>Ще може отново да направите изпита на: @(courseProgress.CourseProgress.LockoutLift?.ToString("dd MMMM yyyy - HH:mm"))</span>
+                                        }
+                                        else if (assessmentEligibilityStatus == AssessmentEligibilityStatus.Eligible)
+                                        {
+                                            <span>Направете изпита <a href="@courseProgress.AssessmentUrl" title="изпит">сега</a></span>
+                                        }
+                                        else
+                                        {
+                                            <span>Преминете всички лекции преди да отключите изпита</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
-                                                }
-                                                else
-                                                {
-                                                    <div class="alert  alert-icon alert-warning">
-                                                        <i class="fa fa-warning"></i> Нямате записани обучения. Моля, разгледайте <a href="/courses" class="alert-link">нашите предложения</a>.
-                                                    </div>
-                                                }
+                    }
+                    else
+                    {
+                        <div class="alert  alert-icon alert-warning">
+                            <i class="fa fa-warning"></i> Нямате записани обучения. Моля, разгледайте <a href="/courses" class="alert-link">нашите предложения</a>.
+                        </div>
+                    }
                 </div>
             </div>
-            @*<div class="col-md-12">
-                    <div class="pv-20 ph-20 feature-box-2 boxed light-gray-bg">
-                        <h4>Моите серификати</h4>
-                        @if (userHasCertificate)
+                @*<div class="col-md-12">
+            <div class="pv-20 ph-20 feature-box-2 boxed light-gray-bg">
+                <h4>Моите серификати</h4>
+                @if (userHasCertificate)
+                {
+                    <ol>
+                        @foreach (var certificate in certificates)
                         {
-                            <ol>
-                                @foreach (var certificate in certificates)
-                                {
-                                    <li>@certificate.CourseName</li>
-                                }
-                            </ol>
+                            <li>@certificate.CourseName</li>
                         }
-                        else
-                        {
-                            <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате взет сертификат. За да получите сертификат трябва да прочетете всички лекции на дадено обучение, и след това да преминете успешно изпита му!</div>
-                        }
-                    </div>
-                </div>*@
+                    </ol>
+                }
+                else
+                {
+                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате взет сертификат. За да получите сертификат трябва да прочетете всички лекции на дадено обучение, и след това да преминете успешно изпита му!</div>
+                }
+            </div>
+        </div>*@
         </div>
     </div>
 </section>

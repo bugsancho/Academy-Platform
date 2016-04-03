@@ -16,5 +16,7 @@
         IEnumerable<CourseProgress> GetCoursesProgress(string username);
         
         void AddPayment(Payment payment);
+
+        CourseSubscription GetSubscription(string username, int courseId);
     }
 }

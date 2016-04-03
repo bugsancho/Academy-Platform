@@ -6,6 +6,7 @@
 
     using AcademyPlatform.Data.Repositories;
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Exceptions;
     using AcademyPlatform.Models.Payments;
@@ -50,13 +51,20 @@
                 {
                     CourseId = subscription.CourseId,
                     TotalLecturesCount = _lectures.GetLecturesCount(subscription.CourseId),
-                    SubscriptionStatus = subscription.Status
+                    SubscriptionStatus = subscription.Status,
+                    AssessmentEligibilityStatus = _assessments.GetEligibilityStatus(username, subscription.CourseId)
                 };
 
                 if (subscription.Status == SubscriptionStatus.Active)
                 {
                     courseProgress.VisitedLecturesCount = _lectures.GetLectureVisitsCount(username, subscription.CourseId);
-                    courseProgress.AssessmentPassed = _assessments.HasSuccessfulSubmission(username, subscription.CourseId);
+                }
+
+                if (courseProgress.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
+                {
+                    courseProgress.LockoutLift = _assessments.GetNextAssessmentAttemptDate(
+                        username,
+                        subscription.CourseId);
                 }
                 courseProgresses.Add(courseProgress);
             }
@@ -91,6 +99,11 @@
             }
 
             return SubscriptionStatus.None;
+        }
+
+        public CourseSubscription GetSubscription(string username, int courseId)
+        {
+            return _courseSubscriptions.All().FirstOrDefault(x => x.User.Username == username && x.CourseId == courseId);
         }
 
         public SubscriptionStatus JoinCourse(string username, int courseId)

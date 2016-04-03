@@ -37,9 +37,9 @@
             return absoluteUrl;
         }
 
-        public string GetAssessmentRoute(AcademyPlatform.Models.Courses.Course course)
+        public string GetAssessmentRoute(int courseId)
         {
-            IPublishedContent courseContent = _coursesContentService.GetCoursePublishedContentById(course.Id);
+            IPublishedContent courseContent = _coursesContentService.GetCoursePublishedContentById(courseId);
             string validationPath = GetRouteByName("Assessment", new { courseNiceUrl = courseContent.UrlName });
             string absoluteUrl = GetHttpsAbsoluteUrl(validationPath);
             return absoluteUrl;

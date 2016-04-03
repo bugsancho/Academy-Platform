@@ -18,6 +18,6 @@
 
         string GetCoursePictureRoute(int courseId);
 
-        string GetAssessmentRoute(AcademyPlatform.Models.Courses.Course course);
+        string GetAssessmentRoute(int courseId);
     }
 }

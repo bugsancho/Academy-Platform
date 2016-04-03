@@ -15,6 +15,7 @@
         private readonly IRepository<AssessmentRequest> _assessmentRequests;
         private readonly IRepository<AssessmentSubmission> _assessmentSubmissions;
         private readonly IRepository<CourseSubscription> _subscriptions;
+        private readonly IRepository<Course> _courses;
         private readonly IRouteProvider _routeProvider;
         private readonly IMessageService _messageService;
         private readonly ILecturesService _lecturesService;
@@ -24,7 +25,7 @@
 
         private DateTime NextAvailableAssessmentAttempt(DateTime date) => date.AddHours(_applicationSettings.AssessmentLockoutTime);
 
-        public AssessmentsService(IRepository<AssessmentRequest> assessmentRequests, IRepository<AssessmentSubmission> assessmentSubmissions, IMessageService messageService, ITaskRunner taskRunner, ILecturesService lecturesService, IApplicationSettings applicationSettings, IRepository<CourseSubscription> subscriptions, IRouteProvider routeProvider, ICertificatesService certificatesService)
+        public AssessmentsService(IRepository<AssessmentRequest> assessmentRequests, IRepository<AssessmentSubmission> assessmentSubmissions, IMessageService messageService, ITaskRunner taskRunner, ILecturesService lecturesService, IApplicationSettings applicationSettings, IRepository<CourseSubscription> subscriptions, IRouteProvider routeProvider, ICertificatesService certificatesService, IRepository<Course> courses)
         {
             _assessmentRequests = assessmentRequests;
             _assessmentSubmissions = assessmentSubmissions;
@@ -35,6 +36,7 @@
             _subscriptions = subscriptions;
             _routeProvider = routeProvider;
             _certificatesService = certificatesService;
+            _courses = courses;
         }
 
         public void CreateAssesmentRequest(AssessmentRequest request)
@@ -58,6 +60,22 @@
                                    .OrderByDescending(x => x.CreatedOn)
                                    .FirstOrDefault();
             return request;
+        }
+
+        public DateTime? GetNextAssessmentAttemptDate(string username, int courseId)
+        {
+            AssessmentSubmission latestSubmission =
+                _assessmentSubmissions.All()
+                                      .Where(x => x.User.Username == username && x.CourseId == courseId)
+                                      .OrderByDescending(x => x.CreatedOn)
+                                      .FirstOrDefault();
+
+            if (latestSubmission == null)
+            {
+                return null;
+            }
+
+            return NextAvailableAssessmentAttempt(latestSubmission.CreatedOn);
         }
 
         public AssessmentEligibilityStatus GetEligibilityStatus(string username, int courseId)
@@ -115,20 +133,22 @@
             _assessmentRequests.Update(request);
             _assessmentRequests.SaveChanges();
 
+            submission.UserId = request.UserId;
             _assessmentSubmissions.Add(submission);
             _assessmentSubmissions.SaveChanges();
 
+            Course submissionCourse = _courses.GetById(submission.CourseId);
             if (submission.IsSuccessful)
             {
-                certificate = _certificatesService.GenerateCertificate(request.User.Username, submission.CourseId, submission);
+                certificate = _certificatesService.GenerateCertificate(request.User.Username, submissionCourse.Id, submission);
                 string certificateUrl = _routeProvider.GetCertificateRoute(certificate);
                 string certificatePictureUrl = _routeProvider.GetCertificatePictureRoute(certificate);
-                _messageService.SendExamSuccessfulMessage(request.User, submission.Course, certificateUrl, certificatePictureUrl);
+                _messageService.SendExamSuccessfulMessage(request.User, submissionCourse, certificateUrl, certificatePictureUrl);
             }
             else
             {
-                string assessmentUrl = _routeProvider.GetAssessmentRoute(submission.Course);
-                _taskRunner.Schedule<IMessageService>(x => x.SendExamAvailableMessage(request.User, submission.Course, assessmentUrl), NextAvailableAssessmentAttempt(submission.CreatedOn));//TODO add config setting
+                string assessmentUrl = _routeProvider.GetAssessmentRoute(submissionCourse.Id);
+                _taskRunner.Schedule<IMessageService>(x => x.SendExamAvailableMessage(request.User, submissionCourse, assessmentUrl), NextAvailableAssessmentAttempt(submission.CreatedOn));//TODO add config setting
             }
         }
     }

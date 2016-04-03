@@ -87,7 +87,7 @@
 
         public MessageTemplate GetExamSuccessfulTemplate()
         {
-            return GetCoursesMessageTemplate(nameof(Models.Umbraco.DocumentTypes.Courses.ExamSuccessfullTemplate));
+            return GetCoursesMessageTemplate(nameof(Models.Umbraco.DocumentTypes.Courses.ExamSuccessfulTemplate));
         }
 
 

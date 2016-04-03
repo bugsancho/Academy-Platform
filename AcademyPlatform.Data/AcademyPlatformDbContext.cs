@@ -58,6 +58,11 @@
                         .WithMany()
                         .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<AssessmentSubmission>()
+                        .HasRequired(x => x.User)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Certificate>()
                         .HasRequired(x => x.User)
                         .WithMany()
@@ -77,7 +82,7 @@
         public IDbSet<Lecture> Lectures { get; set; }
 
         public IDbSet<LectureVisit> LectureVisits { get; set; }
-        
+
         public IDbSet<Certificate> Certificates { get; set; }
 
         public IDbSet<AssessmentRequest> AssessmentRequests { get; set; }

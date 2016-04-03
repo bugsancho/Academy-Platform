@@ -1,5 +1,7 @@
 ﻿namespace AcademyPlatform.Services.Contracts
 {
+    using System;
+
     using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Certificates;
 
@@ -16,5 +18,7 @@
         bool HasSuccessfulSubmission(string username, int courseId);
 
         AssessmentEligibilityStatus GetEligibilityStatus(string username, int courseId);
+
+        DateTime? GetNextAssessmentAttemptDate(string username, int courseId);
     }
 }

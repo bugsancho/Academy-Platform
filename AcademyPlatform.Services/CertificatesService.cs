@@ -49,7 +49,7 @@
             CertificateGenerationInfo certificateGenerationInfo = _generationInfoProvider.GetByCourseId(courseId);
             Certificate certificate = new Certificate
             {
-                //UserId = user.Id,
+                UserId = user.Id,
                 AssesmentSubmissionId = assessmentSubmission.Id,
                 CourseId = course.Id,
                 Code = _random.GenerateRandomCode(10)

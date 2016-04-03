@@ -10,6 +10,6 @@
 
         public int ExamAvailableTemplate { get; set; }
 
-        public int ExamSuccessfullTemplate { get; set; }
+        public int ExamSuccessfulTemplate { get; set; }
     }
 }

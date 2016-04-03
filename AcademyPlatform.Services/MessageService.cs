@@ -87,7 +87,7 @@ E-mail: {inquiry.Email} <br/>
             template.Body = template.Body.Replace("/{{courseUrl}}", courseUrl);
             template.Body = template.Body.Replace("/{{courseImageUrl}}", coursePictureUrl);
             template.Body = template.Body.Replace("{{subscriptionNumber}}", payment.SubscriptionId.ToString());
-            template.Body = template.Body.Replace("{{transactionDate}}", payment.PaymentDate.ToString());
+            template.Body = template.Body.Replace("{{transactionDate}}", payment.PaymentDate.ToString("dd.mm.yyyyy"));
             template.Body = template.Body.Replace("{{transactionSum}}", payment.Total.ToString());
             template.Body = template.Body.Replace("{{transactionAccount}}", payment.BankAccount);
             template.Body = template.Body.Replace("{{transactionDetails}}", payment.Details);
