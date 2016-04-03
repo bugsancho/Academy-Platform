@@ -1,5 +1,4 @@
-﻿@using AcademyPlatform.Models.Assessments
-@inherits Umbraco.Web.Mvc.UmbracoViewPage<AcademyPlatform.Web.Models.Assessments.AssessmentViewModel>
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<AcademyPlatform.Web.Models.Assessments.AssessmentViewModel>
 <div class="container gray-bg">
     <div class="row">
         <div class="col-md-12">
@@ -10,35 +9,11 @@
         </div>
         @using (Html.BeginForm())
             {
-            @Html.Hidden("Assessment.AssessmentRequestId", Model.AssessmentRequestId)
+            @Html.HiddenFor(x => x.AssessmentRequestId)
             var questionIndex = 0;
-            var questionNumber = 1;
             foreach (var question in Model.Questions)
             {
-                var answerIndex = 0;
-                @Html.Hidden("Assessment.Questions[" + questionIndex + "].Id", question.Id)
-                <div class="col-md-12">
-                    <div class="pv-30 ph-20 exam-box feature-box bordered text-justify object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-                        <span class="icon default-bg small">@questionNumber</span>
-                        @Html.Raw(question.QuestionText)
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="separator clearfix"></div>
-                                @foreach (var answer in question.Answers)
-                                {
-                                    <div>
-                                        @Html.Hidden("Assessment.Questions[" + questionIndex + "].Answers[" + answerIndex + "].Index", answer.Index)
-                                        @Html.CheckBox("Assessment.Questions[" + questionIndex + "].Answers[" + answerIndex + "].IsCorrect", false)
-                                        @Html.Label("Assessment.Questions[" + questionIndex + "].Answers[" + answerIndex + "].IsCorrect", answer.Text)
-
-                                    </div>
-                                    answerIndex++;
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                questionNumber++;
+                @Html.EditorFor(x => question, null, $"Questions[{questionIndex}]", new { QuestionIndex = questionIndex })
                 questionIndex++;
             }
             <div class="col-md-12">
@@ -47,3 +22,4 @@
         }
     </div>
 </div>
+asdas

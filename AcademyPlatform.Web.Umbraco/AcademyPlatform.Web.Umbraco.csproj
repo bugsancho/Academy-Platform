@@ -608,6 +608,9 @@
     <Content Include="Views\Profile\_ProfilePartial.cshtml" />
     <Content Include="Views\MacroPartials\ContactUs.cshtml" />
     <Content Include="Views\Partials\RenderContactUs.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\QuestionViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\QuestionAnswer.cshtml" />
+    <Content Include="Views\Feedback\Feedback.cshtml" />
     <None Include="Views\Subscriptions\JoinCourse.cshtml" />
     <Content Include="Views\UserControlPanel.cshtml" />
     <None Include="Web.Debug.config">
@@ -631,6 +634,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\CoursesController.cs" />
     <Compile Include="Controllers\CertificatesController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\SurfaceControllers\ContactUsController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\AssessmentController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\CourseController.cs" />

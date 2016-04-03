@@ -28,7 +28,7 @@
     {
         private readonly IUmbracoMapper _mapper;
         private readonly IAssessmentsService _assessments;
-        private readonly ISubscriptionsService _subscriptions;
+        private readonly IFeedbackService _feedbackService;
         private readonly ICertificatesService _certificates;
         private readonly ICoursesContentService _coursesContentService;
         private readonly IUserService _users;
@@ -36,21 +36,27 @@
         //TODO improve code quality:
         // * Use xxxContentService to retrieve umbraco content
         // * Extract duplicate code between GET and POST methods
-        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ISubscriptionsService subscriptions, ICoursesContentService coursesContentService)
+        public AssessmentController(IUmbracoMapper mapper, IAssessmentsService assessments, IUserService users, ICertificatesService certificates, ICoursesContentService coursesContentService, IFeedbackService feedbackService)
         {
             _mapper = mapper;
             _assessments = assessments;
             _users = users;
             _certificates = certificates;
-            _subscriptions = subscriptions;
             _coursesContentService = coursesContentService;
+            _feedbackService = feedbackService;
         }
 
         [HttpGet]
         public ActionResult Assessment()
         {
             int courseId = _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
-            if (_assessments.GetEligibilityStatus(User.Identity.Name, courseId) != AssessmentEligibilityStatus.Eligible)
+            string username = User.Identity.Name;
+            if (!_feedbackService.UserHasSentFeedback(username, courseId))
+            {
+                return RedirectToRoute("Feedback", new { courseNiceUrl = Umbraco.AssignedContentItem.UrlName });
+            }
+
+            if (_assessments.GetEligibilityStatus(username, courseId) != AssessmentEligibilityStatus.Eligible)
             {
                 TempData["ErrorMessage"] = $"В момента нямате достъп до изпита за този курс. Моля посетете <a href=\"{Url.RouteUrl("Profile")}\" title=\"Профил\">Вашия профил </a> за повече информация.";
                 return Redirect(Umbraco.AssignedContentItem.Url);
@@ -58,7 +64,7 @@
 
             object assessmentId = Umbraco.AssignedContentItem.GetPropertyValue<Picker>(nameof(Course.Assessment)).SavedValue;
             IPublishedContent assessmentContnet = Umbraco.TypedContent(assessmentId);
-            var user = _users.GetByUsername(User.Identity.Name);
+            var user = _users.GetByUsername(username);
             AssessmentViewModel assessment = new AssessmentViewModel();
             List<QuestionViewModel> questionViewModel = new List<QuestionViewModel>();
             IEnumerable<IPublishedContent> questions;
@@ -106,7 +112,13 @@
         public ActionResult Assessment(AssessmentViewModel assessment)
         {
             int courseId = _coursesContentService.GetCourseId(Umbraco.AssignedContentItem);
-            if (_assessments.GetEligibilityStatus(User.Identity.Name, courseId) != AssessmentEligibilityStatus.Eligible)
+            string username = User.Identity.Name;
+            if (!_feedbackService.UserHasSentFeedback(username, courseId))
+            {
+                return RedirectToRoute("Feedback", new { courseNiceUrl = Umbraco.AssignedContentItem.UrlName });
+            }
+
+            if (_assessments.GetEligibilityStatus(username, courseId) != AssessmentEligibilityStatus.Eligible)
             {
                 return Redirect(Umbraco.AssignedContentItem.Url);
             }
@@ -166,7 +178,6 @@
             {
                 CourseId = courseId,
                 AssessmentRequestId = assessmentRequest.Id,
-                SubmissionDate = DateTime.Now,
                 Submission = JsonConvert.SerializeObject(assessment.Questions)
             };
 

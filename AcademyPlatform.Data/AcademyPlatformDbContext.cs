@@ -90,6 +90,8 @@
 
         public IDbSet<Inquiry> Inquiries { get; set; }
 
+        public IDbSet<Feedback> Feedback { get; set; }
+
         public static AcademyPlatformDbContext Create()
         {
             return new AcademyPlatformDbContext();

@@ -19,6 +19,7 @@
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             RootNodeRouteHandler rootNodeHandler = new RootNodeRouteHandler();
+            RootNodeRouteHandler courseRouteHandler = new CourseNodeProvider();
             RouteTable.Routes.MapUmbracoRoute("Register", "register", new { Controller = "Account", Action = "Register" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("Validate", "validate/{email}/{validationCode}", new { Controller = "Account", Action = "Validate", ValidationCode = UrlParameter.Optional }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("ForgotPassword", "forgot-password", new { Controller = "Account", Action = "ForgotPassword" }, rootNodeHandler);
@@ -27,9 +28,10 @@
             RouteTable.Routes.MapUmbracoRoute("LogOut", "logout", new { Controller = "Account", Action = "LogOut" }, rootNodeHandler);
 
             RouteTable.Routes.MapUmbracoRoute("JoinCourse", "join/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "JoinCourse" }, rootNodeHandler);
-            RouteTable.Routes.MapUmbracoRoute("Assessment", "assessment/{courseNiceUrl}", new { Controller = "Assessment", Action = "Assessment" }, new CourseNodeProvider());
+            RouteTable.Routes.MapUmbracoRoute("Feedback", "feedback/{courseNiceUrl}", new { Controller = "Feedback", Action = "Feedback" }, courseRouteHandler);
+            RouteTable.Routes.MapUmbracoRoute("Assessment", "assessment/{courseNiceUrl}", new { Controller = "Assessment", Action = "Assessment" }, courseRouteHandler);
             RouteTable.Routes.MapUmbracoRoute("Profile", "profile", new { Controller = "Profile", Action = "Index" }, rootNodeHandler);
-            RouteTable.Routes.MapUmbracoRoute("Profile_Defailt", "profile/{action}", new { Controller = "Profile"}, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("Profile_Defailt", "profile/{action}", new { Controller = "Profile" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateUniqueCode}", new { Controller = "Certificate", Action = "Certificate" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" }, rootNodeHandler);
 
@@ -38,7 +40,7 @@
             //AreaRegistration.RegisterAllAreas();
             RouteTable.Routes.RegisterArea<AdminAreaRegistration>();
             RouteTable.Routes.MapHttpRoute("Default_Api", "umbraco/backoffice/api/{controller}/{action}/{id}", new { Id = UrlParameter.Optional }, null);
-            
+
         }
     }
     public class RootNodeRouteHandler : UmbracoVirtualNodeRouteHandler

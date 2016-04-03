@@ -1,0 +1,46 @@
+﻿@model AcademyPlatform.Web.Models.Surveys.FeedbackViewModel
+<div class="container gray-bg">
+        <div class="col-md-12">
+            <div class="alert alert-warning">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Преди да положите изпита, моля попълнете тази кратка форма за обратна връзка.
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pv-30 ph-20 exam-box feature-box bordered text-justify object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                <span class="icon default-bg small"><i class="fa fa-info"></i></span>
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            var questionIndex = 0;
+            foreach (var question in Model.Questions)
+            {
+                @Html.EditorFor(x => question, null, $"Questions[{questionIndex}]", new { QuestionIndex = questionIndex })
+                questionIndex++;
+            }
+            <div class="col-md-12">
+                <div class="pv-30 ph-20 exam-box feature-box bordered text-justify object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="icon default-bg small">@(questionIndex + 1)</span>
+                    Допълнителни бележки.
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="separator clearfix"></div>
+
+                            <div>
+                                @Html.TextAreaFor(x => x.AdditionalNotes,new {rows = 6, @class="max-width"})
+                                @Html.ValidationMessageFor(x => x.AdditionalNotes)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <input type="submit" name="form" class="submit-button btn btn-default" value="Изпращане на обратна връзка"/>
+            </div>
+        }
+    </div>
+</div>

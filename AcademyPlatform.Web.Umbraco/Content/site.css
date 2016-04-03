@@ -1,3 +1,11 @@
 ﻿.bold {
     font-weight: bold;
 }
+
+.max-width {
+    width: 100%;
+}
+
+.field-validation-error {
+    color: red;
+}

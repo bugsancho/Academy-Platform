@@ -26,6 +26,8 @@
 
         public string Assessment { get; set; }
 
+        public string FeedbackForm { get; set; }
+
         public IEnumerable<Module> Modules { get; set; }
 
         public IEnumerable<FileViewModel> Files { get; set; }

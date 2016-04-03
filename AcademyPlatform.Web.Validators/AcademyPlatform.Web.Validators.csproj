@@ -58,6 +58,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Subscriptions\PaymentEditViewModelValidator.cs" />
+    <Compile Include="Surveys\QuestionViewModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">

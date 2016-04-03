@@ -80,8 +80,9 @@
     <Compile Include="Account\ProfileViewModel.cs" />
     <Compile Include="Account\RegisterViewModel.cs" />
     <Compile Include="Account\ResendValidationEmailViewModel.cs" />
-    <Compile Include="Assessments\AssessmentViewModel.cs" />
-    <Compile Include="Assessments\QuestionViewModel.cs" />
+    <Compile Include="Surveys\AssessmentViewModel.cs" />
+    <Compile Include="Surveys\FeedbackViewModel.cs" />
+    <Compile Include="Surveys\QuestionViewModel.cs" />
     <Compile Include="Common\FileViewModel.cs" />
     <Compile Include="Common\ImageViewModel.cs" />
     <Compile Include="Common\PageLink.cs" />
@@ -97,12 +98,12 @@
     <Compile Include="Courses\LectureLinkViewModel.cs" />
     <Compile Include="Courses\LectureViewModel.cs" />
     <Compile Include="Courses\ModuleViewModel.cs" />
-    <Compile Include="Other\AwaitingPaymentViewModel.cs" />
+    <Compile Include="Payments\AwaitingPaymentViewModel.cs" />
     <Compile Include="Other\InquiryViewModel.cs" />
     <Compile Include="Other\StorylineContentViewModel.cs" />
     <Compile Include="Payments\PaymentEditViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Assessments\QuestionAnswer.cs" />
+    <Compile Include="Surveys\QuestionAnswer.cs" />
     <Compile Include="Umbraco\DocumentTypes\AccountSection.cs" />
     <Compile Include="Umbraco\DocumentTypes\Assessment.cs" />
     <Compile Include="Umbraco\DocumentTypes\Certificate.cs" />

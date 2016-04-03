@@ -78,6 +78,8 @@
     <Compile Include="Contracts\ICertificatesService.cs" />
     <Compile Include="Contracts\IMessageService.cs" />
     <Compile Include="Contracts\IInquiryService.cs" />
+    <Compile Include="FeedbackService.cs" />
+    <Compile Include="Contracts\IFeedbackService.cs" />
     <Compile Include="InquiryService.cs" />
     <Compile Include="LecturesService.cs" />
     <Compile Include="MembershipService.cs" />
