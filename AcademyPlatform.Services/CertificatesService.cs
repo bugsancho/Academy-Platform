@@ -1,6 +1,7 @@
 ﻿namespace AcademyPlatform.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
@@ -40,6 +41,12 @@
         {
             Certificate certificate = _certificates.All().FirstOrDefault(x => x.Code == uniqueCode);
             return certificate;
+        }
+
+        public IEnumerable<Certificate> GetCertificatesForUser(string username)
+        {
+            List<Certificate> certificates = _certificates.AllIncluding(x => x.Course).Where(x => x.User.Username == username).ToList();
+            return certificates;
         }
 
         public Certificate GenerateCertificate(string username, int courseId, AssessmentSubmission assessmentSubmission)

@@ -22,13 +22,15 @@
         private readonly IMembershipService _membershipService;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICoursesContentService _coursesContentService;
+        private readonly ICertificatesService _certificatesService;
 
-        public ProfileController(IUserService users, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService)
+        public ProfileController(IUserService users, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService, ICertificatesService certificatesService)
         {
             _users = users;
             _subscriptions = subscriptions;
             _membershipService = membershipService;
             _coursesContentService = coursesContentService;
+            _certificatesService = certificatesService;
         }
 
         public ActionResult Index()
@@ -56,6 +58,7 @@
             }
 
             profileViewModel.ProgressViewModels = progressViewModels;
+            profileViewModel.Certificates = _certificatesService.GetCertificatesForUser(user.Username);
             return View(profileViewModel);
         }
 
