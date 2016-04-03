@@ -8,7 +8,6 @@
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
-    using AcademyPlatform.Web.Models.Assessments;
     using AcademyPlatform.Web.Models.Surveys;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;

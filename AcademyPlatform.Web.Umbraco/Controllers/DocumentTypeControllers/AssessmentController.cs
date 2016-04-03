@@ -7,7 +7,7 @@
 
     using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Services.Contracts;
-    using AcademyPlatform.Web.Models.Assessments;
+    using AcademyPlatform.Web.Models.Surveys;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;

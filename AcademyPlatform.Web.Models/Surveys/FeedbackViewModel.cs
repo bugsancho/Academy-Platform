@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using AcademyPlatform.Web.Models.Assessments;
-
     public class FeedbackViewModel
     {
         public string Description { get; set; }

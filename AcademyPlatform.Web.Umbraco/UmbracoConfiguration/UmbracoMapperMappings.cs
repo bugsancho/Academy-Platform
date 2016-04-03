@@ -4,8 +4,8 @@
     using System.Linq;
 
     using AcademyPlatform.Models.Certificates;
-    using AcademyPlatform.Web.Models.Assessments;
     using AcademyPlatform.Web.Models.Common;
+    using AcademyPlatform.Web.Models.Surveys;
 
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;

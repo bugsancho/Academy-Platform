@@ -1,4 +1,4 @@
-﻿namespace AcademyPlatform.Web.Models.Other
+﻿namespace AcademyPlatform.Web.Models.Payments
 {
     public class AwaitingPaymentViewModel
     {

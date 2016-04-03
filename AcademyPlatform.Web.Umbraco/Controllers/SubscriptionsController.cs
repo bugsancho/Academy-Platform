@@ -10,6 +10,7 @@
     using AcademyPlatform.Web.Models.Account;
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Models.Other;
+    using AcademyPlatform.Web.Models.Payments;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
 

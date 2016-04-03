@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    using AcademyPlatform.Web.Models.Assessments;
+    using AcademyPlatform.Web.Models.Surveys;
 
     using FluentValidation;
 

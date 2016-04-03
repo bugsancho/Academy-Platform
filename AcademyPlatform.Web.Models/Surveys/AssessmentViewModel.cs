@@ -1,4 +1,4 @@
-﻿namespace AcademyPlatform.Web.Models.Assessments
+﻿namespace AcademyPlatform.Web.Models.Surveys
 {
     using System.Collections.Generic;
 

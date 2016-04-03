@@ -1,4 +1,4 @@
-﻿namespace AcademyPlatform.Web.Models.Assessments
+﻿namespace AcademyPlatform.Web.Models.Surveys
 {
     public class QuestionAnswer
     {
