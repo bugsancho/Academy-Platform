@@ -1,11 +1,9 @@
 ﻿namespace AcademyPlatform.Models.Assessments
 {
-    using System;
-
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
 
-    public class AssessmentSubmission :SoftDeletableEntity
+    public class AssessmentSubmission : SoftDeletableEntity
     {
         public int Id { get; set; }
 
@@ -17,7 +15,9 @@
 
         public virtual Course Course { get; set; }
 
-        public DateTime SubmissionDate { get; set; }
+        public int UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         /// <summary>
         /// JSON representation of all the answers including the questions themseves.

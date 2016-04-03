@@ -2,10 +2,9 @@
 {
     public class AwaitingPaymentViewModel
     {
-        public int CourseId { get; set; }
+        public int SubscriptionId { get; set; }
 
         public string CourseName { get; set; }
-
-        public string Username { get; set; }
+        
     }
 }

@@ -5,11 +5,9 @@
 
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
-    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Account;
     using AcademyPlatform.Web.Models.Courses;
-    using AcademyPlatform.Web.Models.Other;
     using AcademyPlatform.Web.Models.Payments;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
@@ -128,9 +126,9 @@
         {
             Course course = _coursesContent.GetCourseByNiceUrl(courseNiceUrl);
             string username = User.Identity.Name;
-            SubscriptionStatus status = _subscriptions.GetSubscriptionStatus(username, course.Id);
+            CourseSubscription subscription = _subscriptions.GetSubscription(username, course.Id);
 
-            if (status != SubscriptionStatus.AwaitingPayment)
+            if (subscription.Status != SubscriptionStatus.AwaitingPayment)
             {
                 return Redirect("/");
             }
@@ -138,8 +136,7 @@
             AwaitingPaymentViewModel viewModel = new AwaitingPaymentViewModel
             {
                 CourseName = course.Title,
-                CourseId = course.Id,
-                Username = username
+                SubscriptionId = subscription.Id
             };
 
             return View(viewModel);

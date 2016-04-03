@@ -12,11 +12,9 @@
     <h2>Очаквано плащане за курс - @Model.CourseName</h2>
     <ul>
         <li><strong>Успешно сте записани за курс: </strong>@(Model.CourseName).</li>
-        <li>
-            &quot;Курс № <span class="bold">@Model.CourseId</span>, потребител: <span class="bold">@Model.Username</span>&quot;
-        </li>
-        <li><strong>За да получите достъп до обучението, моля направете плащане към нашата сметка: като посочите основание за плащане</strong></li>
+        <li><strong>За да получите пълен достъп до обучението, моля направете плащане към нашата сметка със следната информация:</strong></li>
         @* !!!!!!!!!!!!!!!!!!!! EXAMPLE BANK ACCOUNT!!!!!!!!!!!!!!!!!!!! *@
+        <li><strong>Основание за плащане: </strong>"Заявка за записване за курс №@Model.SubscriptionId"</li>
         <li><strong>IBAN: </strong>BG13 BNBG 0000 0000 0000 00</li>
         <li><strong>BIC:Българска народна банка</strong></li>
         <li><strong>BIC:</strong> BNBGBGSD</li>
