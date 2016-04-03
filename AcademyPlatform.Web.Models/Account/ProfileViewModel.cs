@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using AcademyPlatform.Models;
+    using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Web.Infrastructure.Mappings;
     using AcademyPlatform.Web.Models.Courses;
 
@@ -19,5 +20,7 @@
         public string Company { get; set; }
 
         public IEnumerable<CourseProgressViewModel> ProgressViewModels { get; set; }
+
+        public IEnumerable<Certificate> Certificates { get; set; }
     }
 }
