@@ -4,6 +4,7 @@
 
     using AcademyPlatform.Models.Certificates;
     using AcademyPlatform.Services.Contracts;
+    using AcademyPlatform.Web.Models.Courses;
 
     using global::Umbraco.Web.Mvc;
 
@@ -19,14 +20,19 @@
         public ActionResult Certificate(string certificateCode)
         {
             Certificate certificate = _certificates.GetByUniqueCode(certificateCode);
-            if (certificate != null)
+            if (certificate == null)
             {
-                return View(model: $"\\certificates\\{certificateCode}.jpeg");
+                return HttpNotFound();
             }
+            var viewModel = new CertificateViewModel
+            {
+                CertificateUrl = $"\\certificates\\{certificateCode}.jpeg",
+                CourseName = certificate.Course.Title,
+                HolderName =
+                                        $"{certificate.User.FirstName} {certificate.User.LastName}"
+            };
 
-            //ViewBag.AssessmentSuccessful = false;
-            return HttpNotFound();
-
+            return View(viewModel);
         }
     }
 }

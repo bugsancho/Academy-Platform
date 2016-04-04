@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model AcademyPlatform.Web.Models.Courses.CertificateViewModel
 @{
     bool isSuccessfulSubmission = false;
     if (TempData.ContainsKey("SuccessfulSubmission"))
@@ -13,13 +13,13 @@
         <h3>Успешно премиханте изпита</h3>
         <p>Ето го и вашия сертификат:</p>
     }
-
+    <h2>Сертификат на <strong>@Model.HolderName</strong> за обучение: <strong>@Model.CourseName</strong></h2>
     <div class="overlay-container">
-        <img src="@Model" alt="">
-        <a href="@Model" class="overlay-link popup-img-single" title="Сертификат">
+        <img src="@Model.CertificateUrl" alt="">
+        <a href="@Model.CertificateUrl" class="overlay-link popup-img-single" title="Сертификат">
             <i class="fa fa-plus"></i>
         </a>
     </div>
-    <a href="@Model" download class="btn btn-animated btn-lg btn-default-transparent">Свали сертификата <i class="fa fa-download"></i></a>
+    <a href="@Model.CertificateUrl" download class="btn btn-animated btn-lg btn-default-transparent">Свали сертификата <i class="fa fa-download"></i></a>
     <div class="space-bottom"></div>
 </div>

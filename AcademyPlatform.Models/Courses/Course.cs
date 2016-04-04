@@ -15,6 +15,10 @@
 
         public string Description { get; set; }
 
+        public string ModuleNames { get; set; }
+
+        public int NumberOfHours { get; set; }
+
         //[DataType(DataType.Date)]
         //public DateTime StartDate { get; set; }
 

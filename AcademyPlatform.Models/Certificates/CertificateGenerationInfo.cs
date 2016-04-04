@@ -14,5 +14,11 @@
 
         public PlaceholderInfo QrCode { get; set; }
 
+        public PlaceholderInfo CertificateNumber { get; set; }
+
+        public PlaceholderInfo NumberOfHours { get; set; }
+
+        public PlaceholderInfo ModuleNames { get; set; }
+
     }
 }

@@ -26,6 +26,10 @@
 
         public string Features { get; set; }
 
+        public string ModulesNames { get; set; }
+
+        public int NumberOfHours { get; set; }
+
         public string Assessment { get; set; }
 
         public int FeedbackForm { get; set; }

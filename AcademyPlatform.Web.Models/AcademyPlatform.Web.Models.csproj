@@ -81,6 +81,7 @@
     <Compile Include="Account\RegisterViewModel.cs" />
     <Compile Include="Account\ResendValidationEmailViewModel.cs" />
     <Compile Include="Account\UpdateProfileViewModel.cs" />
+    <Compile Include="Courses\CertificateViewModel.cs" />
     <Compile Include="Surveys\AssessmentFailureViewModel.cs" />
     <Compile Include="Surveys\AssessmentViewModel.cs" />
     <Compile Include="Surveys\FeedbackViewModel.cs" />
