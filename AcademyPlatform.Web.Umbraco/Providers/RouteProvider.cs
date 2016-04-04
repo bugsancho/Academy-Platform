@@ -54,8 +54,7 @@
 
         public string GetCertificatePictureRoute(Certificate certificate)
         {
-            //TODO figure out a smarter way to retrieve image url
-            string certificatePictureRoute = GetCertificateRoute(certificate) + ".jpeg";
+            string certificatePictureRoute = GetHttpsAbsoluteUrl(certificate.FilePath);
             return certificatePictureRoute;
         }
 

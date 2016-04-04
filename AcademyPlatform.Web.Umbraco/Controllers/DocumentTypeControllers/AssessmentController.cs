@@ -190,7 +190,7 @@
 
             if (submission.IsSuccessful)
             {
-                TempData["SuccessfullSubmission"] = true;
+                TempData["SuccessfulSubmission"] = true;
                 return RedirectToRoute("Certificate", new { certificateCode = certificate.Code });
             }
 

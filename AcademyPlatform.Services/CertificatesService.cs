@@ -79,9 +79,9 @@
                     certificateTemplate.DrawString(course.Title, arialFont, new SolidBrush(ColorTranslator.FromHtml(courseData.Color)), new Rectangle(courseData.TopLeftX, courseData.TopLeftY, courseData.Width, courseData.Height));
                     certificateTemplate.DrawString(DateTime.Today.ToString("dd.MM.yyy") + "г.", arialFont, new SolidBrush(ColorTranslator.FromHtml(datePlaceholder.Color)), new Rectangle(datePlaceholder.TopLeftX, datePlaceholder.TopLeftY, datePlaceholder.Width, datePlaceholder.Height));
                     certificateTemplate.DrawImage(certificateUrlQrCode, new Rectangle(qrPlaceholder.TopLeftX, qrPlaceholder.TopLeftY, qrPlaceholder.Width, qrPlaceholder.Height));
-                    string filePath = Path.Combine(
-                        certificateGenerationInfo.BaseFilePath,
-                        string.Format(CertificateFilePathFormat, certificate.Code));
+
+                    string certificateRelativePath = string.Format(CertificateFilePathFormat, certificate.Code);
+                    string filePath = Path.Combine(certificateGenerationInfo.BaseFilePath, certificateRelativePath);
                     string directoryPath = Path.GetDirectoryName(filePath);
                     Debug.Assert(!string.IsNullOrEmpty(directoryPath));
                     if (!Directory.Exists(directoryPath))
@@ -90,6 +90,7 @@
                     }
 
                     bitmap.Save(filePath);
+                    certificate.FilePath = certificateRelativePath;
                 }
             }
 

@@ -1,12 +1,19 @@
 ﻿@model string
-
+@{
+    bool isSuccessfulSubmission = false;
+    if (TempData.ContainsKey("SuccessfulSubmission"))
+    {
+        isSuccessfulSubmission = (bool)TempData["SuccessfulSubmission"];
+    }
+}
 <div class="container">
-    
+    @if (isSuccessfulSubmission)
+    {
         <h1>Поздравления!</h1>
         <h3>Успешно премиханте изпита</h3>
         <p>Ето го и вашия сертификат:</p>
-    
-   
+    }
+
     <div class="overlay-container">
         <img src="@Model" alt="">
         <a href="@Model" class="overlay-link popup-img-single" title="Сертификат">
