@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Web.Mvc;
 
+    using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Account;
@@ -18,15 +19,15 @@
     [Authorize]
     public class ProfileController : UmbracoController
     {
-        private readonly IUserService _users;
+        private readonly IUserService _usersService;
         private readonly IMembershipService _membershipService;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICoursesContentService _coursesContentService;
         private readonly ICertificatesService _certificatesService;
 
-        public ProfileController(IUserService users, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService, ICertificatesService certificatesService)
+        public ProfileController(IUserService usersService, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService, ICertificatesService certificatesService)
         {
-            _users = users;
+            _usersService = usersService;
             _subscriptions = subscriptions;
             _membershipService = membershipService;
             _coursesContentService = coursesContentService;
@@ -35,8 +36,7 @@
 
         public ActionResult Index()
         {
-            var user = _users.GetByUsername(User.Identity.Name);
-            var profileViewModel = Mapper.Map<ProfileViewModel>(user);
+            ProfileViewModel profileViewModel = new ProfileViewModel();
 
             List<CourseProgressViewModel> progressViewModels = new List<CourseProgressViewModel>();
             IEnumerable<CourseProgress> courseProgresses = _subscriptions.GetCoursesProgress(User.Identity.Name);
@@ -58,7 +58,7 @@
             }
 
             profileViewModel.ProgressViewModels = progressViewModels;
-            profileViewModel.Certificates = _certificatesService.GetCertificatesForUser(user.Username);
+            profileViewModel.Certificates = _certificatesService.GetCertificatesForUser(User.Identity.Name);
             return View(profileViewModel);
         }
 
@@ -91,7 +91,49 @@
 
         private ActionResult ChangePasswordPartial(ChangePasswordViewModel viewModel)
         {
+            return PartialView("~/Views/Profile/_PasswordPartial.cshtml", viewModel);
+        }
+
+
+
+        public ActionResult ProfileInfo()
+        {
+            User user = _usersService.GetByUsername(User.Identity.Name);
+            UpdateProfileViewModel viewModel = Mapper.Map<UpdateProfileViewModel>(user);
+            if (HttpContext.Items.Contains("SuccessMessage"))
+            {
+                viewModel.SuccessMessage = (string)HttpContext.Items["SuccessMessage"];
+            }
             return PartialView("~/Views/Profile/_ProfilePartial.cshtml", viewModel);
+        }
+
+        public ActionResult UpdateProfile()
+        {
+            User user = _usersService.GetByUsername(User.Identity.Name);
+            UpdateProfileViewModel viewModel = Mapper.Map<UpdateProfileViewModel>(user);
+            return UpdateProfilePartial(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostUpdateProfile(UpdateProfileViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = _usersService.GetByUsername(User.Identity.Name);
+                Mapper.Map(viewModel, user);
+                _usersService.UpdateUser(user);
+
+                HttpContext.Items["SuccessMessage"] = "Успешно обновихте вашия профил!";
+                return ProfileInfo();
+            }
+
+            return UpdateProfilePartial(viewModel);
+        }
+
+        private ActionResult UpdateProfilePartial(UpdateProfileViewModel viewModel)
+        {
+            return PartialView("~/Views/Profile/_UpdateProfilePartial.cshtml", viewModel);
         }
     }
 }

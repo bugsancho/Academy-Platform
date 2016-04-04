@@ -604,12 +604,14 @@
     <Content Include="Views\Certificate\Certificate.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Assessment\AssessmentFailure.cshtml" />
-    <Content Include="Views\Profile\_ProfilePartial.cshtml" />
+    <Content Include="Views\Profile\_PasswordPartial.cshtml" />
     <Content Include="Views\MacroPartials\ContactUs.cshtml" />
     <Content Include="Views\Partials\RenderContactUs.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\QuestionViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\QuestionAnswer.cshtml" />
     <Content Include="Views\Feedback\Feedback.cshtml" />
+    <Content Include="Views\Profile\_UpdateProfilePartial.cshtml" />
+    <Content Include="Views\Profile\_ProfilePartial.cshtml" />
     <None Include="Views\Subscriptions\JoinCourse.cshtml" />
     <Content Include="Views\UserControlPanel.cshtml" />
     <None Include="Web.Debug.config">
@@ -653,6 +655,7 @@
     <Compile Include="Providers\RouteProvider.cs" />
     <Compile Include="Providers\TaskRunner.cs" />
     <Compile Include="Startup\AcademyPlatformOwinStartup.cs" />
+    <Compile Include="Startup\DateTimeConfig.cs" />
     <Compile Include="Startup\FiltersConfig.cs" />
     <Compile Include="Startup\FluentValidationConfig.cs" />
     <Compile Include="Startup\SerializationConfig.cs" />

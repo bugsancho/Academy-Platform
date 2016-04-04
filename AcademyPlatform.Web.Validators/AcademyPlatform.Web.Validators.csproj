@@ -48,6 +48,7 @@
     <Compile Include="Account\ChangePasswordViewModelValidator.cs" />
     <Compile Include="Account\RegisterViewModelValidator.cs" />
     <Compile Include="Account\ResendValidationEmailValidator.cs" />
+    <Compile Include="Account\UpdateProfileViewModelValidator.cs" />
     <Compile Include="Courses\CreateCourseViewModelValidator.cs" />
     <Compile Include="Courses\JoinCourseViewModelValidator.cs" />
     <Compile Include="Other\InquiryViewModelValidator.cs" />

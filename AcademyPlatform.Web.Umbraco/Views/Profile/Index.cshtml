@@ -6,53 +6,34 @@
     Layout = "~/Views/Site.cshtml";
 
 }
+<script type="text/javascript">
+    function initalizeUnobtrusiveValidation(formSelector) {
+        $.validator.unobtrusive.parse(formSelector);
+    }
+</script>
 <section class="main-container">
     <div class="container">
         <div class="row">
             <div class="container">
                 <ul class="nav nav-tabs style-1 space-top">
-                    <li class="active"><a href="#htab1" data-toggle="tab"><i class="fa fa-user pr-10"></i>Обща информация</a></li>
+                    <li class="active"><a href="#profile" data-toggle="tab"><i class="fa fa-user pr-10"></i>Обща информация</a></li>
                     <li><a href="#change-password" data-toggle="tab"><i class="fa fa-lock pr-10"></i>Смяна на парлола</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div id="htab1" class="tab-pane fade in active">
+                    <div id="profile" class="tab-pane fade in active">
                         <h3>Обща информация</h3>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul>
-                                    <li><strong>Име: </strong>@Model.FirstName</li>
-                                    <li><strong>Презиме: </strong>@Model.MiddleName</li>
-                                    <li><strong>Фамилия: </strong>@Model.LastName</li>
-                                    <li><strong>Имейл адрес: </strong><a href="mailto:@Model.Username" target="_blank">@Model.Username</a></li>
-                                    <li><strong>Име на организация: </strong>@Model.Company</li>
-                                </ul>
-                                @*<a href="#" class="btn btn-animated btn-warning">Промени информацията <i class="fa fa-cog"></i></a>*@
-                            </div>
-                            @*<div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Име</label>
-                                        <div class="col-sm-10"><input type="email" class="form-control" id="inputEmail3" placeholder="Email" /></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">Презиме</label>
-                                        <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword1" placeholder="Testing" /></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">Фамиля</label>
-                                        <div class="col-sm-10"><input type="password" class="form-control" id="inputPassword2" placeholder="Testing" /></div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10"><button class="btn btn-default">Направи промените</button></div>
-                                    </div>
-                                </div>*@
-                        </div>
+
+                        <section id="update-profile-placeholder">
+                            @Html.Action("ProfileInfo")
+                        </section>
+
                     </div>
                     <div id="change-password" class="tab-pane fade">
                         <h3>Смяна на паролата</h3>
                         <section id="change-password-placeholder">
                             @{
-                                Html.RenderPartial("~/Views/Profile/_ProfilePartial.cshtml", new ChangePasswordViewModel());
+                                Html.RenderPartial("~/Views/Profile/_PasswordPartial.cshtml", new ChangePasswordViewModel());
                             }
                         </section>
                     </div>
@@ -142,7 +123,7 @@
                                         @certificate.Course.Title
                                     </td>
                                     <td>
-                                        @certificate.CreatedOn
+                                        @certificate.CreatedOn.ToString("dd MMMM yyyy - HH:mm")
                                     </td>
                                     <td>
                                         (<a href="@Url.RouteUrl("Certificate", new { certificateCode = certificate.Code })" title="сертификат">виж</a>)
@@ -151,12 +132,6 @@
                             }
                         </tbody>
                     </table>
-                        @*<ol>
-                                @foreach (var certificate in Model.Certificates)
-                                {
-                                    <li>@certificate.Course.Title (<a href="@Url.RouteUrl("Certificate", new { certificateCode = certificate.Code })">виж</a>)</li>
-                                }
-                            </ol>*@
                 }
                 else
                 {
@@ -166,8 +141,3 @@
         </div>
     </div>
 </section>
-<script type="text/javascript">
-    function initalizeUnobtrusiveValidation(formSelector) {
-        $.validator.unobtrusive.parse(formSelector);
-    }
-</script>

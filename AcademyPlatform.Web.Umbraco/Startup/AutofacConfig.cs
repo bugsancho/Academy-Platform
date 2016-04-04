@@ -32,7 +32,7 @@
             var builder = new ContainerBuilder();
 
             builder.Register(c => UmbracoContext.Current).AsSelf().InstancePerLifetimeScope();
-            builder.RegisterControllers(Assembly.GetExecutingAssembly()).InstancePerLifetimeScope();
+            builder.RegisterControllers(Assembly.GetExecutingAssembly()).InstancePerDependency();
             builder.RegisterControllers(typeof(UmbracoApplication).Assembly).InstancePerLifetimeScope();
             builder.RegisterApiControllers(typeof(UmbracoApplication).Assembly).InstancePerLifetimeScope();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerLifetimeScope();

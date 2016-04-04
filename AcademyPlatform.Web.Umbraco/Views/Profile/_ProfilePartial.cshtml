@@ -1,15 +1,6 @@
-﻿@model AcademyPlatform.Web.Models.Account.ChangePasswordViewModel
-
-@using (Ajax.BeginForm("PostChangePassword", "Profile", new AjaxOptions
-{
-    HttpMethod = "POST",
-    InsertionMode = InsertionMode.Replace,
-    LoadingElementId = "change-password-loader",
-    UpdateTargetId = "change-password-placeholder",
-    OnBegin = "$('#change-password-button').hide()"
-}, new { id = "change-password-form" }))
-{
-    if (!string.IsNullOrEmpty(Model.SuccessMessage))
+﻿@model  AcademyPlatform.Web.Models.Account.UpdateProfileViewModel
+<div class="row">
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
     {
         <div class="row">
             <div class="col-md-4">
@@ -20,59 +11,35 @@
             </div>
         </div>
     }
-    @Html.AntiForgeryToken()
-    <div>
-        @Html.ValidationSummary(true)
+    <div class="col-md-12">
+        <ul>
+            <li><strong>Име: </strong>@Model.FirstName</li>
+            <li><strong>Презиме: </strong>@Model.MiddleName</li>
+            <li><strong>Фамилия: </strong>@Model.LastName</li>
+            <li><strong>Oрганизация: </strong>@Model.Company</li>
+            <li><strong>Телефон: </strong>@Model.Phone</li>
+        </ul>
+        <span id="update-profile-loader" style="display: none">Изчакайте...</span>
+        @Ajax.ActionLink("Промени информацията", "UpdateProfile", null, new AjaxOptions
+   {
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.Replace,
+       LoadingElementId = "update-profile-loader",
+       UpdateTargetId = "update-profile-placeholder",
+       OnBegin = "$('#update-profile-button').hide()",
+       OnSuccess = "console.log('cussess');"
+   }, new { id = "update-profile-button", @class = "btn btn-warning" })
+        @*<a href="javascript:$('#update-profile-placeholder').show()" id="show-update-profile-button" class="btn btn-animated btn-warning">Промени информацията <i class="fa fa-cog"></i></a>*@
     </div>
+</div>
+@*<script>
+    $(function () {
+        var button = $('#update-profile-button'),
+            innerText = button.html(),
+            iconElement = $('<i>');
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group row">
-                <div class="col-md-3">
-                    @Html.LabelFor(m => m.OldPassword, new { @class = "control-label" })
-                    <span>*</span>
-                </div>
-                <div class="col-md-9">
-                    @Html.ValidationMessageFor(m => m.OldPassword)
-                    @Html.EditorFor(m => m.OldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Стара парола" } })
-                </div>
-            </div>
+        iconElement.addClass('fa fa-cog');
+        button.html(innerText + iconElement.html());
+    })
 
-            <div class="form-group row">
-
-                <div class="col-md-3">
-                    @Html.LabelFor(m => m.NewPassword, new { @class = "control-label" })
-                    <span>*</span>
-                </div>
-                <div class="col-md-9">
-                    @Html.ValidationMessageFor(m => m.NewPassword)
-                    @Html.EditorFor(m => m.NewPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Нова парола" } })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-md-3">
-                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-                    <span>*</span>
-                </div>
-                <div class="col-md-9">
-                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
-                    @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Потвърждение на парола" } })
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-10">
-                    <div id="change-password-loader" style="display: none" class="margin-vertical-10">
-                        Запазване на промените ...
-                    </div>
-                    <button id="change-password-button" class="btn btn-default">Промени Паролата</button>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-<script type="text/javascript">
-    initalizeUnobtrusiveValidation("#change-password-form");
-</script>
-
-
+</script>*@
