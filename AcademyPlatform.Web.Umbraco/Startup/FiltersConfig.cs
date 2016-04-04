@@ -11,7 +11,7 @@
         protected override void ApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             GlobalFilters.Filters.Add(new ExceptionFilter());
-            //GlobalFilters.Filters.Add(new RequireHttpsAttribute());
+            GlobalFilters.Filters.Add(new RequireHttpsAttribute());
         }
     }
 }
