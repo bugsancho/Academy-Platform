@@ -80,7 +80,8 @@
                 AssessmentEligibilityStatus = _assessmentsService.GetEligibilityStatus(User.Identity.Name, coursePublishedContentViewModel.CourseId),
                 DetailedDescription = coursePublishedContentViewModel.DetailedDescription,
                 ShortDescription = coursePublishedContentViewModel.ShortDescription,
-                Features = coursePublishedContentViewModel.Features
+                Features = coursePublishedContentViewModel.Features,
+                SampleCertificate = coursePublishedContentViewModel.SampleCertificate
 
             };
             //========================================================================================
