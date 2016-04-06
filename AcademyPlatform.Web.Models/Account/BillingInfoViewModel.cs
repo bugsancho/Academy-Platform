@@ -13,19 +13,19 @@
         [Display(Name = "Фамилно име")]
         public string LastName { get; set; }
 
-        [Display(Name = "Име на организацията")]
+        [Display(Name = "Организация (ако е приложимо)*:")]
         public string Company { get; set; }
 
         /// <summary>
         /// Bulstat /EIK
         /// </summary>
-        [Display(Name = "БУЛСТАТ (ЕИК)")]
+        [Display(Name = "ЕИК/Булстат (ако е приложимо)*:")]
         public string CompanyId { get; set; }
 
-        [Display(Name = "Личен адрес")]
+        [Display(Name = "Адрес (ул., номер):")]
         public string Address { get; set; }
 
-        [Display(Name = "Град")]
+        [Display(Name = "Град/село:")]
         public string City { get; set; }
 
     }

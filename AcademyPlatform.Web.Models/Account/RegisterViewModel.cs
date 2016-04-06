@@ -27,5 +27,5 @@
         [DataType(DataType.Password)]
         [Display(Name = "Потвърждение на парола")]
         public string ConfirmPassword { get; set; }
-    }
+        }
 }
