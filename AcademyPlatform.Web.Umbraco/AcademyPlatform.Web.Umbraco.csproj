@@ -386,6 +386,7 @@
     <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\hover-min.css" />
     <Content Include="Content\hover.css" />
+    <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\jasny-bootstrap.css" />
     <Content Include="Content\jasny-bootstrap.min.css" />
     <Content Include="Content\Less\project-theme.css" />
@@ -655,7 +656,6 @@
     <Compile Include="Providers\RouteProvider.cs" />
     <Compile Include="Providers\TaskRunner.cs" />
     <Compile Include="Startup\AcademyPlatformOwinStartup.cs" />
-    <Compile Include="Startup\DateTimeConfig.cs" />
     <Compile Include="Startup\FiltersConfig.cs" />
     <Compile Include="Startup\FluentValidationConfig.cs" />
     <Compile Include="Startup\SerializationConfig.cs" />
@@ -708,7 +708,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Content\Images\" />
     <Folder Include="UmbracoConfiguration\UrlProviders\" />
     <Folder Include="Views\ErrorPage\" />
   </ItemGroup>
