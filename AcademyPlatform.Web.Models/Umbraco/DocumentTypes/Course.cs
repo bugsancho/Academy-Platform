@@ -20,6 +20,8 @@
 
         public ImageViewModel PartnerLogo { get; set; }
 
+        public ImageViewModel SampleCertificate { get; set; }
+
         public PageLink PartnerPage { get; set; }
 
         public int LicenseTerms { get; set; }

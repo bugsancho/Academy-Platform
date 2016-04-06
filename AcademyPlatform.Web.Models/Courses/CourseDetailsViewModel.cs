@@ -36,6 +36,8 @@
 
         public string Features { get; set; }
 
+        public ImageViewModel SampleCertificate { get; set; }
+
         public ICollection<ModuleViewModel> Modules { get; set; }
 
         public IEnumerable<FileViewModel> Files { get; set; }
