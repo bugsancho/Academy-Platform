@@ -63,6 +63,7 @@
             JoinCourseViewModel viewModel = new JoinCourseViewModel
             {
                 CourseName = course.Title,
+                CoursePrice = course.Price,
                 RequiresBillingInfo = _courses.IsPaidCourse(course)
             };
 

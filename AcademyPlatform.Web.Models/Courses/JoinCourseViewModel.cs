@@ -14,6 +14,8 @@
 
         public string LicenseTermsUrl { get; set; }
 
+        public decimal? CoursePrice { get; set; }
+
         [Display(Name = "Общи условия.")]
         public bool AcceptLicenseTerms { get; set; }
 
