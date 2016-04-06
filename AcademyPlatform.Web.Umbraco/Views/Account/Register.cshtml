@@ -77,9 +77,17 @@
                             <label for="reCaptcha" class="col-md-3 control-label ">
                                 Рекаптча
                             </label>
-                            @Html.ValidationMessage("ReCaptcha")
                             <div class="col-md-9" id="reCaptcha">
+                                @Html.ValidationMessage("ReCaptcha")
                                 @Html.Recaptcha(language: "bg")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.AcceptLicenseTerms, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <div class="col-md-10 col-md-offset-2">
+                                @Html.ValidationMessageFor(model => model.AcceptLicenseTerms, "", new { @class = "text-danger", style="display:block;" })
+                                @Html.EditorFor(model => model.AcceptLicenseTerms)
+                                <label for="AcceptLicenseTerms" style="display: inline">Прочетох и приемам <a href="@Model.LicenseTermsUrl" target="_blank">общите условия за ползване</a> на Focus Academy.</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -87,14 +95,7 @@
                                 <input type="submit" class="btn btn-default" value="Регистрация"/>
                             </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.AcceptLicenseTerms, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.AcceptLicenseTerms)
-                                @Html.ValidationMessageFor(model => model.AcceptLicenseTerms, "", new { @class = "text-danger" })
-                                <span>Прочетох и приемам <a href="@Model.LicenseTermsUrl" target="_blank">общите условия за ползване</a> на Focus Academy.</span>
-                            </div>
-                        </div>
+                      
 
                     }
                 </div>

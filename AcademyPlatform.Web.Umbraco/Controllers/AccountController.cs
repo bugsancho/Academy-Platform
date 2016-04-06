@@ -1,5 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -10,6 +11,7 @@
     using AcademyPlatform.Web.Infrastructure.Extensions;
     using AcademyPlatform.Web.Infrastructure.Filters;
     using AcademyPlatform.Web.Models.Account;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.ViewModels;
 
     using global::Umbraco.Core.Models;
@@ -65,7 +67,18 @@
         [RequireAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel viewModel = new RegisterViewModel();
+            IPublishedContent legalPage = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(LegalContent)).FirstOrDefault();
+            int licenseAgreement = legalPage.GetPropertyValue<int>(nameof(LegalContent.LicenseTerms));
+            if (licenseAgreement == default(int))
+            {
+                throw new InvalidOperationException("License terms page is not configured. Please select a license terms page");
+            }
+
+            IPublishedContent licenseAgreementPage = Umbraco.TypedContent(licenseAgreement);
+            viewModel.LicenseTermsUrl = licenseAgreementPage.Url;
+
+            return View(viewModel);
         }
 
         [HttpPost]
