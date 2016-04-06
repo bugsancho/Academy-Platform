@@ -20,7 +20,7 @@
     {
         public static object MapMediaFile(IUmbracoMapper mapper, IPublishedContent contentToMapFrom, string propName, bool isRecursive)
         {
-            var mediaobj = UmbracoContext.Current.MediaCache.GetById(contentToMapFrom.GetPropertyValue<int>(propName));
+            IPublishedContent mediaobj = UmbracoContext.Current.MediaCache.GetById(contentToMapFrom.GetPropertyValue<int>(propName));
             return new ImageViewModel
             {
                 Url = mediaobj.Url,
@@ -31,11 +31,21 @@
             };
         }
 
+        public static object MapPageLink(IUmbracoMapper mapper, IPublishedContent contentToMapFrom, string propName, bool isRecursive)
+        {
+            IPublishedContent content = UmbracoContext.Current.ContentCache.GetById(contentToMapFrom.GetPropertyValue<int>(propName));
+            return new PageLink
+            {
+                Url = content.Url,
+                Name = content.Name
+            };
+        }
+
         public static object MapQuestionAnswer(IUmbracoMapper mapper, IPublishedContent contentToMapFrom, string propName, bool isRecursive)
         {
             if (contentToMapFrom.HasProperty(propName))
             {
-                var answers = contentToMapFrom.GetPropertyValue<string>(propName);
+                string answers = contentToMapFrom.GetPropertyValue<string>(propName);
                 return JsonConvert.DeserializeObject<IEnumerable<QuestionAnswer>>(answers);
             }
 
@@ -46,7 +56,7 @@
         {
             if (contentToMapFrom.HasProperty(propName))
             {
-                var placeholderInfo = contentToMapFrom.GetPropertyValue<string>(propName);
+                string placeholderInfo = contentToMapFrom.GetPropertyValue<string>(propName);
                 return JsonConvert.DeserializeObject<PlaceholderInfo>(placeholderInfo);
             }
 
@@ -57,7 +67,7 @@
         {
             if (contentToMapFrom.HasProperty(propName))
             {
-                var picker = contentToMapFrom.GetPropertyValue<Picker>(propName);
+                Picker picker = contentToMapFrom.GetPropertyValue<Picker>(propName);
                 return int.Parse(picker.PickedKeys.First());
             }
 

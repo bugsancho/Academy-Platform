@@ -42,6 +42,7 @@
 
             List<Course> coursesContentViewModels = new List<Course>();
             _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
+                   .AddCustomMapping(typeof(PageLink).FullName, UmbracoMapperMappings.MapPageLink)
                    .AddCustomMapping(typeof(int).FullName, UmbracoMapperMappings.MapPicker, nameof(Course.CourseId))
                    .MapCollection(coursesContentCollection, coursesContentViewModels);
 
@@ -51,7 +52,7 @@
                 courses,
                 coursesContent => coursesContent.CourseId,
                 course => course.Id,
-                (coursesContent,course) => new CoursesListViewModel
+                (coursesContent, course) => new CoursesListViewModel
                 {
                     Title = course.Title,
                     CourseUrl = coursesContent.Url,
@@ -60,6 +61,8 @@
                     Category = course.Category,
                     IsJoined = User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, course.Id),
                     JoinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = coursesContent.UrlName }),
+                    PartnerPageUrl = coursesContent.PartnerPage.Url,
+                    PartnerLogoUrl = coursesContent.PartnerLogo.Url
 
                 }).ToList();
 

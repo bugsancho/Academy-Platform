@@ -11,12 +11,16 @@
             Modules = new List<Module>();
             Files = new List<FileViewModel>();
         }
-        
+
         public int CourseId { get; set; }
 
-        public int  Certificate { get; set; }
+        public int Certificate { get; set; }
 
         public ImageViewModel CoursePicture { get; set; }
+
+        public ImageViewModel PartnerLogo { get; set; }
+
+        public PageLink PartnerPage { get; set; }
 
         public int LicenseTerms { get; set; }
 

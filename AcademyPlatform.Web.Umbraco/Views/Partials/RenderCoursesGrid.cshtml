@@ -25,10 +25,8 @@
                 <div class="course-bg">
                     <img src="@Url.Content(course.ImageUrl)" class="course-img" style="max-height: 195px" alt="@course.Title">
                     <div class="course-owner">
-                        @* TODO Replace with real owner information *@
-                        <a href="/partners/training-partner-icl/" target="_blank">
-                            @*TODO Replace with asset image or dynamic link*@
-                            <img src="/media/1111/owner-logo-3.png" class="course-owner-logo" alt="" rel="2327" data-id="2327" />
+                        <a href="@course.PartnerPageUrl" target="_blank">
+                            <img src="@course.PartnerLogoUrl" class="course-owner-logo" alt="Партньор" />
                         </a>
                     </div>
                     <div class="ph-30 clearfix">
