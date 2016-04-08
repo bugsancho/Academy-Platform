@@ -41,10 +41,15 @@
                                 <br />
                                 <a href="@course.CourseUrl" class="btn-default btn-lg">Към курса</a>
                             }
-                            else
+                            else if(course.Status == CourseStatus.Active)
                             {
                                 <p><a href="@course.CourseUrl"> Вижте повече</a></p>
                                 <a href="@course.JoinCourseUrl" class="btn-orange btn-lg">Запишете се</a>
+                            }
+                            else //if (course.Status == CourseStatus.AwaitingRelease)
+                            {
+                                <br/>
+                                <p style="color: red; font-weight: bold">Очаквайте скоро!</p>
                             }
                         </div>
                     </div>

@@ -35,6 +35,8 @@
 
         public CourseDifficultyType Difficulty { get; set; }
 
+        public CourseStatus Status { get; set; }
+
         //public virtual ICollection<Module> Lectures
         //{
         //    get { return _lectures; }

@@ -1,9 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Models.Courses
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Web;
-    using System.Web.Mvc;
 
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Web.Infrastructure.Mappings;
@@ -22,5 +19,8 @@
 
         [Display(Name = "Цена")]
         public decimal Price { get; set; }
+
+        [Display(Name = "Статус")]
+        public CourseStatus Status { get; set; }
     }
 }

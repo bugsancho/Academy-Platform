@@ -81,7 +81,8 @@
                 DetailedDescription = coursePublishedContentViewModel.DetailedDescription,
                 ShortDescription = coursePublishedContentViewModel.ShortDescription,
                 Features = coursePublishedContentViewModel.Features,
-                SampleCertificate = coursePublishedContentViewModel.SampleCertificate
+                SampleCertificate = coursePublishedContentViewModel.SampleCertificate,
+                Status = course.Status
 
             };
             //========================================================================================

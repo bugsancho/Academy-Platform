@@ -62,7 +62,8 @@
                     IsJoined = User.Identity.IsAuthenticated && _subscriptions.HasActiveSubscription(User.Identity.Name, course.Id),
                     JoinCourseUrl = Url.RouteUrl("JoinCourse", new { courseNiceUrl = coursesContent.UrlName }),
                     PartnerPageUrl = coursesContent.PartnerPage.Url,
-                    PartnerLogoUrl = coursesContent.PartnerLogo.Url
+                    PartnerLogoUrl = coursesContent.PartnerLogo.Url,
+                    Status = course.Status
 
                 }).ToList();
 

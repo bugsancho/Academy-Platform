@@ -49,5 +49,7 @@
         public AssessmentEligibilityStatus AssessmentEligibilityStatus { get; set; }
 
         public string ErrorMessage { get; set; }
+
+        public CourseStatus Status { get; set; }
     }
 }

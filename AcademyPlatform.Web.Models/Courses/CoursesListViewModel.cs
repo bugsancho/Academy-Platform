@@ -22,5 +22,7 @@
         public string PartnerLogoUrl { get; set; }
 
         public string PartnerPageUrl { get; set; }
+
+        public CourseStatus Status { get; set; }
     }
 }

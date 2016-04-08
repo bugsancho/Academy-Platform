@@ -66,6 +66,7 @@
     <Compile Include="Courses\CourseDifficultyType.cs" />
     <Compile Include="Courses\CoursePricingType.cs" />
     <Compile Include="Courses\CourseProgress.cs" />
+    <Compile Include="Courses\CourseStatus.cs" />
     <Compile Include="Courses\CourseSubscription.cs" />
     <Compile Include="Courses\Feedback.cs" />
     <Compile Include="Courses\Lecture.cs" />
