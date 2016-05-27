@@ -28,8 +28,7 @@
             {
                 CertificateUrl = $"\\certificates\\{certificateCode}.jpeg",
                 CourseName = certificate.Course.Title,
-                HolderName =
-                                        $"{certificate.User.FirstName} {certificate.User.LastName}"
+                HolderName = $"{certificate.User.FirstName} {certificate.User.LastName}"
             };
 
             return View(viewModel);
