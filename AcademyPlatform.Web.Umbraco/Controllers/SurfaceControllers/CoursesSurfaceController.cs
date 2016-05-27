@@ -34,7 +34,7 @@
         [ChildActionOnly]
         public ActionResult RenderCoursesGrid(int numberOfCourses, bool shouldHideFilters)
         {
-            IEnumerable<IPublishedContent> coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(Course)).OrderByDescending(x => x.CreateDate);
+            IEnumerable<IPublishedContent> coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(Course));
             if (numberOfCourses != default(int))
             {
                 coursesContentCollection = coursesContentCollection.Take(numberOfCourses);
