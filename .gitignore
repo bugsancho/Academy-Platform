@@ -181,3 +181,9 @@ smtp.config
 ConnectionStrings.config
 Media
 /Certificates/
+/AcademyPlatform.Web.Umbraco/certificates/RV5V6G1BVS.jpeg
+/AcademyPlatform.Web.Umbraco/certificates/TEUJIU7HT2.jpeg
+/AcademyPlatform.Web.Umbraco/umbraco
+/AcademyPlatform.Web.Umbraco/umbraco_client
+/AcademyPlatform.Web.Umbraco/Config/ConnectionStrings.Release.config
+/AcademyPlatform.Web.Umbraco/macroScripts/web.config

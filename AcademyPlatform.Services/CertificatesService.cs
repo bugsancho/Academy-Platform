@@ -79,35 +79,35 @@
             {
                 using (Font arialFont = new Font("Arial", 16, FontStyle.Bold))
                 {
-                    PlaceholderInfo studentData = certificateGenerationInfo.StudentName;
-                    PlaceholderInfo courseData = certificateGenerationInfo.CourseName;
-                    PlaceholderInfo datePlaceholder = certificateGenerationInfo.IssueDate;
-                    PlaceholderInfo qrPlaceholder = certificateGenerationInfo.QrCode;
-                    PlaceholderInfo certificateNumberPlaceholder = certificateGenerationInfo.CertificateNumber;
-                    PlaceholderInfo moduleNamesPlaceholder = certificateGenerationInfo.ModuleNames;
-                    PlaceholderInfo numberOfHoursPlaceholder = certificateGenerationInfo.NumberOfHours;
-                    certificateTemplate.DrawString($"{user.FirstName} {user.MiddleName} {user.LastName}", arialFont, new SolidBrush(ColorTranslator.FromHtml(studentData.Color)), new Rectangle(studentData.TopLeftX, studentData.TopLeftY, studentData.Width, studentData.Height));
-                    certificateTemplate.DrawString(course.Title, arialFont, new SolidBrush(ColorTranslator.FromHtml(courseData.Color)), new Rectangle(courseData.TopLeftX, courseData.TopLeftY, courseData.Width, courseData.Height));
-                    certificateTemplate.DrawString(DateTime.Today.ToString("dd.MM.yyy") + "г.", arialFont, new SolidBrush(ColorTranslator.FromHtml(datePlaceholder.Color)), new Rectangle(datePlaceholder.TopLeftX, datePlaceholder.TopLeftY, datePlaceholder.Width, datePlaceholder.Height));
-                    certificateTemplate.DrawImage(certificateUrlQrCode, new Rectangle(qrPlaceholder.TopLeftX, qrPlaceholder.TopLeftY, qrPlaceholder.Width, qrPlaceholder.Height));
-                    certificateTemplate.DrawString($"Рег. № {certificate.Id}", arialFont, new SolidBrush(ColorTranslator.FromHtml(certificateNumberPlaceholder.Color)), new Rectangle(certificateNumberPlaceholder.TopLeftX, certificateNumberPlaceholder.TopLeftY, certificateNumberPlaceholder.Width, certificateNumberPlaceholder.Height));
-                    certificateTemplate.DrawString(course.ModuleNames, arialFont, new SolidBrush(ColorTranslator.FromHtml(moduleNamesPlaceholder.Color)), new Rectangle(moduleNamesPlaceholder.TopLeftX, moduleNamesPlaceholder.TopLeftY, moduleNamesPlaceholder.Width, moduleNamesPlaceholder.Height));
-                    certificateTemplate.DrawString($"{course.NumberOfHours} учебни часа", arialFont, new SolidBrush(ColorTranslator.FromHtml(numberOfHoursPlaceholder.Color)), new Rectangle(numberOfHoursPlaceholder.TopLeftX, numberOfHoursPlaceholder.TopLeftY, numberOfHoursPlaceholder.Width, numberOfHoursPlaceholder.Height));
-
-
-                    string directoryPath = Path.GetDirectoryName(filePath);
-                    Debug.Assert(!string.IsNullOrEmpty(directoryPath));
-                    if (!Directory.Exists(directoryPath))
+                    using (Font arialFontLarge = new Font("Arial", 20, FontStyle.Bold))
                     {
-                        Directory.CreateDirectory(directoryPath);
+                        PlaceholderInfo studentData = certificateGenerationInfo.StudentName;
+                        PlaceholderInfo courseData = certificateGenerationInfo.CourseName;
+                        PlaceholderInfo datePlaceholder = certificateGenerationInfo.IssueDate;
+                        PlaceholderInfo qrPlaceholder = certificateGenerationInfo.QrCode;
+                        PlaceholderInfo certificateNumberPlaceholder = certificateGenerationInfo.CertificateNumber;
+                        PlaceholderInfo moduleNamesPlaceholder = certificateGenerationInfo.ModuleNames;
+                        PlaceholderInfo numberOfHoursPlaceholder = certificateGenerationInfo.NumberOfHours;
+                        certificateTemplate.DrawString($"{user.FirstName} {user.MiddleName} {user.LastName}", arialFontLarge, new SolidBrush(ColorTranslator.FromHtml(studentData.Color)), new Rectangle(studentData.TopLeftX, studentData.TopLeftY, studentData.Width, studentData.Height));
+                        certificateTemplate.DrawString(course.Title, arialFontLarge, new SolidBrush(ColorTranslator.FromHtml(courseData.Color)), new Rectangle(courseData.TopLeftX, courseData.TopLeftY, courseData.Width, courseData.Height));
+                        certificateTemplate.DrawString(DateTime.Today.ToString("dd.MM.yyy") + "г.", arialFont, new SolidBrush(ColorTranslator.FromHtml(datePlaceholder.Color)), new Rectangle(datePlaceholder.TopLeftX, datePlaceholder.TopLeftY, datePlaceholder.Width, datePlaceholder.Height));
+                        certificateTemplate.DrawImage(certificateUrlQrCode, new Rectangle(qrPlaceholder.TopLeftX, qrPlaceholder.TopLeftY, qrPlaceholder.Width, qrPlaceholder.Height));
+                        certificateTemplate.DrawString($"Рег. № {certificate.Id}", arialFontLarge, new SolidBrush(ColorTranslator.FromHtml(certificateNumberPlaceholder.Color)), new Rectangle(certificateNumberPlaceholder.TopLeftX, certificateNumberPlaceholder.TopLeftY, certificateNumberPlaceholder.Width, certificateNumberPlaceholder.Height));
+                        certificateTemplate.DrawString(course.ModuleNames, arialFont, new SolidBrush(ColorTranslator.FromHtml(moduleNamesPlaceholder.Color)), new Rectangle(moduleNamesPlaceholder.TopLeftX, moduleNamesPlaceholder.TopLeftY, moduleNamesPlaceholder.Width, moduleNamesPlaceholder.Height));
+                        certificateTemplate.DrawString($"{course.NumberOfHours} учебни часа", arialFont, new SolidBrush(ColorTranslator.FromHtml(numberOfHoursPlaceholder.Color)), new Rectangle(numberOfHoursPlaceholder.TopLeftX, numberOfHoursPlaceholder.TopLeftY, numberOfHoursPlaceholder.Width, numberOfHoursPlaceholder.Height));
+
+
+                        string directoryPath = Path.GetDirectoryName(filePath);
+                        Debug.Assert(!string.IsNullOrEmpty(directoryPath));
+                        if (!Directory.Exists(directoryPath))
+                        {
+                            Directory.CreateDirectory(directoryPath);
+                        }
+
+                        bitmap.Save(filePath);
                     }
-
-                    bitmap.Save(filePath);
-
                 }
             }
-
-
             return certificate;
         }
     }
