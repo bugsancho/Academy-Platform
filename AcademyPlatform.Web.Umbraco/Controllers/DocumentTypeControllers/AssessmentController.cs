@@ -191,6 +191,8 @@
             if (submission.IsSuccessful)
             {
                 TempData["SuccessfulSubmission"] = true;
+                TempData["CorrectAnswers"] = correctAnswers;
+                TempData["RequiredAnswers"] = requiredCorrectAnswers;
                 return RedirectToRoute("Certificate", new { certificateCode = certificate.Code });
             }
 

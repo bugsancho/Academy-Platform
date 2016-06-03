@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
+    using System.Threading;
     using System.Web;
     using System.Web.Mvc;
 
@@ -24,6 +26,15 @@
             UmbracoApplicationBase umbracoApplication,
             ApplicationContext applicationContext)
         {
+            umbracoApplication.BeginRequest += (sender, args) =>
+                {
+                    CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+                    newCulture.DateTimeFormat.ShortDatePattern = "dd MMMM yyyy";
+                    newCulture.DateTimeFormat.FirstDayOfWeek = DayOfWeek.Monday;
+                    newCulture.DateTimeFormat.LongTimePattern = "HH:mm";
+                    Thread.CurrentThread.CurrentCulture = newCulture;
+                };
+
             //The Umbraco implementation of Public Access restriction does an internal redirect to the login page PublishedContent.
             //We want that to be a redirect with returnUrl.
             PublishedContentRequest.Prepared += delegate (object sender, EventArgs args)
@@ -43,8 +54,8 @@
 
             ContentService.Saving += (sender, args) =>
                 {
-                    AddOrUpdateLecture(args.SavedEntities, x => x.Published && (x.Parent()?.Published ?? false));
-                    UpdateCourse(args.SavedEntities);
+                    //AddOrUpdateLecture(args.SavedEntities, x => x.Published && (x.Parent()?.Published ?? false));
+                    //UpdateCourse(args.SavedEntities);
                 };
 
             //Adding a Save post-event because during the Saving event, new items still have no Id so syncing won't work.
@@ -61,7 +72,7 @@
             ContentService.RollingBack += (sender, args) =>
                 {
                     AddOrUpdateLecture(Enumerable.Repeat(args.Entity, 1), x => x.Published && (x.Parent()?.Published ?? false));
-                     UpdateCourse(Enumerable.Repeat(args.Entity, 1));
+                    UpdateCourse(Enumerable.Repeat(args.Entity, 1));
                 };
 
             ContentService.Moving += (sender, args) =>
@@ -94,8 +105,10 @@
                 }
 
                 Course course = coursesService.GetById(courseId);
-                course.Description =
-                    (string)courseContent.Properties[nameof(DocumentTypes.Course.ShortDescription)].Value;
+                course.Description = (string)courseContent.Properties[nameof(DocumentTypes.Course.ShortDescription)].Value;
+                course.Title = courseContent.Name;
+                course.ModuleNames = (string)courseContent.Properties[nameof(DocumentTypes.Course.ModulesNames)].Value;
+                course.NumberOfHours = int.Parse((string)courseContent.Properties[nameof(DocumentTypes.Course.NumberOfHours)].Value);
                 coursesService.Update(course);
             }
         }

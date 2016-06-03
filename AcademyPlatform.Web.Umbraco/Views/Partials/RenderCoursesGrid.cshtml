@@ -23,7 +23,7 @@
         <div data-category="@(course.Category.Id)" class="isotope-item col-md-4 col-sm-6 col-xs-12 course-box">
             <div class="pv-30 ph-20 feature-box courses text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall">
                 <div class="course-bg">
-                    <img src="@Url.Content(course.ImageUrl)" class="course-img" style="max-height: 195px" alt="@course.Title">
+                    <img src="@Url.Content(course.ImageUrl)" class="course-img" style="max-height: 195px;width: 100%" alt="@course.Title">
                     <div class="course-owner">
                         <a href="@course.PartnerPageUrl" target="_blank">
                             <img src="@course.PartnerLogoUrl" class="course-owner-logo" alt="Партньор" />
@@ -48,7 +48,7 @@
                             }
                             else //if (course.Status == CourseStatus.AwaitingRelease)
                             {
-                                <br/>
+                                <p><a href="@course.CourseUrl"> Вижте повече</a></p>
                                 <p style="color: red; font-weight: bold">Очаквайте скоро!</p>
                             }
                         </div>
