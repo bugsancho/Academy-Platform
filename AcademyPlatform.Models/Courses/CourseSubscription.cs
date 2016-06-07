@@ -3,8 +3,9 @@
     using System;
 
     using AcademyPlatform.Models.Base;
+    using AcademyPlatform.Models.Payments;
 
-    public class CourseSubscription : SoftDeletableEntity
+    public class CourseSubscription : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 
@@ -20,6 +21,10 @@
         public SubscriptionStatus Status { get; set; }
 
         public SubscriptionType SubscriptionType { get; set; }
+
+        public int? OrderId { get; set; }
+
+        public virtual Order Order { get; set; }
 
         public virtual Course Course { get; set; }
 

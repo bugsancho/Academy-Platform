@@ -1,8 +1,10 @@
-﻿namespace AcademyPlatform.Models.Payments
+﻿using AcademyPlatform.Models.Base;
+
+namespace AcademyPlatform.Models.Payments
 {
     using AcademyPlatform.Models.Courses;
 
-    public class Product
+    public class Product : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 

@@ -4,7 +4,7 @@
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
 
-    public class Certificate : SoftDeletableEntity
+    public class Certificate : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 

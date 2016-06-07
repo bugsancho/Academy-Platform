@@ -2,7 +2,7 @@
 {
     using AcademyPlatform.Models.Base;
 
-    public class Feedback : SoftDeletableEntity
+    public class Feedback : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 

@@ -6,7 +6,7 @@
 
     using AcademyPlatform.Models.Base;
 
-    public class LectureVisit : SoftDeletableEntity
+    public class LectureVisit : SoftDeletableLoggedEntity
     {
         //public int Id { get; set; }
 

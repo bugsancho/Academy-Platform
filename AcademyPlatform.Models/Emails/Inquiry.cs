@@ -2,7 +2,7 @@
 {
     using AcademyPlatform.Models.Base;
 
-    public class Inquiry : SoftDeletableEntity
+    public class Inquiry : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 

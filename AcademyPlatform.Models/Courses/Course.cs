@@ -1,13 +1,15 @@
 ﻿namespace AcademyPlatform.Models.Courses
 {
+    using System.Collections.Generic;
 
     using AcademyPlatform.Models.Base;
+    using AcademyPlatform.Models.Payments;
 
-    public class Course : SoftDeletableEntity
+    public class Course : SoftDeletableLoggedEntity
     {
         //private ICollection<Module> _lectures;
         //private ICollection<User> _participants;
-        //private ICollection<Product> _products;
+        private ICollection<Product> _products;
 
         public int Id { get; set; }
 
@@ -49,17 +51,17 @@
         //    set { _participants = value; }
         //}
 
-        //public virtual ICollection<Product> Products
-        //{
-        //    get { return _products; }
-        //    set { _products = value; }
-        //}
+        public virtual ICollection<Product> Products
+        {
+            get { return _products; }
+            set { _products = value; }
+        }
 
-        //public Course()
-        //{
-        //    _lectures = new HashSet<Module>();
-        //    _participants = new HashSet<User>();
-        //    _products = new HashSet<Product>();
-        //}
+        public Course()
+        {
+            //    _lectures = new HashSet<Module>();
+            //    _participants = new HashSet<User>();
+            _products = new HashSet<Product>();
+        }
     }
 }

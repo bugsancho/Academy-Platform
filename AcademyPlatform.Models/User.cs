@@ -7,8 +7,9 @@
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Models.Payments;
 
-    public class User : SoftDeletableEntity
+    public class User : SoftDeletableLoggedEntity
     {
+        private ICollection<Order> _orders;
         private ICollection<Course> _courses;
         private ICollection<Certificate> _certificates;
         private ICollection<LectureVisit> _lectureVisits;
@@ -33,13 +34,18 @@
 
         public virtual BillingInfo BillingInfo { get; set; }
 
-        //public virtual Profile Profile { get; set; }
-
         public virtual ICollection<Course> Courses
         {
             get { return _courses; }
             set { _courses = value; }
         }
+
+        public virtual ICollection<Order> Orders
+        {
+            get { return _orders; }
+            set { _orders = value; }
+        }
+
         public virtual ICollection<Certificate> Certificates
         {
             get { return _certificates; }
@@ -54,6 +60,7 @@
 
         public User()
         {
+            _orders = new HashSet<Order>();
             _courses = new HashSet<Course>();
             _certificates = new HashSet<Certificate>();
             _lectureVisits = new HashSet<LectureVisit>();

@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class SoftDeletableEntity : ISoftDeletableEntity, ILoggedEntity
+    public class SoftDeletableLoggedEntity : ISoftDeletableEntity, ILoggedEntity
     {
         [Display(Name = "Deleted?")]
         [Editable(false)]

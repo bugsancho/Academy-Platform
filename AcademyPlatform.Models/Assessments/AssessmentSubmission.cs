@@ -3,7 +3,7 @@
     using AcademyPlatform.Models.Base;
     using AcademyPlatform.Models.Courses;
 
-    public class AssessmentSubmission : SoftDeletableEntity
+    public class AssessmentSubmission : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 

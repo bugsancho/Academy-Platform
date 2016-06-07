@@ -3,7 +3,7 @@
     public enum PaymentType
     {
         None,
-        CourseAccess,
-        Certificate
+        Online,
+        BankTransfer
     }
 }

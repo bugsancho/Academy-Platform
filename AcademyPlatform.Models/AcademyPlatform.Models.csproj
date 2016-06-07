@@ -57,7 +57,7 @@
     <Compile Include="Base\ILoggedEntity.cs" />
     <Compile Include="Base\ISoftDeletableEntity.cs" />
     <Compile Include="Base\LoggedEntity.cs" />
-    <Compile Include="Base\SoftDeletableEntity.cs" />
+    <Compile Include="Base\SoftDeletableLoggedEntity.cs" />
     <Compile Include="Certificates\Certificate.cs" />
     <Compile Include="Certificates\CertificateGenerationInfo.cs" />
     <Compile Include="Certificates\PlaceholderInfo.cs" />
@@ -82,6 +82,8 @@
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Payments\BillingInfo.cs" />
     <Compile Include="Payments\LineItem.cs" />
+    <Compile Include="Payments\OnlineTransaction.cs" />
+    <Compile Include="Payments\OnlineTransactionResultType.cs" />
     <Compile Include="Payments\Order.cs" />
     <Compile Include="Payments\OrderStatusType.cs" />
     <Compile Include="Payments\Payment.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Payments\PaymentType.cs" />
     <Compile Include="Payments\Product.cs" />
     <Compile Include="Payments\ProductType.cs" />
+    <Compile Include="Payments\ShoppingCart.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
