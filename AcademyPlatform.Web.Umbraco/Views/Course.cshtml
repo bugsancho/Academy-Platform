@@ -63,43 +63,43 @@
                                                 <div @*class="table-responsive"*@>
                                                     <table class="table table-colored table-hover">
                                                         <tbody>
-                                                        @{
-                                                            var lectureIndex = 1;
-                                                        }
-                                                        @foreach (var lecture in module.LectureLinks)
-                                                        {
-                                                            <tr>
-                                                                @if (lecture.IsDemo || Model.HasActiveSubscription)
-                                                                {
-                                                                    <td class="text-left">@(moduleIndex).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
-                                                                    <td class="text-right">
+                                                            @{
+                                                                var lectureIndex = 1;
+                                                            }
+                                                            @foreach (var lecture in module.LectureLinks)
+                                                            {
+                                                                <tr>
+                                                                    @if (lecture.IsDemo || Model.HasActiveSubscription)
+                                                                    {
+                                                                        <td class="text-left">@(moduleIndex).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
+                                                                        <td class="text-right">
 
-                                                                        @if (Model.HasActiveSubscription)
-                                                                        {
-                                                                            if (lecture.IsVisited)
+                                                                            @if (Model.HasActiveSubscription)
                                                                             {
-                                                                                <i class="fa fa-check"></i>
+                                                                                if (lecture.IsVisited)
+                                                                                {
+                                                                                    <i class="fa fa-check"></i>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
+                                                                                }
                                                                             }
                                                                             else
                                                                             {
-                                                                                <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
+                                                                                <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
                                                                             }
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
-                                                                        }
-                                                                    </td>
-                                                                }
-                                                                else if (!Model.HasActiveSubscription)
-                                                                {
-                                                                    <td class="text-left text-muted">@(moduleIndex).@(lectureIndex++) @lecture.Name</td>
-                                                                    <td class="text-right">
-                                                                        <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>@*&nbsp;Платена лекция*@</span>
-                                                                    </td>
-                                                                }
-                                                            </tr>
-                                                        }
+                                                                        </td>
+                                                                    }
+                                                                    else if (!Model.HasActiveSubscription)
+                                                                    {
+                                                                        <td class="text-left text-muted">@(moduleIndex).@(lectureIndex++) @lecture.Name</td>
+                                                                        <td class="text-right">
+                                                                            <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>@*&nbsp;Платена лекция*@</span>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                            }
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -107,8 +107,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                moduleIndex++;
-                            }
+                                                                    moduleIndex++;
+                                                                }
                         </div>
                     </div>
                     <div class="tab-pane fade" id="description">
@@ -132,24 +132,24 @@
                                 </div>
                             </div>
                             @*<div class="space-bottom"></div>
-                            <div class="row grid-space-20">
-                                <div class="col-xs-3">
-                                    <div class="overlay-container">
-                                        <img src="https://focus-academy.bg/media/1180/cert.png" alt="">
-                                        <a href="https://focus-academy.bg/media/1180/cert.png" class="overlay-link small popup-img" title="Примерен сертификат - бял">
-                                            <i class="fa fa-plus"></i>
-                                        </a>
+                                <div class="row grid-space-20">
+                                    <div class="col-xs-3">
+                                        <div class="overlay-container">
+                                            <img src="https://focus-academy.bg/media/1180/cert.png" alt="">
+                                            <a href="https://focus-academy.bg/media/1180/cert.png" class="overlay-link small popup-img" title="Примерен сертификат - бял">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-3">
-                                    <div class="overlay-container">
-                                        <img src="https://focus-academy.bg/media/1178/cert-blue.png" alt="">
-                                        <a href="https://focus-academy.bg/media/1178/cert-blue.png" class="overlay-link small popup-img" title="Примерен сертификат - син ">
-                                            <i class="fa fa-plus"></i>
-                                        </a>
+                                    <div class="col-xs-3">
+                                        <div class="overlay-container">
+                                            <img src="https://focus-academy.bg/media/1178/cert-blue.png" alt="">
+                                            <a href="https://focus-academy.bg/media/1178/cert-blue.png" class="overlay-link small popup-img" title="Примерен сертификат - син ">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>*@
+                                </div>*@
                         </div>
                     </div>
 
@@ -224,8 +224,10 @@
                 </div>
                 <!-- tabs end -->
             </div>
-            <!-- main end -->
-            @Html.Raw(Model.Features)
+            <div class="col-md-3">
+                <!-- main end -->
+                @Html.Raw(Model.Features)
+            </div>
         </div>
     </div>
 </section>

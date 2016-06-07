@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
 
     using AcademyPlatform.Models;
     using AcademyPlatform.Models.Courses;
+    using AcademyPlatform.Models.Payments;
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Account;
     using AcademyPlatform.Web.Models.Courses;
@@ -24,14 +26,18 @@
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICoursesContentService _coursesContentService;
         private readonly ICertificatesService _certificatesService;
+        private readonly IPaymentService _paymentService;
+        private readonly IOrdersService _ordersService;
 
-        public ProfileController(IUserService usersService, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService, ICertificatesService certificatesService)
+        public ProfileController(IUserService usersService, ISubscriptionsService subscriptions, IMembershipService membershipService, ICoursesContentService coursesContentService, ICertificatesService certificatesService, IPaymentService paymentService, IOrdersService ordersService)
         {
             _usersService = usersService;
             _subscriptions = subscriptions;
             _membershipService = membershipService;
             _coursesContentService = coursesContentService;
             _certificatesService = certificatesService;
+            _paymentService = paymentService;
+            _ordersService = ordersService;
         }
 
         public ActionResult Index()
@@ -40,6 +46,7 @@
 
             List<CourseProgressViewModel> progressViewModels = new List<CourseProgressViewModel>();
             IEnumerable<CourseProgress> courseProgresses = _subscriptions.GetCoursesProgress(User.Identity.Name);
+            var payments = _paymentService.GetByUser(User.Identity.Name);
             foreach (CourseProgress courseProgress in courseProgresses)
             {
                 CourseProgressViewModel viewModel = new CourseProgressViewModel();
@@ -59,6 +66,7 @@
 
             profileViewModel.ProgressViewModels = progressViewModels;
             profileViewModel.Certificates = _certificatesService.GetCertificatesForUser(User.Identity.Name);
+            profileViewModel.Orders = _ordersService.GetByUser(User.Identity.Name).Where(x => x.Status == OrderStatusType.Completed);
             return View(profileViewModel);
         }
 

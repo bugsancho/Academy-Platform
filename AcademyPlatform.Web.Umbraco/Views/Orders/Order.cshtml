@@ -1,0 +1,91 @@
+﻿@model AcademyPlatform.Models.Payments.Order
+
+@section head{
+
+    <title>Фактура - @Model.Id</title>
+}
+
+<style media="print">
+    
+.header-top,
+.header,
+.page-intro,
+.page-title,
+.parallax,
+.call-to-action,
+.section,
+#footer,
+.scrollToTop,
+.btn-print,
+.breadcrumb-container {
+	display: none!important;
+}
+
+.col-sm-offset-3 {
+	margin-left: 25%;
+}
+.col-sm-3 {
+	width: 25%;
+	float: left;
+}
+.col-sm-6 {
+	width: 50%;
+	float: left;
+}
+</style>
+
+<div class="container">
+    <div id="invoice-container" class="invoice-container">
+        <div class="row">
+            <div class="col-sm-6"><img src="/media/1183/falogo4.png" alt="logoGoesHere" /> <!-- <p class="invoice-slogan">Your Slogan Here</p> --><address class="small"><strong>Focus Academy</strong><br /> Ул. Калиманци 45, офис 3, гр. София<br /> M: +359 882402642<br /> E-mail: <a href="mailto:office@focus-academy.bg">office@focus-academy.bg</a></address></div>
+            <div class="col-sm-offset-3 col-sm-3">
+                <p class="text-right small"><strong>Фактура #@Model.Id</strong> <br /> @Model.Payment.PaymentDate.ToString("dd MMMM yyyy")</p>
+                <h4 class="text-right">Клиент</h4>
+                <p class="text-right small">
+                    <strong>Име:</strong><span>&nbsp;@Model.ClientName</span><br />
+                    @if (!string.IsNullOrWhiteSpace(Model.Company))
+                    {
+                        <strong>Организация:</strong>@:&nbsp;@Model.Company<br />
+                    }
+                    @if (!string.IsNullOrWhiteSpace(Model.CompanyId))
+                    {
+                        <span style="display: inline-block;"><strong style="display: inline-block;">ЕИК/БУЛСТАТ:</strong>&nbsp;@Model.CompanyId</span>  <br />
+                    }
+                    <strong>Адрес:</strong>&nbsp;@Model.Address<br />
+                    <strong>Град:</strong>&nbsp;@Model.City<br />
+                </p>
+            </div>
+        </div>
+        <table border="0" class="table cart table-bordered table-colored">
+            <thead>
+                <tr>
+                    <th>Описание</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th class="amount">Общо</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- products begin -->
+                @foreach (var product in Model.LineItems)
+                {
+                    <tr>
+                        <td class="product">@product.Product.Name</td>
+                        <td class="price">@product.Product.Price</td>
+                        <td class="quantity">@product.Quantity</td>
+                        <td class="amount">@(product.Quantity * product.Product.Price)</td>
+                    </tr>
+                }
+
+                <tr><!-- products end --></tr>
+                <tr>
+                    <td class="total-quantity" colspan="3"><span class="text-right">Общо покупки</span></td>
+                    <td class="total-amount">@Model.Total</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="small">Ако имате въпроси относно тази фактура, моля свържете се с нас, телефон: <strong><a href="tel:+359882402642">+359 882402642</a></strong>, email: <strong><a href="mailto:office@focus-academy.bg">office@focus-academy.bg</a></strong> <br /> Благодарим Ви за покупката!</p>
+        <hr />
+    </div>
+    <div class="text-right"><button class="btn btn-print btn-default-transparent btn-hvr hvr-shutter-out-horizontal" onclick="print();">Принтирай <i class="fa fa-print pl-10"></i></button></div>
+</div>

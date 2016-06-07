@@ -25,8 +25,9 @@
         private readonly IRepository<Payment> _payments;
 
         private readonly ICoursesService _coursesService;
+        private readonly IOrdersService _ordersService;
 
-        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments, IMessageService messageService, IRepository<Payment> payments, IRouteProvider routeProvider)
+        public SubscriptionsService(IRepository<User> users, IRepository<CourseSubscription> courseSubscriptions, IRepository<Course> courses, ICoursesService coursesService, IUserService usersService, ILecturesService lectures, IAssessmentsService assessments, IMessageService messageService, IRepository<Payment> payments, IRouteProvider routeProvider, IOrdersService ordersService)
         {
             _users = users;
             _courseSubscriptions = courseSubscriptions;
@@ -38,6 +39,7 @@
             _messageService = messageService;
             _payments = payments;
             _routeProvider = routeProvider;
+            _ordersService = ordersService;
         }
 
         public IEnumerable<CourseProgress> GetCoursesProgress(string username)
@@ -136,6 +138,8 @@
                 {
                     subscription.Status = SubscriptionStatus.AwaitingPayment;
                     subscription.SubscriptionType = SubscriptionType.Paid;
+
+                    subscription.Order = _ordersService.Generate(course, user);
                 }
                 else
                 {
@@ -170,10 +174,13 @@
             CourseSubscription subscription = _courseSubscriptions.GetById(payment.SubscriptionId);
             subscription.ApprovedDate = DateTime.Now;
             subscription.Status = SubscriptionStatus.Active;
+            var order = subscription.Order;
+            order.Payment = payment;
+            order.Status = OrderStatusType.Completed;
             _courseSubscriptions.Update(subscription);
             //TODO implement proper UoW pattern
             _courseSubscriptions.SaveChanges();
-
+            
             string courseUrl = _routeProvider.GetCourseRoute(subscription.CourseId);
             string coursePictureUrl = _routeProvider.GetCoursePictureRoute(subscription.CourseId);
             _messageService.SendPaymentApprovedMessage(subscription.User, subscription.Course, payment, courseUrl, coursePictureUrl);

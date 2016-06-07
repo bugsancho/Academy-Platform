@@ -1,4 +1,7 @@
-﻿namespace AcademyPlatform.Web.Umbraco.Startup
+﻿using AcademyPlatform.Web.Infrastructure.Extensions;
+using AcademyPlatform.Web.Umbraco.Controllers;
+
+namespace AcademyPlatform.Web.Umbraco.Startup
 {
     using System;
     using System.Linq;
@@ -34,6 +37,8 @@
             RouteTable.Routes.MapUmbracoRoute("Profile_Defailt", "profile/{action}", new { Controller = "Profile" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("Certificate", "certificate/{certificateCode}", new { Controller = "Certificate", Action = "Certificate" }, rootNodeHandler);
             RouteTable.Routes.MapUmbracoRoute("AwaitingPayment", "awaiting-payment/{courseNiceUrl}", new { Controller = "Subscriptions", Action = "AwaitingPayment" }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("PaymentResult", "payment-success", new { Controller = nameof(PaymentResultController).StripControllerSufix(), Action = nameof(PaymentResultController.Index) }, rootNodeHandler);
+            RouteTable.Routes.MapUmbracoRoute("OrderDetails", "order/{orderId}", new { Controller = nameof(OrdersController).StripControllerSufix(), Action = nameof(OrdersController.Order) }, rootNodeHandler);
 
 
 

@@ -109,24 +109,65 @@
                 {
                     <table class="table table-bordered table-colored">
                         <thead>
+                        <tr>
+                            <th>Обучение</th>
+                            <th>Дата на издаване</th>
+                            <th>Връзка</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var certificate in Model.Certificates)
+                        {
                             <tr>
-                                <th>Обучение</th>
+                                <td>
+                                    @certificate.Course.Title
+                                </td>
+                                <td>
+                                    @certificate.CreatedOn.ToString("dd MMMM yyyy - HH:mm")
+                                </td>
+                                <td>
+                                    (<a href="@Url.RouteUrl("Certificate", new { certificateCode = certificate.Code })" title="сертификат">виж</a>)
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате взет сертификат. За да получите сертификат трябва да прочетете всички лекции на дадено обучение, и след това да преминете успешно изпита му!
+                    </div>
+                }
+            </div>
+            
+            <div class="col-md-12">
+                <h2 class="text-center">Моите фактури</h2>
+                @if (Model.Orders.Any())
+                {
+                    <table class="table table-bordered table-colored">
+                        <thead>
+                            <tr>
+                                <th>Номер</th>
                                 <th>Дата на издаване</th>
-                                <th>Връзка</th>
+                                <th>Сума</th>
+                                <th>Детайли</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var certificate in Model.Certificates)
+                            @foreach (var order in Model.Orders)
                             {
                                 <tr>
                                     <td>
-                                        @certificate.Course.Title
+                                        @order.Id
                                     </td>
                                     <td>
-                                        @certificate.CreatedOn.ToString("dd MMMM yyyy - HH:mm")
+                                        @order.CreatedOn.ToString("dd MMMM yyyy")
+                                    </td> 
+                                    <td>
+                                        @order.Total
                                     </td>
                                     <td>
-                                        (<a href="@Url.RouteUrl("Certificate", new { certificateCode = certificate.Code })" title="сертификат">виж</a>)
+                                        (<a href="@Url.RouteUrl("OrderDetails", new { orderId = order.Id })" title="фактура">виж</a>)
                                     </td>
                                 </tr>
                             }
@@ -135,7 +176,7 @@
                 }
                 else
                 {
-                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате взет сертификат. За да получите сертификат трябва да прочетете всички лекции на дадено обучение, и след това да преминете успешно изпита му!</div>
+                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате направени плащания. След като направите плащане, тук ще може да видите вашата фактура!</div>
                 }
             </div>
         </div>

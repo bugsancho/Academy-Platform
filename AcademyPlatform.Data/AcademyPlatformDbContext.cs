@@ -68,6 +68,26 @@
                         .WithMany()
                         .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Order>()
+                        .HasRequired(x => x.User)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<LineItem>()
+                        .HasRequired(x => x.Product)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Order>()
+                        .HasOptional(x => x.Payment)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CourseSubscription>()
+                        .HasOptional(x => x.Order)
+                        .WithMany()
+                        .WillCascadeOnDelete(false);
+
 
 
             base.OnModelCreating(modelBuilder);
@@ -96,6 +116,10 @@
         public IDbSet<Inquiry> Inquiries { get; set; }
 
         public IDbSet<Feedback> Feedback { get; set; }
+
+        public IDbSet<Product> Products { get; set; }
+
+        public IDbSet<Order> Orders { get; set; }
 
         public static AcademyPlatformDbContext Create()
         {

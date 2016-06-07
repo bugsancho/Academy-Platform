@@ -613,6 +613,7 @@
     <Content Include="Views\Feedback\Feedback.cshtml" />
     <Content Include="Views\Profile\_UpdateProfilePartial.cshtml" />
     <Content Include="Views\Profile\_ProfilePartial.cshtml" />
+    <Content Include="Views\Orders\Order.cshtml" />
     <None Include="Views\Subscriptions\JoinCourse.cshtml" />
     <Content Include="Views\UserControlPanel.cshtml" />
     <None Include="Web.Debug.config">
@@ -637,6 +638,8 @@
     <Compile Include="Controllers\ApiControllers\CoursesController.cs" />
     <Compile Include="Controllers\CertificatesController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PaymentResultController.cs" />
     <Compile Include="Controllers\SurfaceControllers\ContactUsController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\AssessmentController.cs" />
     <Compile Include="Controllers\DocumentTypeControllers\CourseController.cs" />
