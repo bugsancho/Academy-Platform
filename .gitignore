@@ -183,3 +183,4 @@ Media
 /Certificates/
 /AcademyPlatform.Web.Umbraco/certificates/
 /AcademyPlatform.Web.Umbraco/Config/ConnectionStrings.Release.config
+/AcademyPlatform.Web.Umbraco/macroScripts/web.config

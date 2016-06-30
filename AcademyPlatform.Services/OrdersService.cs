@@ -12,7 +12,6 @@
 
     public class OrdersService : IOrdersService
     {
-
         private readonly IRepository<Order> _orders;
 
         public OrdersService(IRepository<Order> orders)
@@ -39,6 +38,7 @@
                                                new LineItem { Product = product, Quantity = 1 }
                                            };
             var billingInfo = user.BillingInfo;
+
             Order order = new Order
             {
                 LineItems = lineItems,
@@ -49,7 +49,7 @@
                 Address = billingInfo.Address,
                 City = billingInfo.City,
                 Company = billingInfo.Company,
-                CompanyId = billingInfo.CompanyId
+                CompanyId = billingInfo.CompanyId,
             };
 
             _orders.Add(order);
