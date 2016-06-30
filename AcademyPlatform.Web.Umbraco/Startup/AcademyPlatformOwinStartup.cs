@@ -14,6 +14,8 @@ namespace AcademyPlatform.Web.Umbraco.Startup
     using Hangfire.Dashboard;
     using Hangfire.Server;
     using Hangfire.SqlServer;
+    using Hangfire.States;
+    using Hangfire.Storage;
 
     using Microsoft.Owin;
 
@@ -35,6 +37,7 @@ namespace AcademyPlatform.Web.Umbraco.Startup
             });
 
             GlobalJobFilters.Filters.Add(new PrepareUmbracoRequestFilter());
+            GlobalJobFilters.Filters.Add(new JobExpirationFilter());
             JobHelper.SetSerializerSettings(new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             app.UseHangfireServer();
             app.UseHangfireDashboard("/hangfire", new DashboardOptions { AuthorizationFilters = new IAuthorizationFilter[] { new RoleAuthorizationFilter() } });
@@ -53,12 +56,25 @@ namespace AcademyPlatform.Web.Umbraco.Startup
         }
     }
 
+    public class JobExpirationFilter : IApplyStateFilter
+    {
+        public void OnStateApplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
+        {
+            context.JobExpirationTimeout = TimeSpan.FromDays(100);
+        }
+
+        public void OnStateUnapplied(ApplyStateContext context, IWriteOnlyTransaction transaction)
+        {
+
+        }
+    }
+
     public class PrepareUmbracoRequestFilter : JobFilterAttribute, IServerFilter
     {
         public void OnPerforming(PerformingContext filterContext)
         {
             AcademyPlatform.Web.Umbraco.UmbracoConfiguration.Extensions.UmbracoContextExtensions.GetOrCreateContext();
-
+          
             UmbracoContext.Current.PublishedContentRequest = new PublishedContentRequest(
                 UmbracoContext.Current.HttpContext.Request.Url,
                 UmbracoContext.Current.RoutingContext,
