@@ -54,8 +54,8 @@
 
             ContentService.Saving += (sender, args) =>
                 {
-                    //AddOrUpdateLecture(args.SavedEntities, x => x.Published && (x.Parent()?.Published ?? false));
-                    //UpdateCourse(args.SavedEntities);
+                    AddOrUpdateLecture(args.SavedEntities, x => x.Published && (x.Parent()?.Published ?? false));
+                    UpdateCourse(args.SavedEntities);
                 };
 
             //Adding a Save post-event because during the Saving event, new items still have no Id so syncing won't work.
