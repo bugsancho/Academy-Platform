@@ -6,7 +6,7 @@
     <h2>Записване за обучение - @Model.CourseName</h2>
     @if (Model.RequiresBillingInfo)
     {
-        <h3>Цена на обучението: @Model.CoursePrice лева с включено ДДС.</h3>
+        <h3>Цена на обучението: @Model.CoursePrice лева.</h3>
         <p>За да активираме достъпа ви до това обучение е необходимо да направите плащане по банков път. Незабавно след потвърждаването на направеното плащане, ще получите имейл с потвърждение, че достъпът ви е активиран.</p>
     }
     <div class="form-horizontal">
@@ -49,9 +49,7 @@
                         <button class="btn btn-group btn-danger btn-animated">Запиши се <i class="fa fa-check"></i></button>
                     </div>
                 </div>
-
             }
-
         }
     </div>
 </div>

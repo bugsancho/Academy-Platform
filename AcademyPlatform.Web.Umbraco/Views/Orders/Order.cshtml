@@ -5,87 +5,178 @@
     <title>Фактура - @Model.Id</title>
 }
 
-<style media="print">
-    
-.header-top,
-.header,
-.page-intro,
-.page-title,
-.parallax,
-.call-to-action,
-.section,
-#footer,
-.scrollToTop,
-.btn-print,
-.breadcrumb-container {
-	display: none!important;
+@{
+    int counter = 0;
 }
 
-.col-sm-offset-3 {
-	margin-left: 25%;
-}
-.col-sm-3 {
-	width: 25%;
-	float: left;
-}
-.col-sm-6 {
-	width: 50%;
-	float: left;
-}
+<style media="print">
+    .header-top,
+    .header,
+    .page-intro,
+    .page-title,
+    .parallax,
+    .call-to-action,
+    .section,
+    #footer,
+    .scrollToTop,
+    .btn-print,
+    .breadcrumb-container {
+        display: none !important;
+    }
+
+    .col-sm-offset-3 {
+        margin-left: 25%;
+    }
+
+    .col-sm-3 {
+        width: 25%;
+        float: left;
+    }
+
+    .col-sm-6 {
+        width: 50%;
+        float: left;
+    }
 </style>
 
 <div class="container">
     <div id="invoice-container" class="invoice-container">
-        <div class="row">
-            <div class="col-sm-6"><img src="/media/1183/falogo4.png" alt="logoGoesHere" /> <!-- <p class="invoice-slogan">Your Slogan Here</p> --><address class="small"><strong>Focus Academy</strong><br /> Ул. Калиманци 45, офис 3, гр. София<br /> M: +359 882402642<br /> E-mail: <a href="mailto:office@focus-academy.bg">office@focus-academy.bg</a></address></div>
-            <div class="col-sm-offset-3 col-sm-3">
-                <p class="text-right small"><strong>Фактура #@Model.Id</strong> <br /> @Model.Payment.PaymentDate.ToString("dd MMMM yyyy")</p>
-                <h4 class="text-right">Клиент</h4>
-                <p class="text-right small">
-                    <strong>Име:</strong><span>&nbsp;@Model.ClientName</span><br />
-                    @if (!string.IsNullOrWhiteSpace(Model.Company))
-                    {
-                        <strong>Организация:</strong>@:&nbsp;@Model.Company<br />
-                    }
-                    @if (!string.IsNullOrWhiteSpace(Model.CompanyId))
-                    {
-                        <span style="display: inline-block;"><strong style="display: inline-block;">ЕИК/БУЛСТАТ:</strong>&nbsp;@Model.CompanyId</span>  <br />
-                    }
-                    <strong>Адрес:</strong>&nbsp;@Model.Address<br />
-                    <strong>Град:</strong>&nbsp;@Model.City<br />
-                </p>
-            </div>
-        </div>
-        <table border="0" class="table cart table-bordered table-colored">
-            <thead>
-                <tr>
-                    <th>Описание</th>
-                    <th>Цена</th>
-                    <th>Количество</th>
-                    <th class="amount">Общо</th>
-                </tr>
-            </thead>
+        <table class="table table-striped table-colored">
             <tbody>
-                <!-- products begin -->
+                <tr>
+                    <td colspan="2">
+                        <p><strong>Получател</strong></p>
+                    </td>
+                    <td colspan="3">
+                        <p><strong>ФАКТУРА-ОРИГИНАЛ</strong></p>
+                    </td>
+                    <td colspan="4">
+                        <p><strong>Доставчик</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>Име: @Model.ClientName</p>
+                        <p>Град: @Model.City</p>
+                        <p>Адрес: @Model.Address</p>
+                        @if (!string.IsNullOrWhiteSpace(Model.Company))
+                        {
+                            <p>
+                                Организация:: @Model.Company<br />
+                            </p>                    }
+                        @if (!string.IsNullOrWhiteSpace(Model.CompanyId))
+                        {
+                            <p>
+                                <span style="display: inline-block;">ЕИК/БУЛСТАТ:&nbsp;@Model.CompanyId</span>
+                            </p>
+                        }
+                    </td>
+                    <td colspan="3">
+                        <p>№ @Model.Id.ToString().PadLeft(10, '0')</p>
+                        <p>Дата: @Model.Payment.PaymentDate.ToString("dd MMMM yyyy")</p>
+                        <p>Място на сделката: гр. София</p>
+                    </td>
+                    <td colspan="4">
+                        <p>Име: ГД &bdquo;Фокус Академия&ldquo;</p>
+                        <p>Град: София</p>
+                        <p>Адрес: ул. Калиманци 45, офис 3</p>
+                        <p>БУЛСТАТ: 176999170&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>№</p>
+                    </td>
+                    <td colspan="3">
+                        <p>Наименование на стоките/услугите</p>
+                    </td>
+                    <td colspan="2">
+                        <p>Кол-во</p>
+                    </td>
+                    <td>
+                        <p>Мярка</p>
+                    </td>
+                    <td>
+                        <p>Ед. Цена</p>
+                    </td>
+                    <td>
+                        <p>Стойност</p>
+                    </td>
+                </tr>
                 @foreach (var product in Model.LineItems)
                 {
+                    counter++;
                     <tr>
-                        <td class="product">@product.Product.Name</td>
-                        <td class="price">@product.Product.Price</td>
-                        <td class="quantity">@product.Quantity</td>
-                        <td class="amount">@(product.Quantity * product.Product.Price)</td>
+                        <td>
+                            <p>@counter</p>
+                        </td>
+                        <td colspan="3">
+                            <p>@product.Product.Name, с основание за плащане: @product.Order.Payment.SubscriptionId</p>
+                        </td>
+                        <td colspan="2">
+                            <p>@product.Quantity</p>
+                        </td>
+                        <td>
+                            <p>Брой</p>
+                        </td>
+                        <td>
+                            <p>@product.Product.Price лв.</p>
+                        </td>
+                        <td>
+                            <p>@(product.Quantity * product.Product.Price) лв.</p>
+                        </td>
                     </tr>
                 }
-
-                <tr><!-- products end --></tr>
                 <tr>
-                    <td class="total-quantity" colspan="3"><span class="text-right">Общо покупки</span></td>
-                    <td class="total-amount">@Model.Total</td>
+                    <td colspan="6" rowspan="3">
+                        <p>Словом: ............</p>
+                    <td colspan="2">
+                        <p>Общо:</p>
+                    </td>
+                    <td>
+                        <p>@(string.Format($"{Model.Total:F2}")) лв.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>ДДС (%):</p>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>Всичко:</p>
+                    </td>
+                    <td>
+                        <p>@(string.Format($"{Model.Total:F2}")) лв</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9">
+                        <p>Основание за нулева ставка или неначисляване на ДДС: нерегистрирано лице, чл. 113 от ЗДДС</p>
+                        <p>Дата на данъчното събитие на доставката или дата, на която е получено плащането: @Model.Payment.PaymentDate.ToString("dd MMMM yyyy")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <p>Начин на плащане:</p>
+                        <p>По банков път</p>
+                        <p>Стоката (услугата) получена от: @Model.ClientName</p>
+                        <p>Подпис:...............................</p>
+                        <p>(подпис на получателя)</p>
+                    </td>
+                    <td colspan="6">
+                        <p>Банка: &bdquo;Първа Инвестиционна банка&ldquo;</p>
+                        <p>IBAN: BG85 FINV 9150 1416 7149 27</p>
+                        <p>BIC: FINVBGSF</p>
+                        <p>Съставил:</p>
+                        <p>Ралица Митева</p>
+                    </td>
                 </tr>
             </tbody>
         </table>
-        <p class="small">Ако имате въпроси относно тази фактура, моля свържете се с нас, телефон: <strong><a href="tel:+359882402642">+359 882402642</a></strong>, email: <strong><a href="mailto:office@focus-academy.bg">office@focus-academy.bg</a></strong> <br /> Благодарим Ви за покупката!</p>
-        <hr />
+
+
     </div>
     <div class="text-right"><button class="btn btn-print btn-default-transparent btn-hvr hvr-shutter-out-horizontal" onclick="print();">Принтирай <i class="fa fa-print pl-10"></i></button></div>
 </div>

@@ -16,6 +16,12 @@
         <div class="row form-block center-block p-30 light-gray-bg border-clear full-width-section">
             <div class="pv-10 ph-20 target object-visible">
                 <h1 > Създаване на профил </h1>
+                <div class="col-md-12">
+                    <div class="alert alert-info fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                         Моля попълнете „име“ и „фамилия“ на кирилица (използваме тези данни за създаването на сертификатите). По-късно можете да ги коригирате и в профила си.
+                    </div>
+                </div>
                 <div class="col-md-7">
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {

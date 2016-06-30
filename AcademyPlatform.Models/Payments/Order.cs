@@ -45,5 +45,6 @@ namespace AcademyPlatform.Models.Payments
             get { return _lineItems; }
             set { _lineItems = value; }
         }
+        
     }
 }

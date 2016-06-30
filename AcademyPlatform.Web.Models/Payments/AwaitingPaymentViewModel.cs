@@ -5,6 +5,8 @@
         public int SubscriptionId { get; set; }
 
         public string CourseName { get; set; }
+
+        public decimal? CoursePrice { get; set; }
         
     }
 }

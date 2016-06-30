@@ -137,7 +137,8 @@
             AwaitingPaymentViewModel viewModel = new AwaitingPaymentViewModel
             {
                 CourseName = course.Title,
-                SubscriptionId = subscription.Id
+                SubscriptionId = subscription.Id,
+                CoursePrice = course.Price
             };
 
             return View(viewModel);

@@ -886,3 +886,11 @@ h4 {
     max-width: 40%;
     height: auto;
 }
+
+
+.close {
+    font-size: 24px;
+    font-weight: bolder;
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
