@@ -6,6 +6,7 @@
 }
 @Html.Grid(Model).Columns(columns =>
 {
+    columns.Add(x => x.Id).Titled("Поръчка №");
     columns.Add(x => x.User.Username).Titled("Потребител");
     columns.Add(x => x.Course.Title).Titled("Курс");
     columns.Add(x => x.CourseId).Titled("Номер на курс");

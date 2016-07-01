@@ -5,19 +5,18 @@
         <div class="row form-block center-block p-30 light-gray-bg border-clear">
             <div class="pv-10 ph-20 target object-visible">
                 <h1> Вход във Focus Academy </h1>
-                
-                    <div class="col-md-12">
-                            @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-horizontal" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                <div class="col-md-12">
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                                     <div class="col-md-10">
@@ -35,7 +34,7 @@
                                     </div>*@
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Вход" class="btn btn-default pull-left"/>
+                                        <input type="submit" value="Вход" class="btn btn-default pull-left" />
 
                                         @*<span class="text-center text-muted">Влез с</span>
                                             <ul class="social-links colored circle clearfix">
@@ -52,11 +51,11 @@
                                         Все още нямате акаунт? <a href="@Url.RouteUrl("Register")">Регистрирайте се сега.</a>
                                     </p>
                                 </div>
-                            }
-                        </div>
-                        
-                    </div>
-                
+                    }
+                </div>
+
             </div>
+
         </div>
+    </div>
 </section>

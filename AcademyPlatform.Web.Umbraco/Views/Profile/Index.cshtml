@@ -158,7 +158,7 @@
                             {
                                 <tr>
                                     <td>
-                                        @order.Id
+                                        @order.Id.ToString().PadLeft(10,'0')
                                     </td>
                                     <td>
                                         @order.CreatedOn.ToString("dd MMMM yyyy")
