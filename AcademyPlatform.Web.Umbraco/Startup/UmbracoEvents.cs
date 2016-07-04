@@ -108,7 +108,7 @@
                 course.Description = (string)courseContent.Properties[nameof(DocumentTypes.Course.ShortDescription)].Value;
                 course.Title = courseContent.Name;
                 course.ModuleNames = (string)courseContent.Properties[nameof(DocumentTypes.Course.ModulesNames)].Value;
-                course.NumberOfHours = int.Parse((string)courseContent.Properties[nameof(DocumentTypes.Course.NumberOfHours)].Value);
+                course.NumberOfHours = (int)courseContent.Properties[nameof(DocumentTypes.Course.NumberOfHours)].Value;
                 coursesService.Update(course);
             }
         }
