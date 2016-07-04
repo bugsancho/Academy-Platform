@@ -19,5 +19,6 @@
 
         public LectureLinkViewModel NextLecture { get; set; }
 
+        public string AssesmentUrl { get; set; }
     }
 }

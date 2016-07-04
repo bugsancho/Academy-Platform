@@ -9,7 +9,7 @@
     using AcademyPlatform.Web.Models.Courses;
     using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.Services.Contracts;
-    
+
     using global::Umbraco.Core.Models;
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
@@ -23,6 +23,7 @@
         private readonly IUmbracoMapper _mapper;
         private readonly ISubscriptionsService _subscriptions;
         private readonly ICoursesContentService _coursesContentService;
+
 
         public LectureController(IUmbracoMapper mapper, ISubscriptionsService subscriptions, ILecturesService lectures, ICoursesContentService coursesContentService)
         {
@@ -109,6 +110,8 @@
             }
 
             lectureViewModel.Modules = modulesDictionary.Values;
+            lectureViewModel.AssesmentUrl = Url.RouteUrl("Assessment", new { courseNiceUrl = model.Content.Parent.Parent.UrlName });
+
 
             if (User.Identity.IsAuthenticated)
             {
