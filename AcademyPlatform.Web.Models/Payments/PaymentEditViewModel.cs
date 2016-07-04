@@ -15,6 +15,7 @@
         public int SubscriptionId { get; set; }
 
         [Display(Name = "Дата на транзакцията")]
+        [DataType(DataType.Date)]
         public DateTime PaymentDate { get; set; }
 
         [Display(Name = "Обща сума на транзакцията")]
