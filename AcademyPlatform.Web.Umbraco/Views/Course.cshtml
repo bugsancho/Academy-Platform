@@ -18,7 +18,7 @@
                         <br />
                         @if (!Model.HasActiveSubscription && Model.Status == CourseStatus.Active)
                         {
-                        <a href="@Model.JoinCourseUrl" class="btn btn-animated btn-course-unsigned-transparent btn-lg">Запиши се <i class="fa fa-sign-in"></i></a>
+                            <a href="@Model.JoinCourseUrl" class="btn btn-animated btn-course-unsigned-transparent btn-lg">Запиши се <i class="fa fa-sign-in"></i></a>
                         }
 
                     </div>
@@ -45,7 +45,7 @@
                         Вие вече сте преминал успешно този изпит!
                     </div>
                 }
-                else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.NotEligible)
+                else if (Model.HasActiveSubscription && Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.NotEligible)
                 {
                     <div class="alert alert-info fade in">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
@@ -53,9 +53,9 @@
                     </div>
                 }
                 @*//else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
-                //{
-                //    //TODO: Make alert with information about lockout
-                //}*@
+                    //{
+                    //    //TODO: Make alert with information about lockout
+                    //}*@
             </div>
 
             <!-- main start -->
@@ -68,7 +68,7 @@
                     <li><a href="#assessment" role="tab" data-toggle="tab"><i class="fa fa-pencil-square-o pr-10"></i>Изпит</a></li>
                     @if (Model.Files.Any())
                     {
-                    <li><a href="#files" role="tab" data-toggle="tab"><i class="fa fa-file pr-10"></i>Материали</a></li>
+                        <li><a href="#files" role="tab" data-toggle="tab"><i class="fa fa-file pr-10"></i>Материали</a></li>
                     }
                 </ul>
                 <!-- Tab panes -->
@@ -78,65 +78,65 @@
                         <div>
                             @foreach (var module in Model.Modules)
                             {
-                            <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
-                                <span class="icon default-bg small">@moduleIndex</span>
-                                <div class="body">
-                                    <h4 class="title">@module.Name</h4>
+                                <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                                    <span class="icon default-bg small">@moduleIndex</span>
+                                    <div class="body">
+                                        <h4 class="title">@module.Name</h4>
 
-                                    <div class="col-md-1">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div @*class="table-responsive"*@>
-                                                <table class="table table-colored table-hover">
-                                                    <tbody>
-                                                        @{
-                                                            var lectureIndex = 1;
-                                                        }
-                                                        @foreach (var lecture in module.LectureLinks)
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div @*class="table-responsive"*@>
+                                                    <table class="table table-colored table-hover">
+                                                        <tbody>
+                                                            @{
+                                                                var lectureIndex = 1;
+                                                            }
+                                                            @foreach (var lecture in module.LectureLinks)
                                                             {
-                                                            <tr>
-                                                                @if (lecture.IsDemo || Model.HasActiveSubscription)
+                                                                <tr>
+                                                                    @if (lecture.IsDemo || Model.HasActiveSubscription)
                                                                     {
-                                                                    <td class="text-left">@(moduleIndex).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
+                                                                        <td class="text-left">@(moduleIndex).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
                                                                         <td class="text-right">
 
                                                                             @if (Model.HasActiveSubscription)
                                                                             {
                                                                                 if (lecture.IsVisited)
                                                                                 {
-                                                                            <i class="fa fa-check"></i>
+                                                                                    <i class="fa fa-check"></i>
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                            <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
+                                                                                    <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
                                                                                 }
                                                                             }
                                                                             else
                                                                             {
-                                                                            <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
+                                                                                <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
                                                                             }
                                                                         </td>
                                                                     }
                                                                     else if (!Model.HasActiveSubscription)
                                                                     {
-                                                                    <td class="text-left text-muted">@(moduleIndex).@(lectureIndex++) @lecture.Name</td>
+                                                                        <td class="text-left text-muted">@(moduleIndex).@(lectureIndex++) @lecture.Name</td>
                                                                         <td class="text-right">
                                                                             <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>@*&nbsp;Платена лекция*@</span>
                                                                         </td>
-                                                                }
-                                                            </tr>
-                                                        }
+                                                                    }
+                                                                </tr>
+                                                            }
 
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                                                                moduleIndex++;
-                                                            }
+                                                                    moduleIndex++;
+                                                                }
 
                         </div>
                     </div>
@@ -189,26 +189,26 @@
                                 @*TODO figure out what information to display regarding Assessment*@
                                 @if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Eligible)
                                 {
-                                <a href="@Model.AssessmentUrl" title="Изпит">Направете изпита сега</a>
+                                    <a href="@Model.AssessmentUrl" title="Изпит">Направете изпита сега</a>
                                 }
                                 else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.NotEligible)
                                 {
                                     if (Model.HasActiveSubscription)
                                     {
-                                <span>Моля, преминете през всички лекции за да отключите изпита</span>
+                                        <span>Моля, преминете през всички лекции за да отключите изпита</span>
                                     }
                                     else
                                     {
-                                <span>Изпитът е достъпен след като се запишете за курса и преминете през всички лекции.</span>
+                                        <span>Изпитът е достъпен след като се запишете за курса и преминете през всички лекции.</span>
                                     }
                                 }
                                 else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.AlreadyCompleted)
                                 {
-                                <span>Вие успешно сте преминали този изпит! Може да видите генерирания сертификат във <a href="@Model.ProfileUrl">Вашия профил</a>.</span>
+                                    <span>Вие успешно сте преминали този изпит! Може да видите генерирания сертификат във <a href="@Model.ProfileUrl">Вашия профил</a>.</span>
                                 }
                                 else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
                                 {
-                                <span>Скоро сте направили неуспешен опит за изпита. Моля, проверете <a href="@Model.ProfileUrl">Вашия профил</a> за повече информация.</span>
+                                    <span>Скоро сте направили неуспешен опит за изпита. Моля, проверете <a href="@Model.ProfileUrl">Вашия профил</a> за повече информация.</span>
                                 }
 
                             </div>
@@ -222,24 +222,24 @@
                                 <div class="col-md-12">
                                     @if (Model.HasActiveSubscription)
                                     {
-                                    <table class="table table-bordered table-colored">
-                                        <thead>
-                                            <tr>
-                                                <th>Име</th>
-                                                <th>Размер</th>
-                                                @*<th>Изпит</th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach (var file in Model.Files)
-                                                {
+                                        <table class="table table-bordered table-colored">
+                                            <thead>
                                                 <tr>
-                                                    <td><a href="@file.Url" alt="@file.Name" title="@file.Name" download target="_blank">@file.Name</a></td>
-                                                    <td>@file.Size.ToFileSize()</td>
+                                                    <th>Име</th>
+                                                    <th>Размер</th>
+                                                    @*<th>Изпит</th>*@
                                                 </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var file in Model.Files)
+                                                {
+                                                    <tr>
+                                                        <td><a href="@file.Url" alt="@file.Name" title="@file.Name" download target="_blank">@file.Name</a></td>
+                                                        <td>@file.Size.ToFileSize()</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
                                     }
                                     else
                                     {
