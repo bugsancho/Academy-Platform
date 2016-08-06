@@ -1,5 +1,9 @@
 ﻿namespace AcademyPlatform.Services.Tests
 {
+    using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using AcademyPlatform.Models;
     using AcademyPlatform.Models.Assessments;
     using AcademyPlatform.Models.Courses;
     using AcademyPlatform.Services.Contracts;
@@ -94,5 +98,148 @@
             // Assert
             assessmentRequestRepositoryMock.Verify(x => x.Add(It.IsAny<AssessmentRequest>()), Times.Once);
         }
+
+        [Test]
+        public void CreateAssesmentRequest_ShouldSaveChangesToAssesmentRepository_AfterAssmentRequestIsAdded()
+        {
+            var assessmentRequestRepositoryMock = new Mock<IRepository<AssessmentRequest>>();
+            assessmentRequestRepositoryMock.Setup(x => x.Add(It.IsAny<AssessmentRequest>()));
+            assessmentRequestRepositoryMock.Setup(x => x.SaveChanges());
+
+            var service = SetupAssessmentsService(assessmentRequestRepositoryMock.Object);
+
+            var assementRequest = new AssessmentRequest();
+
+            // Act
+            service.CreateAssesmentRequest(assementRequest);
+
+
+            // Assert
+            assessmentRequestRepositoryMock.Verify(x => x.SaveChanges(), Times.Once);
+        }
+
+        [Test]
+        public void GetAssessmentRequest_ShouldReturnAssesmentRequest_WhenGivenValidId()
+        {
+            var assesmentIdToGet = 5;
+
+            var assesmentRequest = new AssessmentRequest();
+            assesmentRequest.Id = assesmentIdToGet;
+
+            var assessmentRequestRepositoryMock = new Mock<IRepository<AssessmentRequest>>();
+            assessmentRequestRepositoryMock.Setup(x => x.Add(It.IsAny<AssessmentRequest>()));
+            assessmentRequestRepositoryMock.Setup(x => x.SaveChanges());
+            assessmentRequestRepositoryMock.Setup(x => x.GetById(It.IsAny<int>()));
+
+            var service = SetupAssessmentsService(assessmentRequests: assessmentRequestRepositoryMock.Object);
+
+
+            service.GetAssessmentRequest(assesmentIdToGet);
+
+            assessmentRequestRepositoryMock.Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
+        }
+
+        [Test]
+        public void GetAssessmentRequest_ShouldThrowArgumentOutOfRangeException_WhenGivenNegativeIntegerAsId()
+        {
+            var assesmentIdToGet = -5;
+
+            var assesmentRequest = new AssessmentRequest();
+            assesmentRequest.Id = assesmentIdToGet;
+
+            var assessmentRequestRepositoryMock = new Mock<IRepository<AssessmentRequest>>();
+            assessmentRequestRepositoryMock.Setup(x => x.Add(It.IsAny<AssessmentRequest>()));
+            assessmentRequestRepositoryMock.Setup(x => x.SaveChanges());
+            assessmentRequestRepositoryMock.Setup(x => x.GetById(It.IsAny<int>()));
+
+            var service = SetupAssessmentsService(assessmentRequests: assessmentRequestRepositoryMock.Object);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => service.GetAssessmentRequest(assesmentIdToGet));
+        }
+
+        [Test]
+        public void GetLatestForUser_ShouldReturnAssesmentRequest_WhenGivenExistingUsernameAndAssesmentId()
+        {
+            #region listOfRequests
+            var list = new List<AssessmentRequest>()
+            {
+                new AssessmentRequest()
+                {
+                    AssessmentExternalId = 1,
+                    CreatedOn = DateTime.Now,
+                    DeletedOn = null,
+                    Id = 1,
+                    IsCompleted = false,
+                    IsDeleted = false,
+                    ModifiedOn = null,
+                    QuestionIds = "question ids",
+                    User = new User()
+                    {
+                        Username = "Ivan"
+                    },
+                    UserId = 1
+                },
+                new AssessmentRequest()
+                {
+                    AssessmentExternalId = 2,
+                    CreatedOn = DateTime.Now,
+                    DeletedOn = null,
+                    Id = 2,
+                    IsCompleted = false,
+                    IsDeleted = false,
+                    ModifiedOn = null,
+                    QuestionIds = "question ids",
+                    User = new User()
+                    {
+                        Username = "Stamat"
+                    },
+                    UserId = 2
+                },
+                new AssessmentRequest()
+                {
+                    AssessmentExternalId = 3,
+                    CreatedOn = DateTime.Now,
+                    DeletedOn = null,
+                    Id = 3,
+                    IsCompleted = false,
+                    IsDeleted = false,
+                    ModifiedOn = null,
+                    QuestionIds = "question ids",
+                    User = new User()
+                    {
+                        Username = "Pesho"
+                    },
+                    UserId = 3
+                },
+            };
+
+            #endregion
+
+            var userPesho = new User();
+            userPesho.Username = "Pesho";
+
+            var expectedRequest = new AssessmentRequest();
+            expectedRequest.User = userPesho;
+            expectedRequest.AssessmentExternalId = 3;
+
+            var assessmentRequestRepositoryMock = new Mock<IRepository<AssessmentRequest>>();
+            assessmentRequestRepositoryMock.Setup(x => x.All()).Returns(list.AsQueryable());//
+
+            var sevice = SetupAssessmentsService(assessmentRequestRepositoryMock.Object);
+            var result = sevice.GetLatestForUser("Pesho", 3);
+
+            Assert.AreEqual(expectedRequest.AssessmentExternalId, result.AssessmentExternalId);
+            Assert.AreEqual(expectedRequest.User.Username, result.User.Username);
+        }
+
+        [Test]
+        public void GetNextAssessmentAttemptDate_ShouldReturnNull_IfAssesmentSubmissionIsNotFound()
+        {
+            var service = SetupAssessmentsService();
+
+            Assert.AreEqual(null, service.GetNextAssessmentAttemptDate("NotExistingUser", 1));
+        }
+
+       
     }
 }

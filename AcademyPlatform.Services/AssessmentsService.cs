@@ -48,6 +48,11 @@
 
         public AssessmentRequest GetAssessmentRequest(int requestId)
         {
+            if (requestId <= 0)
+            {
+                throw new ArgumentOutOfRangeException("requestId must be a positive integer.");
+            }
+
             AssessmentRequest request = _assessmentRequests.GetById(requestId);
             return request;
         }
