@@ -26,6 +26,11 @@
 
         public Lecture GetLectureByExternalId(int externalId)
         {
+            if (externalId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(externalId), "Parameter must be a possitive integer");
+            }
+
             return _lectures.All().FirstOrDefault(x => x.ExternalId == externalId);
         }
 

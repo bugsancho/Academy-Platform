@@ -91,6 +91,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AssessmentsServiceTests.cs" />
+    <Compile Include="LecturesServiceTests.cs" />
+    <Compile Include="Mocks\RepositoryMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

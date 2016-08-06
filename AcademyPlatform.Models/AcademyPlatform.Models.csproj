@@ -54,6 +54,7 @@
     <Compile Include="Assessments\Question.cs" />
     <Compile Include="Assessments\QuestionSubmission.cs" />
     <Compile Include="Assessments\QuestionType.cs" />
+    <Compile Include="Base\IEntity.cs" />
     <Compile Include="Base\ILoggedEntity.cs" />
     <Compile Include="Base\ISoftDeletableEntity.cs" />
     <Compile Include="Base\LoggedEntity.cs" />
