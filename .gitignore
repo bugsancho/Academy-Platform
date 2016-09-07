@@ -173,6 +173,14 @@ FakesAssemblies/
 EventSystem.Web/Event/CreateEvent.aspx.designer.cs
 EventSystem.Web/Event/CreateEvent.aspx.designer.cs
 logs
-Images
 App_Data
 StorylineContent
+.vs
+machineKey.config
+smtp.config
+ConnectionStrings.config
+Media
+/Certificates/
+/AcademyPlatform.Web.Umbraco/certificates/
+/AcademyPlatform.Web.Umbraco/Config/ConnectionStrings.Release.config
+/AcademyPlatform.Web.Umbraco/macroScripts/web.config

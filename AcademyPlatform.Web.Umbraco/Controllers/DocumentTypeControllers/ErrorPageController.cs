@@ -2,7 +2,7 @@
 {
     using System.Web.Mvc;
 
-    using AcademyPlatform.Web.Umbraco.DocumentTypeModels;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Models;
@@ -14,7 +14,7 @@
         public override ActionResult Index(RenderModel model)
         {
             Response.StatusCode = model.Content.GetPropertyValue<int>(nameof(ErrorPage.ErrorCode));
-
+            //Response.TrySkipIisCustomErrors = true;
             return base.Index(model);
         }
     }

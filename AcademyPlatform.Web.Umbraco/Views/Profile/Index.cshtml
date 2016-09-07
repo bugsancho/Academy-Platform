@@ -1,0 +1,184 @@
+﻿@using AcademyPlatform.Models.Assessments
+@using AcademyPlatform.Models.Courses
+@using AcademyPlatform.Web.Models.Account
+@model ProfileViewModel
+@{
+    Layout = "~/Views/Site.cshtml";
+
+}
+<script type="text/javascript">
+    function initalizeUnobtrusiveValidation(formSelector) {
+        $.validator.unobtrusive.parse(formSelector);
+    }
+</script>
+<section class="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <ul class="nav nav-tabs style-1 space-top">
+                    <li class="active"><a href="#profile" data-toggle="tab"><i class="fa fa-user pr-10"></i>Обща информация</a></li>
+                    <li><a href="#change-password" data-toggle="tab"><i class="fa fa-lock pr-10"></i>Смяна на парола</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div id="profile" class="tab-pane fade in active">
+                        <h3>Обща информация</h3>
+
+                        <section id="update-profile-placeholder">
+                            @Html.Action("ProfileInfo")
+                        </section>
+
+                    </div>
+                    <div id="change-password" class="tab-pane fade">
+                        <h3>Смяна на паролата</h3>
+                        <section id="change-password-placeholder">
+                            @{
+                                Html.RenderPartial("~/Views/Profile/_PasswordPartial.cshtml", new ChangePasswordViewModel());
+                            }
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h2 class="text-center">Моите обучения</h2>
+                <div class="table-responsive">
+                    @if (Model.ProgressViewModels.Any())
+                    {
+                        <table class="table table-bordered table-colored">
+                            <thead>
+                                <tr>
+                                    <th>Обучение</th>
+                                    <th>Статус</th>
+                                    <th>Изпит</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var courseProgress in Model.ProgressViewModels)
+                                {
+                                    <tr>
+                                        <td>
+                                            <a href="@courseProgress.CourseUrl">@courseProgress.CourseName</a>
+                                        </td>
+                                        <td>
+                                            @if (courseProgress.CourseProgress.SubscriptionStatus == SubscriptionStatus.Active)
+                                            {
+                                                <span>Преминали сте @courseProgress.CourseProgress.VisitedLecturesCount от @courseProgress.CourseProgress.TotalLecturesCount лекции</span>
+                                            }
+                                            else if (courseProgress.CourseProgress.SubscriptionStatus == SubscriptionStatus.AwaitingPayment)
+                                            {
+                                                <span>Очаква се плащане за този курс <a href="@courseProgress.AwaitingPaymentUrl">детайли</a></span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                var assessmentEligibilityStatus = courseProgress.CourseProgress.AssessmentEligibilityStatus;
+                                            }
+                                            @if (assessmentEligibilityStatus == AssessmentEligibilityStatus.AlreadyCompleted)
+                                            {
+                                                <span>Изпитът е успешно положен</span>
+                                            }
+                                            else if (assessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
+                                            {
+                                                <span>Ще може отново да направите изпита на: @(courseProgress.CourseProgress.LockoutLift?.ToString("dd MMMM yyyy - HH:mm"))</span>
+                                            }
+                                            else if (assessmentEligibilityStatus == AssessmentEligibilityStatus.Eligible)
+                                            {
+                                                <span>Направете изпита <a href="@courseProgress.AssessmentUrl" title="изпит">сега</a></span>
+                                            }
+                                            else
+                                            {
+                                                <span>Преминете всички лекции преди да отключите изпита</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                                }
+                            </tbody>
+                        </table>
+                                                }
+                                                else
+                                                {
+                                                    <div class="alert  alert-icon alert-warning">
+                                                        <i class="fa fa-warning"></i> Нямате записани обучения. Моля, разгледайте <a href="/courses" class="alert-link">нашите предложения</a>.
+                                                    </div>
+                                                }
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h2 class="text-center">Моите серификати</h2>
+                @if (Model.Certificates.Any())
+                {
+                    <table class="table table-bordered table-colored">
+                        <thead>
+                        <tr>
+                            <th>Обучение</th>
+                            <th>Дата на издаване</th>
+                            <th>Връзка</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var certificate in Model.Certificates)
+                        {
+                            <tr>
+                                <td>
+                                    @certificate.Course.Title
+                                </td>
+                                <td>
+                                    @certificate.CreatedOn.ToString("dd MMMM yyyy - HH:mm")
+                                </td>
+                                <td>
+                                    (<a href="@Url.RouteUrl("Certificate", new { certificateCode = certificate.Code })" title="сертификат">виж</a>)
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате взет сертификат. За да получите сертификат трябва да прочетете всички лекции на дадено обучение, и след това да преминете успешно изпита му!
+                    </div>
+                }
+            </div>
+            
+            <div class="col-md-12">
+                <h2 class="text-center">Моите фактури</h2>
+                @if (Model.Orders.Any())
+                {
+                    <table class="table table-bordered table-colored">
+                        <thead>
+                            <tr>
+                                <th>Номер</th>
+                                <th>Дата на издаване</th>
+                                <th>Сума</th>
+                                <th>Детайли</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.Orders)
+                            {
+                                <tr>
+                                    <td>
+                                        @order.Id.ToString().PadLeft(10,'0')
+                                    </td>
+                                    <td>
+                                        @order.CreatedOn.ToString("dd MMMM yyyy")
+                                    </td> 
+                                    <td>
+                                        @order.Total
+                                    </td>
+                                    <td>
+                                        (<a href="@Url.RouteUrl("OrderDetails", new { orderId = order.Id })" title="фактура">виж</a>)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i> Нямате направени плащания. След като направите плащане, тук ще може да видите вашата фактура!</div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

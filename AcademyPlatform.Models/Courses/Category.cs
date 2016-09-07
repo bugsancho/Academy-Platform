@@ -1,6 +1,8 @@
 ﻿namespace AcademyPlatform.Models.Courses
 {
-    public class Category
+    using AcademyPlatform.Models.Base;
+
+    public class Category : SoftDeletableLoggedEntity
     {
         public int Id { get; set; }
 

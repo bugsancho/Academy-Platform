@@ -1,0 +1,83 @@
+﻿@model AcademyPlatform.Web.Models.Payments.AwaitingPaymentViewModel
+@{
+    Layout = "~/Views/Site.cshtml";
+}
+
+@section head
+{
+    <title>Очаквано плащане - Фокус Академия</title>
+}
+
+<div class="container">
+    <h2>Очаквано плащане за обучение - @Model.CourseName</h2>
+    <ul>
+        <li><strong>Успешно сте записани за курс: </strong>@(Model.CourseName).</li>
+        <li><strong>За да получите пълен достъп до обучението, моля направете плащане към нашата сметка със следната информация:</strong></li>
+        <li><strong>Основание за плащане: </strong>"Заявка за записване за курс №@Model.SubscriptionId"</li>
+        <li><strong>Цена на услугата: </strong>@Model.CoursePrice лв.</li>
+        <li><strong>IBAN: </strong>BG85 FINV 9150 1416 7149 27</li>
+        <li><strong>BIC:</strong> FINVBGSF</li>
+        <li><strong>Първа Инвестиционна Банка АД</strong></li>
+        <li><strong>Титуляр на сметката: ГД „Фокус Академия“</strong></li>
+        <li>
+            <p>
+                Веднага след като потвърдим направеното плащане за обучението, ще получите имейл на посочената при регистрацията електронна поща с потвърждение, че достъпът Ви е активиран.
+                Ако имате въпроси, можете да се свържете с нас на телефон: 0882402642 или на имейл: <a href="mailto:office@focus-academy.bg">office@focus-academy.bg</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+
+
+<div class="section-separator"><a href="#faregsteps" class="go-down-btn circle"> <span class="go-down-btn-inner circle"> <i class="fa fa-arrow-down"></i> </span> </a></div>
+<!-- ================ -->
+<section id="faregsteps" class="section pt-70 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h4 class="text-center text-orange">НАУЧЕТЕ НОВИ НЕЩА</h4>
+                <h2 class="text-center">В ТРИ ЛЕСНИ СТЪПКИ</h2>
+            </div>
+            <div class="col-md-4 ">
+                <div class="pv-30 ph-20 step object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="orange-circle">1</span> <i class="fa fa-desktop step-icon"></i>
+                    <h3 class="pt-20 step-title">Запишете се за обучение</h3>
+                    <p class="step-text">Разгледайте нашия каталог с обучения и изберете това, което ви интересува. С може да учите навсякъде, по всяко време!</p>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="pv-30 ph-20 step object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="orange-circle">2</span> <i class="fa fa-bar-chart step-icon"></i>
+                    <h3 class="pt-20 step-title">Положете успешно изпит</h3>
+                    <p class="step-text">Всяко обучение завършва с изпит като задължително трябва да постигнете 80% верни отговори, за да го преминете успешно.</p>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="pv-30 ph-20 step object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                    <span class="orange-circle">3</span> <i class="fa fa-flag-o step-icon"></i>
+                    <h3 class="pt-20 step-title">Вземете си сертификата</h3>
+                    <p class="step-text">Вече можете да свалите вашия сертификат в .pdf формат и да се похвалите с него.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="footer-top animated-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Изберете си обучение!</h2>
+                            <h2>Запишете се безплатно!</h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="mt-10"><a href="/courses/" title="Courses" class="btn btn-animated btn-lg btn-orange" data-id="2074">ВСИЧКИ ОБУЧЕНИЯ <i class="fa fa-book"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,37 +1,67 @@
 ﻿@using AcademyPlatform.Models.Courses
 @inherits UmbracoViewPage<IList<AcademyPlatform.Web.Models.Courses.CoursesListViewModel>>
-<div class="filters">
-    <ul class="nav nav-pills">
-        <li class="active"><a href="#" data-filter="*">Всички</a></li>
-        @foreach (var category in (IEnumerable<Category>)ViewBag.Categories)
-        {
-            <li><a href="#" data-filter="[data-category=@category.Id]">@category.Title</a></li>
-        }
-    </ul>
-</div>
+@{
+    //TODO Use this variable and to the filter hiding magic!
+    bool shouldHideFilters = ViewBag.ShouldHideFilters;
+}
+@if (!shouldHideFilters)
+{
+    <div class="filters">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#" data-filter="*">Всички</a></li>
+            @foreach (var category in (IEnumerable<Category>)ViewBag.Categories)
+            {
+                <li><a href="#" data-filter="[data-category=@category.Id]">@category.Title</a></li>
+            }
+        </ul>
+    </div>
+}
 <!--Isotope filters END-->
 <div class="isotope-container-fitrows grid-space-10">
     @foreach (var course in Model)
     {
-        <div data-category="@(course.Category.Id)" class="isotope-item col-md-4">
-            <div class="image-box style-2 mb-20 shadow bordered light-gray-bg text-center">
-                <div class="overlay-container">
-                    <img src="@Url.Content(course.ImageUrl)" style="height: 325px" alt="">
-                    <div class="overlay-to-top">
-                        <p class="small margin-clear">
-                            <em>@course.Title</em>
-                        </p>
+        <div data-category="@(course.Category.Id)" class="isotope-item col-md-4 col-sm-6 col-xs-12 course-box">
+            <div class="pv-30 ph-20 feature-box courses text-center object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall">
+                <div class="course-bg" style="height: 555px; position: relative">
+                    <img src="@Url.Content(course.ImageUrl)" class="course-img" style="height: 195px;width: 100%" alt="@course.Title">
+                    <div class="course-owner">
+                        <a href="@course.PartnerPageUrl" target="_blank">
+                            <img src="@course.PartnerLogoUrl" class="course-owner-logo" alt="Партньор" />
+                        </a>
+                    </div>
+                    <div class="ph-30 clearfix">
+                        <h3 class="course-title" style="margin-top: 10px;">@course.Title</h3>
+                        @*<p class="course-category">Платено обучение</p>*@
+                        <div class="course-short-description">
+                            @Html.Raw(course.ShortDescription)
+                        </div>
+                    </div>
+                    <div class="pb-30" style="position: absolute;bottom: 15px;width: 100%;">
+
+                        @if (course.IsJoined)
+                        {
+                            <br />
+                            <a href="@course.CourseUrl" class="btn-default btn-lg">Към курса</a>
+                        }
+                        else if (course.Status == CourseStatus.Active)
+                        {
+                            <div>
+                                <p><a href="@course.CourseUrl"> Вижте повече</a></p>
+                                <a href="@course.JoinCourseUrl" class="btn-orange btn-lg">Запишете се</a>
+                            </div>
+                        }
+                        else //if (course.Status == CourseStatus.AwaitingRelease)
+                        {
+                            <div style="bottom: -45px; position: relative">
+                                <p><a href="@course.CourseUrl"> Вижте повече</a></p>
+                                <div class="alert alert-danger" style="margin: 0;">
+                                    <strong>Очаквайте през Септември!</strong>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div class="body">
-                <h3>@course.Title</h3>
-                <div class="separator"></div>
-                <p>@Html.Raw(course.ShortDescription).</p>
-                <a href="@course.CourseUrl" class="btn btn-default btn-sm btn-animated margin-clear">Повече за Курса<i class="fa fa-arrow-right pl-10"></i></a>
-            </div>
         </div>
-
     }
 </div>
-

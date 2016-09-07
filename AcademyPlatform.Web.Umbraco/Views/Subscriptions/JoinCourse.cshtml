@@ -1,0 +1,55 @@
+﻿@model AcademyPlatform.Web.Models.Courses.JoinCourseViewModel
+@{
+    Layout = "~/Views/Site.cshtml";
+}
+<div class="container">
+    <h2>Записване за обучение - @Model.CourseName</h2>
+    @if (Model.RequiresBillingInfo)
+    {
+        <h3>Цена на обучението: @Model.CoursePrice лева.</h3>
+        <p>За да активираме достъпа ви до това обучение е необходимо да направите плащане по банков път. Незабавно след потвърждаването на направеното плащане, ще получите имейл с потвърждение, че достъпът ви е активиран.</p>
+    }
+    <div class="form-horizontal">
+
+        @using (Html.BeginForm())
+        {
+
+            if (Model.RequiresBillingInfo)
+            {
+                @Html.EditorFor(x => x.BillingInfo)
+            }
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AcceptLicenseTerms, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AcceptLicenseTerms)
+                    @Html.ValidationMessageFor(model => model.AcceptLicenseTerms, "", new { @class = "text-danger" })
+                    <span>Прочетох и приемам <a href="@Model.LicenseTermsUrl" target="_blank">общите условия за ползване</a> на Focus Academy.</span>
+                </div>
+            </div>
+            if (Model.RequiresBillingInfo)
+            {
+                <p>
+                    *Ако попълните име на организация, системата задължително изисква да посочите и ЕИК/БУЛСТАТ.
+                </p>
+                <p>Фактурата за направеното плащане ще получите на имейла, който сте използвали при регистрацията.</p>
+
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <button class="btn btn-group btn-danger btn-animated">Поръчка със задължение за плащане <i class="fa fa-check"></i></button>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p>Това обучение е безплатно и ще получите достъп до него веднага след като прочетете и се съгласите на нашите условия.</p>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <button class="btn btn-group btn-danger btn-animated">Запиши се <i class="fa fa-check"></i></button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

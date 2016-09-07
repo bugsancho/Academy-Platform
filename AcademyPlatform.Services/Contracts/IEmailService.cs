@@ -2,6 +2,6 @@
 {
     public interface IEmailService
     {
-        bool SendMail(string recipient, string body, string subject);
+        bool SendMail(string recipient, string subject, string body);
     }
 }

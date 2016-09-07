@@ -4,6 +4,7 @@
     {
         None,
         Active,
+        AwaitingPayment,
         Expired,
         Cancelled
     }

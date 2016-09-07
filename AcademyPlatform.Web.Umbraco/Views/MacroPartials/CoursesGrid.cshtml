@@ -1,5 +1,12 @@
-﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+﻿@using AcademyPlatform.Web.Models.Umbraco.Macros
+@inherits Umbraco.Web.Macros.PartialViewMacroPage
 
 @{
-    Html.RenderAction("RenderCoursesGrid", "CoursesSurface");
+    int numberOfCourses;
+    int hideFiltersValue;
+    int.TryParse(Model.MacroParameters[nameof(CoursesGrid.NumberOfCourses)].ToString(), out numberOfCourses);
+    int.TryParse(Model.MacroParameters[nameof(CoursesGrid.HideFilters)].ToString(), out hideFiltersValue);
+
+    bool shouldHideFilters = hideFiltersValue == 1;
+    Html.RenderAction("RenderCoursesGrid", "CoursesSurface", new { numberOfCourses, shouldHideFilters });
 }

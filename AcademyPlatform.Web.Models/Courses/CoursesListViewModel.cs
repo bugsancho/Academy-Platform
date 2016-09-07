@@ -15,5 +15,14 @@
 
         public string ShortDescription { get; set; }
 
+        public string JoinCourseUrl { get; set; }
+
+        public bool IsJoined { get; set; }
+
+        public string PartnerLogoUrl { get; set; }
+
+        public string PartnerPageUrl { get; set; }
+
+        public CourseStatus Status { get; set; }
     }
 }

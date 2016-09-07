@@ -16,7 +16,7 @@ namespace AcademyPlatform.Web.App_Start
     using AcademyPlatform.Models.Courses.Validators;
     using AcademyPlatform.Services;
     using AcademyPlatform.Web.Infrastructure.Sanitizers;
-    using AcademyPlatform.Web.Models.Courses.Validators;
+    using AcademyPlatform.Web.Validators.Courses;
 
     using FluentValidation;
 

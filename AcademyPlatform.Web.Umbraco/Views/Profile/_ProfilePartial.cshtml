@@ -1,0 +1,45 @@
+﻿@model  AcademyPlatform.Web.Models.Account.UpdateProfileViewModel
+<div class="row">
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    @Model.SuccessMessage
+                </div>
+            </div>
+        </div>
+    }
+    <div class="col-md-12">
+        <ul>
+            <li><strong>Име: </strong>@Model.FirstName</li>
+            <li><strong>Презиме: </strong>@Model.MiddleName</li>
+            <li><strong>Фамилия: </strong>@Model.LastName</li>
+            <li><strong>Oрганизация: </strong>@Model.Company</li>
+            <li><strong>Телефон: </strong>@Model.Phone</li>
+        </ul>
+        <span id="update-profile-loader" style="display: none">Изчакайте...</span>
+        @Ajax.ActionLink("Промени информацията", "UpdateProfile", null, new AjaxOptions
+   {
+       HttpMethod = "GET",
+       InsertionMode = InsertionMode.Replace,
+       LoadingElementId = "update-profile-loader",
+       UpdateTargetId = "update-profile-placeholder",
+       OnBegin = "$('#update-profile-button').hide()",
+       OnSuccess = "console.log('cussess');"
+   }, new { id = "update-profile-button", @class = "btn btn-warning" })
+        @*<a href="javascript:$('#update-profile-placeholder').show()" id="show-update-profile-button" class="btn btn-animated btn-warning">Промени информацията <i class="fa fa-cog"></i></a>*@
+    </div>
+</div>
+@*<script>
+    $(function () {
+        var button = $('#update-profile-button'),
+            innerText = button.html(),
+            iconElement = $('<i>');
+
+        iconElement.addClass('fa fa-cog');
+        button.html(innerText + iconElement.html());
+    })
+
+</script>*@

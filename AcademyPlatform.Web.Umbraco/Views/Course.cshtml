@@ -1,74 +1,288 @@
-﻿@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.CourseDetailsViewModel>
-
+﻿@using AcademyPlatform.Models.Assessments
+@using AcademyPlatform.Models.Courses
+@using AcademyPlatform.Web.Infrastructure.Extensions
+@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.CourseDetailsViewModel>
+@{
+    int moduleIndex = 1;
+}
 <section class="main-container padding-ver-clear">
     <div class="container pv-40">
         <div class="row">
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-md-8">
-                <h1 class="title">@Model.Title</h1>
-                <div class="separator"></div>
-                <a class="btn btn-default" href="@Model.CoursesPageUrl">Обрато към курсовете</a>
-                <img src="@Model.ImageUrl" alt="@Model.Title" />
-                @Html.Raw(Model.DetailedDescription)
-                <h3>Цели на курса</h3>
-                <div class="separator">
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-icons">
-                            <li><i class="fa fa-circle-o"></i> цел едно</li>
-                            <li><i class="fa fa-circle-o"></i> цел две</li>
-                            <li><i class="fa fa-circle-o"></i> цел три</li>
-                            <li><i class="fa fa-circle-o"></i> цел четири</li>
-                        </ul>
-                    </div>
-                </div>
-                <h3>Сертификация след приключване на курса</h3>
-                <div class="separator">
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <ul class="list-icons">
-                            <li><i class="fa fa-circle-o"></i> сертификат едно (например за 100%) </li>
-                            <li><i class="fa fa-circle-o"></i> сертификат две (от 80 до 99 %) </li>
-                            <li><i class="fa fa-circle-o"></i> сертификат три (60 до 79%) </li>
-                            <li><i class="fa fa-circle-o"></i> сертификат четири (под 60% )</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="separator"></div>
-                <h3>Програма на курса</h3>
-                <div class="row">
-                    <div class="col-md-6">
-                        <ol type="1">
-                            <li> Тема на лекция едно</li>
-                            <li> Тема на лекция две</li>
-                            <li> Тема на лекция три</li>
-                            <li> Тема на лекция четири</li>
-                        </ol>
+
+            <div class="col-md-12">
+                <div class="course-img-container" style="background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(@Model.ImageUrl) center center; background-size: 100%; background-repeat: no-repeat">
+                    <div class="inner">
+                        <h1>@Model.Title</h1>
+                        <br />
+                        @Html.Raw(Model.ShortDescription)
+                        <br />
+                        @if (!Model.HasActiveSubscription && Model.Status == CourseStatus.Active)
+                        {
+                            <a href="@Model.JoinCourseUrl" class="btn btn-animated btn-course-unsigned-transparent btn-lg">Запиши се <i class="fa fa-sign-in"></i></a>
+                        }
+
                     </div>
                 </div>
             </div>
-            <!-- main end -->
-            <!-- sidebar start -->
-            <!-- ================ -->
-            <aside class="col-md-4 col-lg-3 col-lg-offset-1">
-                <div class="sidebar">
-                    <div class="block clearfix">
-                        <h3 class="title">Project Info</h3>
-                        <div class="separator-2"></div>
-                        <ul class="list margin-clear">
-                            <li><strong>Продължителност: </strong> <span class="text-left"> 50 учебни часа</span></li>
-                            <li><strong>Зала: </strong> <span class="text-left"> зала едно на НДК</span></li>
-                            <li><strong>Лектор: </strong> <span class="text-left">@Model.LecturerName </span></li>
-                            <li><strong>Категория: </strong> <span class="text-left">@Model.Category.Title </span></li>
-                        </ul>
-                        <a href="@Url.Action("Apply","CoursesAdmin",new {Area = string.Empty})" class="btn btn-danger btn-lg"> Кандидатствай </a>
+            <div class="col-md-12">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                        <div class="alert  alert-icon alert-warning"><i class="fa fa-warning"></i>@Html.Raw(Model.ErrorMessage)</div>
+                   
+                }
+
+                @if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Eligible)
+            {
+                    <div class="alert alert-success">
+                        <h4><i class="fa fa-thumbs-o-up"></i>Вие преминахте това обучение!</h4>
+                        Натиснете&nbsp;<a href="@Model.AssessmentUrl" target="_blank" title="exam">тук</a>,&nbsp;за да започнете вашия изпит.
                     </div>
+                }
+                else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.AlreadyCompleted)
+                {
+                    <div class="alert alert-info fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        Вие вече сте преминал успешно този изпит!
+                    </div>
+                }
+                else if (Model.HasActiveSubscription && Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.NotEligible)
+                {
+                    <div class="alert alert-info fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                        За да получите достъп до изпита на това обучение, моля прочете всичките му лекции.
+                    </div>
+                }
+                @*//else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
+                    //{
+                    //    //TODO: Make alert with information about lockout
+                    //}*@
+            </div>
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-8">
+                <ul class="nav nav-tabs style-1 space-top" role="tablist">
+                    <li class="active"><a href="#modules" role="tab" data-toggle="tab"><i class="fa fa-book pr-10"></i>Модули</a></li>
+                    <li><a href="#description" role="tab" data-toggle="tab"><i class="fa fa-list pr-10"></i>Описание</a></li>
+                    <li><a href="#certificate" role="tab" data-toggle="tab"><i class="fa fa-certificate pr-10"></i>Сертификат</a></li>
+                    <li><a href="#assessment" role="tab" data-toggle="tab"><i class="fa fa-pencil-square-o pr-10"></i>Изпит</a></li>
+                    @if (Model.Files.Any())
+                    {
+                        <li><a href="#files" role="tab" data-toggle="tab"><i class="fa fa-file pr-10"></i>Материали</a></li>
+                    }
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="modules">
+                        <h3>Модули</h3>
+                        <div>
+                            @foreach (var module in Model.Modules)
+                            {
+                                <div class="pv-20 ph-20 feature-box-2 boxed white-bg">
+                                    <span class="icon default-bg small">@moduleIndex</span>
+                                    <div class="body">
+                                        <h4 class="title">@module.Name</h4>
+
+                                        <div class="col-md-1">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div @*class="table-responsive"*@>
+                                                    <table class="table table-colored table-hover">
+                                                        <tbody>
+                                                            @{
+                                                                var lectureIndex = 1;
+                                                            }
+                                                            @foreach (var lecture in module.LectureLinks)
+                                                            {
+                                                                <tr>
+                                                                    @if (lecture.IsDemo || Model.HasActiveSubscription)
+                                                                    {
+                                                                        <td class="text-left">@(moduleIndex).@(lectureIndex++) <a href="@lecture.Url">@lecture.Name</a></td>
+                                                                        <td class="text-right">
+
+                                                                            @if (Model.HasActiveSubscription)
+                                                                            {
+                                                                                if (lecture.IsVisited)
+                                                                                {
+                                                                                    <i class="fa fa-check"></i>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <a href="@lecture.Url"><i class="fa fa-play"></i>&nbsp;Старт</a>
+                                                                                }
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span title="Безплатна демо лекция" class="badge text-warning text-"><i class="fa fa-unlock"></i>&nbsp;Демо</span>
+                                                                            }
+                                                                        </td>
+                                                                    }
+                                                                    else if (!Model.HasActiveSubscription)
+                                                                    {
+                                                                        <td class="text-left text-muted">@(moduleIndex).@(lectureIndex++) @lecture.Name</td>
+                                                                        <td class="text-right">
+                                                                            <span title="Запишете се за курса за да получите достъп" class="badge text-warning"><i class="fa fa-lock"></i>@*&nbsp;Платена лекция*@</span>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                            }
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                                    moduleIndex++;
+                                                                }
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="description">
+                        <h3>Описание</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.Raw(Model.DetailedDescription)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="certificate">
+                        <h3>Сертификат</h3>
+                        <p>При успешно положен изпит, ще ви бъде генериран сертификат, подобен на този:</p>
+                        <div class="row">
+                            <div class="shadow bordered">
+                                <div class="overlay-container">
+                                    <img src="@Model.SampleCertificate.Url" alt="@Model.SampleCertificate.Name">
+                                    <a href="@Model.SampleCertificate.Url" class="overlay-link popup-img" title="Примерен сертификат">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            @*<div class="space-bottom"></div>
+                                <div class="row grid-space-20">
+                                    <div class="col-xs-3">
+                                        <div class="overlay-container">
+                                            <img src="https://focus-academy.bg/media/1180/cert.png" alt="">
+                                            <a href="https://focus-academy.bg/media/1180/cert.png" class="overlay-link small popup-img" title="Примерен сертификат - бял">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <div class="overlay-container">
+                                            <img src="https://focus-academy.bg/media/1178/cert-blue.png" alt="">
+                                            <a href="https://focus-academy.bg/media/1178/cert-blue.png" class="overlay-link small popup-img" title="Примерен сертификат - син ">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="assessment">
+                        <h3>Изпит</h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @*TODO figure out what information to display regarding Assessment*@
+                                @if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Eligible)
+                                {
+                                    <a href="@Model.AssessmentUrl" title="Изпит">Направете изпита сега</a>
+                                }
+                                else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.NotEligible)
+                                {
+                                    if (Model.HasActiveSubscription)
+                                    {
+                                        <span>Моля, преминете през всички лекции за да отключите изпита</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Изпитът е достъпен след като се запишете за курса и преминете през всички лекции.</span>
+                                    }
+                                }
+                                else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.AlreadyCompleted)
+                                {
+                                    <span>Вие успешно сте преминали този изпит! Може да видите генерирания сертификат във <a href="@Model.ProfileUrl">Вашия профил</a>.</span>
+                                }
+                                else if (Model.AssessmentEligibilityStatus == AssessmentEligibilityStatus.Lockout)
+                                {
+                                    <span>Скоро сте направили неуспешен опит за изпита. Моля, проверете <a href="@Model.ProfileUrl">Вашия профил</a> за повече информация.</span>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    @if (Model.Files.Any())
+                    {
+                        <div class="tab-pane fade" id="files">
+                            <h3>Материали</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (Model.HasActiveSubscription)
+                                    {
+                                        <table class="table table-bordered table-colored">
+                                            <thead>
+                                                <tr>
+                                                    <th>Име</th>
+                                                    <th>Размер</th>
+                                                    @*<th>Изпит</th>*@
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var file in Model.Files)
+                                                {
+                                                    <tr>
+                                                        <td><a href="@file.Url" alt="@file.Name" title="@file.Name" download target="_blank">@file.Name</a></td>
+                                                        <td>@file.Size.ToFileSize()</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <span>След като се запишете, тук ще може да намерите полезни материали, свързани с курса</span>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-            </aside>
-            <!-- sidebar end -->
+                <!-- tabs end -->
+            </div>
+            <div class="col-md-4">
+                <!-- main end -->
+                @Html.Raw(Model.Features)
+            </div>
         </div>
     </div>
 </section>
+<div class="footer-top animated-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Обратно към обученията</h2>
+                            <h2>Изберете си обучение!</h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <p class="mt-10">
+                                <a href="@Model.CoursesPageUrl" title="Courses" class="btn btn-animated btn-lg btn-orange" data-id="2074">ВСИЧКИ ОБУЧЕНИЯ <i class="fa fa-book"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

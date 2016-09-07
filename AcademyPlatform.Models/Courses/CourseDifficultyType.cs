@@ -4,11 +4,11 @@
 
     public enum CourseDifficultyType
     {
-        [Display(Name = "Трудност")]
+        [Display(Name = "Лесен")]
         Beginner,
-        [Display(Name = "Трудност")]
+        [Display(Name = "Среден")]
         Intermediate,
-        [Display(Name = "Трудност")]
+        [Display(Name = "Труден")]
         Challenging
     }
 }

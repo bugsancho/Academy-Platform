@@ -1,62 +1,104 @@
-﻿@using ClientDependency.Core.Mvc
+﻿@using AcademyPlatform.Web.Models.Umbraco.DocumentTypes
+@using ClientDependency.Core.Mvc
 @inherits UmbracoViewPage<dynamic>
 @{
     Layout = null;
 
 
-    Html.RequiresCss("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
-    Html.RequiresCss("~/Content/animate.css");
-    Html.RequiresCss("~/Content/animations.css");
-    @*Html.RequiresCss("~/Content/custom.css");*@
-    @*Html.RequiresCss("~/Content/custom-site.css"); *@
-Html.RequiresCss("~/Content/project-theme.css");
-Html.RequiresCss("~/Content/ProjectThemeSkins/light_blue.css");
-Html.RequiresCss("~/Content/Fonts/font-awesome.css");
-Html.RequiresCss("~/Content/hover.css");
-Html.RequiresCss("~/Content/rs-slider.css");
-Html.RequiresCss("~/Content/jasny-bootstrap.css");
-Html.RequiresCss("~/Content/animate.css");
-Html.RequiresCss("/css/CustomAcademyStyles.css");
+    Html.RequiresCss("~/content/bootstrap.min.css");
+    Html.RequiresCss("~/content/site.css");
+    Html.RequiresCss("~/content/animate.css");
+    Html.RequiresCss("~/content/animations.css");
+    Html.RequiresCss("~/content/Fonts/font-awesome.css");
+    Html.RequiresCss("~/content/hover.css");
+    Html.RequiresCss("~/content/animate.css");
+    Html.RequiresCss("~/content/rs-slider.css");
+    Html.RequiresCss("~/content/jasny-bootstrap.css");
+    Html.RequiresCss("~/content/magnific-popup.css");
+    Html.RequiresCss("~/content/project-theme.css");
+    Html.RequiresCss("~/content/ProjectThemeSkins/green.css");
+    Html.RequiresCss("~/content/custom.css");
 
-Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
-Html.RequiresJs("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js");
-Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
+    Html.RequiresJs("https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js", 0);
+    Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js");
 
-Html.RequiresJs("~/Scripts/jquery.validate.min.js");
-Html.RequiresJs("~/Scripts/jquery.validate.unobtrusive.min.js");
-Html.RequiresJs("~/Scripts/respond.js");
-Html.RequiresJs("~/Scripts/Plugins/SmoothScroll.js");
-Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.revolution.js");
-Html.RequiresJs("~/Scripts/Plugins/jquery.themepunch.tools.min.js");
-Html.RequiresJs("~/Scripts/Plugins/jquery.waypoints.js");
-Html.RequiresJs("~/Scripts/Plugins/jquery.browser.js");
-Html.RequiresJs("~/Scripts/template.js");
-Html.RequiresJs("~/Scripts/custom.js");
-Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.js");
-Html.RequiresJs("~/Scripts/Plugins/isotope.pkgd.min.js");
-Html.RequiresJs("~/Scripts/Plugins/jquery.vide.js");
+    Html.RequiresJs("~/scripts/respond.js");
+    Html.RequiresJs("~/scripts/jquery.validate.min.js");
+    Html.RequiresJs("~/scripts/jquery.validate.unobtrusive.min.js");
+    Html.RequiresJs("~/scripts/jquery.unobtrusive-ajax.js");
+    Html.RequiresJs("~/scripts/bootstrap.min.js");
+    Html.RequiresJs("~/scripts/plugins/smoothscroll.js");
+    Html.RequiresJs("~/scripts/plugins/jquery.themepunch.revolution.js");
+    Html.RequiresJs("~/scripts/plugins/jquery.themepunch.tools.min.js");
+    Html.RequiresJs("~/scripts/plugins/jquery.browser.js");
+    Html.RequiresJs("~/scripts/plugins/jquery.waypoints.js");
+    Html.RequiresJs("~/scripts/plugins/isotope.pkgd.js");
+    Html.RequiresJs("~/scripts/plugins/isotope.pkgd.min.js");
+    Html.RequiresJs("~/scripts/plugins/jquery.vide.js");
+    Html.RequiresJs("~/scripts/plugins/jquery.magnific-popup.min.js");
+    Html.RequiresJs("~/scripts/template.js");
+    Html.RequiresJs("~/scripts/custom.js");
+    Html.RequiresJs("~/scripts/treeMenu.js"); //Only used in lecture page
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="http://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" href="@Url.Content("~/Images/favicon.png")">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="@Url.Content("~/content/images/favicon.png")">
+    @* NEW *@
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:700,400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Jura:400,500,600,300&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    @* NEW END *@
     @Html.RenderCssHere()
     @RenderSection("head", false)
 </head>
-<body class="no-trans">
-    <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
+<body class="no-trans front-page">
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-MBS8PD"
+                height="0" width="0"
+                style="display: none; visibility: hidden"></iframe>
+    </noscript>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-MBS8PD');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <div class="scrollToTop circle">
+        <div class="scrollToTopInner circle">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+    </div>
     <div class="page-wrapper">
         <div class="header-container">
-            @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("header"))
+            @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf(nameof(Site)).GetPropertyValue<string>(nameof(Site.Header)))
         </div>
         @RenderSection("PreContent", required: false)
         @RenderBody()
     </div>
-    @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf("Site").GetPropertyValue<string>("footer"))
+    @Html.Raw(Umbraco.TypedContentAtRoot().First().AncestorOrSelf(nameof(Site)).GetPropertyValue<string>(nameof(Site.Footer)))
     @Html.RenderJsHere()
     @RenderSection("scripts", required: false)
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6iMoH6Ha1MoMKpSYrsaX-7ItFRTpizPQ" type="text/javascript"></script>
+
+    <script src="~/scripts/plugins/googleMaps.js"></script>
 </body>
 </html>

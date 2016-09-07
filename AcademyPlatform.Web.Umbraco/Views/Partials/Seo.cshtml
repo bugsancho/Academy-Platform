@@ -1,6 +1,6 @@
-﻿@using AcademyPlatform.Web.Umbraco.Common
+﻿@using AcademyPlatform.Web.Models.Umbraco.DocumentTypes
 @inherits UmbracoViewPage<dynamic>
 
-<title>@Umbraco.Field(DocumentTypes.Seo.Title) - Фокус Академия</title>
-<meta name="description" content="@Umbraco.Field(DocumentTypes.Seo.Description)" />
-<meta name="keywords" content="@Umbraco.Field(DocumentTypes.Seo.Keywords)" />
+<title>@Umbraco.Field(nameof(Seo.Title)) - Фокус Академия</title>
+<meta name="description" content="@Umbraco.Field(nameof(Seo.Description))" />
+<meta name="keywords" content="@Umbraco.Field(nameof(Seo.Keywords))" />

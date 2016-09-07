@@ -7,7 +7,7 @@
     using System.Web.Mvc;
 
     using AcademyPlatform.Web.Models.Other;
-    using AcademyPlatform.Web.Umbraco.UmbracoModels.Macros;
+    using AcademyPlatform.Web.Models.Umbraco.Macros;
 
     using global::Umbraco.Web;
     using global::Umbraco.Web.Mvc;
@@ -58,7 +58,7 @@
                 }
                 else
                 {
-                    throw new ArgumentException($"Storyline content archive doesnt contain file with name {StorylineFileName}");
+                    throw new ArgumentException($"Storyline content archive {archivePath} doesnt contain file with name {StorylineFileName}");
                 }
             }
             else

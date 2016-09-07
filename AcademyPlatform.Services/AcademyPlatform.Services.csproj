@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcademyPlatform.Services</RootNamespace>
     <AssemblyName>AcademyPlatform.Services</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,9 +39,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AutoMapper.3.0.0\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
+    <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
@@ -50,17 +56,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssessmentsService.cs" />
     <Compile Include="CategoryService.cs" />
+    <Compile Include="CertificatesService.cs" />
+    <Compile Include="Contracts\IApplicationSettings.cs" />
     <Compile Include="Contracts\ICategoryService.cs" />
-    <Compile Include="Contracts\IMembersService.cs" />
+    <Compile Include="Contracts\ICertificateGenerationInfoProvider.cs" />
+    <Compile Include="Contracts\IMessageTemplateProvider.cs" />
+    <Compile Include="Contracts\IMailSettingsProvider.cs" />
+    <Compile Include="Contracts\IMembershipService.cs" />
+    <Compile Include="Contracts\IRouteProvider.cs" />
+    <Compile Include="Contracts\ITaskRunner.cs" />
     <Compile Include="CoursesService.cs" />
     <Compile Include="Contracts\ICoursesService.cs" />
     <Compile Include="Contracts\ISubscriptionsService.cs" />
+    <Compile Include="DeferredMessageService.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="Contracts\IEmailService.cs" />
-    <Compile Include="MembersService.cs" />
+    <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Contracts\ILecturesService.cs" />
+    <Compile Include="Contracts\IAssessmentsService.cs" />
+    <Compile Include="Contracts\ICertificatesService.cs" />
+    <Compile Include="Contracts\IMessageService.cs" />
+    <Compile Include="Contracts\IInquiryService.cs" />
+    <Compile Include="FeedbackService.cs" />
+    <Compile Include="Contracts\IFeedbackService.cs" />
+    <Compile Include="InquiryService.cs" />
+    <Compile Include="Contracts\IPaymentService.cs" />
+    <Compile Include="Contracts\IOrdersService.cs" />
+    <Compile Include="LecturesService.cs" />
+    <Compile Include="MembershipService.cs" />
+    <Compile Include="MessageService.cs" />
+    <Compile Include="OrdersService.cs" />
+    <Compile Include="PaymentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubscriptionsService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AcademyPlatform.Common\AcademyPlatform.Common.csproj">

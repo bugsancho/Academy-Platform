@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcademyPlatform.Web.Validators</RootNamespace>
     <AssemblyName>AcademyPlatform.Web.Validators</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentValidation">
-      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=6.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.0.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,10 +44,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\BillingInfoViewModelValidator.cs" />
+    <Compile Include="Account\ChangePasswordViewModelValidator.cs" />
+    <Compile Include="Account\RegisterViewModelValidator.cs" />
+    <Compile Include="Account\ResendValidationEmailValidator.cs" />
+    <Compile Include="Account\UpdateProfileViewModelValidator.cs" />
     <Compile Include="Courses\CreateCourseViewModelValidator.cs" />
+    <Compile Include="Courses\JoinCourseViewModelValidator.cs" />
+    <Compile Include="Other\InquiryViewModelValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\ErrorMessages.Designer.cs">
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Subscriptions\PaymentEditViewModelValidator.cs" />
+    <Compile Include="Surveys\QuestionViewModelValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AcademyPlatform.Models\AcademyPlatform.Models.csproj">
+      <Project>{A9F65F1E-F7FA-4C33-8092-CBA90776843B}</Project>
+      <Name>AcademyPlatform.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Services\AcademyPlatform.Services.csproj">
+      <Project>{3901efc5-27fe-4590-bb9a-9ffd3a0b6617}</Project>
+      <Name>AcademyPlatform.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AcademyPlatform.Web.Infrastructure\AcademyPlatform.Web.Infrastructure.csproj">
       <Project>{8ae5320d-2ee3-4891-8363-59d3e1ca3059}</Project>
       <Name>AcademyPlatform.Web.Infrastructure</Name>
@@ -54,9 +78,21 @@
       <Project>{3f351c2d-799a-48fe-84f8-6c5412b6d060}</Project>
       <Name>AcademyPlatform.Web.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AcademyPlatform.Web.Umbraco.Services\AcademyPlatform.Web.Umbraco.Services.csproj">
+      <Project>{92439f32-e32d-438e-8b92-215345dd626a}</Project>
+      <Name>AcademyPlatform.Web.Umbraco.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ErrorMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

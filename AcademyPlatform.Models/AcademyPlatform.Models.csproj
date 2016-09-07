@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AcademyPlatform.Models</RootNamespace>
     <AssemblyName>AcademyPlatform.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=6.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.0.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -44,24 +45,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\AccountCreationStatus.cs" />
     <Compile Include="Assessments\Answer.cs" />
     <Compile Include="Assessments\Assessment.cs" />
+    <Compile Include="Assessments\AssessmentEligibilityStatus.cs" />
+    <Compile Include="Assessments\AssessmentRequest.cs" />
     <Compile Include="Assessments\AssessmentSubmission.cs" />
     <Compile Include="Assessments\Question.cs" />
     <Compile Include="Assessments\QuestionSubmission.cs" />
     <Compile Include="Assessments\QuestionType.cs" />
+    <Compile Include="Base\IEntity.cs" />
     <Compile Include="Base\ILoggedEntity.cs" />
     <Compile Include="Base\ISoftDeletableEntity.cs" />
     <Compile Include="Base\LoggedEntity.cs" />
-    <Compile Include="Base\SoftDeletableEntity.cs" />
+    <Compile Include="Base\SoftDeletableLoggedEntity.cs" />
+    <Compile Include="Certificates\Certificate.cs" />
+    <Compile Include="Certificates\CertificateGenerationInfo.cs" />
+    <Compile Include="Certificates\PlaceholderInfo.cs" />
     <Compile Include="Courses\Category.cs" />
     <Compile Include="Courses\Course.cs" />
     <Compile Include="Courses\CourseDifficultyType.cs" />
+    <Compile Include="Courses\CoursePricingType.cs" />
+    <Compile Include="Courses\CourseProgress.cs" />
+    <Compile Include="Courses\CourseStatus.cs" />
     <Compile Include="Courses\CourseSubscription.cs" />
+    <Compile Include="Courses\Feedback.cs" />
+    <Compile Include="Courses\Lecture.cs" />
+    <Compile Include="Courses\LectureVisit.cs" />
     <Compile Include="Courses\Module.cs" />
     <Compile Include="Courses\SubscriptionStatus.cs" />
+    <Compile Include="Courses\SubscriptionType.cs" />
     <Compile Include="Courses\Validators\CourseValidator.cs" />
+    <Compile Include="Emails\Inquiry.cs" />
+    <Compile Include="Emails\MessageTemplate.cs" />
+    <Compile Include="Exceptions\CourseNotFoundException.cs" />
+    <Compile Include="Exceptions\UserNotApprovedException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Payments\BillingInfo.cs" />
+    <Compile Include="Payments\LineItem.cs" />
+    <Compile Include="Payments\OnlineTransaction.cs" />
+    <Compile Include="Payments\OnlineTransactionResultType.cs" />
+    <Compile Include="Payments\Order.cs" />
+    <Compile Include="Payments\OrderStatusType.cs" />
+    <Compile Include="Payments\Payment.cs" />
+    <Compile Include="Payments\PaymentStatus.cs" />
+    <Compile Include="Payments\PaymentType.cs" />
+    <Compile Include="Payments\Product.cs" />
+    <Compile Include="Payments\ProductType.cs" />
+    <Compile Include="Payments\ShoppingCart.cs" />
+    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

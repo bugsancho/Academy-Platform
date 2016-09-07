@@ -1,0 +1,32 @@
+﻿@model AcademyPlatform.Web.Models.Surveys.QuestionViewModel
+
+@{
+    var questionIndex = (int)ViewBag.QuestionIndex;
+    var answerIndex = 0;
+}
+@Html.HiddenFor(x => x.Id)
+@*@Html.Hidden("Questions[" + questionIndex + "].Id", Model.Id)*@
+<div class="col-md-12">
+    <div class="pv-30 ph-20 exam-box feature-box bordered text-justify object-non-visible animated object-visible fadeInDownSmall" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+        <span class="icon default-bg small">@(questionIndex + 1)</span>
+        @Html.Raw(Model.QuestionText)
+        <div class="row">
+            <div class="col-md-12">
+                <div class="separator clearfix"></div>
+                <div>
+                    @Html.ValidationMessageFor(x => x.Answers)
+                </div>
+                @foreach (var answer in Model.Answers)
+                {
+                    <div>
+                        @Html.Hidden("Answers[" + answerIndex + "].Index", answer.Index)
+                        @Html.CheckBox("Answers[" + answerIndex + "].IsCorrect", false)
+                        @Html.Label("Answers[" + answerIndex + "].IsCorrect", answer.Text)
+
+                    </div>
+                    answerIndex++;
+                }
+            </div>
+        </div>
+    </div>
+</div>

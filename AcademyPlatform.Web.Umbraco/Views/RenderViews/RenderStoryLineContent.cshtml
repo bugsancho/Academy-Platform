@@ -1,5 +1,6 @@
-﻿@inherits UmbracoViewPage< AcademyPlatform.Web.Models.Other.StorylineContentViewModel>
+﻿@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Other.StorylineContentViewModel>
 @{
     Layout = null;
 }
-<iframe src="@Model.ContentFilePath" width="@Model.Width" height="@Model.Height"></iframe>
+<iframe border="0" cellspacing="0"
+        style="border-style: none;" src="@Model.ContentFilePath" width="@Model.Width" height="@Model.Height"></iframe>

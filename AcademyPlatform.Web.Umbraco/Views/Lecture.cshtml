@@ -1,41 +1,89 @@
-﻿@inherits UmbracoViewPage
+﻿@using ClientDependency.Core.Mvc
+@inherits UmbracoViewPage<AcademyPlatform.Web.Models.Courses.LectureViewModel>
 @{
-    Layout = "~/Views/StudentSite.cshtml";
+    Layout = "~/Views/Site.cshtml";
 }
-<section class="pv-30 light-gray-bg padding-bottom-clear clearfix">
+<section class="pv-30 padding-bottom-clear clearfix">
+    @* used to have 'light-gray-bg' CSS class *@
     <div class="container">
-        <div class="row">
-            <div class="main col-md-10 col-sm-12 col-xs-12">
-
-
-                @Umbraco.Field("Content")
-                <div class="col-md-12">
-                    <div class="alert alert-success">
-                        <h4>
-                            <i class="fa fa-thumbs-o-up"></i> Край на лекцията
-                        </h4>
-                        Направете бърз <a href="#">тест</a>, за да проверите своите знания!
-                    </div>
+        <div class="row space-bottom">
+            <div class="main col-md-9 col-sm-12 col-xs-12">
+                <div class="space-bottom">
+                    @Html.Raw(Model.Content)
                 </div>
+                <div class="space-bottom">
+                    @if (Model.PreviousLecture != null)
+                    {
+                        <a href="@Model.PreviousLecture.Url" class="btn btn-default pull-left"><i class="fa fa-caret-left" style="margin-right: 10px"></i>@Model.PreviousLecture.Name</a>
+                    }
+                    @if (Model.NextLecture != null)
+                    {
+                        <a href="@Model.NextLecture.Url" class="btn btn-default pull-right">@Model.NextLecture.Name<i class="fa fa-caret-right" style="margin-left: 10px"></i></a>
+                    }
+                </div>
+                <div class="row" id="disqus_thread"></div>
             </div>
-            <aside class="col-md-2 hidden-sm hidden-xs">
-                <div class="sidebar affix-top ">
-                    <nav class="affix-menu scrollspy">
-                        <ul class="smooth-scroll nav nav-pills nav-stacked">
-                            <li class="active"><a href="#info">Информация</a></li>
-                            <li><a href="#1">Лекция - 1</a></li>
-                            <li><a href="#2">Лекция - 2</a></li>
-                            <li><a href="#3">Лекция - 3</a></li>
-                            <li><a href="#4">Лекция - 4</a></li>
-                            <li><a href="#5">Лекция - 5</a></li>
-                            <li><a href="#6">Лекция - 6</a></li>
-                            <li><a href="#7">Лекция - 7</a></li>
-                            <li><a href="#8">Лекция - 8</a></li>
-                            <li><a href="#9">Лекция - 9</a></li>
+            <aside class="col-md-3 hidden-sm hidden-xs">
+                <div>
+                    <div class="tree">
+                        <ul>
+                            <li>
+                                <span class="course-tree-name"><i class="fa fa-list-ul"></i> Съдържание</span>
+                                <ul>
+                                    @foreach (var module in Model.Modules)
+                                    {
+                                        <li>
+                                            <span><i class="fa fa-minus"></i> @module.Name</span>
+                                            <ul>
+                                                @foreach (var lecture in module.LectureLinks)
+                                                {
+                                                    if (lecture.IsCurrent)
+                                                    {
+                                                        <li><i style="color: #777777" class="fa fa-arrow-right">&nbsp</i><a href="@lecture.Url">@lecture.Name</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="@lecture.Url">@lecture.Name</a></li>
+                                                    }
+                                                }
+
+                                            </ul>
+                                        </li>
+                                    }
+                                    <li>
+                                        <span><i class="fa fa-minus"></i>Изпит</span>
+                                        <ul>
+                                            <li><a href="@Model.AssesmentUrl">Изпит</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
-                    </nav>
+                    </div>
                 </div>
             </aside>
         </div>
     </div>
 </section>
+@*<script>
+        /**
+        * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+
+        var disqus_config = function () {
+            this.page.url = '@Request.Url.AbsoluteUri'; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'lecture_' + '@Model.Id'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+
+        };
+
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//asdasddsfadsf.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>*@

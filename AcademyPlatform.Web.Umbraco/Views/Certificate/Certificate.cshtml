@@ -1,0 +1,30 @@
+﻿@model AcademyPlatform.Web.Models.Courses.CertificateViewModel
+@{
+    bool isSuccessfulSubmission = false;
+    int correctAnswers = 0;
+    int requiredAnswers = 0;
+    if (TempData.ContainsKey("SuccessfulSubmission"))
+    {
+        isSuccessfulSubmission = (bool)TempData["SuccessfulSubmission"];
+        correctAnswers = (int)TempData["CorrectAnswers"];
+        requiredAnswers = (int)TempData["RequiredAnswers"];
+    }
+}
+<div class="container">
+    @if (isSuccessfulSubmission)
+    {
+        <h1>Поздравления!</h1>
+        <h3>Успешно премиханте изпита</h3>
+        <p>Ето го и вашия сертификат:</p>
+        <p>Резултат: @correctAnswers верни отговора от @requiredAnswers</p>
+    }
+    <h2>Сертификат на <strong>@Model.HolderName</strong> за обучение: <strong>@Model.CourseName</strong></h2>
+    <div class="overlay-container">
+        <img src="@Model.CertificateUrl" alt="">
+        <a href="@Model.CertificateUrl" class="overlay-link popup-img-single" title="Сертификат">
+            <i class="fa fa-plus"></i>
+        </a>
+    </div>
+    <a href="@Model.CertificateUrl" download class="btn btn-animated btn-lg btn-default-transparent">Свали сертификата <i class="fa fa-download"></i></a>
+    <div class="space-bottom"></div>
+</div>

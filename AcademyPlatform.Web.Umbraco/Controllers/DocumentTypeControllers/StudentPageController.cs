@@ -1,5 +1,6 @@
 ﻿namespace AcademyPlatform.Web.Umbraco.Controllers.DocumentTypeControllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -7,6 +8,7 @@
     using AcademyPlatform.Services.Contracts;
     using AcademyPlatform.Web.Models.Common;
     using AcademyPlatform.Web.Models.Courses;
+    using AcademyPlatform.Web.Models.Umbraco.DocumentTypes;
     using AcademyPlatform.Web.Umbraco.UmbracoConfiguration;
 
     using global::Umbraco.Web;
@@ -31,38 +33,8 @@
         [HttpGet]
         public override ActionResult Index(RenderModel model)
         {
-            // TODO improve query
-            var coursesContentCollection = Umbraco.TypedContentAtRoot().DescendantsOrSelf(nameof(DocumentTypeModels.Course));
-            var coursesContentViewModels = new List<DocumentTypeModels.Course>();
-            _mapper.AddCustomMapping(typeof(ImageViewModel).FullName, UmbracoMapperMappings.MapMediaFile)
-                   .MapCollection(coursesContentCollection, coursesContentViewModels, new Dictionary<string, PropertyMapping>
-                    {
-                      {
-                          "CourseUrl", new PropertyMapping
-                              {
-                                  SourceProperty = "Url",
-                              }
-                      }
-                    });
-
-            var courses = _courses.GetActiveCourses();
-
-            var coursesViewModels = courses.Join(
-                coursesContentViewModels,
-                course => course.Id,
-                coursesContent => coursesContent.CourseId,
-                (course, coursesContent) => new CoursesListViewModel
-                {
-                    Title = course.Title,
-                    CourseUrl = coursesContent.CourseUrl,
-                    ImageUrl = coursesContent.CoursePicture.Url,
-                    ShortDescription = coursesContent.ShortDescription,
-                    Category = course.Category
-                }).ToList();
-
-            //TODO Find out why(if) distinct works without implementing IEquitable<T>
-            ViewBag.Categories = coursesViewModels.Select(x => x.Category).Distinct();
-            return CurrentTemplate(coursesViewModels);
+            throw new ArgumentException("This should never be called - student page!!!" + Request.Url.AbsolutePath);
+     
         }
     }
 }
